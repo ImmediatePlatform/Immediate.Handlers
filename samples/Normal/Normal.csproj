@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="../../src/Immediate.Handlers/Immediate.Handlers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"  />
+	</ItemGroup>
+
+</Project>

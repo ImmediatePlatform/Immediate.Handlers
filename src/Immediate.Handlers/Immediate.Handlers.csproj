@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		<IsRoslynComponent>true</IsRoslynComponent>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Nuget">
+		<Title>Immediate.Handlers</Title>
+		<Description>TBD</Description>
+
+		<Authors>Immediate.Handlers Developers</Authors>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RepositoryUrl>https://github.com/viceroypenguin/Immediate.Handlers</RepositoryUrl>
+	</PropertyGroup>
+
+  <!--
+  This ensures the library will be packaged as a source generator when we use `dotnet pack`
+  -->
+  <ItemGroup>
+    <None Include="../../readme.md" Pack="true" PackagePath="/" />
+		<None Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
+		<None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)/$(AssemblyName).Utility.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)/$(AssemblyName).Utility.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="false" />
+    <None Include="$(OutputPath)/$(AssemblyName).Utility.xml" Pack="true" PackagePath="lib/netstandard2.0" Visible="false" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+		<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="../Immediate.Handlers.Utility/Immediate.Handlers.Utility.csproj" PrivateAssets="All" />
+	</ItemGroup>
+
+	<PropertyGroup Label="MinVer">
+		<MinVerAutoIncrement>minor</MinVerAutoIncrement>
+		<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
+		<MinVerTagPrefix>v</MinVerTagPrefix>
+	</PropertyGroup>
+
+</Project>

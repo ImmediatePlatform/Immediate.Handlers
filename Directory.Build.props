@@ -1,0 +1,29 @@
+<Project>
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>$(WarningsAsErrors);nullable;</WarningsAsErrors>
+
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<AnalysisLevel>latest-all</AnalysisLevel>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PolySharp" PrivateAssets="All" />
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+		<!-- Don't block development work; but block CI if dev work isn't complete. -->
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<CollectCoverage>true</CollectCoverage>
+		<CoverletOutputFormat>opencover</CoverletOutputFormat>
+	</PropertyGroup>
+</Project>
