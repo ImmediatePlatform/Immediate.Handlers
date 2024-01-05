@@ -6,6 +6,11 @@
 public enum RenderMode
 {
 	/// <summary>
+	/// TODO: Invalid entry
+	/// </summary>
+	None,
+
+	/// <summary>
 	/// TODO: Fill out
 	/// </summary>
 	Normal,
