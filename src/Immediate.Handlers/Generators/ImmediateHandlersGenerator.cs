@@ -72,7 +72,17 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private RenderMode TransformRenderMode(GeneratorAttributeSyntaxContext context, CancellationToken token)
 	{
-		return RenderMode.Normal;
+		var attr = context.Attributes[0];
+		if (attr.ConstructorArguments.Length > 0)
+		{
+			var ca = attr.ConstructorArguments[0];
+			return (RenderMode?)(int?)ca.Value ?? RenderMode.Normal;
+		}
+		else
+		{
+			var pa = attr.NamedArguments[0];
+			return (RenderMode?)(int?)pa.Value.Value ?? RenderMode.Normal;
+		}
 	}
 
 	private static ImmutableArray<Behavior> TransformBehaviors(
