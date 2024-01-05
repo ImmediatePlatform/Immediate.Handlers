@@ -60,14 +60,20 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			(spc, node) => RenderHandler(spc, node.Left.Left, node.Left.Right, node.Right, template)
 		);
 
-		var registrationNodes = handlers
-			.Select((h, _) => h.FullTypeName)
+		var hasMsDi = context
+			.MetadataReferencesProvider
 			.Collect()
-			.Combine(behaviors);
+			.Select((refs, _) => refs.Any(r => (r.Display ?? "").Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
+
+		var registrationNodes = handlers
+			.Select((h, _) => h?.FullTypeName)
+			.Collect()
+			.Combine(behaviors)
+			.Combine(hasMsDi);
 
 		context.RegisterSourceOutput(
 			registrationNodes,
-			RenderServiceCollectionExtension
+			(spc, node) => RenderServiceCollectionExtension(spc, node.Left.Left, node.Left.Right, node.Right)
 		);
 	}
 
@@ -77,12 +83,12 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (attr.ConstructorArguments.Length > 0)
 		{
 			var ca = attr.ConstructorArguments[0];
-			return (RenderMode?)(int?)ca.Value ?? RenderMode.Normal;
+			return (RenderMode?)(int?)ca.Value ?? RenderMode.None;
 		}
 		else
 		{
 			var pa = attr.NamedArguments[0];
-			return (RenderMode?)(int?)pa.Value.Value ?? RenderMode.Normal;
+			return (RenderMode?)(int?)pa.Value.Value ?? RenderMode.None;
 		}
 	}
 
@@ -155,21 +161,40 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			})
 			.ToArray();
 
+		cancellationToken.ThrowIfCancellationRequested();
 		return ImmutableArray.Create(behaviors);
 	}
 
-	private static void RenderServiceCollectionExtension(SourceProductionContext context, (ImmutableArray<string> handlers, ImmutableArray<Behavior?> behaviors) node)
+	private static void RenderServiceCollectionExtension(SourceProductionContext context, ImmutableArray<string?> handlers, ImmutableArray<Behavior?> behaviors, bool hasDi)
 	{
+		context.CancellationToken.ThrowIfCancellationRequested();
+
+		if (!hasDi)
+			return;
+
+		if (handlers.Any(h => h is null))
+			return;
+
+		if (behaviors.Any(b => b is null))
+			return;
+
+		var cancellationToken = context.CancellationToken;
+		cancellationToken.ThrowIfCancellationRequested();
+
 		var template = GetTemplate("ServiceCollectionExtensions");
+		cancellationToken.ThrowIfCancellationRequested();
+
 		var source = template.Render(new
 		{
-			Handlers = node.handlers,
-			Behaviors = node.behaviors,
+			Handlers = handlers,
+			Behaviors = behaviors,
 		});
+		cancellationToken.ThrowIfCancellationRequested();
+
 		context.AddSource("Immediate.Handlers.ServiceCollectionExtensions.cs", source);
 	}
 
-	private static Handler TransformHandler(
+	private static Handler? TransformHandler(
 		GeneratorAttributeSyntaxContext context,
 		CancellationToken cancellationToken
 	)
@@ -179,12 +204,27 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static void RenderHandler(
 		SourceProductionContext context,
-		Handler handler,
+		Handler? handler,
 		ImmutableArray<Behavior?> behaviors,
 		ImmutableArray<RenderMode> renderModes,
 		Template template
 	)
 	{
+		if (handler == null)
+			return;
+
+		if (behaviors.Any(b => b is null))
+			return;
+
+		if (renderModes.Length > 1)
+			return;
+
+		var cancellationToken = context.CancellationToken;
+		cancellationToken.ThrowIfCancellationRequested();
+
+		var renderMode = renderModes.Length == 0 ? RenderMode.Normal : renderModes[0];
+		if (renderMode is not RenderMode.Normal)
+			return;
 
 	}
 
