@@ -1,0 +1,38 @@
+﻿namespace {{ namespace }}
+
+public static partial class {{ class_name }}
+{
+    public sealed class Handler(
+        LoggingBehavior<Query, IEnumerable<User>> loggingBehavior,
+        HandleBehavior<Query, IEnumerable<User>> handleBehavior
+	)
+    {
+        public async Task<IEnumerable<User>> HandleAsync(Query query)
+        {
+            loggingBehavior.InnerHandler = handleBehavior;
+            return await loggingBehavior.HandleAsync(query);
+        }
+    }
+
+    [EditorBrowsable(false)]
+    private sealed class HandleBehavior : Behavior<Query, IEnumerable<User>>(
+        UsersService usersService
+    )
+    {
+        public async Task<IEnumerable<User>> HandleAsync(Query query, CancellationToken token)
+        {
+            return await GetUsersQuery.Handle(
+                query,
+                usersService,
+                token);
+        }
+    }
+
+    [EditorBrowsable(false)]
+    public static IServiceCollection AddHandlers(
+        IServiceCollection services)
+    {
+        services.AddScoped<GetUsersQuery.Handler>();
+        services.AddScoped<GetUsersQuery.HandleBehavior>();
+    }
+}

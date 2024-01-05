@@ -1,0 +1,15 @@
+﻿namespace Microsoft.Extensions.DependencyInjection;
+
+public static class HandlerServiceCollectionExtensions
+{
+    public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
+        this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+    {
+		{{~ for b in behaviors ~}}
+        services.AddScoped(typeof({{ b.full_type_name }}));
+		{{~ end ~}}
+		{{~ for h in handlers ~}}
+        {{ h }}.AddHandlers(services);
+		{{~ end ~}}
+    }
+}
