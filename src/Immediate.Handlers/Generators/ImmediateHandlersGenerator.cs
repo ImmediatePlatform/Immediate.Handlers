@@ -12,10 +12,11 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 {
 	private sealed record Behavior
 	{
-		public required string Name { get; set; }
-		public required string FullTypeName { get; set; }
-		public required string? TRequest { get; set; }
-		public required string? TResponse { get; set; }
+		public required string RegistrationType { get; init; }
+		public required string ConstructorType { get; init; }
+		public required bool IsGeneric { get; init; }
+		public required string? TRequest { get; init; }
+		public required string? TResponse { get; init; }
 	}
 
 	private sealed record Handler
@@ -37,7 +38,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		var behaviors = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.BehaviorsAttribute",
-				predicate: (_, _) => true,
+				(node, _) => node is CompilationUnitSyntax,
 				TransformBehaviors
 			)
 			.SelectMany((x, _) => x)
@@ -85,15 +86,79 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		}
 	}
 
-	private static ImmutableArray<Behavior> TransformBehaviors(
+	private static ImmutableArray<Behavior?> TransformBehaviors(
 		GeneratorAttributeSyntaxContext context,
 		CancellationToken cancellationToken
 	)
 	{
-		return ImmutableArray.Create<Behavior>();
+		cancellationToken.ThrowIfCancellationRequested();
+
+		var semanticModel = context.SemanticModel;
+		var compilation = semanticModel.Compilation;
+		cancellationToken.ThrowIfCancellationRequested();
+
+		var attr = context.Attributes[0];
+		if (attr.ConstructorArguments.Length != 1)
+			return ImmutableArray<Behavior?>.Empty;
+
+		var ca = attr.ConstructorArguments[0];
+		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(
+			compilation.GetTypeByMetadataName("System.Type")!, 1)!;
+		if (!SymbolEqualityComparer.Default.Equals(
+				ca.Type,
+				arrayTypeSymbol
+		))
+		{
+			return ImmutableArray<Behavior?>.Empty;
+		}
+
+		cancellationToken.ThrowIfCancellationRequested();
+		var behaviorType = typeof(Behavior<,>);
+		var behaviorTypeSymbol = compilation.GetTypeByMetadataName(behaviorType.FullName);
+		if (behaviorTypeSymbol is null)
+			return ImmutableArray<Behavior?>.Empty;
+
+		cancellationToken.ThrowIfCancellationRequested();
+		var behaviors = ca.Values
+			.Select(v =>
+			{
+				cancellationToken.ThrowIfCancellationRequested();
+				if (v.Value is not INamedTypeSymbol symbol)
+					return null;
+
+				var originalDefinition = symbol.OriginalDefinition;
+				if (SymbolEqualityComparer.Default.Equals(originalDefinition, behaviorTypeSymbol))
+					return null;
+
+				if (!originalDefinition.ImplementsBaseClass(behaviorTypeSymbol))
+					return null;
+
+				if (symbol.IsUnboundGenericType && symbol.TypeParameters.Length == 2)
+				{
+					// services.AddScoped<global::Dummy.LoggingBehavior<,>>();
+					// global::Dummy.LoggingBehavior<,>
+					var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+					return new Behavior
+					{
+						RegistrationType = typeName,
+						ConstructorType = typeName,
+						IsGeneric = true,
+						TRequest = null,
+						TResponse = null,
+					};
+				}
+
+				// TODO: 
+				// 1. figure out TRequest and TResponse
+				// 2. figure out if type is bounded on either side
+				throw new NotImplementedException();
+			})
+			.ToArray();
+
+		return ImmutableArray.Create(behaviors);
 	}
 
-	private static void RenderServiceCollectionExtension(SourceProductionContext context, (ImmutableArray<string> handlers, ImmutableArray<Behavior> behaviors) node)
+	private static void RenderServiceCollectionExtension(SourceProductionContext context, (ImmutableArray<string> handlers, ImmutableArray<Behavior?> behaviors) node)
 	{
 		var template = GetTemplate("ServiceCollectionExtensions");
 		var source = template.Render(new
@@ -115,7 +180,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 	private static void RenderHandler(
 		SourceProductionContext context,
 		Handler handler,
-		ImmutableArray<Behavior> behaviors,
+		ImmutableArray<Behavior?> behaviors,
 		ImmutableArray<RenderMode> renderModes,
 		Template template
 	)
