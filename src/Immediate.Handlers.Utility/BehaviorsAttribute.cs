@@ -4,7 +4,7 @@
 /// TODO: Fill out
 /// </summary>
 /// <param name="types"></param>
-[AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class, AllowMultiple = false)]
 public sealed class BehaviorsAttribute(params Type[] types) : Attribute
 {
 	/// <summary>
