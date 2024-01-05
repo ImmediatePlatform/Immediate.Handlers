@@ -2,6 +2,7 @@
 using System.Reflection;
 using Immediate.Handlers.Utility;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Scriban;
 
 namespace Immediate.Handlers.Generators;
@@ -28,7 +29,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		var globalRenderMode = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Utility.RenderModeAttribute",
-				predicate: (_, _) => true,
+				(node, _) => node is CompilationUnitSyntax,
 				TransformRenderMode
 			)
 			.Collect();
