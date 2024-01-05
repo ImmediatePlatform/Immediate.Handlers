@@ -27,6 +27,11 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
+		var hasMsDi = context
+			.MetadataReferencesProvider
+			.Collect()
+			.Select((refs, _) => refs.Any(r => (r.Display ?? "").Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
+
 		var globalRenderMode = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.RenderModeAttribute",
@@ -52,18 +57,14 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var handlerNodes = handlers
 			.Combine(behaviors)
-			.Combine(globalRenderMode);
+			.Combine(globalRenderMode
+				.Combine(hasMsDi));
 
 		var template = GetTemplate("Handler");
 		context.RegisterSourceOutput(
 			handlerNodes,
-			(spc, node) => RenderHandler(spc, node.Left.Left, node.Left.Right, node.Right, template)
+			(spc, node) => RenderHandler(spc, node.Left.Left, node.Left.Right, node.Right.Left, node.Right.Right, template)
 		);
-
-		var hasMsDi = context
-			.MetadataReferencesProvider
-			.Collect()
-			.Select((refs, _) => refs.Any(r => (r.Display ?? "").Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
 
 		var registrationNodes = handlers
 			.Select((h, _) => h?.FullTypeName)
@@ -206,6 +207,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		Handler? handler,
 		ImmutableArray<Behavior?> behaviors,
 		ImmutableArray<RenderMode> renderModes,
+		bool hasMsDi,
 		Template template
 	)
 	{
