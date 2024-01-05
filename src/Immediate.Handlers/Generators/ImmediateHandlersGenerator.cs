@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
-using Immediate.Handlers.Utility;
+using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Scriban;
@@ -28,7 +28,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 	{
 		var globalRenderMode = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
-				"Immediate.Handlers.Utility.RenderModeAttribute",
+				"Immediate.Handlers.Shared.RenderModeAttribute",
 				(node, _) => node is CompilationUnitSyntax,
 				TransformRenderMode
 			)
@@ -36,7 +36,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var behaviors = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
-				"Immediate.Handlers.Utility.BehaviorsAttribute",
+				"Immediate.Handlers.Shared.BehaviorsAttribute",
 				predicate: (_, _) => true,
 				TransformBehaviors
 			)
@@ -45,7 +45,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var handlers = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
-				"Immediate.Handlers.Utility.HandlerAttribute",
+				"Immediate.Handlers.Shared.HandlerAttribute",
 				predicate: (_, _) => true,
 				TransformHandler);
 

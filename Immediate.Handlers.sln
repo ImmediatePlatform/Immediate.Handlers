@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{C484
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immediate.Handlers", "src\Immediate.Handlers\Immediate.Handlers.csproj", "{4E9DC4CB-4833-4471-AF34-699565BCFDBE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immediate.Handlers.Utility", "src\Immediate.Handlers.Utility\Immediate.Handlers.Utility.csproj", "{789B0C8D-98ED-4712-8AB1-E4B10AD4D669}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immediate.Handlers.Shared", "src\Immediate.Handlers.Shared\Immediate.Handlers.Shared.csproj", "{789B0C8D-98ED-4712-8AB1-E4B10AD4D669}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immediate.Handlers.Tests", "tests\Immediate.Handlers.Tests\Immediate.Handlers.Tests.csproj", "{7E5E76EB-8087-48F6-8A87-CFABFC5CB409}"
 EndProject

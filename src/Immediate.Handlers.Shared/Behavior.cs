@@ -1,4 +1,4 @@
-﻿namespace Immediate.Handlers.Utility;
+﻿namespace Immediate.Handlers.Shared;
 
 /// <summary>
 /// TODO: Fill out

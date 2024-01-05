@@ -1,5 +1,5 @@
 ﻿using Dummy;
-using Immediate.Handlers.Utility;
+using Immediate.Handlers.Shared;
 
 [assembly: RenderMode(renderMode: RenderMode.Normal)]
 
