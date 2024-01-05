@@ -167,7 +167,8 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static void RenderServiceCollectionExtension(SourceProductionContext context, ImmutableArray<string?> handlers, ImmutableArray<Behavior?> behaviors, bool hasDi)
 	{
-		context.CancellationToken.ThrowIfCancellationRequested();
+		var cancellationToken = context.CancellationToken;
+		cancellationToken.ThrowIfCancellationRequested();
 
 		if (!hasDi)
 			return;
@@ -178,19 +179,17 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (behaviors.Any(b => b is null))
 			return;
 
-		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
-
 		var template = GetTemplate("ServiceCollectionExtensions");
-		cancellationToken.ThrowIfCancellationRequested();
 
+		cancellationToken.ThrowIfCancellationRequested();
 		var source = template.Render(new
 		{
 			Handlers = handlers,
 			Behaviors = behaviors,
 		});
-		cancellationToken.ThrowIfCancellationRequested();
 
+		cancellationToken.ThrowIfCancellationRequested();
 		context.AddSource("Immediate.Handlers.ServiceCollectionExtensions.cs", source);
 	}
 
