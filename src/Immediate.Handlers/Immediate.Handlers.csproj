@@ -20,17 +20,17 @@
 		<RepositoryUrl>https://github.com/viceroypenguin/Immediate.Handlers</RepositoryUrl>
 	</PropertyGroup>
 
-  <!--
+	<!--
   This ensures the library will be packaged as a source generator when we use `dotnet pack`
   -->
-  <ItemGroup>
-    <None Include="../../readme.md" Pack="true" PackagePath="/" />
+	<ItemGroup>
+		<None Include="../../readme.md" Pack="true" PackagePath="/" />
 		<None Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
-		<None Include="$(OutputPath)/$(AssemblyName).dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
-    <None Include="$(OutputPath)/$(AssemblyName).Utility.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
-    <None Include="$(OutputPath)/$(AssemblyName).Utility.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="false" />
-    <None Include="$(OutputPath)/$(AssemblyName).Utility.xml" Pack="true" PackagePath="lib/netstandard2.0" Visible="false" />
-  </ItemGroup>
+		<None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
+		<None Include="$(OutputPath)$(AssemblyName).Utility.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
+		<None Include="$(OutputPath)$(AssemblyName).Utility.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="false" />
+		<None Include="$(OutputPath)$(AssemblyName).Utility.xml" Pack="true" PackagePath="lib/netstandard2.0" Visible="false" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove="Templates\*.sbntxt" />
@@ -44,8 +44,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="../Immediate.Handlers.Utility/Immediate.Handlers.Utility.csproj" PrivateAssets="All" />
+		<ProjectReference Include="../Immediate.Handlers.Utility/Immediate.Handlers.Utility.csproj" PrivateAssets="all" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+	</PropertyGroup>
+
+	<Target Name="GetDependencyTargetPaths">
+		<ItemGroup>
+			<TargetPathWithTargetPlatformMoniker Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" IncludeRuntimeDependency="false" />
+		</ItemGroup>
+	</Target>
 
 	<PropertyGroup Label="MinVer">
 		<MinVerAutoIncrement>minor</MinVerAutoIncrement>

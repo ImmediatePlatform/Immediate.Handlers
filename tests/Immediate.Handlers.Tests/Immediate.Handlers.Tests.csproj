@@ -4,7 +4,7 @@
 		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<PackageReference Include="coverlet.collector" PrivateAssets="All" />
 		<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
@@ -14,7 +14,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="../../src/Immediate.Handlers/Immediate.Handlers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="../../src/Immediate.Handlers/Immediate.Handlers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="../../src/Immediate.Handlers.Utility/Immediate.Handlers.Utility.csproj" />
 	</ItemGroup>
 
 </Project>
