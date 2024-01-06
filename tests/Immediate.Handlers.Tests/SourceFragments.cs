@@ -1,8 +1,9 @@
-namespace Immediate.Handlers.Tests;
+﻿namespace Immediate.Handlers.Tests;
 
 public static class SourceFragments
 {
 	public static readonly string Normal = """
+using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 

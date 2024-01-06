@@ -1,4 +1,4 @@
-using Immediate.Handlers.Shared;
+﻿using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
@@ -36,8 +36,11 @@ public partial class ImmediateHandlersGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 		var requestType = BuildGenericType((INamedTypeSymbol)handleMethod.Parameters[0].Type);
 
+		var compilation = context.SemanticModel.Compilation;
+		var taskSymbol = compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1")!;
+
 		cancellationToken.ThrowIfCancellationRequested();
-		var responseTypeSymbol = handleMethod.GetTaskReturnType();
+		var responseTypeSymbol = handleMethod.GetTaskReturnType(taskSymbol);
 		if (responseTypeSymbol is null)
 			return null;
 

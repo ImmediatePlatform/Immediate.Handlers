@@ -10,10 +10,10 @@ internal static class Utility
 			&& ImplementsBaseClass(typeSymbol.BaseType.OriginalDefinition, typeToCheck)
 		   );
 
-	public static ITypeSymbol? GetTaskReturnType(this IMethodSymbol method) =>
-		method.ReturnsVoid || method.ReturnType.OriginalDefinition.ToString() != "System.Threading.Tasks.Task<TResult>"
-			? null
-			: ((INamedTypeSymbol)method.ReturnType).TypeArguments.FirstOrDefault();
+	public static ITypeSymbol? GetTaskReturnType(this IMethodSymbol method, INamedTypeSymbol taskSymbol) =>
+		!method.ReturnsVoid && SymbolEqualityComparer.Default.Equals(method.ReturnType.OriginalDefinition, taskSymbol)
+			? ((INamedTypeSymbol)method.ReturnType).TypeArguments.FirstOrDefault()
+			: null;
 
 	public static AttributeData? GetAttribute(this INamedTypeSymbol symbol, string attribute) =>
 		symbol

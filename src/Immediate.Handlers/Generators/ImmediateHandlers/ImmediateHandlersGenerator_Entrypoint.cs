@@ -90,7 +90,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		{
 			Handlers = handlers,
 			Behaviors = behaviors
-				.Concat(handlers.SelectMany(h => h.behaviors ?? []))
+				.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))
 				.Distinct(),
 		});
 

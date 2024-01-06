@@ -1,4 +1,4 @@
-using Immediate.Handlers.Shared;
+﻿using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
