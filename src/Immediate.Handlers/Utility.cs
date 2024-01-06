@@ -11,7 +11,7 @@ internal static class Utility
 		   );
 
 	public static ITypeSymbol? GetTaskReturnType(this IMethodSymbol method) =>
-		method.ReturnsVoid || method.ReturnType.OriginalDefinition.ToString() != "System.Threading.Tasks.Task<TResult>"
+		method.ReturnsVoid || method.ReturnType.Name != nameof(Task)
 			? null
 			: ((INamedTypeSymbol)method.ReturnType).TypeArguments.FirstOrDefault();
 }

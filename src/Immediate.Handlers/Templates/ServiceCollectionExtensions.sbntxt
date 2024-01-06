@@ -2,14 +2,16 @@
 
 public static class HandlerServiceCollectionExtensions
 {
-    public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
-        this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
-    {
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
+		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	{
 		{{~ for b in behaviors ~}}
-        services.AddScoped(typeof({{ b.registration_type }}));
+		services.AddScoped(typeof({{ b.registration_type }}));
 		{{~ end ~}}
 		{{~ for h in handlers ~}}
-        {{ h }}.AddHandlers(services);
+		{{ h }}.AddHandlers(services);
 		{{~ end ~}}
-    }
+		
+		return services;
+	}
 }

@@ -1,5 +1,4 @@
 ﻿using Immediate.Handlers.Shared;
-using Microsoft.Extensions.DependencyInjection;
 using Normal;
 
 [assembly: RenderMode(renderMode: RenderMode.Normal)]
