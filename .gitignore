@@ -13,6 +13,9 @@
 # VS Code cache/options directory
 .vscode/
 
+# Rider temporary files
+.idea/
+
 # TestResults
 [Tt]est[Rr]esults/
 
