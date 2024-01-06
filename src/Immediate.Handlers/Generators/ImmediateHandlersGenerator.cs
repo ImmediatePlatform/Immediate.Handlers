@@ -19,10 +19,32 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		public required string? TResponse { get; init; }
 	}
 
+	private sealed record Parameter
+	{
+		public required string Type { get; init; }
+		public required string Name { get; init; }
+	}
+
+	private sealed record GenericType
+	{
+		public required string Name { get; init; }
+		public required EquatableReadOnlyList<string> Implements { get; init; }
+	}
+
 	private sealed record Handler
 	{
-		public required string Name { get; set; }
-		public required string FullTypeName { get; set; }
+		public required string Namespace { get; init; }
+		public required string ClassName { get; init; }
+		public required string DisplayName { get; init; }
+
+		public required GenericType RequestType { get; init; }
+		public required GenericType ResponseType { get; init; }
+
+		public required EquatableReadOnlyList<Parameter> Parameters { get; init; }
+
+		public EquatableReadOnlyList<Behavior>? OverrideBehaviors { get; init; }
+		public RenderMode? OverrideRenderMode { get; init; }
+
 	}
 
 	public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -67,7 +89,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		);
 
 		var registrationNodes = handlers
-			.Select((h, _) => h?.FullTypeName)
+			.Select((h, _) => h?.DisplayName)
 			.Collect()
 			.Combine(behaviors)
 			.Combine(hasMsDi);
@@ -199,7 +221,88 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		CancellationToken cancellationToken
 	)
 	{
-		return default!;
+		var symbol = (INamedTypeSymbol)context.TargetSymbol;
+
+		var @namespace = symbol.ContainingNamespace.ToString();
+		var name = symbol.Name;
+		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+		if (symbol
+				.GetMembers()
+				.OfType<IMethodSymbol>()
+				.FirstOrDefault(m =>
+					m.Name.Equals("Handle", StringComparison.Ordinal)
+					|| m.Name.Equals("HandleAsync", StringComparison.Ordinal)
+				) is not { } handleMethod)
+		{
+			return null;
+		}
+
+		// must have request type and cancellationtoken
+		if (handleMethod.Parameters.Length < 2)
+			return null;
+
+		var requestType = BuildGenericType((INamedTypeSymbol)handleMethod.Parameters[0].Type);
+
+		var responseTypeSymbol = handleMethod.GetTaskReturnType();
+		if (responseTypeSymbol is null)
+			return null;
+
+		var responseType = BuildGenericType((INamedTypeSymbol)responseTypeSymbol);
+
+		var parameters = handleMethod.Parameters
+			.Skip(1).Take(handleMethod.Parameters.Length - 2)
+			.Select(p => new Parameter
+			{
+				Type = p.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+				Name = p.Name,
+			})
+			.ToEquatableReadOnlyList();
+
+		return new()
+		{
+			Namespace = @namespace,
+			ClassName = name,
+			DisplayName = displayName,
+
+			RequestType = requestType,
+			ResponseType = responseType,
+
+			Parameters = parameters,
+		};
+	}
+
+	private static GenericType BuildGenericType(INamedTypeSymbol type)
+	{
+		var name = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+		var implements = new List<string>();
+		AddBaseTypes(type, implements);
+
+		return new()
+		{
+			Name = name,
+			Implements = implements.Distinct().ToEquatableReadOnlyList(),
+		};
+	}
+
+	private static void AddBaseTypes(ITypeSymbol type, List<string> implements)
+	{
+		if (type.OriginalDefinition.ToString() is
+				"object"
+				or "System.Collections.IEnumerable"
+				or "System.IEquatable<T>"
+		)
+		{
+			return;
+		}
+
+		implements.Add(type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+		if (type.BaseType is not null)
+			AddBaseTypes(type.BaseType, implements);
+
+		foreach (var i in type.Interfaces)
+			AddBaseTypes(i, implements);
 	}
 
 	private static void RenderHandler(

@@ -7,6 +7,7 @@
 		<PackageVersion Include="coverlet.collector" Version="6.0.0" />
 		<PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
 		<PackageVersion Include="GitHubActionsTestLogger" Version="2.3.3" />
+		<PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
 		<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
 		<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
 		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
