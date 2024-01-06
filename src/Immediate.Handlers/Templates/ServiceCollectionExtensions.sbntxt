@@ -9,7 +9,7 @@ public static class HandlerServiceCollectionExtensions
 		services.AddScoped(typeof({{ b.registration_type }}));
 		{{~ end ~}}
 		{{~ for h in handlers ~}}
-		{{ h }}.AddHandlers(services);
+		{{ h.item1 }}.AddHandlers(services);
 		{{~ end ~}}
 		
 		return services;
