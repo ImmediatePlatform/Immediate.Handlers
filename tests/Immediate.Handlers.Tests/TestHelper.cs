@@ -1,5 +1,4 @@
-using Immediate.Handlers.Generators;
-using Immediate.Handlers.Shared;
+﻿using Immediate.Handlers.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -16,7 +15,12 @@ public static class TestHelper
 		var compilation = CSharpCompilation.Create(
 			assemblyName: "Tests",
 			syntaxTrees: new[] { syntaxTree },
-			references: [MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll")]);
+			references:
+			[
+				.. Basic.Reference.Assemblies.NetStandard20.References.All,
+				MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll"),
+			]
+		);
 
 		// Create an instance of our incremental source generator
 		var generator = new ImmediateHandlersGenerator();

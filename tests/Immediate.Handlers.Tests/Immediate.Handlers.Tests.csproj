@@ -6,6 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Basic.Reference.Assemblies" />
 		<PackageReference Include="coverlet.collector" PrivateAssets="All" />
 		<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
 		<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
