@@ -88,7 +88,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		);
 
 		var registrationNodes = handlers
-			.Select((h, _) => h?.DisplayName)
+			.Select((h, _) => (h?.DisplayName, h?.OverrideBehaviors))
 			.Collect()
 			.Combine(behaviors)
 			.Combine(hasMsDi);
@@ -216,7 +216,12 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		throw new NotImplementedException();
 	}
 
-	private static void RenderServiceCollectionExtension(SourceProductionContext context, ImmutableArray<string?> handlers, ImmutableArray<Behavior?> behaviors, bool hasDi)
+	private static void RenderServiceCollectionExtension(
+		SourceProductionContext context,
+		ImmutableArray<(string? displayName, EquatableReadOnlyList<Behavior?>? behaviors)> handlers,
+		ImmutableArray<Behavior?> behaviors,
+		bool hasDi
+	)
 	{
 		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
@@ -224,7 +229,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (!hasDi)
 			return;
 
-		if (handlers.Any(h => h is null))
+		if (handlers.Any(h => h.displayName is null || (h.behaviors?.Any(b => b is null) ?? false)))
 			return;
 
 		if (behaviors.Any(b => b is null))
@@ -237,7 +242,9 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		var source = template.Render(new
 		{
 			Handlers = handlers,
-			Behaviors = behaviors,
+			Behaviors = behaviors
+				.Concat(handlers.SelectMany(h => h.behaviors ?? []))
+				.Distinct(),
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();
