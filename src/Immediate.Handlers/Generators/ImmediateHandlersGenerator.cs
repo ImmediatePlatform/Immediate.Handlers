@@ -14,9 +14,8 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 	{
 		public required string RegistrationType { get; init; }
 		public required string ConstructorType { get; init; }
-		public required bool IsGeneric { get; init; }
-		public required string? TRequest { get; init; }
-		public required string? TResponse { get; init; }
+		public required string? RequestType { get; init; }
+		public required string? ResponseType { get; init; }
 	}
 
 	private sealed record Parameter
@@ -162,30 +161,52 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 				if (!originalDefinition.ImplementsBaseClass(behaviorTypeSymbol))
 					return null;
 
+				var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 				if (symbol.IsUnboundGenericType && symbol.TypeParameters.Length == 2)
 				{
 					// services.AddScoped<global::Dummy.LoggingBehavior<,>>();
 					// global::Dummy.LoggingBehavior<,>
-					var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+					var constructorType = typeName.Replace("<,>", "<TRequest,TResponse>");
 					return new Behavior
 					{
 						RegistrationType = typeName,
-						ConstructorType = typeName,
-						IsGeneric = true,
-						TRequest = null,
-						TResponse = null,
+						ConstructorType = constructorType,
+						RequestType = null,
+						ResponseType = null,
 					};
 				}
+				else
+				{
+					var constraint = GetConstraintInfo(symbol);
 
-				// TODO: 
-				// 1. figure out TRequest and TResponse
-				// 2. figure out if type is bounded on either side
-				throw new NotImplementedException();
+					return new Behavior
+					{
+						RegistrationType = typeName,
+						ConstructorType = constraint.ConstructorType,
+						RequestType = constraint.RequestType,
+						ResponseType = constraint.ResponseType,
+					};
+				}
 			})
 			.ToArray();
 
 		cancellationToken.ThrowIfCancellationRequested();
 		return ImmutableArray.Create(behaviors);
+	}
+
+	private struct ConstraintInfo
+	{
+		public required string ConstructorType { get; set; }
+		public string RequestType { get; set; }
+		public string ResponseType { get; set; }
+	}
+
+	private static ConstraintInfo GetConstraintInfo(INamedTypeSymbol symbol)
+	{
+		// TODO: 
+		// 1. figure out TRequest and TResponse
+		// 2. figure out if type is bounded on either side
+		throw new NotImplementedException();
 	}
 
 	private static void RenderServiceCollectionExtension(SourceProductionContext context, ImmutableArray<string?> handlers, ImmutableArray<Behavior?> behaviors, bool hasDi)
@@ -335,8 +356,8 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var handlerSource = template.Render(new
 		{
-			ClassName = handler.ClassName, 
-			hasMsDi = hasMsDi, 
+			ClassName = handler.ClassName,
+			hasMsDi = hasMsDi,
 			Namespace = handler.Namespace,
 		});
 
