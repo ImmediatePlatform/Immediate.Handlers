@@ -381,7 +381,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			Namespace = handler.Namespace,
 			RequestType = handler.RequestType.Name,
 			ResponseType = handler.ResponseType.Name,
-			HandlerParameters = handler.Parameters.Select(x => x.Name)
+			HandlerParameters = handler.Parameters
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();

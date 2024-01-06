@@ -27,18 +27,27 @@ public static partial class {{ class_name }}
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public sealed class HandleBehavior : Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
     {
-        private readonly UsersService _usersService;
+        {{~ for parameter in handler_parameters ~}}
+        private readonly {{ parameter.type }} _{{ parameter.name }};
+        {{~ end ~}}
     
-        public HandleBehavior(UsersService usersService)
+        public HandleBehavior(
+            {{~ for parameter in handler_parameters ~}}
+            {{ parameter.type }} {{ parameter.name }}{{ if !for.last }},{{ end }}
+            {{end}})
         {
-            _usersService = usersService;
+            {{~ for parameter in handler_parameters ~}}
+            _{{ parameter.name }} = {{ parameter.name }};
+            {{~ end ~}}
         }
     
         public override async Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
         {
             return await {{ class_fully_qualified_name }}.HandleAsync(
-                request,
-                _usersService,
+                request,                
+                {{~ for parameter in handler_parameters ~}}
+                _{{ parameter.name }},
+                {{~ end ~}}
                 cancellationToken);
         }
     }
