@@ -88,7 +88,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 		var source = template.Render(new
 		{
-			Handlers = handlers,
+			Handlers = handlers.Select(x => x.displayName),
 			Behaviors = behaviors
 				.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))
 				.Distinct(),

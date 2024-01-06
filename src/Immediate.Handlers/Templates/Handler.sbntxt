@@ -7,32 +7,31 @@ public static partial class {{ class_name }}
     public sealed class Handler
     {
         {{~ for behavior in behaviors ~}}
-        private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _behavior_{{for.index}};
+        private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _behavior_{{for.index + 1}};
         {{~ end ~}}    
-        private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
+        private readonly {{ class_fully_qualified_name }}.HandleBehavior _behavior_0;
     
         public Handler(
             {{~ for behavior in behaviors ~}}
-            {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> behavior_{{for.index}},
+            {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> behavior_{{for.index + 1}},
             {{~ end ~}}
             {{ class_fully_qualified_name }}.HandleBehavior handleBehavior)
         {
             {{~ for behavior in behaviors ~}}
-            _behavior_{{for.index}} = behavior_{{for.index}};
+            _behavior_{{for.index + 1}} = behavior_{{for.index + 1}};
             {{~ end ~}}
-            _handleBehavior = handleBehavior;
+            _behavior_0 = handleBehavior;
         }
     
         public async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
         {
-            {{~ if behaviors.size ~}}
-            {{~ for behavior in behaviors ~}}
-            _behavior_{{ for.index }}.InnerHandler = {{ if for.last }}_handleBehavior{{ else }}_behavior_{{ for.index | math.add 1 }}{{ end }};
+            {{~ $length = behaviors.size ~}}
+            {{~ if $length > 0 ~}}
+            {{~ for i in $length..1 ~}}
+            _behavior_{{ i }}.InnerHandler = _behavior_{{ i - 1 }};
             {{~ end ~}}
-            return await _behavior_0.HandleAsync(request, cancellationToken);
-            {{~ else ~}}
-            return await _handleBehavior.HandleAsync(request, cancellationToken);
-            {{~ end ~}}
+            {{~ end ~}}            
+            return await _behavior_{{ if $length == 0 }}0{{ else }}{{ $length }}{{ end }}.HandleAsync(request, cancellationToken);
         }
     }
 
