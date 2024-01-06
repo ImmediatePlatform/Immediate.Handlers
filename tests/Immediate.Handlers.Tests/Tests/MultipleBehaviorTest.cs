@@ -1,5 +1,6 @@
-namespace Immediate.Handlers.Tests.Tests;
+﻿namespace Immediate.Handlers.Tests.Tests;
 
+[UsesVerify]
 public class MultipleBehaviorTest
 {
 	private readonly string _input = $$"""
@@ -69,11 +70,11 @@ public interface ILogger<T>;
 """;
 
 	[Fact]
-	public void MultipleBehavior()
+	public async Task MultipleBehavior()
 	{
 		var driver = TestHelper.GetDriver(_input);
 
 		var runResult = driver.GetRunResult();
-		_ = Verify(runResult);
+		_ = await Verify(runResult);
 	}
 }

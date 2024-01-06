@@ -1,5 +1,6 @@
-namespace Immediate.Handlers.Tests.Tests;
+﻿namespace Immediate.Handlers.Tests.Tests;
 
+[UsesVerify]
 public class SingleBehaviorTest
 {
 	private readonly string _input = """
@@ -57,11 +58,11 @@ public interface ILogger<T>;
 """;
 
 	[Fact]
-	public void SingleBehavior()
+	public async Task SingleBehavior()
 	{
 		var driver = TestHelper.GetDriver(_input);
 
 		var runResult = driver.GetRunResult();
-		_ = Verify(runResult);
+		_ = await Verify(runResult);
 	}
 }
