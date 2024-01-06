@@ -14,4 +14,11 @@ internal static class Utility
 		method.ReturnsVoid || method.ReturnType.OriginalDefinition.ToString() != "System.Threading.Tasks.Task<TResult>"
 			? null
 			: ((INamedTypeSymbol)method.ReturnType).TypeArguments.FirstOrDefault();
+
+	public static AttributeData? GetAttribute(this INamedTypeSymbol symbol, string attribute) =>
+		symbol
+			.GetAttributes()
+			.FirstOrDefault(a =>
+				a.AttributeClass?.ToString() == attribute
+			);
 }

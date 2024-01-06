@@ -100,8 +100,10 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 	}
 
 	private RenderMode TransformRenderMode(GeneratorAttributeSyntaxContext context, CancellationToken token)
+		=> ParseRenderMode(context.Attributes[0]);
+
+	private static RenderMode ParseRenderMode(AttributeData attr)
 	{
-		var attr = context.Attributes[0];
 		if (attr.ConstructorArguments.Length > 0)
 		{
 			var ca = attr.ConstructorArguments[0];
@@ -280,6 +282,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			})
 			.ToEquatableReadOnlyList();
 
+		var renderMode = GetOverrideRenderMode(symbol);
 		return new()
 		{
 			Namespace = @namespace,
@@ -290,8 +293,16 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			ResponseType = responseType,
 
 			Parameters = parameters,
+
+			OverrideRenderMode = renderMode,
 		};
 	}
+
+	private static RenderMode? GetOverrideRenderMode(INamedTypeSymbol symbol) =>
+		symbol.GetAttribute("Immediate.Handlers.Shared.RenderModeAttribute")
+				is { } rma
+			? ParseRenderMode(rma)
+			: null;
 
 	private static GenericType BuildGenericType(INamedTypeSymbol type)
 	{
