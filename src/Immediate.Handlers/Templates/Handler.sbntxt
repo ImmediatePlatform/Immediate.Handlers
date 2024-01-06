@@ -6,19 +6,18 @@ public static partial class {{ class_name }}
 {
     public sealed class Handler
     {
-        private readonly LoggingBehavior<{{ request_type }}, IEnumerable<User>> _loggingBehavior;
+        private readonly LoggingBehavior<{{ request_type }}, {{ response_type }}> _loggingBehavior;
         private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
     
         public Handler(
-               LoggingBehavior<{{ request_type }}, IEnumerable<User>> loggingBehavior,
-               {{ class_fully_qualified_name }}.HandleBehavior handleBehavior
-        )
+               LoggingBehavior<{{ request_type }}, {{ response_type }}> loggingBehavior,
+               {{ class_fully_qualified_name }}.HandleBehavior handleBehavior)
         {
             _loggingBehavior = loggingBehavior;
             _handleBehavior = handleBehavior;
         }
     
-        public async Task<IEnumerable<User>> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
+        public async Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
         {
             _loggingBehavior.InnerHandler = _handleBehavior;
             return await _loggingBehavior.HandleAsync(request, cancellationToken);
@@ -26,7 +25,7 @@ public static partial class {{ class_name }}
     }
 
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    public sealed class HandleBehavior : Immediate.Handlers.Shared.Behavior<{{ request_type }}, IEnumerable<User>>
+    public sealed class HandleBehavior : Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
     {
         private readonly UsersService _usersService;
     
@@ -35,7 +34,7 @@ public static partial class {{ class_name }}
             _usersService = usersService;
         }
     
-        public override async Task<IEnumerable<User>> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
+        public override async Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
         {
             return await {{ class_fully_qualified_name }}.HandleAsync(
                 request,
@@ -44,8 +43,7 @@ public static partial class {{ class_name }}
         }
     }
 
-    {{ if has_ms_di }}
-    {{- raw -}}
+    {{~ if has_ms_di ~}}
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
     {
@@ -53,6 +51,5 @@ public static partial class {{ class_name }}
         services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
         return services;
     }
-    {{- endraw -}}
     {{ end }}
 }
