@@ -5,7 +5,7 @@ namespace Immediate.Handlers;
 public static class EquatableReadOnlyList
 {
 	public static EquatableReadOnlyList<T> ToEquatableReadOnlyList<T>(this IEnumerable<T> enumerable)
-		where T : IEquatable<T> => new(enumerable.ToArray());
+		=> new(enumerable.ToArray());
 }
 
 /// <summary>
@@ -14,7 +14,6 @@ public static class EquatableReadOnlyList
 public readonly struct EquatableReadOnlyList<T>(
 	IReadOnlyList<T> collection
 ) : IEquatable<EquatableReadOnlyList<T>>, IReadOnlyList<T>
-	where T : IEquatable<T>
 {
 	public bool Equals(EquatableReadOnlyList<T> other)
 		=> this.SequenceEqual(other);

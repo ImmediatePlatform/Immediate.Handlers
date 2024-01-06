@@ -116,7 +116,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		}
 	}
 
-	private static ImmutableArray<Behavior?> TransformBehaviors(
+	private static EquatableReadOnlyList<Behavior?> TransformBehaviors(
 		GeneratorAttributeSyntaxContext context,
 		CancellationToken cancellationToken
 	)
@@ -129,7 +129,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var attr = context.Attributes[0];
 		if (attr.ConstructorArguments.Length != 1)
-			return ImmutableArray<Behavior?>.Empty;
+			return [];
 
 		var ca = attr.ConstructorArguments[0];
 		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(
@@ -139,17 +139,17 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 				arrayTypeSymbol
 		))
 		{
-			return ImmutableArray<Behavior?>.Empty;
+			return [];
 		}
 
 		cancellationToken.ThrowIfCancellationRequested();
 		var behaviorType = typeof(Behavior<,>);
 		var behaviorTypeSymbol = compilation.GetTypeByMetadataName(behaviorType.FullName);
 		if (behaviorTypeSymbol is null)
-			return ImmutableArray<Behavior?>.Empty;
+			return [];
 
 		cancellationToken.ThrowIfCancellationRequested();
-		var behaviors = ca.Values
+		return ca.Values
 			.Select(v =>
 			{
 				cancellationToken.ThrowIfCancellationRequested();
@@ -190,10 +190,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 					};
 				}
 			})
-			.ToArray();
-
-		cancellationToken.ThrowIfCancellationRequested();
-		return ImmutableArray.Create(behaviors);
+			.ToEquatableReadOnlyList();
 	}
 
 	private struct ConstraintInfo
