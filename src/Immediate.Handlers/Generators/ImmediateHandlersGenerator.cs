@@ -244,12 +244,14 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		CancellationToken cancellationToken
 	)
 	{
+		cancellationToken.ThrowIfCancellationRequested();
 		var symbol = (INamedTypeSymbol)context.TargetSymbol;
 
 		var @namespace = symbol.ContainingNamespace.ToString();
 		var name = symbol.Name;
 		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
+		cancellationToken.ThrowIfCancellationRequested();
 		if (symbol
 				.GetMembers()
 				.OfType<IMethodSymbol>()
@@ -265,14 +267,17 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (handleMethod.Parameters.Length < 2)
 			return null;
 
+		cancellationToken.ThrowIfCancellationRequested();
 		var requestType = BuildGenericType((INamedTypeSymbol)handleMethod.Parameters[0].Type);
 
+		cancellationToken.ThrowIfCancellationRequested();
 		var responseTypeSymbol = handleMethod.GetTaskReturnType();
 		if (responseTypeSymbol is null)
 			return null;
 
 		var responseType = BuildGenericType((INamedTypeSymbol)responseTypeSymbol);
 
+		cancellationToken.ThrowIfCancellationRequested();
 		var parameters = handleMethod.Parameters
 			.Skip(1).Take(handleMethod.Parameters.Length - 2)
 			.Select(p => new Parameter
@@ -282,7 +287,10 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			})
 			.ToEquatableReadOnlyList();
 
+		cancellationToken.ThrowIfCancellationRequested();
 		var renderMode = GetOverrideRenderMode(symbol);
+
+		cancellationToken.ThrowIfCancellationRequested();
 		return new()
 		{
 			Namespace = @namespace,
