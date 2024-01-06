@@ -333,15 +333,15 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		{
 			return;
 		}
-		
+
 		var handlerSource = template.Render(new
 		{
-			ClassName = handler.Name,
+			ClassName = handler.DisplayName,
 			hasMsDi = hasMsDi,
-			Namespace = handler.FullTypeName[..handler.FullTypeName.LastIndexOf('.')]
+			Namespace = handler.Namespace,
 		});
 
-		context.AddSource($"Immediate.Handlers.Templates.{handler.Name}.cs", handlerSource);
+		context.AddSource($"Immediate.Handlers.Templates.{handler.Namespace}.{handler.ClassName}.cs", handlerSource);
 	}
 
 	private static Template GetTemplate(string name)
