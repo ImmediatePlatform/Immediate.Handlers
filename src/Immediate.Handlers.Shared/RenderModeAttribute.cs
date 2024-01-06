@@ -21,7 +21,7 @@ public enum RenderMode
 /// </summary>
 ///	<remarks>
 ///	<para>
-///	    If applied to the Assembly (<c>[assembly: RenderMode()]</c>, then all handlers will use the given <see
+///	    If applied to the Assembly (<c>[assembly: RenderMode()]</c>), then all handlers will use the given <see
 ///	    cref="Shared.RenderMode"/> unless overriden. 
 ///	</para>
 ///	<para>
