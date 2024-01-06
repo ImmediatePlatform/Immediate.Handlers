@@ -41,7 +41,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		public required EquatableReadOnlyList<Parameter> Parameters { get; init; }
 
-		public EquatableReadOnlyList<Behavior>? OverrideBehaviors { get; init; }
+		public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
 		public RenderMode? OverrideRenderMode { get; init; }
 
 	}
@@ -127,11 +127,25 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		var compilation = semanticModel.Compilation;
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var attr = context.Attributes[0];
-		if (attr.ConstructorArguments.Length != 1)
+		return ParseBehaviors(context.Attributes[0], compilation, cancellationToken);
+	}
+
+	private static EquatableReadOnlyList<Behavior?> ParseBehaviors(
+		AttributeData attribute,
+		Compilation compilation,
+		CancellationToken cancellationToken
+	)
+	{
+		cancellationToken.ThrowIfCancellationRequested();
+		var behaviorType = typeof(Behavior<,>);
+		var behaviorTypeSymbol = compilation.GetTypeByMetadataName(behaviorType.FullName);
+		if (behaviorTypeSymbol is null)
 			return [];
 
-		var ca = attr.ConstructorArguments[0];
+		if (attribute.ConstructorArguments.Length != 1)
+			return [];
+
+		var ca = attribute.ConstructorArguments[0];
 		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(
 			compilation.GetTypeByMetadataName("System.Type")!, 1)!;
 		if (!SymbolEqualityComparer.Default.Equals(
@@ -141,12 +155,6 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		{
 			return [];
 		}
-
-		cancellationToken.ThrowIfCancellationRequested();
-		var behaviorType = typeof(Behavior<,>);
-		var behaviorTypeSymbol = compilation.GetTypeByMetadataName(behaviorType.FullName);
-		if (behaviorTypeSymbol is null)
-			return [];
 
 		cancellationToken.ThrowIfCancellationRequested();
 		return ca.Values
@@ -288,6 +296,9 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		var renderMode = GetOverrideRenderMode(symbol);
 
 		cancellationToken.ThrowIfCancellationRequested();
+		var behaviors = GetOverrideBehaviors(symbol, context.SemanticModel.Compilation, cancellationToken);
+
+		cancellationToken.ThrowIfCancellationRequested();
 		return new()
 		{
 			Namespace = @namespace,
@@ -300,6 +311,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			Parameters = parameters,
 
 			OverrideRenderMode = renderMode,
+			OverrideBehaviors = behaviors,
 		};
 	}
 
@@ -307,6 +319,12 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		symbol.GetAttribute("Immediate.Handlers.Shared.RenderModeAttribute")
 				is { } rma
 			? ParseRenderMode(rma)
+			: null;
+
+	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(INamedTypeSymbol symbol, Compilation compilation, CancellationToken cancellationToken) =>
+		symbol.GetAttribute("Immediate.Handlers.Shared.BehaviorsAttribute")
+				is { } ba
+			? ParseBehaviors(ba, compilation, cancellationToken)
 			: null;
 
 	private static GenericType BuildGenericType(INamedTypeSymbol type)
