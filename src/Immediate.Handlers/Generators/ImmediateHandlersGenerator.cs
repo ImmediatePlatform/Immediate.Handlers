@@ -356,9 +356,12 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var handlerSource = template.Render(new
 		{
+			ClassFullyQualifiedName = handler.DisplayName,
 			ClassName = handler.ClassName,
 			hasMsDi = hasMsDi,
 			Namespace = handler.Namespace,
+			RequestType = handler.RequestType.Name,
+			ResponseType = handler.ResponseType.Name,
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();

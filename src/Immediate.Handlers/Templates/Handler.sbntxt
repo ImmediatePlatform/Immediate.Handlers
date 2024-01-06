@@ -6,27 +6,27 @@ public static partial class {{ class_name }}
 {
     public sealed class Handler
     {
-        private readonly LoggingBehavior<Query, IEnumerable<User>> _loggingBehavior;        
-        private readonly GetUsersQuery.HandleBehavior _handleBehavior;
+        private readonly LoggingBehavior<{{ request_type }}, IEnumerable<User>> _loggingBehavior;
+        private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
     
         public Handler(
-               LoggingBehavior<Query, IEnumerable<User>> loggingBehavior,
-               GetUsersQuery.HandleBehavior handleBehavior
+               LoggingBehavior<{{ request_type }}, IEnumerable<User>> loggingBehavior,
+               {{ class_fully_qualified_name }}.HandleBehavior handleBehavior
         )
         {
             _loggingBehavior = loggingBehavior;
             _handleBehavior = handleBehavior;
         }
     
-        public async Task<IEnumerable<User>> HandleAsync(Query query, global::System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<User>> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
         {
             _loggingBehavior.InnerHandler = _handleBehavior;
-            return await _loggingBehavior.HandleAsync(query, cancellationToken);
+            return await _loggingBehavior.HandleAsync(request, cancellationToken);
         }
     }
 
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    public sealed class HandleBehavior : Immediate.Handlers.Shared.Behavior<Query, IEnumerable<User>>
+    public sealed class HandleBehavior : Immediate.Handlers.Shared.Behavior<{{ request_type }}, IEnumerable<User>>
     {
         private readonly UsersService _usersService;
     
@@ -35,10 +35,10 @@ public static partial class {{ class_name }}
             _usersService = usersService;
         }
     
-        public override async Task<IEnumerable<User>> HandleAsync(Query query, global::System.Threading.CancellationToken cancellationToken)
+        public override async Task<IEnumerable<User>> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
         {
-            return await GetUsersQuery.HandleAsync(
-                query,
+            return await {{ class_fully_qualified_name }}.HandleAsync(
+                request,
                 _usersService,
                 cancellationToken);
         }
@@ -49,8 +49,8 @@ public static partial class {{ class_name }}
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
     {
-        services.AddScoped<GetUsersQuery.Handler>();
-        services.AddScoped<GetUsersQuery.HandleBehavior>();
+        services.AddScoped<{{ class_fully_qualified_name }}.Handler>();
+        services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
         return services;
     }
     {{- endraw -}}
