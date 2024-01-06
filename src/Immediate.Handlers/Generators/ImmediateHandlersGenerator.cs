@@ -275,7 +275,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			.Skip(1).Take(handleMethod.Parameters.Length - 2)
 			.Select(p => new Parameter
 			{
-				Type = p.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+				Type = p.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
 				Name = p.Name,
 			})
 			.ToEquatableReadOnlyList();
@@ -362,6 +362,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			Namespace = handler.Namespace,
 			RequestType = handler.RequestType.Name,
 			ResponseType = handler.ResponseType.Name,
+			HandlerParameters = handler.Parameters.Select(x => x.Name)
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();
