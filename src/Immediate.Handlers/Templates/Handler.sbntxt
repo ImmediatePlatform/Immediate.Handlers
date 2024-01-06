@@ -6,26 +6,38 @@ public static partial class {{ class_name }}
 {
     public sealed class Handler
     {
-        private readonly LoggingBehavior<{{ request_type }}, {{ response_type }}> _loggingBehavior;
+        {{~ for behavior in behaviors ~}}
+        private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _behavior_{{for.index}};
+        {{~ end ~}}    
         private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
     
         public Handler(
-               LoggingBehavior<{{ request_type }}, {{ response_type }}> loggingBehavior,
-               {{ class_fully_qualified_name }}.HandleBehavior handleBehavior)
+            {{~ for behavior in behaviors ~}}
+            {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> behavior_{{for.index}},
+            {{~ end ~}}
+            {{ class_fully_qualified_name }}.HandleBehavior handleBehavior)
         {
-            _loggingBehavior = loggingBehavior;
+            {{~ for behavior in behaviors ~}}
+            _behavior_{{for.index}} = behavior_{{for.index}};
+            {{~ end ~}}
             _handleBehavior = handleBehavior;
         }
     
-        public async Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
+        public async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
         {
-            _loggingBehavior.InnerHandler = _handleBehavior;
-            return await _loggingBehavior.HandleAsync(request, cancellationToken);
+            {{~ if behaviors.size ~}}
+            {{~ for behavior in behaviors ~}}
+            _behavior_{{ for.index }}.InnerHandler = {{ if for.last }}_handleBehavior{{ else }}_behavior_{{ for.index | math.add 1 }}{{ end }};
+            {{~ end ~}}
+            return await _behavior_0.HandleAsync(request, cancellationToken);
+            {{~ else ~}}
+            return await _handleBehavior.HandleAsync(request, cancellationToken);
+            {{~ end ~}}
         }
     }
 
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    public sealed class HandleBehavior : Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
+    public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
     {
         {{~ for parameter in handler_parameters ~}}
         private readonly {{ parameter.type }} _{{ parameter.name }};
@@ -41,7 +53,7 @@ public static partial class {{ class_name }}
             {{~ end ~}}
         }
     
-        public override async Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
+        public override async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
         {
             return await {{ class_fully_qualified_name }}.HandleAsync(
                 request,                
@@ -60,5 +72,5 @@ public static partial class {{ class_name }}
         services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
         return services;
     }
-    {{ end }}
+    {{~ end ~}}
 }

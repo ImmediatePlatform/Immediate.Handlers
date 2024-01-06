@@ -14,6 +14,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 	{
 		public required string RegistrationType { get; init; }
 		public required string ConstructorType { get; init; }
+		public required string NonGenericTypeName { get; init; }
 		public required string? RequestType { get; init; }
 		public required string? ResponseType { get; init; }
 	}
@@ -172,6 +173,8 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 					return null;
 
 				var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+				var nonGenericTypeName = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
 				if (symbol.IsUnboundGenericType && symbol.TypeParameters.Length == 2)
 				{
 					// services.AddScoped<global::Dummy.LoggingBehavior<,>>();
@@ -181,6 +184,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 					{
 						RegistrationType = typeName,
 						ConstructorType = constructorType,
+						NonGenericTypeName = nonGenericTypeName,
 						RequestType = null,
 						ResponseType = null,
 					};
@@ -193,6 +197,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 					{
 						RegistrationType = typeName,
 						ConstructorType = constraint.ConstructorType,
+						NonGenericTypeName = nonGenericTypeName,
 						RequestType = constraint.RequestType,
 						ResponseType = constraint.ResponseType,
 					};
@@ -395,6 +400,7 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			return;
 		}
 
+		// TODO: Respect overrides
 		var handlerSource = template.Render(new
 		{
 			ClassFullyQualifiedName = handler.DisplayName,
@@ -403,7 +409,8 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 			Namespace = handler.Namespace,
 			RequestType = handler.RequestType.Name,
 			ResponseType = handler.ResponseType.Name,
-			HandlerParameters = handler.Parameters
+			HandlerParameters = handler.Parameters,
+			Behaviors = behaviors
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();
