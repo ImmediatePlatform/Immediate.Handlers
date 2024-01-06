@@ -1,31 +1,31 @@
-namespace Immediate.Handlers.Tests;
+﻿namespace Immediate.Handlers.Tests;
 
 [UsesVerify]
 public class Test1
 {
 	[Fact]
-	public Task Driver()
+	public async Task Driver()
 	{
 		var driver = TestHelper.GetDriver(SourceFragments.Normal);
 
-		return Verify(driver);
+		_ = await Verify(driver);
 	}
 
 	[Fact]
-	public Task RunResults()
+	public async Task RunResults()
 	{
 		var driver = TestHelper.GetDriver(SourceFragments.Normal);
 
 		var runResults = driver.GetRunResult();
-		return Verify(runResults);
+		_ = await Verify(runResults);
 	}
 
 	[Fact]
-	public Task RunResult()
+	public async Task RunResult()
 	{
 		var driver = TestHelper.GetDriver(SourceFragments.Normal, [DriverReferenceAssemblies.Msdi]);
 
 		var runResult = driver.GetRunResult().Results.Single();
-		return Verify(runResult);
+		_ = await Verify(runResult);
 	}
 }
