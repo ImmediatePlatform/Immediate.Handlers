@@ -327,9 +327,21 @@ public class ImmediateHandlersGenerator : IIncrementalGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 
 		var renderMode = renderModes.Length == 0 ? RenderMode.Normal : renderModes[0];
-		if (renderMode is not RenderMode.Normal)
-			return;
 
+		// Only support normal render mode for now
+		if (renderMode is not RenderMode.Normal)
+		{
+			return;
+		}
+		
+		var handlerSource = template.Render(new
+		{
+			ClassName = handler.Name,
+			hasMsDi = hasMsDi,
+			Namespace = handler.FullTypeName[..handler.FullTypeName.LastIndexOf('.')]
+		});
+
+		context.AddSource($"Immediate.Handlers.Templates.{handler.Name}.cs", handlerSource);
 	}
 
 	private static Template GetTemplate(string name)

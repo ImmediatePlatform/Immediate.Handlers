@@ -1,5 +1,6 @@
-﻿using Dummy;
-using Immediate.Handlers.Shared;
+﻿using Immediate.Handlers.Shared;
+using Microsoft.Extensions.DependencyInjection;
+using Normal;
 
 [assembly: RenderMode(renderMode: RenderMode.Normal)]
 
@@ -7,16 +8,16 @@ using Immediate.Handlers.Shared;
 	typeof(LoggingBehavior<,>)
 )]
 
-namespace Dummy;
+namespace Normal;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public Task<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
 [Handler]
-public static class GetUsersQuery
+public static partial class GetUsersQuery
 {
 	public record Query;
 

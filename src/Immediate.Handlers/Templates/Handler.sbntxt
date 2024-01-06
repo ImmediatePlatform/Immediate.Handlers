@@ -1,4 +1,7 @@
-﻿namespace {{ namespace }}
+﻿using System.ComponentModel;
+{{ if has_ms_di }}using Microsoft.Extensions.DependencyInjection;{{end}}
+
+namespace {{ namespace }};
 
 public static partial class {{ class_name }}
 {
@@ -14,8 +17,8 @@ public static partial class {{ class_name }}
         }
     }
 
-    [EditorBrowsable(false)]
-    private sealed class HandleBehavior : Behavior<Query, IEnumerable<User>>(
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public sealed class HandleBehavior : Immediate.Handlers.Shared.Behavior<Query, IEnumerable<User>>(
         UsersService usersService
     )
     {
@@ -28,11 +31,15 @@ public static partial class {{ class_name }}
         }
     }
 
-    [EditorBrowsable(false)]
-    public static IServiceCollection AddHandlers(
-        IServiceCollection services)
+    {{ if has_ms_di }}
+    {{- raw -}}
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public static IServiceCollection AddHandlers(IServiceCollection services)
     {
         services.AddScoped<GetUsersQuery.Handler>();
         services.AddScoped<GetUsersQuery.HandleBehavior>();
+        return services;
     }
+    {{- endraw -}}
+    {{ end }}
 }
