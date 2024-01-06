@@ -23,7 +23,7 @@ public class Test1
 	[Fact]
 	public Task RunResult()
 	{
-		var driver = TestHelper.GetDriver(SourceFragments.Normal);
+		var driver = TestHelper.GetDriver(SourceFragments.Normal, [DriverReferenceAssemblies.Msdi]);
 
 		var runResult = driver.GetRunResult().Results.Single();
 		return Verify(runResult);
