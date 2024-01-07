@@ -1,9 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers;
-internal class DisplayNameFormatters
+
+internal static class DisplayNameFormatters
 {
-	public static SymbolDisplayFormat NonGenericFqdnFormat = new SymbolDisplayFormat(
+	public static SymbolDisplayFormat NonGenericFqdnFormat = new(
 		globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Included,
 		typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
 		genericsOptions: SymbolDisplayGenericsOptions.None // This excludes the generic type arguments
