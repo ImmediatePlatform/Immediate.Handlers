@@ -14,10 +14,13 @@ public class HandlerClassAnalyzer : DiagnosticAnalyzer
 {
 	// Keep in mind: you have to list your rules here.
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-		ImmutableArray.Create(HandlerMethodDoesMustExistDiagnostic.Rule, HandlerMethodMustReturnTaskTDiagnostic.Rule, HandlerMethodMustDeclareTwoParametersDiagnostic.Rule);
+		ImmutableArray.Create(HandlerMethodMustExistDiagnostic.Rule, HandlerMethodMustReturnTaskTDiagnostic.Rule, HandlerMethodMustDeclareTwoParametersDiagnostic.Rule);
 
 	public override void Initialize(AnalysisContext context)
 	{
+		if (context == null)
+			throw new ArgumentNullException(nameof(context));
+
 		// You must call this method to avoid analyzing generated code.
 		context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
@@ -40,7 +43,7 @@ public class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		if (method == null)
 		{
-			var doesNotExistDiagnostic = Diagnostic.Create(HandlerMethodDoesMustExistDiagnostic.Rule,
+			var doesNotExistDiagnostic = Diagnostic.Create(HandlerMethodMustExistDiagnostic.Rule,
 				namedTypeSymbol.Locations[0],
 				namedTypeSymbol.Name);
 
@@ -64,7 +67,7 @@ public class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		var methodSymbolParams = methodSymbol.Parameters;
 		if (methodSymbolParams.Length < 2 ||
-			methodSymbolParams[0].Type.ToString().Split().Last() is not ("Query" or "Command") ||
+			methodSymbolParams[0].Type.ToString().Split('.').Last() is not ("Query" or "Command") ||
 			methodSymbolParams.Last().Type.ToString() is not "System.Threading.CancellationToken")
 		{
 			var mustHaveTwoParameters = Diagnostic.Create(HandlerMethodMustDeclareTwoParametersDiagnostic.Rule,

@@ -12,6 +12,7 @@
 		<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="Verify.SourceGenerators" />
@@ -23,8 +24,8 @@
 	<ItemGroup>
 		<ProjectReference Include="../../src/Immediate.Handlers/Immediate.Handlers.csproj" />
 		<ProjectReference Include="../../src/Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
-		<ProjectReference Include="..\..\src\Immediate.Handlers.Analyzers\Immediate.Handlers.Analyzers.csproj" />
-		<ProjectReference Include="..\..\src\Immediate.Handlers.CodeFixes\Immediate.Handlers.CodeFixes.csproj" />
+		<ProjectReference Include="../../src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" />
+		<ProjectReference Include="../../src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" />
 	</ItemGroup>
 
 </Project>

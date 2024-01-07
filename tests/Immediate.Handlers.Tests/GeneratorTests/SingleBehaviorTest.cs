@@ -1,6 +1,6 @@
 ﻿using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.Tests;
+namespace Immediate.Handlers.Tests.GeneratorTests;
 
 [UsesVerify]
 public class SingleBehaviorTest
@@ -60,8 +60,8 @@ public interface ILogger<T>;
 """;
 
 	[Theory]
-	[InlineData(new[] {DriverReferenceAssemblies.Normal})]
-	[InlineData(new[] {DriverReferenceAssemblies.Normal, DriverReferenceAssemblies.Msdi})]
+	[InlineData(new[] { DriverReferenceAssemblies.Normal })]
+	[InlineData(new[] { DriverReferenceAssemblies.Normal, DriverReferenceAssemblies.Msdi })]
 	public async Task SingleBehavior(DriverReferenceAssemblies[] assemblies)
 	{
 		var driver = TestHelper.GetDriver(_input, assemblies);

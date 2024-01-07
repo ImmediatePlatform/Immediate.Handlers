@@ -4,10 +4,11 @@ namespace Immediate.Handlers.Tests.Helpers;
 
 public static class ReferenceAssemblyHelpers
 {
-	public static List<MetadataReference> GetReferences(this ICollection<DriverReferenceAssemblies> assemblies)
+	public static IEnumerable<MetadataReference> GetReferences(this IEnumerable<DriverReferenceAssemblies> assemblies)
 	{
 		ArgumentNullException.ThrowIfNull(assemblies);
 
+		assemblies = assemblies.ToList();
 		List<MetadataReference> references = [];
 
 		if (assemblies.Contains(DriverReferenceAssemblies.Normal))

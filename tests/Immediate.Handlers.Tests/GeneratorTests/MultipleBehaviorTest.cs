@@ -1,6 +1,6 @@
 ﻿using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.Tests;
+namespace Immediate.Handlers.Tests.GeneratorTests;
 
 [UsesVerify]
 public class MultipleBehaviorTest
