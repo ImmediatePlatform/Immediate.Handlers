@@ -63,9 +63,39 @@ namespace Immediate.Handlers.Analyzers {
             }
         }
         
-        internal static string IH0001CodeFixTitle {
+        internal static string IH0002Description {
             get {
-                return ResourceManager.GetString("IH0001CodeFixTitle", resourceCulture);
+                return ResourceManager.GetString("IH0002Description", resourceCulture);
+            }
+        }
+        
+        internal static string IH0002MessageFormat {
+            get {
+                return ResourceManager.GetString("IH0002MessageFormat", resourceCulture);
+            }
+        }
+        
+        internal static string IH0002Title {
+            get {
+                return ResourceManager.GetString("IH0002Title", resourceCulture);
+            }
+        }
+        
+        internal static string IH0003Description {
+            get {
+                return ResourceManager.GetString("IH0003Description", resourceCulture);
+            }
+        }
+        
+        internal static string IH0003MessageFormat {
+            get {
+                return ResourceManager.GetString("IH0003MessageFormat", resourceCulture);
+            }
+        }
+        
+        internal static string IH0003Title {
+            get {
+                return ResourceManager.GetString("IH0003Title", resourceCulture);
             }
         }
     }

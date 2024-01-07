@@ -27,7 +27,22 @@
     <data name="IH0001Title" xml:space="preserve">
         <value>Type name should implement a HandleAsync method</value>
     </data>
-    <data name="IH0001CodeFixTitle" xml:space="preserve">
-        <value>Implement HandleAsync method</value>
+    <data name="IH0002Description" xml:space="preserve">
+        <value>HandleAsync method must return a Task&lt;T&gt;</value>
+    </data>
+    <data name="IH0002MessageFormat" xml:space="preserve">
+        <value>Method '{0}' must return a Task&lt;T&gt;</value>
+    </data>
+    <data name="IH0002Title" xml:space="preserve">
+        <value>Method must return a Task&lt;T&gt;</value>
+    </data>
+    <data name="IH0003Description" xml:space="preserve">
+        <value>HandleAsync method must must take the request type as it's first parameter and a CancellationToken as it's last parameter.</value>
+    </data>
+    <data name="IH0003MessageFormat" xml:space="preserve">
+        <value>Method '{0}' must take the request type as it's first parameter and a CancellationToken as it's last parameter.</value>
+    </data>
+    <data name="IH0003Title" xml:space="preserve">
+        <value>Method must define two parameters</value>
     </data>
 </root>

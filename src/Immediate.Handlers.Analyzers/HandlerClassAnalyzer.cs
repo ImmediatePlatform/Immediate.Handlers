@@ -1,10 +1,7 @@
 using System.Collections.Immutable;
-using System.Linq;
 using Immediate.Handlers.Analyzers.Diagnostics;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Operations;
 
 namespace Immediate.Handlers.Analyzers;
 
@@ -13,11 +10,11 @@ namespace Immediate.Handlers.Analyzers;
 /// To make sure that we analyze the method of the specific class, we use semantic analysis instead of the syntax tree, so this analyzer will not work if the project is not compilable.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class HandlerMethodDoesNotExist : DiagnosticAnalyzer
+public class HandlerClassAnalyzer : DiagnosticAnalyzer
 {
 	// Keep in mind: you have to list your rules here.
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-		ImmutableArray.Create(HandlerMethodExistsDiagnostic.Rule);
+		ImmutableArray.Create(HandlerMethodDoesMustExistDiagnostic.Rule, HandlerMethodMustReturnTaskTDiagnostic.Rule, HandlerMethodMustDeclareTwoParametersDiagnostic.Rule);
 
 	public override void Initialize(AnalysisContext context)
 	{
@@ -41,17 +38,43 @@ public class HandlerMethodDoesNotExist : DiagnosticAnalyzer
 
 		var method = namedTypeSymbol.GetMembers().FirstOrDefault(x => x.Name == "HandleAsync");
 
-		if (method != null)
+		if (method == null)
+		{
+			var doesNotExistDiagnostic = Diagnostic.Create(HandlerMethodDoesMustExistDiagnostic.Rule,
+				namedTypeSymbol.Locations[0],
+				namedTypeSymbol.Name);
+
+			context.ReportDiagnostic(doesNotExistDiagnostic);
+			return;
+		}
+
+		if (method is not IMethodSymbol methodSymbol)
 			return;
 
-		var diagnostic = Diagnostic.Create(HandlerMethodExistsDiagnostic.Rule,
-			// The highlighted area in the analyzed source code. Keep it as specific as possible.
-			namedTypeSymbol.Locations[0],
-			// The value is passed to the 'MessageFormat' argument of your rule.
-			namedTypeSymbol.Name);
+		if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol &&
+			returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.Task<TResult>")
+		{
+			var mustReturnTaskT = Diagnostic.Create(HandlerMethodMustReturnTaskTDiagnostic.Rule,
+				methodSymbol.Locations[0],
+				methodSymbol.Name);
 
-		// Reporting a diagnostic is the primary outcome of analyzers.
-		context.ReportDiagnostic(diagnostic);
+			context.ReportDiagnostic(mustReturnTaskT);
+			return;
+		}
+
+		var methodSymbolParams = methodSymbol.Parameters;
+		if (methodSymbolParams.Length < 2 ||
+			methodSymbolParams[0].Type.ToString().Split().Last() is not ("Query" or "Command") ||
+			methodSymbolParams.Last().Type.ToString() is not "System.Threading.CancellationToken")
+		{
+			var mustHaveTwoParameters = Diagnostic.Create(HandlerMethodMustDeclareTwoParametersDiagnostic.Rule,
+				methodSymbol.Locations[0],
+				methodSymbol.Name);
+
+			context.ReportDiagnostic(mustHaveTwoParameters);
+		}
+
+
 	}
 
 	// /// <summary>
