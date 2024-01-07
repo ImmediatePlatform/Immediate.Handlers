@@ -33,7 +33,7 @@ public static partial class {{ class_name }}
             _behavior_{{ i }}.InnerHandler = _behavior_{{ i - 1 }};
             {{~ end ~}}
             {{~ end ~}}            
-            return await _behavior_{{ $length }}.HandleAsync(request, cancellationToken);
+            return await _behavior_{{ $length }}.HandleAsync(request, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -61,7 +61,7 @@ public static partial class {{ class_name }}
                 {{~ for parameter in handler_parameters ~}}
                 _{{ parameter.name }},
                 {{~ end ~}}
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
         }
     }
     {{~ if has_ms_di ~}}

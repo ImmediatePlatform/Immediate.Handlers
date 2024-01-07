@@ -27,7 +27,7 @@ public static partial class GetUsersQuery
         {
             _behavior_2.InnerHandler = _behavior_1;
             _behavior_1.InnerHandler = _behavior_0;
-            return await _behavior_2.HandleAsync(request, cancellationToken);
+            return await _behavior_2.HandleAsync(request, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -48,7 +48,7 @@ public static partial class GetUsersQuery
             return await global::Dummy.GetUsersQuery.HandleAsync(
                 request,                
                 _usersService,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
         }
     }
 }

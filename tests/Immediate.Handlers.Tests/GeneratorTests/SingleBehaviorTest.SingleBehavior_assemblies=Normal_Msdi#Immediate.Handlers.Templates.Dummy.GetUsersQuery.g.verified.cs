@@ -23,7 +23,7 @@ public static partial class GetUsersQuery
         public async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(global::Dummy.GetUsersQuery.Query request, global::System.Threading.CancellationToken cancellationToken = default)
         {
             _behavior_1.InnerHandler = _behavior_0;
-            return await _behavior_1.HandleAsync(request, cancellationToken);
+            return await _behavior_1.HandleAsync(request, cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -44,7 +44,7 @@ public static partial class GetUsersQuery
             return await global::Dummy.GetUsersQuery.HandleAsync(
                 request,                
                 _usersService,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
         }
     }
 
