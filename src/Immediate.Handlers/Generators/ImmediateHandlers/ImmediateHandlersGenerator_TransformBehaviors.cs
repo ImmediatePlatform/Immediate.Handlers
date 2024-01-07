@@ -72,18 +72,11 @@ public partial class ImmediateHandlersGenerator
 				// for: private readonly global::Dummy.LoggingBehavior
 				var constructorType = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
 
-				cancellationToken.ThrowIfCancellationRequested();
-
-				var constraint = symbol.IsUnboundGenericType && symbol.TypeParameters.Length == 2
-					? new ConstraintInfo
-					{
-						RequestType = null,
-						ResponseType = null,
-					}
-					: GetConstraintInfo(symbol);
+				var constraint = GetConstraintInfo(symbol, behaviorTypeSymbol, cancellationToken);
+				if (constraint == null)
+					return null;
 
 				cancellationToken.ThrowIfCancellationRequested();
-
 				return new Behavior
 				{
 					RegistrationType = typeName,
@@ -95,11 +88,53 @@ public partial class ImmediateHandlersGenerator
 			.ToEquatableReadOnlyList();
 	}
 
-	private static ConstraintInfo GetConstraintInfo(INamedTypeSymbol symbol)
+	private static ConstraintInfo? GetConstraintInfo(INamedTypeSymbol symbol, INamedTypeSymbol behaviorTypeSymbol, CancellationToken cancellationToken)
 	{
-		// TODO: 
-		// 1. figure out TRequest and TResponse
-		// 2. figure out if type is bounded on either side
-		throw new NotImplementedException();
+		cancellationToken.ThrowIfCancellationRequested();
+
+		var originalDefinition = symbol.OriginalDefinition;
+		if (originalDefinition.TypeParameters.Length != 2)
+			return null;
+
+		cancellationToken.ThrowIfCancellationRequested();
+		var requestConstraints = originalDefinition
+			.TypeParameters[0]
+			.ConstraintTypes;
+		if (requestConstraints.Length > 1)
+			return null;
+
+		var requestType = requestConstraints.Length == 1
+			? requestConstraints[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+			: null;
+
+		cancellationToken.ThrowIfCancellationRequested();
+		var responseConstraints = originalDefinition
+			.TypeParameters[1]
+			.ConstraintTypes;
+		if (responseConstraints.Length > 1)
+			return null;
+
+		var responseType = responseConstraints.Length == 1
+			? responseConstraints[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+			: null;
+
+		cancellationToken.ThrowIfCancellationRequested();
+		if (originalDefinition.BaseType != null
+			&& !SymbolEqualityComparer.Default.Equals(originalDefinition.BaseType.OriginalDefinition, behaviorTypeSymbol)
+			&& (requestType == null || responseType == null))
+		{
+			var constraintInfo = GetConstraintInfo(originalDefinition.BaseType, behaviorTypeSymbol, cancellationToken);
+			if (constraintInfo == null)
+				return null;
+
+			requestType ??= constraintInfo.RequestType;
+			responseType ??= constraintInfo.ResponseType;
+		}
+
+		return new()
+		{
+			RequestType = requestType,
+			ResponseType = responseType,
+		};
 	}
 }

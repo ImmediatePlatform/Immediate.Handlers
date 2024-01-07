@@ -40,7 +40,7 @@ public partial class ImmediateHandlersGenerator
 
 	}
 
-	private readonly struct ConstraintInfo
+	private sealed record ConstraintInfo
 	{
 		public required string? RequestType { get; init; }
 		public required string? ResponseType { get; init; }
