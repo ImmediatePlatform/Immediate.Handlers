@@ -107,26 +107,33 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		Template template
 	)
 	{
-		if (handler == null)
-			return;
+		var cancellationToken = context.CancellationToken;
+		cancellationToken.ThrowIfCancellationRequested();
 
-		if (behaviors.Any(b => b is null))
+		if (handler == null)
 			return;
 
 		if (renderModes.Length > 1)
 			return;
 
-		var cancellationToken = context.CancellationToken;
-		cancellationToken.ThrowIfCancellationRequested();
-
-		var renderMode = renderModes.Length == 0 ? RenderMode.Normal : renderModes[0];
+		var renderMode = handler.OverrideRenderMode
+			?? (renderModes.Length == 0 ? RenderMode.Normal : renderModes[0]);
 		// Only support normal render mode for now
 		if (renderMode is not RenderMode.Normal)
 		{
 			return;
 		}
 
-		// TODO: Respect overrides
+		var pipelineBehaviors = BuildPipeline(
+			handler.RequestType,
+			handler.ResponseType,
+			handler.OverrideBehaviors?.AsEnumerable() ?? behaviors
+		);
+
+		cancellationToken.ThrowIfCancellationRequested();
+		if (pipelineBehaviors.Any(b => b is null))
+			return;
+
 		var handlerSource = template.Render(new
 		{
 			ClassFullyQualifiedName = handler.DisplayName,
@@ -136,11 +143,16 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			RequestType = handler.RequestType.Name,
 			ResponseType = handler.ResponseType.Name,
 			HandlerParameters = handler.Parameters,
-			Behaviors = behaviors
+			Behaviors = pipelineBehaviors,
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();
 		context.AddSource($"Immediate.Handlers.Templates.{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
+	}
+
+	private static IEnumerable<Behavior?> BuildPipeline(GenericType requestType, GenericType responseType, IEnumerable<Behavior?> enumerable)
+	{
+		return enumerable;
 	}
 
 	private static Template GetTemplate(string name)
