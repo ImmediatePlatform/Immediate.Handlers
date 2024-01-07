@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immediate.Handlers.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Normal", "samples\Normal\Normal.csproj", "{4E8FA4AC-7802-4775-AF8B-781B199EE5E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Immediate.Handler.FunctionalTests", "tests\Immediate.Handler.FunctionalTests\Immediate.Handler.FunctionalTests.csproj", "{DB656BD6-AFA3-4285-8CD6-4EA91DB36D65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Immediate.Handler.FunctionalTests", "tests\Immediate.Handler.FunctionalTests\Immediate.Handler.FunctionalTests.csproj", "{DB656BD6-AFA3-4285-8CD6-4EA91DB36D65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
