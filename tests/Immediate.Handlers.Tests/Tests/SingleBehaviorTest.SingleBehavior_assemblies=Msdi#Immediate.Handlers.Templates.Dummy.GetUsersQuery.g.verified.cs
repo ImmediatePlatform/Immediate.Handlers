@@ -1,6 +1,8 @@
 ﻿//HintName: Immediate.Handlers.Templates.Dummy.GetUsersQuery.g.cs
 using Microsoft.Extensions.DependencyInjection;
 
+#pragma warning disable CS1591
+
 namespace Dummy;
 
 public static partial class GetUsersQuery

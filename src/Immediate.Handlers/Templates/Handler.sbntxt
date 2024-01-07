@@ -1,5 +1,7 @@
 ﻿{{ if has_ms_di }}using Microsoft.Extensions.DependencyInjection;{{end}}
 
+#pragma warning disable CS1591
+
 namespace {{ namespace }};
 
 public static partial class {{ class_name }}

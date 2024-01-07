@@ -1,4 +1,6 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
+﻿#pragma warning disable CS1591
+
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class HandlerServiceCollectionExtensions
 {
