@@ -17,6 +17,17 @@ indent_style = tab
 insert_final_newline = true
 indent_size = 2
 
+# Verify settings
+
+[*.{received,verified}.{txt,xml,json,cs}]
+charset = "utf-8-bom"
+end_of_line = lf
+indent_size = unset
+indent_style = unset
+insert_final_newline = false
+tab_width = unset
+trim_trailing_whitespace = false
+
 # Code files
 [*.cs]
 indent_style = tab
@@ -221,15 +232,8 @@ dotnet_diagnostic.CS1998.severity = error               # CS1998: Async method l
 dotnet_diagnostic.CS4014.severity = error               # CS4014: Because this call is not awaited, execution of the current method continues before the call is completed
 dotnet_diagnostic.CA2007.severity = none				# CA2007: Consider calling ConfigureAwait on the awaited task
 
+# Immediate.Handlers relies on nested types
+dotnet_diagnostic.CA1034.severity = none				# CA1034: Nested types should not be visible
+
 # Dispose things need disposing
 dotnet_diagnostic.CA2000.severity = error               # CA2000: Dispose objects before losing scope
-
-# Verify settings
-[*.{received,verified}.{txt,xml,json}]
-charset = "utf-8-bom"
-end_of_line = lf
-indent_size = unset
-indent_style = unset
-insert_final_newline = false
-tab_width = unset
-trim_trailing_whitespace = false
