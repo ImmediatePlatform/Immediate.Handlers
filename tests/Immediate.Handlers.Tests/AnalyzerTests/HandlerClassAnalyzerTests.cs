@@ -33,7 +33,7 @@ public static class GetUsersQuery
 			.WithLocation(12, 21)
 			.WithArguments("GetUsersQuery");
 
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected], [DriverReferenceAssemblies.Normal]);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
 		await test.RunAsync();
 	}
 
@@ -81,7 +81,7 @@ public interface ILogger<T>;
 			.WithLocation(16, 36)
 			.WithArguments("HandleAsync");
 
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected], [DriverReferenceAssemblies.Normal]);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
 		await test.RunAsync();
 	}
 
@@ -128,7 +128,7 @@ public interface ILogger<T>;
 			.WithLocation(16, 41)
 			.WithArguments("HandleAsync");
 
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected], [DriverReferenceAssemblies.Normal]);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
 		await test.RunAsync();
 	}
 }

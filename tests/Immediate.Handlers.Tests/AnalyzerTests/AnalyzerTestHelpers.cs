@@ -8,7 +8,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests;
 
 public static class AnalyzerTestHelpers
 {
-	public static CSharpAnalyzerTest<TAnalyzer, DefaultVerifier> CreateAnalyzerTest<TAnalyzer>(string inputSource, List<DiagnosticResult> expectedDiagnostics, List<DriverReferenceAssemblies> referenceAssemblies)
+	public static CSharpAnalyzerTest<TAnalyzer, DefaultVerifier> CreateAnalyzerTest<TAnalyzer>(string inputSource, List<DiagnosticResult> expectedDiagnostics)
 		where TAnalyzer : DiagnosticAnalyzer, new()
 	{
 		var csTest = new CSharpAnalyzerTest<TAnalyzer, DefaultVerifier>
