@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DebugRoslynAnalyzers": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "../Immediate.Handlers.CodeFixes.Sample/Immediate.Handlers.CodeFixes.Sample.csproj"
+    }
+  }
+}

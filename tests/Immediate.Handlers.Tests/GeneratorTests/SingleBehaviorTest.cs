@@ -1,4 +1,6 @@
-﻿namespace Immediate.Handlers.Tests.Tests;
+﻿using Immediate.Handlers.Tests.Helpers;
+
+namespace Immediate.Handlers.Tests.Tests;
 
 [UsesVerify]
 public class SingleBehaviorTest
@@ -58,14 +60,14 @@ public interface ILogger<T>;
 """;
 
 	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task SingleBehavior(DriverReferenceAssemblies assemblies)
+	[InlineData(new[] {DriverReferenceAssemblies.Normal})]
+	[InlineData(new[] {DriverReferenceAssemblies.Normal, DriverReferenceAssemblies.Msdi})]
+	public async Task SingleBehavior(DriverReferenceAssemblies[] assemblies)
 	{
 		var driver = TestHelper.GetDriver(_input, assemblies);
 
 		var runResult = driver.GetRunResult();
 		_ = await Verify(runResult)
-			.UseParameters(assemblies.ToString());
+			.UseParameters(string.Join("_", assemblies.Select(a => a.ToString())));
 	}
 }
