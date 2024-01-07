@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Analyzers.Diagnostics;
 
-public static class HandlerMethodDoesMustExistDiagnostic
+public static class HandlerMethodMustExistDiagnostic
 {
 	// Preferred format of DiagnosticId is Your Prefix + Number, e.g. CA1234.
 	private const string DiagnosticId = "IH0001";
