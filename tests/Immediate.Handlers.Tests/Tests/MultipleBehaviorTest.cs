@@ -69,12 +69,15 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-	[Fact]
-	public async Task MultipleBehavior()
+	[Theory]
+	[InlineData(null)]
+	[InlineData(new[] { DriverReferenceAssemblies.Msdi })]
+	public async Task MultipleBehaviors(DriverReferenceAssemblies[]? driverReferenceAssemblies)
 	{
-		var driver = TestHelper.GetDriver(_input);
+		var driver = TestHelper.GetDriver(_input, driverReferenceAssemblies);
 
 		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult);
+		_ = await Verify(runResult)
+			.UseParameters(string.Join("_", driverReferenceAssemblies?.Select(x => x.ToString()).ToList() ?? ["None"]));
 	}
 }
