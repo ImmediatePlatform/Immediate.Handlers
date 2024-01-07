@@ -127,7 +127,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var pipelineBehaviors = BuildPipeline(
 			handler.RequestType,
 			handler.ResponseType,
-			handler.OverrideBehaviors?.AsEnumerable() ?? behaviors
+			handler.OverrideBehaviors ?? (IReadOnlyList<Behavior?>)behaviors
 		);
 
 		cancellationToken.ThrowIfCancellationRequested();
@@ -150,7 +150,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		context.AddSource($"Immediate.Handlers.Templates.{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
 	}
 
-	private static IEnumerable<Behavior?> BuildPipeline(GenericType requestType, GenericType responseType, IEnumerable<Behavior?> enumerable)
+	private static IReadOnlyList<Behavior?> BuildPipeline(GenericType requestType, GenericType responseType, IReadOnlyList<Behavior?> enumerable)
 	{
 		return enumerable;
 	}

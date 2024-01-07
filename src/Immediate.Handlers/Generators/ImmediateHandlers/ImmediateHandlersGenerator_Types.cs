@@ -7,7 +7,6 @@ public partial class ImmediateHandlersGenerator
 	private sealed record Behavior
 	{
 		public required string RegistrationType { get; init; }
-		public required string ConstructorType { get; init; }
 		public required string NonGenericTypeName { get; init; }
 		public required string? RequestType { get; init; }
 		public required string? ResponseType { get; init; }
@@ -41,10 +40,9 @@ public partial class ImmediateHandlersGenerator
 
 	}
 
-	private struct ConstraintInfo
+	private readonly struct ConstraintInfo
 	{
-		public required string ConstructorType { get; set; }
-		public string RequestType { get; set; }
-		public string ResponseType { get; set; }
+		public required string? RequestType { get; init; }
+		public required string? ResponseType { get; init; }
 	}
 }

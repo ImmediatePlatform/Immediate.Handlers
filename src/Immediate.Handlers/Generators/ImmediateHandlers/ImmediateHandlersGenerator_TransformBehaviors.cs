@@ -60,36 +60,29 @@ public partial class ImmediateHandlersGenerator
 				if (!originalDefinition.ImplementsBaseClass(behaviorTypeSymbol))
 					return null;
 
+				// global::Dummy.LoggingBehavior<,>
+				// for: `services.AddScoped(typeof(..));`
 				var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
-				var nonGenericTypeName = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
-				if (symbol.IsUnboundGenericType && symbol.TypeParameters.Length == 2)
-				{
-					// services.AddScoped<global::Dummy.LoggingBehavior<,>>();
-					// global::Dummy.LoggingBehavior<,>
-					var constructorType = typeName.Replace("<,>", "<TRequest,TResponse>");
-					return new Behavior
+				// global::Dummy.LoggingBehavior
+				// for: private readonly global::Dummy.LoggingBehavior
+				var constructorType = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
+
+				var constraint = symbol.IsUnboundGenericType && symbol.TypeParameters.Length == 2
+					? new ConstraintInfo
 					{
-						RegistrationType = typeName,
-						ConstructorType = constructorType,
-						NonGenericTypeName = nonGenericTypeName,
 						RequestType = null,
 						ResponseType = null,
-					};
-				}
-				else
-				{
-					var constraint = GetConstraintInfo(symbol);
+					}
+					: GetConstraintInfo(symbol);
 
-					return new Behavior
-					{
-						RegistrationType = typeName,
-						ConstructorType = constraint.ConstructorType,
-						NonGenericTypeName = nonGenericTypeName,
-						RequestType = constraint.RequestType,
-						ResponseType = constraint.ResponseType,
-					};
-				}
+				return new Behavior
+				{
+					RegistrationType = typeName,
+					NonGenericTypeName = constructorType,
+					RequestType = constraint.RequestType,
+					ResponseType = constraint.ResponseType,
+				};
 			})
 			.ToEquatableReadOnlyList();
 	}
