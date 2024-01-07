@@ -127,7 +127,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var pipelineBehaviors = BuildPipeline(
 			handler.RequestType,
 			handler.ResponseType,
-			handler.OverrideBehaviors ?? (IReadOnlyList<Behavior?>)behaviors
+			handler.OverrideBehaviors?.ToList()
+				?? behaviors.ToList()
 		);
 
 		cancellationToken.ThrowIfCancellationRequested();
@@ -152,6 +153,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static IReadOnlyList<Behavior?> BuildPipeline(GenericType requestType, GenericType responseType, IReadOnlyList<Behavior?> enumerable)
 	{
+		// TODO: Implement pipeline filtering
 		return enumerable;
 	}
 
