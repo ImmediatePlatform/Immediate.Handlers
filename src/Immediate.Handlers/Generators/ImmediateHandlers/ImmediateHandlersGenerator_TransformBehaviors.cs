@@ -60,13 +60,19 @@ public partial class ImmediateHandlersGenerator
 				if (!originalDefinition.ImplementsBaseClass(behaviorTypeSymbol))
 					return null;
 
+				cancellationToken.ThrowIfCancellationRequested();
+
 				// global::Dummy.LoggingBehavior<,>
 				// for: `services.AddScoped(typeof(..));`
 				var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
+				cancellationToken.ThrowIfCancellationRequested();
+
 				// global::Dummy.LoggingBehavior
 				// for: private readonly global::Dummy.LoggingBehavior
 				var constructorType = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
+
+				cancellationToken.ThrowIfCancellationRequested();
 
 				var constraint = symbol.IsUnboundGenericType && symbol.TypeParameters.Length == 2
 					? new ConstraintInfo
@@ -75,6 +81,8 @@ public partial class ImmediateHandlersGenerator
 						ResponseType = null,
 					}
 					: GetConstraintInfo(symbol);
+
+				cancellationToken.ThrowIfCancellationRequested();
 
 				return new Behavior
 				{
