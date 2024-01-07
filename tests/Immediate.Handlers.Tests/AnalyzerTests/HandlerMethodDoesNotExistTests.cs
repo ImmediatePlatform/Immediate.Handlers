@@ -2,11 +2,11 @@ using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.Tests.Helpers;
 using Verifier =
 	Microsoft.CodeAnalysis.CSharp.Testing.XUnit.AnalyzerVerifier<
-		Immediate.Handlers.Analyzers.SampleSemanticAnalyzer>;
+		Immediate.Handlers.Analyzers.HandlerMethodDoesNotExist>;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests;
 
-public class SampleSemanticAnalyzerTests
+public class HandlerMethodDoesNotExistTests
 {
 	[Fact]
 	public async Task HandleMethodDoesNotExist_AlertDiagnostic()
@@ -25,21 +25,14 @@ using Immediate.Handlers.Shared;
 public static class GetUsersQuery
 {
 	public record Query;
-
-	private static async Task<System.Collections.Generic.List<string>> HandleAsync(
-		Query _,
-		CancellationToken token)
-	{
-		return [];
-	}
 }
 ";
 
 		var expected = Verifier.Diagnostic()
-			.WithLocation(7, 28)
-			.WithArguments("300000000");
+			.WithLocation(12, 21)
+			.WithArguments("GetUsersQuery");
 
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<SampleSemanticAnalyzer>(Text, [expected], [DriverReferenceAssemblies.Normal]);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerMethodDoesNotExist>(Text, [expected], [DriverReferenceAssemblies.Normal]);
 		await test.RunAsync();
 	}
 }

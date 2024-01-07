@@ -13,7 +13,7 @@ namespace Immediate.Handlers.Analyzers;
 /// To make sure that we analyze the method of the specific class, we use semantic analysis instead of the syntax tree, so this analyzer will not work if the project is not compilable.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class SampleSemanticAnalyzer : DiagnosticAnalyzer
+public class HandlerMethodDoesNotExist : DiagnosticAnalyzer
 {
 	// Keep in mind: you have to list your rules here.
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
@@ -29,8 +29,6 @@ public class SampleSemanticAnalyzer : DiagnosticAnalyzer
 
 		// Subscribe to semantic (compile time) action invocation, e.g. method invocation.
 		context.RegisterSymbolAction(AnalyzeSymbol, SymbolKind.NamedType);
-		
-		// Check other 'context.Register...' methods that might be helpful for your purposes.
 	}
 
 	private void AnalyzeSymbol(SymbolAnalysisContext context)
@@ -40,11 +38,22 @@ public class SampleSemanticAnalyzer : DiagnosticAnalyzer
 
 		if (namedTypeSymbol.GetAttributes().All(x => x.AttributeClass?.ToString() != "Immediate.Handlers.Shared.HandlerAttribute"))
 			return;
-		
-		var attributes = namedTypeSymbol.GetAttributes();
-		var a = 0;
+
+		var method = namedTypeSymbol.GetMembers().FirstOrDefault(x => x.Name == "HandleAsync");
+
+		if (method != null)
+			return;
+
+		var diagnostic = Diagnostic.Create(HandlerMethodExistsDiagnostic.Rule,
+			// The highlighted area in the analyzed source code. Keep it as specific as possible.
+			namedTypeSymbol.Locations[0],
+			// The value is passed to the 'MessageFormat' argument of your rule.
+			namedTypeSymbol.Name);
+
+		// Reporting a diagnostic is the primary outcome of analyzers.
+		context.ReportDiagnostic(diagnostic);
 	}
-	
+
 	// /// <summary>
 	// /// Executed on the completion of the semantic analysis associated with the Invocation operation.
 	// /// </summary>
