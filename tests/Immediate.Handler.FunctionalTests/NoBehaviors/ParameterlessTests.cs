@@ -2,10 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Immediate.Handler.FunctionalTests;
+namespace Immediate.Handler.FunctionalTests.NoBehaviors;
 
 [Handler]
-public static partial class OneAdder
+public static partial class NoBehaviorParameterlessOneAdder
 {
 	public sealed record Query(int Input);
 
@@ -17,21 +17,23 @@ public static partial class OneAdder
 	}
 }
 
-public class NoBehaviorTests
+public class ParameterlessTests
 {
 	[Fact]
 	public async Task NoBehaviorShouldReturnExpectedResponse()
 	{
+		const int Input = 1;
+
 		var serviceProvider = new ServiceCollection()
 			.AddHandlers()
 			.BuildServiceProvider();
 
-		var handler = serviceProvider.GetRequiredService<OneAdder.Handler>();
+		var handler = serviceProvider.GetRequiredService<NoBehaviorParameterlessOneAdder.Handler>();
 
-		var query = new OneAdder.Query(1);
+		var query = new NoBehaviorParameterlessOneAdder.Query(Input);
 
 		var result = await handler.HandleAsync(query);
 
-		Assert.Equal(query.Input + 1, result);
+		Assert.Equal(Input + 1, result);
 	}
 }
