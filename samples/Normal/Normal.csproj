@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
+		<NoWarn>CS9113,CA1040,CA1034,CA1822,IDE0060</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
