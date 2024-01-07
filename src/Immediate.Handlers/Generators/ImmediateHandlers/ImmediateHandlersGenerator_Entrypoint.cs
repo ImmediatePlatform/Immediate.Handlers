@@ -127,8 +127,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var pipelineBehaviors = BuildPipeline(
 			handler.RequestType,
 			handler.ResponseType,
-			handler.OverrideBehaviors?.ToList()
-				?? behaviors.ToList()
+			handler.OverrideBehaviors?.AsEnumerable()
+				?? behaviors.AsEnumerable()
 		);
 
 		cancellationToken.ThrowIfCancellationRequested();
@@ -151,11 +151,16 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		context.AddSource($"Immediate.Handlers.Templates.{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
 	}
 
-	private static IReadOnlyList<Behavior?> BuildPipeline(GenericType requestType, GenericType responseType, IReadOnlyList<Behavior?> enumerable)
-	{
-		// TODO: Implement pipeline filtering
-		return enumerable;
-	}
+	private static List<Behavior?> BuildPipeline(GenericType requestType, GenericType responseType, IEnumerable<Behavior?> enumerable) =>
+		enumerable
+			.Where(b => b is null || ValidateType(b.RequestType, requestType))
+			.Where(b => b is null || ValidateType(b.ResponseType, responseType))
+			.ToList();
+
+	private static bool ValidateType(string? type, GenericType implementedTypes) =>
+		type is null
+		|| implementedTypes.Implements
+			.Contains(type);
 
 	private static Template GetTemplate(string name)
 	{
