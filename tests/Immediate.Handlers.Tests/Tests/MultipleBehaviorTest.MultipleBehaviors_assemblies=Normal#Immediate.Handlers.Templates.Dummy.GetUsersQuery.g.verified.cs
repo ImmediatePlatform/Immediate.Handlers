@@ -49,5 +49,4 @@ public static partial class GetUsersQuery
                 cancellationToken);
         }
     }
-
 }

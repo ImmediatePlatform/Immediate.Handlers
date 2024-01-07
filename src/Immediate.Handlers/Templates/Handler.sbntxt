@@ -62,8 +62,8 @@ public static partial class {{ class_name }}
                 cancellationToken);
         }
     }
-
     {{~ if has_ms_di ~}}
+
     [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
     public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
     {

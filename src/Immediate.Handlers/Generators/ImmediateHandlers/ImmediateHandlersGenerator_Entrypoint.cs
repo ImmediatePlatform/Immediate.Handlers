@@ -138,13 +138,13 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var handlerSource = template.Render(new
 		{
 			ClassFullyQualifiedName = handler.DisplayName,
-			ClassName = handler.ClassName,
-			hasMsDi = hasMsDi,
-			Namespace = handler.Namespace,
+			handler.ClassName,
+			handler.Namespace,
 			RequestType = handler.RequestType.Name,
 			ResponseType = handler.ResponseType.Name,
 			HandlerParameters = handler.Parameters,
 			Behaviors = pipelineBehaviors,
+			HasMsDi = hasMsDi,
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();
