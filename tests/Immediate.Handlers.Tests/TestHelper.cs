@@ -6,7 +6,7 @@ namespace Immediate.Handlers.Tests;
 
 public static class TestHelper
 {
-	public static GeneratorDriver GetDriver(string source, IReadOnlyList<DriverReferenceAssemblies>? options = null)
+	public static GeneratorDriver GetDriver(string source, DriverReferenceAssemblies assemblies = DriverReferenceAssemblies.Normal)
 	{
 		// Parse the provided string into a C# syntax tree
 		var syntaxTree = CSharpSyntaxTree.ParseText(source);
@@ -15,7 +15,7 @@ public static class TestHelper
 		var compilation = CSharpCompilation.Create(
 			assemblyName: "Tests",
 			syntaxTrees: new[] { syntaxTree },
-			references: GetReferences(options)
+			references: GetReferences(assemblies)
 		);
 
 		// Create an instance of our incremental source generator
@@ -28,7 +28,7 @@ public static class TestHelper
 		return driver.RunGenerators(compilation);
 	}
 
-	private static List<MetadataReference> GetReferences(IReadOnlyList<DriverReferenceAssemblies>? options)
+	private static List<MetadataReference> GetReferences(DriverReferenceAssemblies assemblies)
 	{
 		List<MetadataReference> references =
 		[
@@ -36,28 +36,26 @@ public static class TestHelper
 			MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll"),
 		];
 
-		if (options is null)
-		{
+		if (assemblies is DriverReferenceAssemblies.Normal)
 			return references;
-		}
 
-		foreach (var option in options)
-		{
-			references.AddRange(option switch
-			{
-				DriverReferenceAssemblies.Msdi => [
-					MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.dll"),
-					MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.Abstractions.dll")
-				],
-				_ => throw new ArgumentOutOfRangeException(nameof(options), options, null),
-			});
-		}
+		references.AddRange(
+			[
+				MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.dll"),
+				MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.Abstractions.dll")
+			]
+		);
 
-		return references;
+		if (assemblies is DriverReferenceAssemblies.Msdi)
+			return references;
+
+		// for mvc+
+		throw new NotImplementedException();
 	}
 }
 
 public enum DriverReferenceAssemblies
 {
-	Msdi
+	Normal,
+	Msdi,
 }

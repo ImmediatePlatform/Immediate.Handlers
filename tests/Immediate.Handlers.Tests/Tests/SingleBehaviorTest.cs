@@ -58,14 +58,14 @@ public interface ILogger<T>;
 """;
 
 	[Theory]
-	[InlineData(null)]
-	[InlineData(new[] { DriverReferenceAssemblies.Msdi })]
-	public async Task SingleBehavior(DriverReferenceAssemblies[]? driverReferenceAssemblies)
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task SingleBehavior(DriverReferenceAssemblies assemblies)
 	{
-		var driver = TestHelper.GetDriver(_input, driverReferenceAssemblies);
+		var driver = TestHelper.GetDriver(_input, assemblies);
 
 		var runResult = driver.GetRunResult();
 		_ = await Verify(runResult)
-			.UseParameters(string.Join("_", driverReferenceAssemblies?.Select(x => x.ToString()).ToList() ?? ["None"]));
+			.UseParameters(assemblies.ToString());
 	}
 }
