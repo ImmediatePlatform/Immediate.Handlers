@@ -7,4 +7,5 @@ public static class DiagnosticIds
 	public const string IHR0003HandlerMethodMustReceiveCorrectParameters = "IHR0003";
 	public const string IHR0004InvalidRenderMode = "IHR0004";
 	public const string IHR0005HandlerClassMustNotBeNested = "IHR0005";
+	public const string IHR0006BehaviorsMustInheritFromBehavior = "IHR0006";
 }

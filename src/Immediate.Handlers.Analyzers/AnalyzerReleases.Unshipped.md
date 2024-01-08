@@ -10,3 +10,4 @@ IHR0002 | ImmediateHandler | Error | HandlerClassAnalyzer
 IHR0003 | ImmediateHandler | Error | HandlerClassAnalyzer
 IHR0004 | ImmediateHandler | Error | RenderModeAnalyzer
 IHR0005 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0006 | ImmediateHandler | Error | BehaviorsAnalyzer
