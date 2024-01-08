@@ -1,6 +1,7 @@
 <Project>
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
+		<TargetFramework>net8.0</TargetFramework>
 
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>$(WarningsAsErrors);nullable;</WarningsAsErrors>
@@ -11,6 +12,7 @@
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -18,9 +20,6 @@
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-		<!-- Don't block development work; but block CI if dev work isn't complete. -->
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<CollectCoverage>true</CollectCoverage>

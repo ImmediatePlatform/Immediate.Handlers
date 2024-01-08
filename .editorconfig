@@ -8,7 +8,7 @@ insert_final_newline = true
 
 # Build scripts
 [*.{yml,yaml}]
-indent_style = spaces
+indent_style = space
 indent_size = 2
 
 # XML project files
@@ -20,7 +20,7 @@ indent_size = 2
 # Verify settings
 
 [*.{received,verified}.{txt,xml,json,cs}]
-charset = "utf-8-bom"
+charset = utf-8
 end_of_line = lf
 indent_size = unset
 indent_style = unset
@@ -34,7 +34,7 @@ indent_style = tab
 insert_final_newline = true
 indent_size = 4
 tab_width = 4
-charset = utf-8-bom
+charset = utf-8
 
 ## Dotnet code style settings:
 
@@ -46,10 +46,10 @@ dotnet_separate_import_directive_groups = false
 dotnet_style_require_accessibility_modifiers = for_non_interface_members:error
 
 # Avoid "this." and "Me." if not necessary
-dotnet_style_qualification_for_field = false:refactoring
-dotnet_style_qualification_for_property = false:refactoring
-dotnet_style_qualification_for_method = false:refactoring
-dotnet_style_qualification_for_event = false:refactoring
+dotnet_style_qualification_for_field = false
+dotnet_style_qualification_for_property = false
+dotnet_style_qualification_for_method = false
+dotnet_style_qualification_for_event = false
 
 # Use language keywords instead of framework type names for type references
 dotnet_style_predefined_type_for_locals_parameters_members = true:error
@@ -197,7 +197,7 @@ csharp_space_after_dot = false
 csharp_space_after_keywords_in_control_flow_statements = true
 csharp_space_after_semicolon_in_for_statement = true
 csharp_space_around_binary_operators = before_and_after
-csharp_space_around_declaration_statements = do_not_ignore
+csharp_space_around_declaration_statements = false
 csharp_space_before_colon_in_inheritance_clause = true
 csharp_space_before_comma = false
 csharp_space_before_dot = false
@@ -215,8 +215,8 @@ csharp_space_between_square_brackets = false
 
 # Blocks are allowed
 csharp_prefer_braces = when_multiline:silent
-csharp_preserve_single_line_blocks = true:silent
-csharp_preserve_single_line_statements = true:silent
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = true
 
 # Style Analytics
 dotnet_analyzer_diagnostic.category-Style.severity = warning
@@ -230,10 +230,10 @@ dotnet_diagnostic.CS1712.severity = none                # CS1712: Type parameter
 # Async
 dotnet_diagnostic.CS1998.severity = error               # CS1998: Async method lacks 'await' operators and will run synchronously
 dotnet_diagnostic.CS4014.severity = error               # CS4014: Because this call is not awaited, execution of the current method continues before the call is completed
-dotnet_diagnostic.CA2007.severity = none				# CA2007: Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2007.severity = none                # CA2007: Consider calling ConfigureAwait on the awaited task
 
 # Immediate.Handlers relies on nested types
-dotnet_diagnostic.CA1034.severity = none				# CA1034: Nested types should not be visible
+dotnet_diagnostic.CA1034.severity = none                # CA1034: Nested types should not be visible
 
 # Dispose things need disposing
 dotnet_diagnostic.CA2000.severity = error               # CA2000: Dispose objects before losing scope

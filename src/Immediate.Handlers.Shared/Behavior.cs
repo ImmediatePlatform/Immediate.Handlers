@@ -1,4 +1,4 @@
-﻿namespace Immediate.Handlers.Shared;
+namespace Immediate.Handlers.Shared;
 
 /// <summary>
 ///		Represents a cross-cutting pipeline behavior
