@@ -70,9 +70,9 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			return;
 		}
 
-		token.ThrowIfCancellationRequested();
 		foreach (var op in aio.ChildOperations)
 		{
+			token.ThrowIfCancellationRequested();
 			if (op is not ITypeOfOperation { TypeOperand: INamedTypeSymbol behaviorType, })
 				continue;
 
