@@ -14,7 +14,7 @@ public sealed class RenderModeAnalyzer : DiagnosticAnalyzer
 			title: "RenderMode attribute must be set to a valid RenderMode",
 			messageFormat: "RenderMode attribute is set to an invalid RenderMode",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Warning,
+			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
 			description: "RenderMode attribute must be set to a valid RenderMode (`RenderMode.Normal`) or removed to generate handlers."
 		);

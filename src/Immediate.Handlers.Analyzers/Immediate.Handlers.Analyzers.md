@@ -2,14 +2,14 @@
 
 ## IHR0004: RenderMode attribute must be set to a valid RenderMode
 
-If the `RenderMode` attribute on the assembly or a Handler is set to an invalid value, then no code will be generated.
-Removing the attribute will restore the default of `RenderMode.Normal`, or setting the value to a valid value will allow
-generation to happen as expected.
+An invalid value on the `RenderMode` attribute on the assembly or a Handler is unsupported and will lead to compilation
+errors. Removing the attribute will restore the default of `RenderMode.Normal`, or setting the value to a valid value
+will correct the issue.
 
 |Item|Value|
 |-|-|
 |Category|ImmediateHandler|
 |Enabled|True|
-|Severity|Warning|
+|Severity|Error|
 |CodeFix|False|
 ---
