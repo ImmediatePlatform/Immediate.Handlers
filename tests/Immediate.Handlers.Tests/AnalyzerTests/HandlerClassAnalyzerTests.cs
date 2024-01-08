@@ -1,5 +1,4 @@
 using Immediate.Handlers.Analyzers;
-using Immediate.Handlers.Analyzers.Diagnostics;
 using Verifier =
 	Microsoft.CodeAnalysis.CSharp.Testing.XUnit.AnalyzerVerifier<
 		Immediate.Handlers.Analyzers.HandlerClassAnalyzer>;
@@ -28,7 +27,7 @@ public static class GetUsersQuery
 }
 ";
 
-		var expected = Verifier.Diagnostic(HandlerMethodMustExistDiagnostic.Rule)
+		var expected = Verifier.Diagnostic()
 			.WithLocation(12, 21)
 			.WithArguments("GetUsersQuery");
 
@@ -76,7 +75,7 @@ public class UsersService(ILogger<UsersService> logger)
 public interface ILogger<T>;
 ";
 
-		var expected = Verifier.Diagnostic(HandlerMethodMustReturnTaskTDiagnostic.Rule)
+		var expected = Verifier.Diagnostic()
 			.WithLocation(16, 36)
 			.WithArguments("HandleAsync");
 
@@ -110,7 +109,7 @@ public static class GetUsersQuery
 }
 ";
 
-		var expected = Verifier.Diagnostic(HandlerMethodMustDeclareTwoParametersDiagnostic.Rule)
+		var expected = Verifier.Diagnostic()
 			.WithLocation(16, 27)
 			.WithArguments("HandleAsync");
 
