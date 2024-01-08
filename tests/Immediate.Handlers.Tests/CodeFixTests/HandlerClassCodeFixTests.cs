@@ -1,10 +1,11 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.CodeFixes;
+using Immediate.Handlers.Tests.Helpers;
 using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.XUnit.CodeFixVerifier<
 	Immediate.Handlers.Analyzers.HandlerClassAnalyzer,
 	Immediate.Handlers.CodeFixes.HandlerClassCodeFixProvider>;
 
-namespace Immediate.Handlers.Tests.AnalyzerTests;
+namespace Immediate.Handlers.Tests.CodeFixTests;
 
 public class HandlerClassCodeFixTests
 {
@@ -47,7 +48,7 @@ public static class GetUsersQuery
 }
 ";
 
-		var test = AnalyzerTestHelpers.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassCodeFixProvider>(input, fixedSource, [Verifier.Diagnostic("IH0001")]);
+		var test = CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassCodeFixProvider>(input, fixedSource, DriverReferenceAssemblies.Normal, [Verifier.Diagnostic("IH0001")]);
 
 		await test.RunAsync();
 	}
