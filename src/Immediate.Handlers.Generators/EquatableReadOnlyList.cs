@@ -1,6 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 
-namespace Immediate.Handlers;
+namespace Immediate.Handlers.Generators;
 
 public static class EquatableReadOnlyList
 {

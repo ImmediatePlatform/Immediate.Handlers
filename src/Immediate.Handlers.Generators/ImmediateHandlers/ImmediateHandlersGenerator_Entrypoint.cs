@@ -166,7 +166,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		using var stream = Assembly
 			.GetExecutingAssembly()
 			.GetManifestResourceStream(
-				$"Immediate.Handlers.Templates.{name}.sbntxt"
+				$"Immediate.Handlers.Generators.Templates.{name}.sbntxt"
 			)!;
 
 		using var reader = new StreamReader(stream);

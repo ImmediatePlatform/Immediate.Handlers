@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<IsPackable>false</IsPackable>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Basic.Reference.Assemblies" />
 		<PackageReference Include="coverlet.collector" PrivateAssets="All" />
@@ -22,10 +18,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="../../src/Immediate.Handlers/Immediate.Handlers.csproj" />
 		<ProjectReference Include="../../src/Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
 		<ProjectReference Include="../../src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" />
 		<ProjectReference Include="../../src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" />
+		<ProjectReference Include="../../src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" />
 	</ItemGroup>
 
 </Project>

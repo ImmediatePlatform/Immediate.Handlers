@@ -1,6 +1,6 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 
-namespace Immediate.Handlers;
+namespace Immediate.Handlers.Generators;
 
 internal static class Utility
 {

@@ -13,6 +13,8 @@
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
