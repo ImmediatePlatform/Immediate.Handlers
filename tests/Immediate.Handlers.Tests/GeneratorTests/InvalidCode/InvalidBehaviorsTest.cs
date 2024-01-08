@@ -209,7 +209,7 @@ public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 
 [Handler]
 [Behaviors(
-	typeof(Behavior<,>)
+	typeof(LoggingBehavior<,>)
 )]
 public static class GetUsersQuery
 {
@@ -263,7 +263,7 @@ public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 
 [Handler]
 [Behaviors(
-	typeof(Behavior<,>)
+	typeof(LoggingBehavior<,>)
 )]
 public static class GetUsersQuery
 {
@@ -325,7 +325,7 @@ public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 
 [Handler]
 [Behaviors(
-	typeof(Behavior<,>)
+	typeof(LoggingBehavior<,>)
 )]
 public static class GetUsersQuery
 {
@@ -387,7 +387,7 @@ public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 
 [Handler]
 [Behaviors(
-	typeof(Behavior<,>)
+	typeof(LoggingBehavior<,,>)
 )]
 public static class GetUsersQuery
 {
