@@ -72,7 +72,7 @@ public partial class ImmediateHandlersGenerator
 				// for: private readonly global::Dummy.LoggingBehavior
 				var constructorType = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
 
-				var constraint = GetConstraintInfo(symbol, behaviorTypeSymbol, cancellationToken);
+				var constraint = GetConstraintInfo(symbol, cancellationToken);
 				if (constraint == null)
 					return null;
 
@@ -88,7 +88,7 @@ public partial class ImmediateHandlersGenerator
 			.ToEquatableReadOnlyList();
 	}
 
-	private static ConstraintInfo? GetConstraintInfo(INamedTypeSymbol symbol, ISymbol behaviorTypeSymbol, CancellationToken cancellationToken)
+	private static ConstraintInfo? GetConstraintInfo(INamedTypeSymbol symbol, CancellationToken cancellationToken)
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 
@@ -116,18 +116,6 @@ public partial class ImmediateHandlersGenerator
 			: null;
 
 		cancellationToken.ThrowIfCancellationRequested();
-		if (originalDefinition.BaseType != null
-			&& !SymbolEqualityComparer.Default.Equals(originalDefinition.BaseType.OriginalDefinition, behaviorTypeSymbol)
-			&& (requestType == null || responseType == null))
-		{
-			var constraintInfo = GetConstraintInfo(originalDefinition.BaseType, behaviorTypeSymbol, cancellationToken);
-			if (constraintInfo == null)
-				return null;
-
-			requestType ??= constraintInfo.RequestType;
-			responseType ??= constraintInfo.ResponseType;
-		}
-
 		return new()
 		{
 			RequestType = requestType,
