@@ -17,15 +17,15 @@ public static class ReferenceAssemblyHelpers
 		if (assemblies is DriverReferenceAssemblies.Normal)
 			return references;
 
-			references.AddRange(
-				[
-					MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.dll"),
-					MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.Abstractions.dll"),
-				]
-			);
+		references.AddRange(
+			[
+				MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.dll"),
+				MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.Abstractions.dll"),
+			]
+		);
 
 		if (assemblies is DriverReferenceAssemblies.Msdi)
-		return references;
+			return references;
 
 		// to be done with other renderers
 		throw new NotImplementedException();
