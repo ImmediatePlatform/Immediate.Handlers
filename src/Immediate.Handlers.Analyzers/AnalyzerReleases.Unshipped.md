@@ -8,3 +8,4 @@ Rule ID | Category | Severity | Notes
 IH0001 | ImmediateHandler | Error | HandlerClassAnalyzer
 IH0002 | ImmediateHandler | Error | HandlerClassAnalyzer
 IH0003 | ImmediateHandler | Error | HandlerClassAnalyzer
+IH0004 | ImmediateHandler | Error | RenderModeAnalyzer
