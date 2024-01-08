@@ -4,13 +4,12 @@ namespace Immediate.Handlers.Tests.Helpers;
 
 public static class ReferenceAssemblyHelpers
 {
-	public static IEnumerable<MetadataReference> GetReferences(this DriverReferenceAssemblies assemblies)
+	public static IEnumerable<MetadataReference> GetAdditionalReferences(this DriverReferenceAssemblies assemblies)
 	{
 		ArgumentNullException.ThrowIfNull(assemblies);
 
 		List<MetadataReference> references =
 			[
-				.. Basic.Reference.Assemblies.NetStandard20.References.All,
 				MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll"),
 			];
 

@@ -1,9 +1,10 @@
 using Immediate.Handlers.Analyzers;
+using Immediate.Handlers.Tests.Helpers;
 using Verifier =
 	Microsoft.CodeAnalysis.CSharp.Testing.XUnit.AnalyzerVerifier<
 		Immediate.Handlers.Analyzers.HandlerClassAnalyzer>;
 
-namespace Immediate.Handlers.Tests.AnalyzerTests;
+namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzer;
 
 public class HandlerClassAnalyzerTests
 {
@@ -31,7 +32,11 @@ public static class GetUsersQuery
 			.WithLocation(11, 21)
 			.WithArguments("GetUsersQuery");
 
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			Text,
+			DriverReferenceAssemblies.Normal,
+			[expected]
+		);
 		await test.RunAsync();
 	}
 
@@ -79,7 +84,11 @@ public interface ILogger<T>;
 			.WithLocation(15, 36)
 			.WithArguments("HandleAsync");
 
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			Text,
+			DriverReferenceAssemblies.Normal,
+			[expected]
+		);
 		await test.RunAsync();
 	}
 
@@ -113,7 +122,11 @@ public static class GetUsersQuery
 			.WithLocation(15, 27)
 			.WithArguments("HandleAsync");
 
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			Text,
+			DriverReferenceAssemblies.Normal,
+			[expected]
+		);
 		await test.RunAsync();
 	}
 }

@@ -3,9 +3,9 @@ using Immediate.Handlers.Tests.Helpers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Immediate.Handlers.Tests;
+namespace Immediate.Handlers.Tests.GeneratorTests;
 
-public static class TestHelper
+public static class GeneratorTestHelper
 {
 	public static GeneratorDriver GetDriver(string source, DriverReferenceAssemblies assemblies)
 	{
@@ -16,7 +16,11 @@ public static class TestHelper
 		var compilation = CSharpCompilation.Create(
 			assemblyName: "Tests",
 			syntaxTrees: new[] { syntaxTree },
-			references: assemblies.GetReferences()
+			references:
+			[
+				.. Basic.Reference.Assemblies.NetStandard20.References.All,
+				.. assemblies.GetAdditionalReferences(),
+			]
 		);
 
 		// Create an instance of our incremental source generator

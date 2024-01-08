@@ -1,9 +1,9 @@
 using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.GeneratorTests;
+namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
 
 [UsesVerify]
-public class SingleBehaviorTest
+public class MultipleBehaviorTest
 {
 	private const string Input = """
 using System.Threading.Tasks;
@@ -13,7 +13,8 @@ using Immediate.Handlers.Shared;
 [assembly: RenderMode(renderMode: RenderMode.Normal)]
 
 [assembly: Behaviors(
-	typeof(LoggingBehavior<,>)
+	typeof(LoggingBehavior<,>),
+	typeof(SecondLoggingBehavior<,>)
 )]
 
 namespace Dummy;
@@ -49,6 +50,17 @@ public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TReque
 	}
 }
 
+public class SecondLoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+	: Behavior<TRequest, TResponse>
+{
+	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	{
+		var response = await InnerHandler.HandleAsync(request, cancellationToken);
+
+		return response;
+	}
+}
+
 public class User { }
 public class UsersService
 {
@@ -62,9 +74,9 @@ public interface ILogger<T>;
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task SingleBehavior(DriverReferenceAssemblies assemblies)
+	public async Task MultipleBehaviors(DriverReferenceAssemblies assemblies)
 	{
-		var driver = TestHelper.GetDriver(Input, assemblies);
+		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
 
 		var runResult = driver.GetRunResult();
 		_ = await Verify(runResult)
