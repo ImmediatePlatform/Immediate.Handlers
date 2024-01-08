@@ -28,7 +28,7 @@ public static class GetUsersQuery
 """;
 
 		var expected = Verifier.Diagnostic("IH0001")
-			.WithLocation(12, 21)
+			.WithLocation(11, 21)
 			.WithArguments("GetUsersQuery");
 
 		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
@@ -76,7 +76,7 @@ public interface ILogger<T>;
 """;
 
 		var expected = Verifier.Diagnostic("IH0002")
-			.WithLocation(16, 36)
+			.WithLocation(15, 36)
 			.WithArguments("HandleAsync");
 
 		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
@@ -110,7 +110,7 @@ public static class GetUsersQuery
 """;
 
 		var expected = Verifier.Diagnostic("IH0003")
-			.WithLocation(16, 27)
+			.WithLocation(15, 27)
 			.WithArguments("HandleAsync");
 
 		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(Text, [expected]);
