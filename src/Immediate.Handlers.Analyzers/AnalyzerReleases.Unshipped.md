@@ -5,6 +5,6 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
-IH0001  | Usage    | Warning  | HandlerClassAnalyzer
-IH0002  | Usage    | Warning  | HandlerClassAnalyzer
-IH0003  | Usage    | Warning  | HandlerClassAnalyzer
+IH0001 | ImmediateHandler | Error | HandlerClassAnalyzer
+IH0002 | ImmediateHandler | Error | HandlerClassAnalyzer
+IH0003 | ImmediateHandler | Error | HandlerClassAnalyzer
