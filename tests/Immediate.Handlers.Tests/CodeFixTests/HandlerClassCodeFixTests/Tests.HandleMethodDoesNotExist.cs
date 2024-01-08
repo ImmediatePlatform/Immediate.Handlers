@@ -43,10 +43,10 @@ public static class GetUsersQuery
 {
 	public record Query;
 
-    private static Task<int> HandleAsync(Query _, CancellationToken token)
-    {
-        return null;
-    }
+	private static Task<int> HandleAsync(Query _, CancellationToken token)
+	{
+		return null;
+	}
 }";
 
 		var expected = Verifier.Diagnostic("IH0001")

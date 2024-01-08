@@ -8,6 +8,17 @@ namespace Immediate.Handlers.Tests.CodeFixTests;
 
 public static class CodeFixTestHelper
 {
+	private const string EditorConfig = """
+		root = true
+
+		[*.cs]
+		charset = utf-8
+		end_of_line = lf
+		indent_style = tab
+		insert_final_newline = true
+		indent_size = 4
+		""";
+
 	public static CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier> CreateCodeFixTest<TAnalyzer, TCodeFix>(
 		string inputSource,
 		string fixedSource,
@@ -22,6 +33,10 @@ public static class CodeFixTestHelper
 			TestState =
 			{
 				Sources = { inputSource },
+				AnalyzerConfigFiles =
+				{
+					{ ("/.editorconfig", EditorConfig) },
+				},
 			},
 			FixedState =
 			{
