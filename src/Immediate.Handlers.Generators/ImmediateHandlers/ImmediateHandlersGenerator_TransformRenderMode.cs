@@ -10,13 +10,10 @@ public partial class ImmediateHandlersGenerator
 
 	private static RenderMode ParseRenderMode(AttributeData attr)
 	{
-		if (attr.ConstructorArguments.Length > 0)
-		{
-			var ca = attr.ConstructorArguments[0];
-			return (RenderMode?)(int?)ca.Value ?? RenderMode.None;
-		}
+		if (attr.ConstructorArguments.Length != 1)
+			return RenderMode.None;
 
-		var pa = attr.NamedArguments[0];
-		return (RenderMode?)(int?)pa.Value.Value ?? RenderMode.None;
+		var ca = attr.ConstructorArguments[0];
+		return (RenderMode?)(int?)ca.Value ?? RenderMode.None;
 	}
 }
