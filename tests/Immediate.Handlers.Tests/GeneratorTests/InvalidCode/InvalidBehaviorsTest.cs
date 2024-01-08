@@ -7,6 +7,7 @@ public class InvalidBehaviorsTest
 {
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task NonBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
@@ -68,6 +69,7 @@ public interface ILogger<T>;
 
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BoundGenericShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
@@ -130,6 +132,7 @@ public interface ILogger<T>;
 
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task NonGenericBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
@@ -192,6 +195,7 @@ public interface ILogger<T>;
 
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task AbstractBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
@@ -246,6 +250,7 @@ public interface ILogger<T>;
 
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTRequestConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
@@ -308,6 +313,7 @@ public interface ILogger<T>;
 
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTResponseConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
@@ -370,6 +376,7 @@ public interface ILogger<T>;
 
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTypeParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
