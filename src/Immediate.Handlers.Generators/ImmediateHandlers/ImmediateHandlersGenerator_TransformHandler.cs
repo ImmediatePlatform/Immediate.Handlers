@@ -24,10 +24,11 @@ public partial class ImmediateHandlersGenerator
 		if (symbol
 				.GetMembers()
 				.OfType<IMethodSymbol>()
-				.FirstOrDefault(m =>
+				.Where(m =>
 					m.Name.Equals("Handle", StringComparison.Ordinal)
 					|| m.Name.Equals("HandleAsync", StringComparison.Ordinal)
-				) is not { } handleMethod)
+				)
+				.ToList() is not [var handleMethod])
 		{
 			return null;
 		}
