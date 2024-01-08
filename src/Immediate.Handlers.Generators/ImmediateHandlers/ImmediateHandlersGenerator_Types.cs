@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Shared;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
 
 public partial class ImmediateHandlersGenerator
 {
+	[ExcludeFromCodeCoverage]
 	private sealed record Behavior
 	{
 		public required string RegistrationType { get; init; }
@@ -12,18 +14,21 @@ public partial class ImmediateHandlersGenerator
 		public required string? ResponseType { get; init; }
 	}
 
+	[ExcludeFromCodeCoverage]
 	private sealed record Parameter
 	{
 		public required string Type { get; init; }
 		public required string Name { get; init; }
 	}
 
+	[ExcludeFromCodeCoverage]
 	private sealed record GenericType
 	{
 		public required string Name { get; init; }
 		public required EquatableReadOnlyList<string> Implements { get; init; }
 	}
 
+	[ExcludeFromCodeCoverage]
 	private sealed record Handler
 	{
 		public required string Namespace { get; init; }
@@ -40,6 +45,7 @@ public partial class ImmediateHandlersGenerator
 
 	}
 
+	[ExcludeFromCodeCoverage]
 	private sealed record ConstraintInfo
 	{
 		public required string? RequestType { get; init; }
