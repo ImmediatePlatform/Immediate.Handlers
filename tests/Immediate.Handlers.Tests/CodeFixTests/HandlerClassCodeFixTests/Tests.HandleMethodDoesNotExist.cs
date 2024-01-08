@@ -49,7 +49,7 @@ public static class GetUsersQuery
 	}
 }";
 
-		var expected = Verifier.Diagnostic("IH0001")
+		var expected = Verifier.Diagnostic("IHR0001")
 			.WithLocation(12, 21)
 			.WithArguments("GetUsersQuery");
 

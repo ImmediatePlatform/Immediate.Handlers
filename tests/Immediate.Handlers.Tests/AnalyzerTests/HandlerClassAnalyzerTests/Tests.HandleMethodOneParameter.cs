@@ -35,7 +35,7 @@ public static class GetUsersQuery
 }
 """;
 
-		var expected = Verifier.Diagnostic("IH0003")
+		var expected = Verifier.Diagnostic("IHR0003")
 			.WithLocation(15, 27)
 			.WithArguments("HandleAsync");
 

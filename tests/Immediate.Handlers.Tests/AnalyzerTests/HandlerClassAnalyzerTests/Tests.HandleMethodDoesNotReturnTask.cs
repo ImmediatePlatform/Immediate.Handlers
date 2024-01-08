@@ -49,7 +49,7 @@ public class UsersService(ILogger<UsersService> logger)
 public interface ILogger<T>;
 """;
 
-		var expected = Verifier.Diagnostic("IH0002")
+		var expected = Verifier.Diagnostic("IHR0002")
 			.WithLocation(15, 36)
 			.WithArguments("HandleAsync");
 
