@@ -35,6 +35,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="MinVer" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
