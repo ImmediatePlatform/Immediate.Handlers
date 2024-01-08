@@ -1,4 +1,6 @@
-//HintName: Immediate.Handlers.Templates.Dummy.GetUsersQuery.g.cs
+﻿//HintName: Dummy.GetUsersQuery.g.cs
+using Microsoft.Extensions.DependencyInjection;
+
 #pragma warning disable CS1591
 
 namespace Dummy;
@@ -55,5 +57,13 @@ public static partial class GetUsersQuery
 				)
 				.ConfigureAwait(false);
         }
+    }
+
+    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+    public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+    {
+        services.AddScoped<global::Dummy.GetUsersQuery.Handler>();
+        services.AddScoped<global::Dummy.GetUsersQuery.HandleBehavior>();
+        return services;
     }
 }
