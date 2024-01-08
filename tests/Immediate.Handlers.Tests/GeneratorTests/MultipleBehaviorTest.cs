@@ -72,14 +72,14 @@ public interface ILogger<T>;
 """;
 
 	[Theory]
-	[InlineData(new[] { DriverReferenceAssemblies.Normal })]
-	[InlineData(new[] { DriverReferenceAssemblies.Normal, DriverReferenceAssemblies.Msdi })]
-	public async Task MultipleBehaviors(DriverReferenceAssemblies[] assemblies)
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task MultipleBehaviors(DriverReferenceAssemblies assemblies)
 	{
 		var driver = TestHelper.GetDriver(Input, assemblies);
 
 		var runResult = driver.GetRunResult();
 		_ = await Verify(runResult)
-			.UseParameters(string.Join("_", assemblies.Select(a => a.ToString())));
+			.UseParameters(string.Join("_", assemblies));
 	}
 }

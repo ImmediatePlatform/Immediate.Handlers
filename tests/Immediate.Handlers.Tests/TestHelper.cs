@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests;
 
 public static class TestHelper
 {
-	public static GeneratorDriver GetDriver(string source, IEnumerable<DriverReferenceAssemblies> assemblies)
+	public static GeneratorDriver GetDriver(string source, DriverReferenceAssemblies assemblies)
 	{
 		// Parse the provided string into a C# syntax tree
 		var syntaxTree = CSharpSyntaxTree.ParseText(source);
