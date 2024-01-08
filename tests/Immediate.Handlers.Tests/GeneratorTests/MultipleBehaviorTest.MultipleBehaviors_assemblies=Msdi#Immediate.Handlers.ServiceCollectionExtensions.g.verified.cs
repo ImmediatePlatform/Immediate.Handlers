@@ -1,4 +1,4 @@
-﻿//HintName: Immediate.Handlers.ServiceCollectionExtensions.g.cs
+//HintName: Immediate.Handlers.ServiceCollectionExtensions.g.cs
 #pragma warning disable CS1591
 
 namespace Microsoft.Extensions.DependencyInjection;

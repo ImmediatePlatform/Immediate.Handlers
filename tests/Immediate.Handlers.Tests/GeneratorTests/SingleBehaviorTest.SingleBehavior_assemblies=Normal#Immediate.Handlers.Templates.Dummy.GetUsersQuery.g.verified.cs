@@ -1,4 +1,4 @@
-﻿//HintName: Immediate.Handlers.Templates.Dummy.GetUsersQuery.g.cs
+//HintName: Immediate.Handlers.Templates.Dummy.GetUsersQuery.g.cs
 #pragma warning disable CS1591
 
 namespace Dummy;

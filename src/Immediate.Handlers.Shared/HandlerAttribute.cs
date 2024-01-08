@@ -1,4 +1,4 @@
-﻿namespace Immediate.Handlers.Shared;
+namespace Immediate.Handlers.Shared;
 
 /// <summary>
 ///	    Applied to a class to indicate that handler code should be generated.

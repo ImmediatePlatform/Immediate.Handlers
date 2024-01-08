@@ -1,4 +1,4 @@
-﻿namespace Immediate.Handlers.Shared;
+namespace Immediate.Handlers.Shared;
 
 /// <summary>
 ///		Specifies which type of handler should be rendered

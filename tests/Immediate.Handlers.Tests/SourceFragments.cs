@@ -1,4 +1,4 @@
-﻿namespace Immediate.Handlers.Tests;
+namespace Immediate.Handlers.Tests;
 
 public static class SourceFragments
 {

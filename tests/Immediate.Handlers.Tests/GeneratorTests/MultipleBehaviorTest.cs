@@ -1,4 +1,4 @@
-﻿using Immediate.Handlers.Tests.Helpers;
+using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests;
 

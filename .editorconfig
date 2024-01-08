@@ -3,25 +3,23 @@
 root = true
 
 [*]
+charset = utf-8
+end_of_line = lf
 indent_style = tab
 insert_final_newline = true
 
 # Build scripts
 [*.{yml,yaml}]
-indent_style = space
 indent_size = 2
 
 # XML project files
 [*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj,props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
 indent_style = tab
-insert_final_newline = true
 indent_size = 2
 
 # Verify settings
 
 [*.{received,verified}.{txt,xml,json,cs}]
-charset = utf-8
-end_of_line = lf
 indent_size = unset
 indent_style = unset
 insert_final_newline = false
@@ -30,11 +28,8 @@ trim_trailing_whitespace = false
 
 # Code files
 [*.cs]
-indent_style = tab
-insert_final_newline = true
 indent_size = 4
 tab_width = 4
-charset = utf-8
 
 ## Dotnet code style settings:
 
