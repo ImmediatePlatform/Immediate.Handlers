@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Reflection;
 using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
@@ -118,11 +118,10 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var renderMode = handler.OverrideRenderMode
 			?? (renderModes.Length == 0 ? RenderMode.Normal : renderModes[0]);
+
 		// Only support normal render mode for now
 		if (renderMode is not RenderMode.Normal)
-		{
 			return;
-		}
 
 		var pipelineBehaviors = BuildPipeline(
 			handler.RequestType,
