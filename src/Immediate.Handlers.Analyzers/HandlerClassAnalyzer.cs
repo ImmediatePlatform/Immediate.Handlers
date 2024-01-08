@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Immediate.Handlers.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class HandlerClassAnalyzer : DiagnosticAnalyzer
+public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 {
 	private static readonly DiagnosticDescriptor HandlerMethodMustExist =
 		new(
