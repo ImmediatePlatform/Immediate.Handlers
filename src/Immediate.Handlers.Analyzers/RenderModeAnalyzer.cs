@@ -10,7 +10,7 @@ public sealed class RenderModeAnalyzer : DiagnosticAnalyzer
 {
 	private static readonly DiagnosticDescriptor InvalidRenderMode =
 		new(
-			id: DiagnosticIds.IH0004InvalidRenderMode,
+			id: DiagnosticIds.IHR0004InvalidRenderMode,
 			title: "RenderMode attribute must be set to a valid RenderMode",
 			messageFormat: "RenderMode attribute is set to an invalid RenderMode",
 			category: "ImmediateHandler",

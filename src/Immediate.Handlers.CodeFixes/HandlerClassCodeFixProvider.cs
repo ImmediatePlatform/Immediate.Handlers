@@ -12,7 +12,7 @@ namespace Immediate.Handlers.CodeFixes;
 [ExportCodeFixProvider(LanguageNames.CSharp)]
 public class HandlerClassCodeFixProvider : CodeFixProvider
 {
-	public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create("IH0001");
+	public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create("IHR0001");
 
 	public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 

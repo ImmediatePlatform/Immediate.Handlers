@@ -9,7 +9,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 {
 	private static readonly DiagnosticDescriptor HandlerMethodMustExist =
 		new(
-			id: DiagnosticIds.IH0001HandlerMethodMustExist,
+			id: DiagnosticIds.IHR0001HandlerMethodMustExist,
 			title: "Handler type should implement a HandleAsync method",
 			messageFormat: "Handler type '{0}' should implement a HandleAsync method",
 			category: "ImmediateHandler",
@@ -20,7 +20,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	private static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
 		new(
-			id: DiagnosticIds.IH0002HandlerMethodMustReturnTask,
+			id: DiagnosticIds.IHR0002HandlerMethodMustReturnTask,
 			title: "Handler method must return a Task<T>",
 			messageFormat: "Method '{0}' must return a Task<T>",
 			category: "ImmediateHandler",
@@ -31,7 +31,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	private static readonly DiagnosticDescriptor HandlerMethodMustReceiveCorrectParameters =
 		new(
-			id: DiagnosticIds.IH0003HandlerMethodMustReceiveCorrectParameters,
+			id: DiagnosticIds.IHR0003HandlerMethodMustReceiveCorrectParameters,
 			title: "Handler method must receive correct parameters",
 			messageFormat: "Method '{0}' must receive the request and a CancellationToken",
 			category: "ImmediateHandler",

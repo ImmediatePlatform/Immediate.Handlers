@@ -5,7 +5,7 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
-IH0001 | ImmediateHandler | Error | HandlerClassAnalyzer
-IH0002 | ImmediateHandler | Error | HandlerClassAnalyzer
-IH0003 | ImmediateHandler | Error | HandlerClassAnalyzer
-IH0004 | ImmediateHandler | Error | RenderModeAnalyzer
+IHR0001 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0002 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0003 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0004 | ImmediateHandler | Error | RenderModeAnalyzer
