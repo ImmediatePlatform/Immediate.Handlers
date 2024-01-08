@@ -40,39 +40,4 @@ public static class GetUsersQuery
 		);
 		await test.RunAsync();
 	}
-
-	[Fact]
-	public async Task HandleMethodIsCorrectReturningNonGenericTask_DoesNotAlert()
-	{
-		const string Text = """
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Immediate.Handlers.Shared;
-
-[Handler]
-public static class GetUsersQuery
-{
-	public record Query;
-
-	private static Task HandleAsync(
-		Query _,
-		CancellationToken token)
-	{
-		return Task.CompletedTask;
-	}
-}
-""";
-
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
-			Text,
-			DriverReferenceAssemblies.Normal,
-			[]
-		);
-		await test.RunAsync();
-	}
 }

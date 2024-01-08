@@ -21,12 +21,12 @@ public class HandlerClassAnalyzer : DiagnosticAnalyzer
 	private static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
 		new(
 			id: DiagnosticIds.IH0002HandlerMethodMustReturnTask,
-			title: "Handler method must return a Task",
-			messageFormat: "Method '{0}' must return a Task",
+			title: "Handler method must return a Task<T>",
+			messageFormat: "Method '{0}' must return a Task<T>",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handler methods must return a Task."
+			description: "Handler methods must return a Task<T>."
 		);
 
 	private static readonly DiagnosticDescriptor HandlerMethodMustReceiveCorrectParameters =
@@ -89,7 +89,7 @@ public class HandlerClassAnalyzer : DiagnosticAnalyzer
 		}
 
 		if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol
-			&& returnTypeSymbol.ConstructedFrom.ToString() is not ("System.Threading.Tasks.Task<TResult>" or "System.Threading.Tasks.Task"))
+			&& returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.Task<TResult>")
 		{
 			var mustReturnTaskT = Diagnostic.Create(
 				HandlerMethodMustReturnTask,
