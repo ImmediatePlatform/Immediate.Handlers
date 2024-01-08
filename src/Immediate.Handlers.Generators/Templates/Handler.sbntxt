@@ -8,61 +8,62 @@ namespace {{ namespace }};
 
 partial class {{ class_name }}
 {
-    public sealed class Handler
-    {
-        private readonly {{ class_fully_qualified_name }}.HandleBehavior _behavior_0;
-        {{~ for behavior in behaviors ~}}
-        private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _behavior_{{for.index + 1}};
-        {{~ end ~}}    
-    
-        public Handler(
-            {{ class_fully_qualified_name }}.HandleBehavior behavior_0{{ if behaviors.size > 0 }},{{ end }}
-            {{~ for behavior in behaviors ~}}
-            {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> behavior_{{for.index + 1}}{{ if !for.last }},{{end }}
-            {{~ end ~}}
+	public sealed class Handler
+	{
+		private readonly {{ class_fully_qualified_name }}.HandleBehavior _behavior_0;
+		{{~ for behavior in behaviors ~}}
+		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _behavior_{{for.index + 1}};
+		{{~ end ~}}    
+	
+		public Handler(
+			{{ class_fully_qualified_name }}.HandleBehavior behavior_0{{ if behaviors.size > 0 }},{{ end }}
+			{{~ for behavior in behaviors ~}}
+			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> behavior_{{for.index + 1}}{{ if !for.last }},{{end }}
+			{{~ end ~}}
 		)
-        {
-            _behavior_0 = behavior_0;
-            {{~ for behavior in behaviors ~}}
-            _behavior_{{for.index + 1}} = behavior_{{for.index + 1}};
-            {{~ end ~}}
-        }
-    
-        public async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            {{~ $length = behaviors.size ~}}
-            {{~ if $length > 0 ~}}
-            {{~ for i in $length..1 ~}}
-            _behavior_{{ i }}.InnerHandler = _behavior_{{ i - 1 }};
-            {{~ end ~}}
-            {{~ end ~}}
-			
-            return await _behavior_{{ $length }}
+		{
+			_behavior_0 = behavior_0;
+			{{~ for behavior in behaviors ~}}
+			_behavior_{{for.index + 1}} = behavior_{{for.index + 1}};
+			{{~ end ~}}
+		}
+	
+		public async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
+		{
+			{{~ $length = behaviors.size ~}}
+			{{~ if $length > 0 ~}}
+			{{~ for i in $length..1 ~}}
+			_behavior_{{ i }}.InnerHandler = _behavior_{{ i - 1 }};
+			{{~ end ~}}
+			{{~ end ~}}
+
+			return await _behavior_{{ $length }}
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
-        }
-    }
+		}
+	}
 
-    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
-    {
-        {{~ for parameter in handler_parameters ~}}
-        private readonly {{ parameter.type }} _{{ parameter.name }};
-        {{~ end ~}}
-    
-        public HandleBehavior(
-            {{~ for parameter in handler_parameters ~}}
-            {{ parameter.type }} {{ parameter.name }}{{ if !for.last }},{{ end }}
-            {{end}})
-        {
-            {{~ for parameter in handler_parameters ~}}
-            _{{ parameter.name }} = {{ parameter.name }};
-            {{~ end ~}}
-        }
-    
-        public override async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
-        {
-            return await {{ class_fully_qualified_name }}
+	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
+	{
+		{{~ for parameter in handler_parameters ~}}
+		private readonly {{ parameter.type }} _{{ parameter.name }};
+		{{~ end ~}}
+	
+		public HandleBehavior(
+			{{~ for parameter in handler_parameters ~}}
+			{{ parameter.type }} {{ parameter.name }}{{ if !for.last }},{{ end }}
+			{{end}}
+		)
+		{
+			{{~ for parameter in handler_parameters ~}}
+			_{{ parameter.name }} = {{ parameter.name }};
+			{{~ end ~}}
+		}
+	
+		public override async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
+		{
+			return await {{ class_fully_qualified_name }}
 				.HandleAsync(
 					request,                
 					{{~ for parameter in handler_parameters ~}}
@@ -71,16 +72,16 @@ partial class {{ class_name }}
 					cancellationToken
 				)
 				.ConfigureAwait(false);
-        }
-    }
-    {{~ if has_ms_di ~}}
+		}
+	}
+	{{~ if has_ms_di ~}}
 
-    [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-    public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
-    {
-        services.AddScoped<{{ class_fully_qualified_name }}.Handler>();
-        services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
-        return services;
-    }
-    {{~ end ~}}
+	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	{
+		services.AddScoped<{{ class_fully_qualified_name }}.Handler>();
+		services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
+		return services;
+	}
+	{{~ end ~}}
 }
