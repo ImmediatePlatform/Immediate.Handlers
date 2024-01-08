@@ -14,7 +14,7 @@ public class HandlerClassCodeFixProvider : CodeFixProvider
 {
 	public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create("IH0001");
 
-	public override FixAllProvider? GetFixAllProvider() => null;
+	public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
 	public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
