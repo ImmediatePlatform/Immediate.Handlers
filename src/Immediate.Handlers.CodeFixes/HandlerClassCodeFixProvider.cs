@@ -9,6 +9,7 @@ using SyntaxKind = Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 
 namespace Immediate.Handlers.CodeFixes;
 
+[ExportCodeFixProvider(LanguageNames.CSharp)]
 public class HandlerClassCodeFixProvider : CodeFixProvider
 {
 	public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create("IH0001");
