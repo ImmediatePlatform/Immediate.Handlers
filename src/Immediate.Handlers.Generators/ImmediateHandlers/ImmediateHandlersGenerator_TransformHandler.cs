@@ -16,8 +16,14 @@ public partial class ImmediateHandlersGenerator
 		var @namespace = symbol.ContainingNamespace.ToString();
 		var name = symbol.Name;
 		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-
 		cancellationToken.ThrowIfCancellationRequested();
+
+		// Handler must not be nested
+		if (symbol.ContainingType is not null)
+		{
+			return null;
+		}
+
 		if (symbol
 				.GetMembers()
 				.OfType<IMethodSymbol>()

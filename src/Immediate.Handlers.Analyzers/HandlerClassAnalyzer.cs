@@ -40,12 +40,24 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "HandleAsync method must must take the request type as it's first parameter and a CancellationToken as it's last parameter."
 		);
 
+	private static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
+		new(
+			id: DiagnosticIds.IHR0005HandlerClassMustNotBeNested,
+			title: "Handler nesting is not allowed",
+			messageFormat: "Handler '{0}' must not be nested in another type",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Handler class must not be nested in another type."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 			[
 				HandlerMethodMustExist,
 				HandlerMethodMustReturnTask,
 				HandlerMethodMustReceiveCorrectParameters,
+				HandlerMustNotBeNestedInAnotherClass
 			]);
 
 	public override void Initialize(AnalysisContext context)
@@ -112,6 +124,17 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			);
 
 			context.ReportDiagnostic(mustHaveTwoParameters);
+		}
+
+		if (namedTypeSymbol.ContainingType is not null)
+		{
+			var mustNotBeWrappedInAnotherType = Diagnostic.Create(
+				HandlerMustNotBeNestedInAnotherClass,
+				namedTypeSymbol.Locations[0],
+				namedTypeSymbol.Name
+			);
+
+			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
 		}
 	}
 }
