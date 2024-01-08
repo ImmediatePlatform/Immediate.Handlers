@@ -10,7 +10,7 @@ public class HandlerClassAnalyzerTests
 	[Fact]
 	public async Task HandleMethodDoesNotExist_AlertDiagnostic()
 	{
-		const string Text = @"
+		const string Text = """
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +25,7 @@ public static class GetUsersQuery
 {
 	public record Query;
 }
-";
+""";
 
 		var expected = Verifier.Diagnostic("IH0001")
 			.WithLocation(12, 21)
@@ -38,7 +38,7 @@ public static class GetUsersQuery
 	[Fact]
 	public async Task HandleMethodDoesNotReturnTask_AlertDiagnostic()
 	{
-		const string Text = @"
+		const string Text = """
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -73,7 +73,7 @@ public class UsersService(ILogger<UsersService> logger)
 }
 
 public interface ILogger<T>;
-";
+""";
 
 		var expected = Verifier.Diagnostic("IH0002")
 			.WithLocation(16, 36)
@@ -86,7 +86,7 @@ public interface ILogger<T>;
 	[Fact]
 	public async Task HandleMethodDoesNotDefineTwoParameters_AlertDiagnostic()
 	{
-		const string Text = @"
+		const string Text = """
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -107,7 +107,7 @@ public static class GetUsersQuery
 		return Task.FromResult(0);
 	}
 }
-";
+""";
 
 		var expected = Verifier.Diagnostic("IH0003")
 			.WithLocation(16, 27)

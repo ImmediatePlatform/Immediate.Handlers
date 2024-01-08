@@ -27,7 +27,7 @@ public partial class ImmediateHandlersGenerator
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 		var behaviorType = typeof(Behavior<,>);
-		var behaviorTypeSymbol = compilation.GetTypeByMetadataName(behaviorType.FullName);
+		var behaviorTypeSymbol = compilation.GetTypeByMetadataName(behaviorType.FullName!);
 		if (behaviorTypeSymbol is null)
 			return [];
 
@@ -35,15 +35,9 @@ public partial class ImmediateHandlersGenerator
 			return [];
 
 		var ca = attribute.ConstructorArguments[0];
-		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(
-			compilation.GetTypeByMetadataName("System.Type")!, 1)!;
-		if (!SymbolEqualityComparer.Default.Equals(
-				ca.Type,
-				arrayTypeSymbol
-		))
-		{
+		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(compilation.GetTypeByMetadataName("System.Type")!, 1);
+		if (!SymbolEqualityComparer.Default.Equals(ca.Type, arrayTypeSymbol))
 			return [];
-		}
 
 		cancellationToken.ThrowIfCancellationRequested();
 		return ca.Values
@@ -88,7 +82,7 @@ public partial class ImmediateHandlersGenerator
 			.ToEquatableReadOnlyList();
 	}
 
-	private static ConstraintInfo? GetConstraintInfo(INamedTypeSymbol symbol, INamedTypeSymbol behaviorTypeSymbol, CancellationToken cancellationToken)
+	private static ConstraintInfo? GetConstraintInfo(INamedTypeSymbol symbol, ISymbol behaviorTypeSymbol, CancellationToken cancellationToken)
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 

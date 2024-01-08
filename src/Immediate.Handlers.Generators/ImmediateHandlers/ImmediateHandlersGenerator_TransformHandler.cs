@@ -29,7 +29,7 @@ public partial class ImmediateHandlersGenerator
 			return null;
 		}
 
-		// must have request type and cancellationtoken
+		// must have request type and cancellation token
 		if (handleMethod.Parameters.Length < 2)
 			return null;
 
@@ -91,7 +91,7 @@ public partial class ImmediateHandlersGenerator
 			? ParseBehaviors(ba, compilation, cancellationToken)
 			: null;
 
-	private static GenericType BuildGenericType(INamedTypeSymbol type)
+	private static GenericType BuildGenericType(ITypeSymbol type)
 	{
 		var name = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 

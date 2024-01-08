@@ -37,8 +37,8 @@ public static class AnalyzerTestHelpers
 			},
 			FixedState =
 			{
-				Sources = { fixedSource }
-			}
+				Sources = { fixedSource },
+			},
 		};
 
 		csTest.TestState.AdditionalReferences.AddRange([MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll")]);

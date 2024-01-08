@@ -1,4 +1,4 @@
-namespace Immediate.Handlers.Shared;
+﻿namespace Immediate.Handlers.Shared;
 
 /// <summary>
 ///		Specifies which type of handler should be rendered
@@ -17,21 +17,21 @@ public enum RenderMode
 }
 
 /// <summary>
-///	    Allows the specification of which type of handler should be rendered. 
+///	    Allows the specification of which type of handler should be rendered.
 /// </summary>
 ///	<remarks>
 ///	<para>
 ///	    If applied to the Assembly (<c>[assembly: RenderMode()]</c>), then all handlers will use the given <see
-///	    cref="Shared.RenderMode"/> unless overriden. 
+///	    cref="Shared.RenderMode"/> unless overriden.
 ///	</para>
 ///	<para>
 ///	    If applied to a <see cref="HandlerAttribute"/>, then the specified handler will be rendered.
 ///	</para>
-///	</remarks>    
+///	</remarks>
 /// <param name="renderMode">
 ///	    Which type of handler should be rendered
 /// </param>
-[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
 public sealed class RenderModeAttribute(RenderMode renderMode) : Attribute
 {
 	/// <summary>

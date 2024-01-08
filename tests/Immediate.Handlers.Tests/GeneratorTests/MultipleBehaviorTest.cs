@@ -1,11 +1,11 @@
-using Immediate.Handlers.Tests.Helpers;
+﻿using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
 [UsesVerify]
 public class MultipleBehaviorTest
 {
-	private readonly string _input = $$"""
+	private const string Input = """
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
@@ -76,7 +76,7 @@ public interface ILogger<T>;
 	[InlineData(new[] { DriverReferenceAssemblies.Normal, DriverReferenceAssemblies.Msdi })]
 	public async Task MultipleBehaviors(DriverReferenceAssemblies[] assemblies)
 	{
-		var driver = TestHelper.GetDriver(_input, assemblies);
+		var driver = TestHelper.GetDriver(Input, assemblies);
 
 		var runResult = driver.GetRunResult();
 		_ = await Verify(runResult)

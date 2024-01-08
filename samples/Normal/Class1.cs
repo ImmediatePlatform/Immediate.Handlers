@@ -55,7 +55,8 @@ public class TestBehavior<TRequest, TResponse> : Behavior<TRequest, TResponse>
 	}
 }
 
-public class User { }
+public class User;
+
 public class UsersService(ILogger<UsersService> logger)
 {
 	public Task<IEnumerable<User>> GetUsers()

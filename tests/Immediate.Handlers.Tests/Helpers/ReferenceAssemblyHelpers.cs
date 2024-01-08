@@ -15,7 +15,7 @@ public static class ReferenceAssemblyHelpers
 		{
 			references.AddRange([
 				.. Basic.Reference.Assemblies.NetStandard20.References.All,
-				MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll")
+				MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll"),
 			]);
 		}
 
@@ -24,7 +24,7 @@ public static class ReferenceAssemblyHelpers
 			references.AddRange(
 				[
 					MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.dll"),
-					MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.Abstractions.dll")
+					MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.Abstractions.dll"),
 				]
 			);
 		}

@@ -59,7 +59,7 @@ public class HandlerClassAnalyzer : DiagnosticAnalyzer
 		context.RegisterSymbolAction(AnalyzeSymbol, SymbolKind.NamedType);
 	}
 
-	private void AnalyzeSymbol(SymbolAnalysisContext context)
+	private static void AnalyzeSymbol(SymbolAnalysisContext context)
 	{
 		if (context.Symbol is not INamedTypeSymbol namedTypeSymbol)
 			return;

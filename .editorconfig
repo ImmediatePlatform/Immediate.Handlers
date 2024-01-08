@@ -213,6 +213,13 @@ csharp_prefer_braces = when_multiline:silent
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
 
+# Resharper/Rider inspections
+resharper_trailing_comma_in_multiline_lists = true
+resharper_align_multiline_binary_expressions_chain = false
+resharper_align_multiline_comments = false
+resharper_align_multiline_statement_conditions = false
+resharper_indent_raw_literal_string = do_not_change
+
 # Style Analytics
 dotnet_analyzer_diagnostic.category-Style.severity = warning
 
