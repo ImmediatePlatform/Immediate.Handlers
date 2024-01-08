@@ -12,8 +12,8 @@ public static class CodeFixTestHelper
 		string inputSource,
 		string fixedSource,
 		DriverReferenceAssemblies assemblies,
-		IEnumerable<DiagnosticResult> expectedDiagnostics
-	)
+		IEnumerable<DiagnosticResult> expectedDiagnostics,
+		IEnumerable<DiagnosticResult> expectedFixedDiagnostics)
 		where TAnalyzer : DiagnosticAnalyzer, new()
 		where TCodeFix : CodeFixProvider, new()
 	{
@@ -34,6 +34,9 @@ public static class CodeFixTestHelper
 
 		csTest.TestState.ExpectedDiagnostics
 			.AddRange(expectedDiagnostics);
+
+		csTest.FixedState.ExpectedDiagnostics
+			.AddRange(expectedFixedDiagnostics);
 
 		return csTest;
 	}
