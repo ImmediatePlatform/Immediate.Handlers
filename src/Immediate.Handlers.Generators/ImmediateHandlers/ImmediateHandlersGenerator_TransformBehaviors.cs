@@ -47,8 +47,14 @@ public partial class ImmediateHandlersGenerator
 				if (v.Value is not INamedTypeSymbol symbol)
 					return null;
 
+				if (!symbol.IsUnboundGenericType)
+					return null;
+
 				var originalDefinition = symbol.OriginalDefinition;
-				if (SymbolEqualityComparer.Default.Equals(originalDefinition, behaviorTypeSymbol))
+				if (originalDefinition.TypeParameters.Length != 2)
+					return null;
+
+				if (originalDefinition.IsAbstract)
 					return null;
 
 				if (!originalDefinition.ImplementsBaseClass(behaviorTypeSymbol))
@@ -87,10 +93,7 @@ public partial class ImmediateHandlersGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 
 		var originalDefinition = symbol.OriginalDefinition;
-		if (originalDefinition.TypeParameters.Length != 2)
-			return null;
 
-		cancellationToken.ThrowIfCancellationRequested();
 		var requestConstraints = originalDefinition
 			.TypeParameters[0]
 			.ConstraintTypes;
