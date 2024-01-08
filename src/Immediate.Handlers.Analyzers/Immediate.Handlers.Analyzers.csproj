@@ -2,15 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<IsPackable>false</IsPackable>
-		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
-
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 		<IsRoslynComponent>true</IsRoslynComponent>
-
-		<RootNamespace>Immediate.Handlers.Analyzers</RootNamespace>
-		<AssemblyName>Immediate.Handlers.Analyzers</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
