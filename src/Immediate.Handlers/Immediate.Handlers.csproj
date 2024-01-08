@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<IsPackable>true</IsPackable>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Nuget">
@@ -16,6 +18,31 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<RepositoryUrl>https://github.com/viceroypenguin/Immediate.Handlers</RepositoryUrl>
 	</PropertyGroup>
+
+	<!--
+	This ensures the library will be packaged as a source generator when we use `dotnet pack`
+	-->
+	<ItemGroup>
+		<None Include="../../readme.md" Pack="true" PackagePath="/" />
+		<None Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="false" />
+		<None Include="$(OutputPath)Immediate.Handlers.Shared.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="true" />
+		<None Include="$(OutputPath)Immediate.Handlers.Analyzers.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="true" />
+		<None Include="$(OutputPath)Immediate.Handlers.CodeFixes.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="true" />
+		<None Include="$(OutputPath)Immediate.Handlers.Generators.dll" Pack="true" PackagePath="analyzers/roslyn4.7/dotnet/cs" Visible="true" />
+		<None Include="$(OutputPath)Immediate.Handlers.Shared.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
+		<None Include="$(OutputPath)Immediate.Handlers.Shared.xml" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="../Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" />
+		<ProjectReference Include="../Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" />
+		<ProjectReference Include="../Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" />
+		<ProjectReference Include="../Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
+	</ItemGroup>
 
 	<PropertyGroup Label="MinVer">
 		<MinVerAutoIncrement>minor</MinVerAutoIncrement>
