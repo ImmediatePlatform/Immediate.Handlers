@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Immediate.Handlers.Generators;
 
+[ExcludeFromCodeCoverage]
 public static class EquatableReadOnlyList
 {
 	public static EquatableReadOnlyList<T> ToEquatableReadOnlyList<T>(this IEnumerable<T> enumerable)
@@ -11,6 +13,7 @@ public static class EquatableReadOnlyList
 /// <summary>
 ///     A wrapper for IReadOnlyList that provides value equality support for the wrapped list.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public readonly struct EquatableReadOnlyList<T>(
 	IReadOnlyList<T> collection
 ) : IEquatable<EquatableReadOnlyList<T>>, IReadOnlyList<T>
