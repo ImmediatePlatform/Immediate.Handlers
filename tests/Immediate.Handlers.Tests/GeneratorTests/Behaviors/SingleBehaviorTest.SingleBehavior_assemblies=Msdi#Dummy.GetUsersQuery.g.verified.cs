@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Dummy;
 
-public static partial class GetUsersQuery
+partial class GetUsersQuery
 {
     public sealed class Handler
     {
