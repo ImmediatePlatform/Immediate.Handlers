@@ -6,8 +6,8 @@
 /// </summary>
 /// <remarks>
 /// <para>
-///	    If applied to the Assembly (<c>[assembly: Behavior()]</c>), then the given <see cref="Behavior{TRequest,
-///     TResponse}"/>s will be part of the pipeline for all requests across the assembly. 
+///	    If applied to the Assembly (<c>[assembly: Behavior()]</c>), then the given
+///		<see cref="Behavior{TRequest, TResponse}"/>s will be part of the pipeline for all requests across the assembly. 
 /// </para>
 /// <para>
 ///	    If applied to a <see cref="HandlerAttribute"/>, then the given <see cref="Behavior{TRequest, TResponse}"/>s will
