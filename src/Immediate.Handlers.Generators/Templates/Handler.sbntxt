@@ -1,4 +1,4 @@
-﻿{{~ if has_ms_di ~}}
+{{~ if has_ms_di ~}}
 using Microsoft.Extensions.DependencyInjection;
 
 {{~ end ~}}

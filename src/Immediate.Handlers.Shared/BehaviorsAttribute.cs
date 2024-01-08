@@ -1,4 +1,4 @@
-﻿namespace Immediate.Handlers.Shared;
+namespace Immediate.Handlers.Shared;
 
 /// <summary>
 ///	    Allows the specification of <see cref="Behavior{TRequest, TResponse}"/>s that should be used as part of the
