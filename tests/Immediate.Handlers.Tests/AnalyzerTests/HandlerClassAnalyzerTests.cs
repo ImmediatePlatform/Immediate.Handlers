@@ -27,7 +27,7 @@ public static class GetUsersQuery
 }
 ";
 
-		var expected = Verifier.Diagnostic()
+		var expected = Verifier.Diagnostic("IH0001")
 			.WithLocation(12, 21)
 			.WithArguments("GetUsersQuery");
 
@@ -75,7 +75,7 @@ public class UsersService(ILogger<UsersService> logger)
 public interface ILogger<T>;
 ";
 
-		var expected = Verifier.Diagnostic()
+		var expected = Verifier.Diagnostic("IH0002")
 			.WithLocation(16, 36)
 			.WithArguments("HandleAsync");
 
@@ -109,7 +109,7 @@ public static class GetUsersQuery
 }
 ";
 
-		var expected = Verifier.Diagnostic()
+		var expected = Verifier.Diagnostic("IH0003")
 			.WithLocation(16, 27)
 			.WithArguments("HandleAsync");
 
