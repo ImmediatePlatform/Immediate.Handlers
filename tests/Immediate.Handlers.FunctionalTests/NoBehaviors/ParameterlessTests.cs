@@ -2,7 +2,7 @@ using Immediate.Handlers.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Immediate.Handler.FunctionalTests.NoBehaviors;
+namespace Immediate.Handlers.FunctionalTests.NoBehaviors;
 
 [Handler]
 public static partial class NoBehaviorParameterlessOneAdder
