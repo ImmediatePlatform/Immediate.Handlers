@@ -22,9 +22,8 @@ public static class CodeFixTestHelper
 	public static CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier> CreateCodeFixTest<TAnalyzer, TCodeFix>(
 		string inputSource,
 		string fixedSource,
-		DriverReferenceAssemblies assemblies,
-		IEnumerable<DiagnosticResult> expectedDiagnostics,
-		IEnumerable<DiagnosticResult> expectedFixedDiagnostics)
+		DriverReferenceAssemblies assemblies
+	)
 		where TAnalyzer : DiagnosticAnalyzer, new()
 		where TCodeFix : CodeFixProvider, new()
 	{
@@ -46,12 +45,6 @@ public static class CodeFixTestHelper
 
 		csTest.TestState.AdditionalReferences
 			.AddRange(assemblies.GetAdditionalReferences());
-
-		csTest.TestState.ExpectedDiagnostics
-			.AddRange(expectedDiagnostics);
-
-		csTest.FixedState.ExpectedDiagnostics
-			.AddRange(expectedFixedDiagnostics);
 
 		return csTest;
 	}

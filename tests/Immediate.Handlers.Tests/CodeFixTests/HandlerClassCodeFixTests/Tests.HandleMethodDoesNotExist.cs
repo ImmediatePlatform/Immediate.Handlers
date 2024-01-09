@@ -8,43 +8,45 @@ namespace Immediate.Handlers.Tests.CodeFixTests.HandlerClassCodeFixTests;
 public class Tests
 {
 	[Fact]
-	public async Task HandleMethodDoesNotExist()
-	{
+	public async Task HandleMethodDoesNotExist() =>
 		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassCodeFixProvider>(
-			@"
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Immediate.Handlers.Shared;
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
 
-[Handler]
-public static class {|IHR0001:GetUsersQuery|}
-{
-	public record Query;
-}",
-@"
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Immediate.Handlers.Shared;
+			[Handler]
+			public static class {|IHR0001:GetUsersQuery|}
+			{
+				public record Query;
+			}
+			""",
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
 
-[Handler]
-public static class GetUsersQuery
-{
-	public record Query;
+			[Handler]
+			public static class GetUsersQuery
+			{
+				public record Query;
 
-	private static Task<int> HandleAsync(Query _, CancellationToken token)
-	{
-		return null;
-	}
-}", DriverReferenceAssemblies.Normal, [], []).RunAsync();
-	}
+				private static Task<int> HandleAsync(Query _, CancellationToken token)
+				{
+					return null;
+				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync();
 }
