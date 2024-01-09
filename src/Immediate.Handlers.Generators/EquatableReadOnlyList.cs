@@ -15,9 +15,11 @@ public static class EquatableReadOnlyList
 /// </summary>
 [ExcludeFromCodeCoverage]
 public readonly struct EquatableReadOnlyList<T>(
-	IReadOnlyList<T> collection
+	IReadOnlyList<T>? collection
 ) : IEquatable<EquatableReadOnlyList<T>>, IReadOnlyList<T>
 {
+	private IReadOnlyList<T> Collection => collection ?? [];
+
 	public bool Equals(EquatableReadOnlyList<T> other)
 		=> this.SequenceEqual(other);
 
@@ -28,20 +30,20 @@ public readonly struct EquatableReadOnlyList<T>(
 	{
 		var hashCode = new HashCode();
 
-		foreach (var item in collection)
+		foreach (var item in Collection)
 			hashCode.Add(item);
 
 		return hashCode.ToHashCode();
 	}
 
 	IEnumerator<T> IEnumerable<T>.GetEnumerator()
-		=> collection.GetEnumerator();
+		=> Collection.GetEnumerator();
 
 	IEnumerator IEnumerable.GetEnumerator()
-		=> collection.GetEnumerator();
+		=> Collection.GetEnumerator();
 
-	public int Count => collection.Count;
-	public T this[int index] => collection[index];
+	public int Count => Collection.Count;
+	public T this[int index] => Collection[index];
 
 	public static bool operator ==(EquatableReadOnlyList<T> left, EquatableReadOnlyList<T> right)
 		=> left.Equals(right);
