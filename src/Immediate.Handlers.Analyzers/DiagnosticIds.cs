@@ -1,6 +1,6 @@
 namespace Immediate.Handlers.Analyzers;
 
-public static class DiagnosticIds
+internal static class DiagnosticIds
 {
 	public const string IHR0001HandlerMethodMustExist = "IHR0001";
 	public const string IHR0002HandlerMethodMustReturnTask = "IHR0002";

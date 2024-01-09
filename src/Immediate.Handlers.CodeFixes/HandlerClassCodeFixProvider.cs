@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using Immediate.Handlers.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -12,7 +13,8 @@ namespace Immediate.Handlers.CodeFixes;
 [ExportCodeFixProvider(LanguageNames.CSharp)]
 public class HandlerClassCodeFixProvider : CodeFixProvider
 {
-	public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create("IHR0001");
+	public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+		ImmutableArray.Create([DiagnosticIds.IHR0001HandlerMethodMustExist]);
 
 	public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
