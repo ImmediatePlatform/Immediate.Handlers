@@ -11,7 +11,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task ConcreteBehaviorDoesNotHaveTwoGenericParameters_Alerts() =>
+	public async Task BehaviorTypeDoesNotHaveTwoGenericParameters_Alerts() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
 			"""
 			using System;
@@ -25,7 +25,7 @@ public partial class Tests
 			using Normal;
 
 			[assembly: Behaviors(
-				{|IHR0007:typeof(LoggingBehavior<string, string>)|}
+				typeof({|IHR0007:LoggingBehavior<,,>|})
 			)]
 
 			namespace Normal;
@@ -33,7 +33,7 @@ public partial class Tests
 			public class User { };
 			public interface ILogger<T>;
 
-			public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+			public class LoggingBehavior<TRequest, TResponse, TExtra>(ILogger<LoggingBehavior<TRequest, TResponse, TExtra>> logger)
 				: Immediate.Handlers.Shared.Behavior<TRequest, TResponse>
 			{
 				public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
@@ -56,7 +56,7 @@ public partial class Tests
 
 			[Handler]
 			[Behaviors(
-				{|IHR0007:typeof(LoggingBehavior<string, string>)|}
+				typeof({|IHR0007:LoggingBehavior<,,>|})
 			)]
 			public static partial class GetUsersQuery
 			{

@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task ConcreteBehaviorDoesNotInheritFromBoundedBehavior_Alerts() =>
+	public async Task BehaviorTypeDoesNotUseUnboundedReference_Alerts() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
 			"""
 			using System;
@@ -21,7 +21,7 @@ public partial class Tests
 			using Normal;
 
 			[assembly: Behaviors(
-				{|IHR0008:typeof(B1)|}
+				typeof({|IHR0008:LoggingBehavior<int, int>|})
 			)]
 
 			namespace Normal;
@@ -29,14 +29,18 @@ public partial class Tests
 			public class User { };
 			public interface ILogger<T>;
 
-			public class B1 : Behavior<int, int>
+			public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+				: Immediate.Handlers.Shared.Behavior<TRequest, TResponse>
 			{
-				public override Task<int> HandleAsync(int request, CancellationToken cancellationToken)
+				public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 				{
-					throw new NotImplementedException();
+					_ = logger.ToString();
+					var response = await Next(request, cancellationToken);
+			
+					return response;
 				}
 			}
-
+			
 			public class UsersService(ILogger<UsersService> logger)
 			{
 				public Task<IEnumerable<User>> GetUsers()
@@ -48,7 +52,7 @@ public partial class Tests
 
 			[Handler]
 			[Behaviors(
-				{|IHR0008:typeof(B1)|}
+				typeof({|IHR0008:LoggingBehavior<int, int>|})
 			)]
 			public static partial class GetUsersQuery
 			{

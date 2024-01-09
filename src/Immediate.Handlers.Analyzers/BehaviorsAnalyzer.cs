@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
@@ -12,33 +13,33 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0006BehaviorsMustInheritFromBehavior,
 			title: "Behaviors must inherit from Behavior<,>",
-			messageFormat: "Behavior '{0}' must inherit from Behavior<,>",
+			messageFormat: "Behavior type '{0}' must inherit from Behavior<,>",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must inherit from Behavior<,> in order to be used properly."
+			description: "All Behaviors must inherit from Behavior<,>."
 		);
 
 	private static readonly DiagnosticDescriptor BehaviorsMustHaveTwoGenericParameters =
 		new(
 			id: DiagnosticIds.IHR0007BehaviorsMustHaveTwoGenericParameters,
 			title: "Behaviors must have two generic parameters",
-			messageFormat: "Behavior '{0}' must have two generic parameters",
+			messageFormat: "Behavior type '{0}' must have two generic parameters",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must have two generic parameters in order to be used properly."
+			description: "All Behaviors must have two generic parameters, correctly referencing `TRequest` and `TResponse`."
 		);
 
-	private static readonly DiagnosticDescriptor BehaviorsMustNotInheritFromBoundedBehaviour =
+	private static readonly DiagnosticDescriptor BehaviorsMustUseUnboundGenerics =
 		new(
-			id: DiagnosticIds.IHR0008BehaviorsMustNotInheritFromBoundedBehaviour,
-			title: "Behaviors must not inherit from bounded Behaviour",
-			messageFormat: "Behavior '{0}' must not inherit from bounded Behaviour",
+			id: DiagnosticIds.IHR0008BehaviorsMustUseUnboundGenerics,
+			title: "Behaviors must use unbound generics",
+			messageFormat: "Behavior type '{0}' must not use generic type arguments",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must not inherit from bounded Behaviour in order to be used properly."
+			description: "All behaviors must use the unbounded generic type, without type arguments."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
@@ -46,7 +47,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		[
 			BehaviorsMustInheritFromBehavior,
 			BehaviorsMustHaveTwoGenericParameters,
-			BehaviorsMustNotInheritFromBoundedBehaviour
+			BehaviorsMustUseUnboundGenerics
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -69,12 +70,8 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			return;
 
 		var behaviorsAttributeSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.BehaviorsAttribute");
-		var baseBehaviorSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.Behavior`2");
-
-		if (baseBehaviorSymbol is null)
-		{
+		if (behaviorsAttributeSymbol is null)
 			return;
-		}
 
 		token.ThrowIfCancellationRequested();
 		if (!SymbolEqualityComparer.Default.Equals(attribute.Type?.OriginalDefinition, behaviorsAttributeSymbol))
@@ -100,51 +97,57 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			return;
 		}
 
+		token.ThrowIfCancellationRequested();
+		var baseBehaviorSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.Behavior`2");
+		if (baseBehaviorSymbol is null)
+			return;
+
 		foreach (var op in aio.ChildOperations)
 		{
 			token.ThrowIfCancellationRequested();
-			if (op is not ITypeOfOperation { TypeOperand: INamedTypeSymbol behaviorType, })
+			if (op is not ITypeOfOperation
+				{
+					TypeOperand: INamedTypeSymbol behaviorType,
+					Syntax: TypeOfExpressionSyntax toes
+				}
+			)
+			{
 				continue;
+			}
 
+			var location = toes.Type.GetLocation();
 			var originalDefinition = behaviorType.OriginalDefinition;
 
-			// originalDefinition.IsAbstract
 			if (!ImplementsBaseClass(originalDefinition, baseBehaviorSymbol))
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(
 						BehaviorsMustInheritFromBehavior,
-						op.Syntax.GetLocation(),
+						location,
 						originalDefinition.Name)
 				);
-
-				continue;
 			}
 
-			if (!originalDefinition.IsGenericType)
-			{
-				context.ReportDiagnostic(
-					Diagnostic.Create(
-						BehaviorsMustNotInheritFromBoundedBehaviour,
-						op.Syntax.GetLocation(),
-						originalDefinition.Name)
-				);
-
-				continue;
-			}
-
-			// HasReferencesToTypeWithoutTwoGenericParameters
-			if (!behaviorType.IsUnboundGenericType
-				|| (behaviorType.IsUnboundGenericType && originalDefinition.TypeParameters.Length != 2))
+			if (!originalDefinition.IsGenericType
+				|| originalDefinition.TypeParameters.Length != 2)
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(
 						BehaviorsMustHaveTwoGenericParameters,
-						op.Syntax.GetLocation(),
+						location,
 						originalDefinition.Name)
 				);
 			}
 
+			if (!behaviorType.IsUnboundGenericType)
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						BehaviorsMustUseUnboundGenerics,
+						location,
+						originalDefinition.Name)
+				);
+			}
 		}
 	}
 

@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task ConcreteBehaviorDoesNotInheritFromGenericBehavior_Alerts() =>
+	public async Task BehaviorTypeIsValid_DoesNotAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
 			"""
 			using System;
@@ -22,9 +22,7 @@ public partial class Tests
 
 			[assembly: Behaviors(
 				typeof(LoggingBehavior<,>),
-				{|IHR0006:typeof(User)|},
-				typeof(TestBehavior<,>),
-				{|IHR0006:typeof(int)|}
+				typeof(TestBehavior<,>)
 			)]
 
 			namespace Normal;
@@ -64,7 +62,8 @@ public partial class Tests
 
 			[Handler]
 			[Behaviors(
-				{|IHR0006:typeof(int)|}
+				typeof(LoggingBehavior<,>),
+				typeof(TestBehavior<,>)
 			)]
 			public static partial class GetUsersQuery
 			{
