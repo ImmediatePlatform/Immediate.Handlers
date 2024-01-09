@@ -5,11 +5,11 @@ using Immediate.Handlers.Tests.Helpers;
 namespace Immediate.Handlers.Tests.CodeFixTests.HandlerClassCodeFixTests;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
-public class Tests
+public partial class Tests
 {
 	[Fact]
 	public async Task HandleMethodDoesNotExist() =>
-		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassCodeFixProvider>(
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerMethodMustExistCodeFixProvider>(
 			"""
 			using System;
 			using System.Collections.Generic;

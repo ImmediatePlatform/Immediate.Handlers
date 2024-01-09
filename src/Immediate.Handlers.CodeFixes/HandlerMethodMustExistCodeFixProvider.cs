@@ -11,7 +11,7 @@ using SyntaxKind = Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 namespace Immediate.Handlers.CodeFixes;
 
 [ExportCodeFixProvider(LanguageNames.CSharp)]
-public class HandlerClassCodeFixProvider : CodeFixProvider
+public class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 {
 	public override ImmutableArray<string> FixableDiagnosticIds { get; } =
 		ImmutableArray.Create([DiagnosticIds.IHR0001HandlerMethodMustExist]);
@@ -34,7 +34,7 @@ public class HandlerClassCodeFixProvider : CodeFixProvider
 				CodeAction.Create(
 					title: "Add HandleAsync method",
 					createChangedDocument: _ => AddHandleAsyncMethodAsync(context.Document, root, classDeclarationSyntax),
-					equivalenceKey: nameof(HandlerClassCodeFixProvider)
+					equivalenceKey: nameof(HandlerMethodMustExistCodeFixProvider)
 				),
 				diagnostic);
 		}

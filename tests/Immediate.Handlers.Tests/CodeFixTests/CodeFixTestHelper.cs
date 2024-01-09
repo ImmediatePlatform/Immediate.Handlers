@@ -22,13 +22,15 @@ public static class CodeFixTestHelper
 	public static CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier> CreateCodeFixTest<TAnalyzer, TCodeFix>(
 		string inputSource,
 		string fixedSource,
-		DriverReferenceAssemblies assemblies
+		DriverReferenceAssemblies assemblies,
+		int codeActionIndex = 0
 	)
 		where TAnalyzer : DiagnosticAnalyzer, new()
 		where TCodeFix : CodeFixProvider, new()
 	{
 		var csTest = new CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier>
 		{
+			CodeActionIndex = codeActionIndex,
 			TestState =
 			{
 				Sources = { inputSource },
@@ -39,6 +41,7 @@ public static class CodeFixTestHelper
 			},
 			FixedState =
 			{
+				MarkupHandling = MarkupMode.IgnoreFixable,
 				Sources = { fixedSource },
 			},
 		};

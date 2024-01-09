@@ -24,4 +24,8 @@
 		<ProjectReference Include="../../src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Compile Include="../../src/Immediate.Handlers.Analyzers/DiagnosticIds.cs" />
+	</ItemGroup>
+
 </Project>
