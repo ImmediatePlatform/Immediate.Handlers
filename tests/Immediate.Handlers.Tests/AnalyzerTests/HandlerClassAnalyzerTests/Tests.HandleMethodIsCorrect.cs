@@ -9,35 +9,32 @@ public partial class Tests
 	[Fact]
 	public async Task HandleMethodIsCorrect_DoesNotAlert()
 	{
-		const string Text = """
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Immediate.Handlers.Shared;
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
 
-[Handler]
-public static class GetUsersQuery
-{
-	public record Query;
+			[Handler]
+			public static class GetUsersQuery
+			{
+				public record Query;
 
-	private static Task<int> HandleAsync(
-		Query _,
-		CancellationToken token)
-	{
-		return Task.FromResult(0);
-	}
-}
-""";
-
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
-			Text,
+				private static Task<int> HandleAsync(
+					Query _,
+					CancellationToken token)
+				{
+					return Task.FromResult(0);
+				}
+			}
+			""",
 			DriverReferenceAssemblies.Normal,
 			[]
-		);
-		await test.RunAsync();
+		).RunAsync();
 	}
 }

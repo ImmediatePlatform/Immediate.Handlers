@@ -1,8 +1,5 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.Tests.Helpers;
-using Verifier =
-	Microsoft.CodeAnalysis.CSharp.Testing.XUnit.AnalyzerVerifier<
-		Immediate.Handlers.Analyzers.HandlerClassAnalyzer>;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
@@ -12,31 +9,24 @@ public partial class Tests
 	[Fact]
 	public async Task HandleClassDoesNotDefineCommandOrQuery_AlertDiagnostic()
 	{
-		const string Text = """
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Immediate.Handlers.Shared;
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
 
-[Handler]
-public static class GetUsersQuery
-{
-}
-""";
-
-		var expected = Verifier.Diagnostic("IHR0009")
-			.WithLocation(11, 21)
-			.WithArguments("GetUsersQuery");
-
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
-			Text,
+			[Handler]
+			public static class {|IHR0009:GetUsersQuery|}
+			{
+			}
+			""",
 			DriverReferenceAssemblies.Normal,
-			[expected]
-		);
-		await test.RunAsync();
+			[]
+		).RunAsync();
 	}
 }

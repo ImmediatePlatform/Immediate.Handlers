@@ -1,8 +1,5 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.Tests.Helpers;
-using Verifier =
-	Microsoft.CodeAnalysis.CSharp.Testing.XUnit.AnalyzerVerifier<
-		Immediate.Handlers.Analyzers.HandlerClassAnalyzer>;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
@@ -12,38 +9,31 @@ public partial class Tests
 	[Fact]
 	public async Task HandleMethodDoesNotDefineTwoParameters_AlertDiagnostic()
 	{
-		const string Text = """
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Immediate.Handlers.Shared;
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
 
-[Handler]
-public static class GetUsersQuery
-{
-	public record Query;
+			[Handler]
+			public static class GetUsersQuery
+			{
+				public record Query;
 
-	private static Task<int> HandleAsync(
-		Query _)
-	{
-		return Task.FromResult(0);
-	}
-}
-""";
-
-		var expected = Verifier.Diagnostic("IHR0003")
-			.WithLocation(15, 27)
-			.WithArguments("HandleAsync");
-
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
-			Text,
+				private static Task<int> {|IHR0003:HandleAsync|}(
+					Query _)
+				{
+					return Task.FromResult(0);
+				}
+			}
+			""",
 			DriverReferenceAssemblies.Normal,
-			[expected]
-		);
-		await test.RunAsync();
+			[]
+		).RunAsync();
 	}
 }
