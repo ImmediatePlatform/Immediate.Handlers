@@ -17,12 +17,12 @@ partial class GetUsersQuery
 		{
 			_behavior_0 = behavior_0;
 			_behavior_1 = behavior_1;
+
+			_behavior_1.SetInnerHandler(_behavior_0);
 		}
 	
 		public async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(global::Dummy.GetUsersQuery.Query request, global::System.Threading.CancellationToken cancellationToken = default)
 		{
-			_behavior_1.InnerHandler = _behavior_0;
-
 			return await _behavior_1
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);

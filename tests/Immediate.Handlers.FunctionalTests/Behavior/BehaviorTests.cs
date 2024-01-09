@@ -1,0 +1,31 @@
+using Xunit;
+
+namespace Immediate.Handlers.FunctionalTests.Behavior;
+
+public sealed class BehaviorTests
+{
+	private sealed class TestBehavior : Shared.Behavior<int, int>
+	{
+		public override async Task<int> HandleAsync(int request, CancellationToken cancellationToken)
+		{
+			return await Next(request, cancellationToken);
+		}
+	}
+
+	[Fact]
+	public void CannotSetHandlerTwice()
+	{
+		var handler = new TestBehavior();
+		handler.SetInnerHandler(handler);
+		_ = Assert.Throws<InvalidOperationException>(() =>
+			handler.SetInnerHandler(handler));
+	}
+
+	[Fact]
+	public async Task MustSetHandlerBeforeCallingNext()
+	{
+		var handler = new TestBehavior();
+		_ = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+			handler.HandleAsync(1, CancellationToken.None));
+	}
+}

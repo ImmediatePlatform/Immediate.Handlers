@@ -44,7 +44,7 @@ public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TReque
 {
 	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
-		var response = await InnerHandler.HandleAsync(request, cancellationToken);
+		var response = await Next(request, cancellationToken);
 
 		return response;
 	}
@@ -55,7 +55,7 @@ public class SecondLoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<
 {
 	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
-		var response = await InnerHandler.HandleAsync(request, cancellationToken);
+		var response = await Next(request, cancellationToken);
 
 		return response;
 	}

@@ -26,17 +26,17 @@ partial class {{ class_name }}
 			{{~ for behavior in behaviors ~}}
 			_behavior_{{for.index + 1}} = behavior_{{for.index + 1}};
 			{{~ end ~}}
+
+			{{~ $length = behaviors.size ~}}
+			{{~ if $length > 0 ~}}
+			{{~ for i in 1..$length ~}}
+			_behavior_{{ i }}.SetInnerHandler(_behavior_{{ i - 1 }});
+			{{~ end ~}}
+			{{~ end ~}}
 		}
 	
 		public async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
 		{
-			{{~ $length = behaviors.size ~}}
-			{{~ if $length > 0 ~}}
-			{{~ for i in $length..1 ~}}
-			_behavior_{{ i }}.InnerHandler = _behavior_{{ i - 1 }};
-			{{~ end ~}}
-			{{~ end ~}}
-
 			return await _behavior_{{ $length }}
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
