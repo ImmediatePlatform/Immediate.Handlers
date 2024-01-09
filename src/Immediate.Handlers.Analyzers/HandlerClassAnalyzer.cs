@@ -33,7 +33,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0003HandlerMethodMustReceiveCorrectParameters,
 			title: "Handler method must receive correct parameters",
-			messageFormat: "Method '{0}' must receive the request and a CancellationToken",
+			messageFormat: "Method '{0}' must receive the request (ending with Command or Query) and a CancellationToken",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
@@ -51,15 +51,15 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler class must not be nested in another type."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerClassMustDefineCommandOrQuery =
+	private static readonly DiagnosticDescriptor HandlerClassShouldDefineCommandOrQuery =
 		new(
-			id: DiagnosticIds.IHR0009HandlerClassMustDefineCommandOrQuery,
-			title: "Handler class must define a Command or Query type",
-			messageFormat: "Handler '{0}' must define a Command or Query type",
+			id: DiagnosticIds.IHR0009HandlerClassShouldDefineCommandOrQuery,
+			title: "Handler class should define a Command or Query type",
+			messageFormat: "Handler '{0}' should define a Command or Query type",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
+			defaultSeverity: DiagnosticSeverity.Info,
 			isEnabledByDefault: true,
-			description: "Handler class must define a Command or Query type."
+			description: "Handler class should define a Command or Query type."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
@@ -69,7 +69,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 				HandlerMethodMustReturnTask,
 				HandlerMethodMustReceiveCorrectParameters,
 				HandlerMustNotBeNestedInAnotherClass,
-				HandlerClassMustDefineCommandOrQuery,
+				HandlerClassShouldDefineCommandOrQuery,
 			]);
 
 	public override void Initialize(AnalysisContext context)
@@ -96,17 +96,27 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			return;
 		}
 
+		if (namedTypeSymbol.ContainingType is not null)
+		{
+			var mustNotBeWrappedInAnotherType = Diagnostic.Create(
+				HandlerMustNotBeNestedInAnotherClass,
+				namedTypeSymbol.Locations[0],
+				namedTypeSymbol.Name
+			);
+
+			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
+		}
+
 		if (namedTypeSymbol.GetMembers().OfType<INamedTypeSymbol>().FirstOrDefault(x => x.Name.EndsWith("Query", StringComparison.InvariantCultureIgnoreCase) || x.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase)) is not
 			{ })
 		{
 			var mustDefineCommandOrQueryDiagnostic = Diagnostic.Create(
-				HandlerClassMustDefineCommandOrQuery,
+				HandlerClassShouldDefineCommandOrQuery,
 				namedTypeSymbol.Locations[0],
 				namedTypeSymbol.Name
 			);
 
 			context.ReportDiagnostic(mustDefineCommandOrQueryDiagnostic);
-			return;
 		}
 
 		if (namedTypeSymbol
@@ -139,7 +149,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		var methodSymbolParams = methodSymbol.Parameters;
 		if (methodSymbolParams.Length < 2
-			|| methodSymbolParams[0].Type.ToString().Split('.').Last() is not ("Query" or "Command")
+			|| (!methodSymbolParams[0].Type.ToString().Split('.').Last().EndsWith("Query", StringComparison.InvariantCultureIgnoreCase)
+				&& !methodSymbolParams[0].Type.ToString().Split('.').Last().EndsWith("Command", StringComparison.InvariantCultureIgnoreCase))
 			|| methodSymbolParams.Last().Type.ToString() is not "System.Threading.CancellationToken")
 		{
 			var mustHaveTwoParameters = Diagnostic.Create(
@@ -149,17 +160,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			);
 
 			context.ReportDiagnostic(mustHaveTwoParameters);
-		}
-
-		if (namedTypeSymbol.ContainingType is not null)
-		{
-			var mustNotBeWrappedInAnotherType = Diagnostic.Create(
-				HandlerMustNotBeNestedInAnotherClass,
-				namedTypeSymbol.Locations[0],
-				namedTypeSymbol.Name
-			);
-
-			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
 		}
 	}
 }

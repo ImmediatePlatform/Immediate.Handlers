@@ -44,6 +44,8 @@ public class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 		SyntaxNode root,
 		ClassDeclarationSyntax classDeclarationSyntax)
 	{
+		var requestType = classDeclarationSyntax.Members.OfType<RecordDeclarationSyntax>().FirstOrDefault(x => x.Identifier.Text.Contains("Query") || x.Identifier.Text.Contains("Command"));
+
 		var methodDeclaration = MethodDeclaration(
 				GenericName(
 						Identifier("Task"))
@@ -72,7 +74,7 @@ public class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 										"_",
 										TriviaList()))
 								.WithType(
-									IdentifierName("Query")),
+									IdentifierName(requestType?.Identifier.Text ?? "object")),
 							Token(SyntaxKind.CommaToken),
 							Parameter(
 									Identifier("token"))

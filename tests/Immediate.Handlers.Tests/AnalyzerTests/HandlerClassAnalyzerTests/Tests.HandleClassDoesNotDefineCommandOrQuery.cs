@@ -20,7 +20,7 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static class {|IHR0009:GetUsersQuery|}
+			public static class {|IHR0009:{|IHR0001:GetUsersQuery|}|}
 			{
 			}
 			""",

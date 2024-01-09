@@ -9,7 +9,7 @@ public partial class Tests
 {
 	[Fact]
 	public async Task HandleClassDoesNotDefineCommandOrQuery_AddsQuery() =>
-		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassMustDefineCommandOrQueryCodeFixProvider>(
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassShouldDefineCommandOrQueryCodeFixProvider>(
 			"""
 			using System;
 			using System.Collections.Generic;
@@ -21,7 +21,7 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static class {|IHR0009:GetUsersQuery|}
+			public static class {|IHR0009:{|IHR0001:GetUsersQuery|}|}
 			{
 			}
 			""",
@@ -46,7 +46,7 @@ public partial class Tests
 
 	[Fact]
 	public async Task HandleClassDoesNotDefineCommandOrQuery_AddsCommand() =>
-		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassMustDefineCommandOrQueryCodeFixProvider>(
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassShouldDefineCommandOrQueryCodeFixProvider>(
 			"""
 			using System;
 			using System.Collections.Generic;
@@ -58,7 +58,7 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static class {|IHR0009:GetUsersQuery|}
+			public static class {|IHR0009:{|IHR0001:GetUsersQuery|}|}
 			{
 			}
 			""",

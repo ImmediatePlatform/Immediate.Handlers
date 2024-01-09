@@ -22,16 +22,6 @@ public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 )]
 public static partial class GetUsersQuery
 {
-	public record Query;
-
-	private static Task<IEnumerable<User>> HandleAsync(
-		Query _,
-		UsersService usersService,
-		CancellationToken token)
-	{
-		token.ThrowIfCancellationRequested();
-		return usersService.GetUsers();
-	}
 }
 
 public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)

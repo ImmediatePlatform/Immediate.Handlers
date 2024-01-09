@@ -22,10 +22,10 @@ public partial class Tests
 			[Handler]
 			public static class GetUsersQuery
 			{
-				public record Query;
+				public record SomeQuery;
 
 				private static Task<int> {|IHR0003:HandleAsync|}(
-					Query _)
+					SomeQuery _)
 				{
 					return Task.FromResult(0);
 				}

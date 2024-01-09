@@ -11,10 +11,10 @@ using SyntaxKind = Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 namespace Immediate.Handlers.CodeFixes;
 
 [ExportCodeFixProvider(LanguageNames.CSharp)]
-public class HandlerClassMustDefineCommandOrQueryCodeFixProvider : CodeFixProvider
+public class HandlerClassShouldDefineCommandOrQueryCodeFixProvider : CodeFixProvider
 {
 	public override ImmutableArray<string> FixableDiagnosticIds { get; } =
-		ImmutableArray.Create([DiagnosticIds.IHR0009HandlerClassMustDefineCommandOrQuery]);
+		ImmutableArray.Create([DiagnosticIds.IHR0009HandlerClassShouldDefineCommandOrQuery]);
 
 	public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
@@ -34,7 +34,7 @@ public class HandlerClassMustDefineCommandOrQueryCodeFixProvider : CodeFixProvid
 				CodeAction.Create(
 					title: "Add Query record",
 					createChangedDocument: _ => AddCommandOrQueryRecordAsync(context.Document, root, classDeclarationSyntax, "Query"),
-					equivalenceKey: nameof(HandlerClassMustDefineCommandOrQueryCodeFixProvider) + "Query"
+					equivalenceKey: nameof(HandlerClassShouldDefineCommandOrQueryCodeFixProvider) + "Query"
 				),
 				diagnostic);
 
@@ -42,7 +42,7 @@ public class HandlerClassMustDefineCommandOrQueryCodeFixProvider : CodeFixProvid
 				CodeAction.Create(
 					title: "Add Command record",
 					createChangedDocument: _ => AddCommandOrQueryRecordAsync(context.Document, root, classDeclarationSyntax, "Command"),
-					equivalenceKey: nameof(HandlerClassMustDefineCommandOrQueryCodeFixProvider) + "Command"
+					equivalenceKey: nameof(HandlerClassShouldDefineCommandOrQueryCodeFixProvider) + "Command"
 				),
 				diagnostic);
 		}
