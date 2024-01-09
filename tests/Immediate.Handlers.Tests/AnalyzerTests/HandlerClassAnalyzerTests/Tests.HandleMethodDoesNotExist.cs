@@ -7,8 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task HandleMethodDoesNotExist_AlertDiagnostic()
-	{
+	public async Task HandleMethodDoesNotExist_AlertDiagnostic() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -29,5 +28,4 @@ public partial class Tests
 			DriverReferenceAssemblies.Normal,
 			[]
 		).RunAsync();
-	}
 }

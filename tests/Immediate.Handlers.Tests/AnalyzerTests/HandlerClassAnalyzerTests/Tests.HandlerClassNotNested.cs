@@ -1,4 +1,4 @@
-﻿using Immediate.Handlers.Analyzers;
+using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
@@ -7,9 +7,8 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task HandlerClassNotNested_DoesNotAlert()
-	{
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+	public async Task HandlerClassNotNested_DoesNotAlert() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
 			using System.Collections.Generic;
@@ -35,7 +34,5 @@ public partial class Tests
 			""",
 			DriverReferenceAssemblies.Normal,
 			[]
-		);
-		await test.RunAsync();
-	}
+		).RunAsync();
 }

@@ -7,8 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task HandleMethodMissingCancellationToken_AlertDiagnostic()
-	{
+	public async Task HandleMethodMissingCancellationToken_AlertDiagnostic() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -36,5 +35,4 @@ public partial class Tests
 			DriverReferenceAssemblies.Normal,
 			[]
 		).RunAsync();
-	}
 }
