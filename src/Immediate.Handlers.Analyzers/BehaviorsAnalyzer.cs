@@ -16,14 +16,38 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All behaviors must inherit from Behavior<,> in order to be used properly."
+			description: "All Behaviors must inherit from Behavior<,> in order to be used properly."
+		);
+
+	private static readonly DiagnosticDescriptor BehaviorsMustHaveTwoGenericParameters =
+		new(
+			id: DiagnosticIds.IHR0007BehaviorsMustHaveTwoGenericParameters,
+			title: "Behaviors must have two generic parameters",
+			messageFormat: "Behavior '{0}' must have two generic parameters",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "All Behaviors must have two generic parameters in order to be used properly."
+		);
+
+	private static readonly DiagnosticDescriptor BehaviorsMustNotInheritFromBoundedBehaviour =
+		new(
+			id: DiagnosticIds.IHR0008BehaviorsMustNotInheritFromBoundedBehaviour,
+			title: "Behaviors must not inherit from bounded Behaviour",
+			messageFormat: "Behavior '{0}' must not inherit from bounded Behaviour",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "All Behaviors must not inherit from bounded Behaviour in order to be used properly."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create<DiagnosticDescriptor>(
-			[
-				BehaviorsMustInheritFromBehavior,
-			]);
+		[
+			BehaviorsMustInheritFromBehavior,
+			BehaviorsMustHaveTwoGenericParameters,
+			BehaviorsMustNotInheritFromBoundedBehaviour
+		]);
 
 	public override void Initialize(AnalysisContext context)
 	{
@@ -45,6 +69,12 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			return;
 
 		var behaviorsAttributeSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.BehaviorsAttribute");
+		var baseBehaviorSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.Behavior`2");
+
+		if (baseBehaviorSymbol is null)
+		{
+			return;
+		}
 
 		token.ThrowIfCancellationRequested();
 		if (!SymbolEqualityComparer.Default.Equals(attribute.Type?.OriginalDefinition, behaviorsAttributeSymbol))
@@ -76,7 +106,51 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			if (op is not ITypeOfOperation { TypeOperand: INamedTypeSymbol behaviorType, })
 				continue;
 
-			_ = behaviorType.ToString();
+			var originalDefinition = behaviorType.OriginalDefinition;
+
+			// originalDefinition.IsAbstract
+			if (!ImplementsBaseClass(originalDefinition, baseBehaviorSymbol))
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						BehaviorsMustInheritFromBehavior,
+						op.Syntax.GetLocation(),
+						originalDefinition.Name)
+				);
+
+				continue;
+			}
+
+			if (!originalDefinition.IsGenericType)
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						BehaviorsMustNotInheritFromBoundedBehaviour,
+						op.Syntax.GetLocation(),
+						originalDefinition.Name)
+				);
+
+				continue;
+			}
+
+			// HasReferencesToTypeWithoutTwoGenericParameters
+			if (!behaviorType.IsUnboundGenericType
+				|| (behaviorType.IsUnboundGenericType && originalDefinition.TypeParameters.Length != 2))
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						BehaviorsMustHaveTwoGenericParameters,
+						op.Syntax.GetLocation(),
+						originalDefinition.Name)
+				);
+			}
+
 		}
 	}
+
+	private static bool ImplementsBaseClass(INamedTypeSymbol typeSymbol, INamedTypeSymbol typeToCheck) =>
+		SymbolEqualityComparer.Default.Equals(typeSymbol, typeToCheck)
+		|| (typeSymbol.BaseType is not null
+			&& ImplementsBaseClass(typeSymbol.BaseType.OriginalDefinition, typeToCheck)
+		);
 }
