@@ -10,4 +10,5 @@ public static class DiagnosticIds
 	public const string IHR0006BehaviorsMustInheritFromBehavior = "IHR0006";
 	public const string IHR0007BehaviorsMustHaveTwoGenericParameters = "IHR0007";
 	public const string IHR0008BehaviorsMustNotInheritFromBoundedBehaviour = "IHR0008";
+	public const string IHR0009HandlerClassMustDefineCommandOrQuery = "IHR0009";
 }
