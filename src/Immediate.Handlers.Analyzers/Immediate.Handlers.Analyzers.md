@@ -27,3 +27,41 @@ it is not supported for now.
 |Severity|Error|
 |CodeFix|False|
 ---
+
+## IHR0006: Behaviors must inherit from `Behavior<,>`
+
+In order to be properly called as part of a pipeline, a behavior must inherit from the `Behavior<,>` class.
+
+|Item|Value|
+|-|-|
+|Category|ImmediateHandler|
+|Enabled|True|
+|Severity|Error|
+|CodeFix|False|
+---
+
+## IHR0007: Behaviors must have two generic types
+
+All behaviors must have two generic parameters, for `TRequest` and `TResponse`. Without these parameters, it is not
+possible to bind the behavior to the target request and response types.
+
+|Item|Value|
+|-|-|
+|Category|ImmediateHandler|
+|Enabled|True|
+|Severity|Error|
+|CodeFix|False|
+---
+
+## IHR0008: Behavior must be referenced with unbound generic
+
+Behaviors must be referenced using the unbound generic syntax. Referencing a generic type using a specific type will
+introduce inconsistencies in connecting multiple behaviors in a pipeline. 
+
+|Item|Value|
+|-|-|
+|Category|ImmediateHandler|
+|Enabled|True|
+|Severity|Error|
+|CodeFix|False|
+---
