@@ -11,7 +11,7 @@
 
 Immediate.Handlers is an implementation of the mediator pattern in .NET using source-generation. All pipeline behaviors
 are determined and the call-tree built at compile-time; meaning that all dependencies are enforced via compile-time
-saftey checks. Behaviors and dependencies are obtained via DI at runtime based on compile-time determined dependencies.
+safety checks. Behaviors and dependencies are obtained via DI at runtime based on compile-time determined dependencies.
 
 Examples TBD.
 
