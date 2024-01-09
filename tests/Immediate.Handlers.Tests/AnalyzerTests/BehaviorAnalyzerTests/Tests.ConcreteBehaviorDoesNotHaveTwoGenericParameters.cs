@@ -29,6 +29,7 @@ using Normal;
 
 namespace Normal;
 
+public class User { };
 public interface ILogger<T>;
 
 public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
@@ -42,6 +43,33 @@ public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TReque
 		return response;
 	}
 }
+
+public class UsersService(ILogger<UsersService> logger)
+{
+	public Task<IEnumerable<User>> GetUsers()
+	{
+		_ = logger.ToString();
+		return Task.FromResult(Enumerable.Empty<User>());
+	}
+}
+
+[Handler]
+[Behaviors(
+	typeof(LoggingBehavior<string, string>)
+)]
+public static partial class GetUsersQuery
+{
+	public record Query;
+
+	private static Task<IEnumerable<User>> HandleAsync(
+		Query _,
+		UsersService usersService,
+		CancellationToken token)
+	{
+		token.ThrowIfCancellationRequested();
+		return usersService.GetUsers();
+	}
+}
 """;
 
 		var test = AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
@@ -49,6 +77,7 @@ public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TReque
 			DriverReferenceAssemblies.Normal,
 			[
 				Verifier.Diagnostic("IHR0007").WithSpan(12, 2, 12, 41).WithArguments("LoggingBehavior"),
+				Verifier.Diagnostic("IHR0007").WithSpan(43, 2, 43, 41).WithArguments("LoggingBehavior"),
 			]
 		);
 		await test.RunAsync();

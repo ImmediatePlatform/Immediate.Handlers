@@ -50,6 +50,34 @@ public class TestBehavior<TRequest, TResponse> : Immediate.Handlers.Shared.Behav
 		throw new NotImplementedException();
 	}
 }
+
+public class UsersService(ILogger<UsersService> logger)
+{
+	public Task<IEnumerable<User>> GetUsers()
+	{
+		_ = logger.ToString();
+		return Task.FromResult(Enumerable.Empty<User>());
+	}
+}
+
+[Handler]
+[Behaviors(
+	typeof(LoggingBehavior<,>),
+	typeof(TestBehavior<,>)
+)]
+public static partial class GetUsersQuery
+{
+	public record Query;
+
+	private static Task<IEnumerable<User>> HandleAsync(
+		Query _,
+		UsersService usersService,
+		CancellationToken token)
+	{
+		token.ThrowIfCancellationRequested();
+		return usersService.GetUsers();
+	}
+}
 """;
 
 		var test = AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
