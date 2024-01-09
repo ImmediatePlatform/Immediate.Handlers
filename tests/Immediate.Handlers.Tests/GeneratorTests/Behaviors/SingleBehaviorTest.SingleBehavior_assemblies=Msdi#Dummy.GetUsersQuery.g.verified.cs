@@ -38,7 +38,6 @@ partial class GetUsersQuery
 	
 		public HandleBehavior(
 			global::Dummy.UsersService usersService
-			
 		)
 		{
 			_usersService = usersService;

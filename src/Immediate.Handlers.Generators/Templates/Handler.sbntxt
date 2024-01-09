@@ -11,13 +11,13 @@ partial class {{ class_name }}
 	public sealed class Handler
 	{
 		private readonly {{ class_fully_qualified_name }}.HandleBehavior _behavior_0;
-		{{~ for behavior in behaviors ~}}
+		{{~ for behavior in (behaviors | array.reverse) ~}}
 		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _behavior_{{for.index + 1}};
 		{{~ end ~}}    
 	
 		public Handler(
 			{{ class_fully_qualified_name }}.HandleBehavior behavior_0{{ if behaviors.size > 0 }},{{ end }}
-			{{~ for behavior in behaviors ~}}
+			{{~ for behavior in (behaviors | array.reverse) ~}}
 			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> behavior_{{for.index + 1}}{{ if !for.last }},{{end }}
 			{{~ end ~}}
 		)
@@ -53,7 +53,7 @@ partial class {{ class_name }}
 		public HandleBehavior(
 			{{~ for parameter in handler_parameters ~}}
 			{{ parameter.type }} {{ parameter.name }}{{ if !for.last }},{{ end }}
-			{{end}}
+			{{~ end ~}}
 		)
 		{
 			{{~ for parameter in handler_parameters ~}}
