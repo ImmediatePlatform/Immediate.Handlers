@@ -1,7 +1,7 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
+namespace Immediate.Handlers.Tests.AnalyzerTests.RenderModeAnalyzerTests;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public partial class Tests
