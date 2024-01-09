@@ -1,9 +1,6 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.CodeFixes;
 using Immediate.Handlers.Tests.Helpers;
-using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.XUnit.CodeFixVerifier<
-	Immediate.Handlers.Analyzers.HandlerClassAnalyzer,
-	Immediate.Handlers.CodeFixes.HandlerClassCodeFixProvider>;
 
 namespace Immediate.Handlers.Tests.CodeFixTests.HandlerClassCodeFixTests;
 
@@ -13,7 +10,8 @@ public class Tests
 	[Fact]
 	public async Task HandleMethodDoesNotExist()
 	{
-		var input = @"
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassCodeFixProvider>(
+			@"
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,11 +22,11 @@ using System.Threading.Tasks;
 using Immediate.Handlers.Shared;
 
 [Handler]
-public static class GetUsersQuery
+public static class {|IHR0001:GetUsersQuery|}
 {
 	public record Query;
-}";
-		var fixedSource = @"
+}",
+@"
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,16 +45,6 @@ public static class GetUsersQuery
 	{
 		return null;
 	}
-}";
-
-		var expected = Verifier.Diagnostic("IHR0001")
-			.WithLocation(12, 21)
-			.WithArguments("GetUsersQuery");
-
-		//var expectedFixed = DiagnosticResult.CompilerError("CS7003").WithSpan(15, 17, 15, 23);
-
-		var test = CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerClassCodeFixProvider>(input, fixedSource, DriverReferenceAssemblies.Normal, [expected], []);
-
-		await test.RunAsync();
+}", DriverReferenceAssemblies.Normal, [], []).RunAsync();
 	}
 }
