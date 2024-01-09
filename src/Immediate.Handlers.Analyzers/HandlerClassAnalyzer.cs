@@ -57,7 +57,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			title: "Handler class should define a Command or Query type",
 			messageFormat: "Handler '{0}' should define a Command or Query type",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Info,
+			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
 			description: "Handler class should define a Command or Query type."
 		);
