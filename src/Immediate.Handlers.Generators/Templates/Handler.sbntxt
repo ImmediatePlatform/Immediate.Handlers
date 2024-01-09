@@ -4,8 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 {{~ end ~}}
 #pragma warning disable CS1591
 
+{{~ if !string.empty namespace ~}}
 namespace {{ namespace }};
 
+{{~ end ~}}
 partial class {{ class_name }}
 {
 	public sealed class Handler

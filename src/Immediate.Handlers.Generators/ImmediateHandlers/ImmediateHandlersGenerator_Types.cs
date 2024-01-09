@@ -31,7 +31,7 @@ public partial class ImmediateHandlersGenerator
 	[ExcludeFromCodeCoverage]
 	private sealed record Handler
 	{
-		public required string Namespace { get; init; }
+		public required string? Namespace { get; init; }
 		public required string ClassName { get; init; }
 		public required string DisplayName { get; init; }
 

@@ -13,7 +13,7 @@ public partial class ImmediateHandlersGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 		var symbol = (INamedTypeSymbol)context.TargetSymbol;
 
-		var @namespace = symbol.ContainingNamespace.ToString();
+		var @namespace = symbol.ContainingNamespace.ToString().NullIf("<global namespace>");
 		var name = symbol.Name;
 		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
