@@ -139,9 +139,13 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			ClassFullyQualifiedName = handler.DisplayName,
 			handler.ClassName,
 			handler.Namespace,
+
+			handler.MethodName,
+			HandlerParameters = handler.Parameters,
+
 			RequestType = handler.RequestType.Name,
 			ResponseType = handler.ResponseType.Name,
-			HandlerParameters = handler.Parameters,
+
 			Behaviors = pipelineBehaviors,
 			HasMsDi = hasMsDi,
 		});

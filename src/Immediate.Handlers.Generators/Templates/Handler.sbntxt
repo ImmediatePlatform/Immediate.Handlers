@@ -64,7 +64,7 @@ partial class {{ class_name }}
 		public override async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
 		{
 			return await {{ class_fully_qualified_name }}
-				.HandleAsync(
+				.{{ method_name }}(
 					request,                
 					{{~ for parameter in handler_parameters ~}}
 					_{{ parameter.name }},

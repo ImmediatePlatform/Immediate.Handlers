@@ -9,7 +9,7 @@ public static partial class NoBehaviorParameterizedOneAdder
 {
 	public sealed record Query(int Input);
 
-	private static Task<int> HandleAsync(
+	private static Task<int> Handle(
 		Query query,
 		AddendProvider addendProvider,
 		CancellationToken _)

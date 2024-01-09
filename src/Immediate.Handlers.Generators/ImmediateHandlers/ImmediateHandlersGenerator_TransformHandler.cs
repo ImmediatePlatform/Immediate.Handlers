@@ -73,6 +73,8 @@ public partial class ImmediateHandlersGenerator
 			ClassName = name,
 			DisplayName = displayName,
 
+			MethodName = handleMethod.Name,
+
 			RequestType = requestType,
 			ResponseType = responseType,
 

@@ -35,10 +35,11 @@ public partial class ImmediateHandlersGenerator
 		public required string ClassName { get; init; }
 		public required string DisplayName { get; init; }
 
+		public required string MethodName { get; init; }
+		public required EquatableReadOnlyList<Parameter> Parameters { get; init; }
+
 		public required GenericType RequestType { get; init; }
 		public required GenericType ResponseType { get; init; }
-
-		public required EquatableReadOnlyList<Parameter> Parameters { get; init; }
 
 		public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
 		public RenderMode? OverrideRenderMode { get; init; }
