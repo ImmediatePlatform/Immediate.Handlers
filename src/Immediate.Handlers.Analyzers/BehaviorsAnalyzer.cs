@@ -47,7 +47,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		[
 			BehaviorsMustInheritFromBehavior,
 			BehaviorsMustHaveTwoGenericParameters,
-			BehaviorsMustUseUnboundGenerics
+			BehaviorsMustUseUnboundGenerics,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -107,7 +107,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			if (op is not ITypeOfOperation
 				{
 					TypeOperand: INamedTypeSymbol behaviorType,
-					Syntax: TypeOfExpressionSyntax toes
+					Syntax: TypeOfExpressionSyntax toes,
 				}
 			)
 			{

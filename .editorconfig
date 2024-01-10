@@ -30,6 +30,7 @@ trim_trailing_whitespace = false
 [*.cs]
 indent_size = 4
 tab_width = 4
+max_line_length = 150
 
 ## Dotnet code style settings:
 
@@ -219,6 +220,7 @@ resharper_align_multiline_binary_expressions_chain = false
 resharper_align_multiline_comments = false
 resharper_align_multiline_statement_conditions = false
 resharper_indent_raw_literal_string = do_not_change
+resharper_csharp_max_line_length = 150
 
 # Style Analytics
 dotnet_analyzer_diagnostic.category-Style.severity = warning

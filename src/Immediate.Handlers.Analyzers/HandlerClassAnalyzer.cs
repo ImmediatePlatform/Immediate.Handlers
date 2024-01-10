@@ -107,8 +107,9 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
 		}
 
-		if (namedTypeSymbol.GetMembers().OfType<INamedTypeSymbol>().FirstOrDefault(x => x.Name.EndsWith("Query", StringComparison.InvariantCultureIgnoreCase) || x.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase)) is not
-			{ })
+		if (namedTypeSymbol.GetMembers().OfType<INamedTypeSymbol>().FirstOrDefault(x =>
+			x.Name.EndsWith("Query", StringComparison.InvariantCultureIgnoreCase) ||
+			x.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase)) is null)
 		{
 			var mustDefineCommandOrQueryDiagnostic = Diagnostic.Create(
 				HandlerClassShouldDefineCommandOrQuery,
