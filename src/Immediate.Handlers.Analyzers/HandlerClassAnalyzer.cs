@@ -154,8 +154,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		var methodSymbolParams = methodSymbol.Parameters;
 		if (methodSymbolParams.Length < 2
-			|| (!methodSymbolParams[0].Type.ToString().Split('.').Last().EndsWith("Query", StringComparison.InvariantCultureIgnoreCase)
-				&& !methodSymbolParams[0].Type.ToString().Split('.').Last().EndsWith("Command", StringComparison.InvariantCultureIgnoreCase))
+			|| (!methodSymbolParams[0].Type.Name.EndsWith("Query", StringComparison.Ordinal)
+				&& !methodSymbolParams[0].Type.Name.EndsWith("Command", StringComparison.Ordinal))
 			|| methodSymbolParams.Last().Type.ToString() is not "System.Threading.CancellationToken")
 		{
 			var mustHaveTwoParameters = Diagnostic.Create(
