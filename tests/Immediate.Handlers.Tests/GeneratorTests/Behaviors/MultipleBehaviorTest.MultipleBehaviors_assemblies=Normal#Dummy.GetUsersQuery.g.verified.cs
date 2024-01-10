@@ -25,7 +25,10 @@ partial class GetUsersQuery
 			_behavior_2.SetInnerHandler(_behavior_1);
 		}
 	
-		public async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(global::Dummy.GetUsersQuery.Query request, global::System.Threading.CancellationToken cancellationToken = default)
+		public async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(
+			global::Dummy.GetUsersQuery.Query request,
+			global::System.Threading.CancellationToken cancellationToken = default
+		)
 		{
 			return await _behavior_2
 				.HandleAsync(request, cancellationToken)
@@ -45,7 +48,10 @@ partial class GetUsersQuery
 			_usersService = usersService;
 		}
 	
-		public override async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(global::Dummy.GetUsersQuery.Query request, global::System.Threading.CancellationToken cancellationToken)
+		public override async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(
+			global::Dummy.GetUsersQuery.Query request,
+			global::System.Threading.CancellationToken cancellationToken
+		)
 		{
 			return await global::Dummy.GetUsersQuery
 				.HandleAsync(

@@ -23,7 +23,10 @@ partial class GetUsersQuery
 			_behavior_1.SetInnerHandler(_behavior_0);
 		}
 	
-		public async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(global::Dummy.GetUsersQuery.Query request, global::System.Threading.CancellationToken cancellationToken = default)
+		public async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(
+			global::Dummy.GetUsersQuery.Query request,
+			global::System.Threading.CancellationToken cancellationToken = default
+		)
 		{
 			return await _behavior_1
 				.HandleAsync(request, cancellationToken)
@@ -43,7 +46,10 @@ partial class GetUsersQuery
 			_usersService = usersService;
 		}
 	
-		public override async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(global::Dummy.GetUsersQuery.Query request, global::System.Threading.CancellationToken cancellationToken)
+		public override async global::System.Threading.Tasks.Task<IEnumerable<global::Dummy.User>> HandleAsync(
+			global::Dummy.GetUsersQuery.Query request,
+			global::System.Threading.CancellationToken cancellationToken
+		)
 		{
 			return await global::Dummy.GetUsersQuery
 				.HandleAsync(
@@ -56,7 +62,9 @@ partial class GetUsersQuery
 	}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
+		global::Microsoft.Extensions.DependencyInjection.IServiceCollection services
+	)
 	{
 		services.AddScoped<global::Dummy.GetUsersQuery.Handler>();
 		services.AddScoped<global::Dummy.GetUsersQuery.HandleBehavior>();

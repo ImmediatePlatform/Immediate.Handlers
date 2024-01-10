@@ -37,7 +37,10 @@ partial class {{ class_name }}
 			{{~ end ~}}
 		}
 	
-		public async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken = default)
+		public async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync(
+			{{ request_type }} request,
+			global::System.Threading.CancellationToken cancellationToken = default
+		)
 		{
 			return await _behavior_{{ $length }}
 				.HandleAsync(request, cancellationToken)
@@ -63,7 +66,10 @@ partial class {{ class_name }}
 			{{~ end ~}}
 		}
 	
-		public override async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync({{ request_type }} request, global::System.Threading.CancellationToken cancellationToken)
+		public override async global::System.Threading.Tasks.Task<{{ response_type }}> HandleAsync(
+			{{ request_type }} request,
+			global::System.Threading.CancellationToken cancellationToken
+		)
 		{
 			return await {{ class_fully_qualified_name }}
 				.{{ method_name }}(
@@ -79,7 +85,9 @@ partial class {{ class_name }}
 	{{~ if has_ms_di ~}}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
+		global::Microsoft.Extensions.DependencyInjection.IServiceCollection services
+	)
 	{
 		services.AddScoped<{{ class_fully_qualified_name }}.Handler>();
 		services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
