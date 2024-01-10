@@ -88,8 +88,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 
 		var compilation = context.Compilation;
 		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(compilation.GetTypeByMetadataName("System.Type")!, 1);
-		if (array is null
-			|| !SymbolEqualityComparer.Default.Equals(array.Type, arrayTypeSymbol)
+		if (!SymbolEqualityComparer.Default.Equals(array.Type, arrayTypeSymbol)
 			|| array.ChildOperations.Count != 2
 			|| array.ChildOperations.ElementAt(1) is not IArrayInitializerOperation aio)
 		{

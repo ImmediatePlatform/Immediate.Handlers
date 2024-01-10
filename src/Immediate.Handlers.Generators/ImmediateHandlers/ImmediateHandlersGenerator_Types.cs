@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Shared;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
 
 public partial class ImmediateHandlersGenerator
@@ -43,7 +45,6 @@ public partial class ImmediateHandlersGenerator
 
 		public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
 		public RenderMode? OverrideRenderMode { get; init; }
-
 	}
 
 	[ExcludeFromCodeCoverage]

@@ -33,7 +33,8 @@ public class HandlerClassShouldDefineCommandOrQueryCodeFixProvider : CodeFixProv
 			context.RegisterCodeFix(
 				CodeAction.Create(
 					title: "Add Query record",
-					createChangedDocument: _ => AddCommandOrQueryRecordAsync(context.Document, root, classDeclarationSyntax, "Query"),
+					createChangedDocument: _ =>
+						AddCommandOrQueryRecordAsync(context.Document, root, classDeclarationSyntax, "Query"),
 					equivalenceKey: nameof(HandlerClassShouldDefineCommandOrQueryCodeFixProvider) + "Query"
 				),
 				diagnostic);
@@ -41,7 +42,8 @@ public class HandlerClassShouldDefineCommandOrQueryCodeFixProvider : CodeFixProv
 			context.RegisterCodeFix(
 				CodeAction.Create(
 					title: "Add Command record",
-					createChangedDocument: _ => AddCommandOrQueryRecordAsync(context.Document, root, classDeclarationSyntax, "Command"),
+					createChangedDocument: _ =>
+						AddCommandOrQueryRecordAsync(context.Document, root, classDeclarationSyntax, "Command"),
 					equivalenceKey: nameof(HandlerClassShouldDefineCommandOrQueryCodeFixProvider) + "Command"
 				),
 				diagnostic);
@@ -54,15 +56,15 @@ public class HandlerClassShouldDefineCommandOrQueryCodeFixProvider : CodeFixProv
 		string recordName)
 	{
 		var recordDeclaration = RecordDeclaration(
-					SyntaxKind.RecordDeclaration,
-					Token(SyntaxKind.RecordKeyword),
-					Identifier(recordName))
-				.WithModifiers(
-					TokenList(
-						Token(SyntaxKind.PublicKeyword)))
-				.WithSemicolonToken(
-					Token(SyntaxKind.SemicolonToken))
-				.NormalizeWhitespace()
+				SyntaxKind.RecordDeclaration,
+				Token(SyntaxKind.RecordKeyword),
+				Identifier(recordName))
+			.WithModifiers(
+				TokenList(
+					Token(SyntaxKind.PublicKeyword)))
+			.WithSemicolonToken(
+				Token(SyntaxKind.SemicolonToken))
+			.NormalizeWhitespace()
 			.WithAdditionalAnnotations(Formatter.Annotation);
 
 		var newMembers = new SyntaxList<MemberDeclarationSyntax>()
