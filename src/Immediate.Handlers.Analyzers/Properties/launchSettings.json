@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Normal": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..//..//Samples//Normal//Normal.csproj"
+    }
+  }
+}

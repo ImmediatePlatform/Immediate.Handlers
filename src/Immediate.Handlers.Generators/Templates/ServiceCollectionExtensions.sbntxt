@@ -1,0 +1,26 @@
+#pragma warning disable CS1591
+
+namespace Microsoft.Extensions.DependencyInjection;
+
+public static class HandlerServiceCollectionExtensions
+{
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddBehaviors(
+		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	{
+		{{~ for b in behaviors ~}}
+		services.AddScoped(typeof({{ b.registration_type }}));
+		{{~ end ~}}
+		
+		return services;
+	}
+
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
+		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	{
+		{{~ for h in handlers ~}}
+		{{ h }}.AddHandlers(services);
+		{{~ end ~}}
+		
+		return services;
+	}
+}

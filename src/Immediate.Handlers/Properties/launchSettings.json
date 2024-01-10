@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Immediate.Handlers.Samples": {
-      "commandName": "DebugRoslynComponent",
-      "targetProject": "..//..//Samples//Immediate.Handlers.Samples//Immediate.Handlers.Samples.csproj"
-    }
-  }
-}
