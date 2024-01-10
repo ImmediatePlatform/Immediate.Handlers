@@ -107,9 +107,13 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
 		}
 
-		if (namedTypeSymbol.GetMembers().OfType<INamedTypeSymbol>().FirstOrDefault(x =>
-			x.Name.EndsWith("Query", StringComparison.InvariantCultureIgnoreCase) ||
-			x.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase)) is null)
+		if (namedTypeSymbol.GetMembers()
+				.OfType<INamedTypeSymbol>()
+				.FirstOrDefault(x =>
+					x.Name.EndsWith("Query", StringComparison.Ordinal)
+					|| x.Name.EndsWith("Command", StringComparison.Ordinal)
+				) is null
+		)
 		{
 			var mustDefineCommandOrQueryDiagnostic = Diagnostic.Create(
 				HandlerClassShouldDefineCommandOrQuery,
