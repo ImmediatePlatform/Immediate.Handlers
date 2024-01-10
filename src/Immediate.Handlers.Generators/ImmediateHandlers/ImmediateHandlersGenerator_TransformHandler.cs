@@ -91,7 +91,10 @@ public partial class ImmediateHandlersGenerator
 			? ParseRenderMode(rma)
 			: null;
 
-	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(INamedTypeSymbol symbol, Compilation compilation, CancellationToken cancellationToken) =>
+	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(
+			INamedTypeSymbol symbol,
+			Compilation compilation,
+			CancellationToken cancellationToken) =>
 		symbol.GetAttribute("Immediate.Handlers.Shared.BehaviorsAttribute")
 				is { } ba
 			? ParseBehaviors(ba, compilation, cancellationToken)

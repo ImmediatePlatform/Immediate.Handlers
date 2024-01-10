@@ -15,7 +15,9 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var hasMsDi = context
 			.MetadataReferencesProvider
 			.Collect()
-			.Select((refs, _) => refs.Any(r => (r.Display ?? "").Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
+			.Select((refs, _) => refs
+				.Any(r => (r.Display ?? "")
+					.Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
 
 		var globalRenderMode = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
@@ -48,7 +50,13 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var template = GetTemplate("Handler");
 		context.RegisterSourceOutput(
 			handlerNodes,
-			(spc, node) => RenderHandler(spc, node.Left.Left, node.Left.Right, node.Right.Left, node.Right.Right, template)
+			(spc, node) => RenderHandler(
+				spc,
+				handler: node.Left.Left,
+				behaviors: node.Left.Right,
+				renderModes: node.Right.Left,
+				hasMsDi: node.Right.Right,
+				template)
 		);
 
 		var registrationNodes = handlers
@@ -59,7 +67,11 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		context.RegisterSourceOutput(
 			registrationNodes,
-			(spc, node) => RenderServiceCollectionExtension(spc, node.Left.Left, node.Left.Right, node.Right)
+			(spc, node) => RenderServiceCollectionExtension(
+				spc,
+				handlers: node.Left.Left,
+				behaviors: node.Left.Right,
+				hasDi: node.Right)
 		);
 	}
 
@@ -154,7 +166,10 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		context.AddSource($"{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
 	}
 
-	private static List<Behavior?> BuildPipeline(GenericType requestType, GenericType responseType, IEnumerable<Behavior?> enumerable) =>
+	private static List<Behavior?> BuildPipeline(
+			GenericType requestType,
+			GenericType responseType,
+			IEnumerable<Behavior?> enumerable) =>
 		enumerable
 			.Where(b => b is null || ValidateType(b.RequestType, requestType))
 			.Where(b => b is null || ValidateType(b.ResponseType, responseType))

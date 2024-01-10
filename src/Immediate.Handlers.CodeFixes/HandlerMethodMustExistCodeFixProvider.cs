@@ -44,7 +44,11 @@ public class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 		SyntaxNode root,
 		ClassDeclarationSyntax classDeclarationSyntax)
 	{
-		var requestType = classDeclarationSyntax.Members.OfType<RecordDeclarationSyntax>().FirstOrDefault(x => x.Identifier.Text.Contains("Query") || x.Identifier.Text.Contains("Command"));
+		var requestType = classDeclarationSyntax.Members
+			.OfType<RecordDeclarationSyntax>()
+			.FirstOrDefault(x =>
+				x.Identifier.Text.EndsWith("Query", StringComparison.Ordinal)
+				|| x.Identifier.Text.EndsWith("Command", StringComparison.Ordinal));
 
 		var methodDeclaration = MethodDeclaration(
 				GenericName(
