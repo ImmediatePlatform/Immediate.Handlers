@@ -10,12 +10,12 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 	private static readonly DiagnosticDescriptor HandlerMethodMustExist =
 		new(
 			id: DiagnosticIds.IHR0001HandlerMethodMustExist,
-			title: "Handler type should implement a HandleAsync method",
-			messageFormat: "Handler type '{0}' should implement a HandleAsync method",
+			title: "Handler type should implement a Handle/HandleAsync method",
+			messageFormat: "Handler type '{0}' should implement a Handle/HandleAsync method",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Classes annotated with a Handler attribute should implement a HandleAsync method."
+			description: "Classes annotated with a Handler attribute should implement a Handle/HandleAsync method."
 		);
 
 	private static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
@@ -37,7 +37,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "HandleAsync method must must take the request type as it's first parameter and a CancellationToken as it's last parameter."
+			description: "Handler method must must take the request type as its first parameter and a CancellationToken as its last parameter."
 		);
 
 	private static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
