@@ -239,5 +239,8 @@ dotnet_diagnostic.CA2007.severity = none                # CA2007: Consider calli
 # Immediate.Handlers relies on nested types
 dotnet_diagnostic.CA1034.severity = none                # CA1034: Nested types should not be visible
 
+# No need for cryptographically secure anything in this project
+dotnet_diagnostic.CA5394.severity = none                # CA5394: Random is an insecure random number generator
+
 # Dispose things need disposing
 dotnet_diagnostic.CA2000.severity = error               # CA2000: Dispose objects before losing scope
