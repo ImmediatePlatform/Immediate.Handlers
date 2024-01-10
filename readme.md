@@ -1,5 +1,4 @@
 # Immediate.Handlers
----
 
 [![NuGet](https://img.shields.io/nuget/v/Immediate.Handlers.svg?style=plastic)](https://www.nuget.org/packages/Immediate.Handlers/)
 [![GitHub release](https://img.shields.io/github/release/viceroypenguin/Immediate.Handlers.svg)](https://GitHub.com/viceroypenguin/Immediate.Handlers/releases/)
