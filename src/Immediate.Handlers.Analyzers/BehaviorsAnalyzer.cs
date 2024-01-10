@@ -35,11 +35,11 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0008BehaviorsMustUseUnboundGenerics,
 			title: "Behaviors must use unbound generics",
-			messageFormat: "Behavior type '{0}' must not use generic type arguments",
+			messageFormat: "Behavior type '{0}' must be a generic type without type arguments",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All behaviors must use the unbounded generic type, without type arguments."
+			description: "All behaviors must use a generic type without type arguments."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
@@ -137,8 +137,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 						originalDefinition.Name)
 				);
 			}
-
-			if (!behaviorType.IsUnboundGenericType)
+			else if (!behaviorType.IsUnboundGenericType)
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(
