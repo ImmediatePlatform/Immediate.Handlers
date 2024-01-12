@@ -160,7 +160,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 				);
 			}
 
-			if (!seenBehaviors.Add(behaviorType.ToString()))
+			if (!seenBehaviors.Add(originalDefinition.ToString()))
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(
