@@ -24,19 +24,6 @@ Handler methods must return a `Task<T>`
 | CodeFix  | False            |
 ---
 
-## IHR0003: Handler method must receive correct parameters
-
-Handler methods must receive a `TRequest` and a `CancellationToken` as parameters. Any services can be injected automatically
-by passing them in as parameters to the `HandleAsync` method of the handler class, between the `TRequest` and `CancellationToken` parameters.
-
-| Item     | Value            |
-|----------|------------------|
-| Category | ImmediateHandler |
-| Enabled  | True             |
-| Severity | Error            |
-| CodeFix  | False            |
----
-
 ## IHR0004: RenderMode attribute must be set to a valid RenderMode
 
 An invalid value on the `RenderMode` attribute on the assembly or a Handler is unsupported and will lead to compilation

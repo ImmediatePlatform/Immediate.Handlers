@@ -29,17 +29,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler methods must return a Task<T>."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerMethodMustReceiveCorrectParameters =
-		new(
-			id: DiagnosticIds.IHR0003HandlerMethodMustReceiveCorrectParameters,
-			title: "Handler method must receive correct parameters",
-			messageFormat: "Method '{0}' must receive the request (ending with Command or Query) and a CancellationToken",
-			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
-			isEnabledByDefault: true,
-			description: "Handler method must must take the request type as its first parameter and a CancellationToken as its last parameter."
-		);
-
 	private static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
 		new(
 			id: DiagnosticIds.IHR0005HandlerClassMustNotBeNested,
@@ -67,7 +56,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			[
 				HandlerMethodMustExist,
 				HandlerMethodMustReturnTask,
-				HandlerMethodMustReceiveCorrectParameters,
 				HandlerMustNotBeNestedInAnotherClass,
 				HandlerClassShouldDefineCommandOrQuery,
 			]);
@@ -150,21 +138,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			);
 
 			context.ReportDiagnostic(mustReturnTaskT);
-		}
-
-		var methodSymbolParams = methodSymbol.Parameters;
-		if (methodSymbolParams.Length < 2
-			|| (!methodSymbolParams[0].Type.Name.EndsWith("Query", StringComparison.Ordinal)
-				&& !methodSymbolParams[0].Type.Name.EndsWith("Command", StringComparison.Ordinal))
-			|| methodSymbolParams.Last().Type.ToString() is not "System.Threading.CancellationToken")
-		{
-			var mustHaveTwoParameters = Diagnostic.Create(
-				HandlerMethodMustReceiveCorrectParameters,
-				methodSymbol.Locations[0],
-				methodSymbol.Name
-			);
-
-			context.ReportDiagnostic(mustHaveTwoParameters);
 		}
 	}
 }
