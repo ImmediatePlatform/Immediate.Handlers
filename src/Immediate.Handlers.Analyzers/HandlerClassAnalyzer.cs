@@ -29,17 +29,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler methods must return a Task<T>."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerMethodMustReceiveCorrectParameters =
-		new(
-			id: DiagnosticIds.IHR0003HandlerMethodMustReceiveCorrectParameters,
-			title: "Handler method must receive correct parameters",
-			messageFormat: "Method '{0}' must receive the request (ending with Command or Query) and a CancellationToken",
-			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
-			isEnabledByDefault: true,
-			description: "Handler method must must take the request type as its first parameter and a CancellationToken as its last parameter."
-		);
-
 	private static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
 		new(
 			id: DiagnosticIds.IHR0005HandlerClassMustNotBeNested,
@@ -51,25 +40,12 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler class must not be nested in another type."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerClassShouldDefineCommandOrQuery =
-		new(
-			id: DiagnosticIds.IHR0009HandlerClassShouldDefineCommandOrQuery,
-			title: "Handler class should define a Command or Query type",
-			messageFormat: "Handler '{0}' should define a Command or Query type",
-			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Warning,
-			isEnabledByDefault: true,
-			description: "Handler class should define a Command or Query type."
-		);
-
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 			[
 				HandlerMethodMustExist,
 				HandlerMethodMustReturnTask,
-				HandlerMethodMustReceiveCorrectParameters,
 				HandlerMustNotBeNestedInAnotherClass,
-				HandlerClassShouldDefineCommandOrQuery,
 			]);
 
 	public override void Initialize(AnalysisContext context)
@@ -107,23 +83,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
 		}
 
-		if (namedTypeSymbol.GetMembers()
-				.OfType<INamedTypeSymbol>()
-				.FirstOrDefault(x =>
-					x.Name.EndsWith("Query", StringComparison.Ordinal)
-					|| x.Name.EndsWith("Command", StringComparison.Ordinal)
-				) is null
-		)
-		{
-			var mustDefineCommandOrQueryDiagnostic = Diagnostic.Create(
-				HandlerClassShouldDefineCommandOrQuery,
-				namedTypeSymbol.Locations[0],
-				namedTypeSymbol.Name
-			);
-
-			context.ReportDiagnostic(mustDefineCommandOrQueryDiagnostic);
-		}
-
 		if (namedTypeSymbol
 				.GetMembers()
 				.OfType<IMethodSymbol>()
@@ -150,21 +109,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			);
 
 			context.ReportDiagnostic(mustReturnTaskT);
-		}
-
-		var methodSymbolParams = methodSymbol.Parameters;
-		if (methodSymbolParams.Length < 2
-			|| (!methodSymbolParams[0].Type.Name.EndsWith("Query", StringComparison.Ordinal)
-				&& !methodSymbolParams[0].Type.Name.EndsWith("Command", StringComparison.Ordinal))
-			|| methodSymbolParams.Last().Type.ToString() is not "System.Threading.CancellationToken")
-		{
-			var mustHaveTwoParameters = Diagnostic.Create(
-				HandlerMethodMustReceiveCorrectParameters,
-				methodSymbol.Locations[0],
-				methodSymbol.Name
-			);
-
-			context.ReportDiagnostic(mustHaveTwoParameters);
 		}
 	}
 }

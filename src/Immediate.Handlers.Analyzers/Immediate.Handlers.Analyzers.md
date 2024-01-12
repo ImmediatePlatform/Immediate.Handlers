@@ -24,19 +24,6 @@ Handler methods must return a `Task<T>`
 | CodeFix  | False            |
 ---
 
-## IHR0003: Handler method must receive correct parameters
-
-Handler methods must receive a `TRequest` and a `CancellationToken` as parameters. Any services can be injected automatically
-by passing them in as parameters to the `HandleAsync` method of the handler class, between the `TRequest` and `CancellationToken` parameters.
-
-| Item     | Value            |
-|----------|------------------|
-| Category | ImmediateHandler |
-| Enabled  | True             |
-| Severity | Error            |
-| CodeFix  | False            |
----
-
 ## IHR0004: RenderMode attribute must be set to a valid RenderMode
 
 An invalid value on the `RenderMode` attribute on the assembly or a Handler is unsupported and will lead to compilation
@@ -63,18 +50,6 @@ it is not supported for now.
 | Enabled  | True             |
 | Severity | Error            |
 | CodeFix  | False            |
----
-
-## IHR0009: Handler class should define a Command or Query record
-
-Handler classes should define a Command or Query record, which will be used as the request type for the handler. 
-
-| Item     | Value            |
-|----------|------------------|
-| Category | ImmediateHandler |
-| Enabled  | True             |
-| Severity | Warning          |
-| CodeFix  | True             |
 ---
 
 ## IHR0006: Behaviors must inherit from `Behavior<,>`
