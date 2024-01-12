@@ -89,3 +89,15 @@ introduce inconsistencies in connecting multiple behaviors in a pipeline.
 |Severity|Error|
 |CodeFix|False|
 ---
+
+## IHR0010: Behaviors must not be repeated in a pipeline
+
+Behaviors are not reentrant, and must not be specified more than once in a single pipeline. 
+
+|Item|Value|
+|-|-|
+|Category|ImmediateHandler|
+|Enabled|True|
+|Severity|Error|
+|CodeFix|False|
+---

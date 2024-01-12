@@ -42,12 +42,24 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			description: "All behaviors must use a generic type without type arguments."
 		);
 
+	private static readonly DiagnosticDescriptor BehaviorsMustNotBeRepeated =
+		new(
+			id: DiagnosticIds.IHR0010BehaviorsMustNotBeRepeated,
+			title: "Behaviors must not be repeated",
+			messageFormat: "Behavior type '{0}' must be used only once",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Behaviors may not be used more than once in a single pipeline."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create<DiagnosticDescriptor>(
 		[
 			BehaviorsMustInheritFromBehavior,
 			BehaviorsMustHaveTwoGenericParameters,
 			BehaviorsMustUseUnboundGenerics,
+			BehaviorsMustNotBeRepeated,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -101,6 +113,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		if (baseBehaviorSymbol is null)
 			return;
 
+		var seenBehaviors = new HashSet<string>();
 		foreach (var op in aio.ChildOperations)
 		{
 			token.ThrowIfCancellationRequested();
@@ -142,6 +155,16 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 				context.ReportDiagnostic(
 					Diagnostic.Create(
 						BehaviorsMustUseUnboundGenerics,
+						location,
+						originalDefinition.Name)
+				);
+			}
+
+			if (!seenBehaviors.Add(behaviorType.ToString()))
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						BehaviorsMustNotBeRepeated,
 						location,
 						originalDefinition.Name)
 				);

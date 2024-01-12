@@ -12,3 +12,4 @@ IHR0005 | ImmediateHandler | Error    | HandlerClassAnalyzer
 IHR0006 | ImmediateHandler | Error    | BehaviorsAnalyzer
 IHR0007 | ImmediateHandler | Error    | BehaviorsAnalyzer
 IHR0008 | ImmediateHandler | Error    | BehaviorsAnalyzer
+IHR0010 | ImmediateHandler | Error    | BehaviorsAnalyzer
