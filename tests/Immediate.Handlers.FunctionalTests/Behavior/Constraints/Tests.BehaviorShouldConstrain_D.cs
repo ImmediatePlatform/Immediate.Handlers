@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -8,8 +7,7 @@ namespace Immediate.Handlers.FunctionalTests.Behavior.Constraints;
 
 [Handler]
 [Behaviors(typeof(BehaviorA<,>), typeof(BehaviorB<,>), typeof(BehaviorC<,>), typeof(BehaviorD<,>))]
-[SuppressMessage("Naming", "CA1707", Justification = "Test names.")]
-public static partial class BehaviorShouldConstrain_D_Adder
+public static partial class BehaviorShouldConstrainD
 {
 	public sealed record Query(int Input) : D;
 
@@ -28,10 +26,10 @@ public sealed partial class Tests
 	{
 		IServiceCollection services = new ServiceCollection();
 		services = ConfigureBehaviors(services);
-		services = BehaviorShouldConstrain_D_Adder.AddHandlers(services);
+		services = BehaviorShouldConstrainD.AddHandlers(services);
 		var serviceProvider = services.BuildServiceProvider();
 
-		var handler = ActivatorUtilities.CreateInstance<BehaviorShouldConstrain_D_Adder.Handler>(serviceProvider);
+		var handler = ActivatorUtilities.CreateInstance<BehaviorShouldConstrainD.Handler>(serviceProvider);
 		_ = await handler.HandleAsync(new(1));
 
 		var behaviorWalker = serviceProvider.GetRequiredService<BehaviorWalker>();
