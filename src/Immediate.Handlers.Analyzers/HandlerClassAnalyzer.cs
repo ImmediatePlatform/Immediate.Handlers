@@ -40,24 +40,12 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler class must not be nested in another type."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerClassShouldDefineCommandOrQuery =
-		new(
-			id: DiagnosticIds.IHR0009HandlerClassShouldDefineCommandOrQuery,
-			title: "Handler class should define a Command or Query type",
-			messageFormat: "Handler '{0}' should define a Command or Query type",
-			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Warning,
-			isEnabledByDefault: true,
-			description: "Handler class should define a Command or Query type."
-		);
-
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 			[
 				HandlerMethodMustExist,
 				HandlerMethodMustReturnTask,
 				HandlerMustNotBeNestedInAnotherClass,
-				HandlerClassShouldDefineCommandOrQuery,
 			]);
 
 	public override void Initialize(AnalysisContext context)
@@ -93,23 +81,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			);
 
 			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
-		}
-
-		if (namedTypeSymbol.GetMembers()
-				.OfType<INamedTypeSymbol>()
-				.FirstOrDefault(x =>
-					x.Name.EndsWith("Query", StringComparison.Ordinal)
-					|| x.Name.EndsWith("Command", StringComparison.Ordinal)
-				) is null
-		)
-		{
-			var mustDefineCommandOrQueryDiagnostic = Diagnostic.Create(
-				HandlerClassShouldDefineCommandOrQuery,
-				namedTypeSymbol.Locations[0],
-				namedTypeSymbol.Name
-			);
-
-			context.ReportDiagnostic(mustDefineCommandOrQueryDiagnostic);
 		}
 
 		if (namedTypeSymbol

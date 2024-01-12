@@ -52,18 +52,6 @@ it is not supported for now.
 | CodeFix  | False            |
 ---
 
-## IHR0009: Handler class should define a Command or Query record
-
-Handler classes should define a Command or Query record, which will be used as the request type for the handler. 
-
-| Item     | Value            |
-|----------|------------------|
-| Category | ImmediateHandler |
-| Enabled  | True             |
-| Severity | Warning          |
-| CodeFix  | True             |
----
-
 ## IHR0006: Behaviors must inherit from `Behavior<,>`
 
 In order to be properly called as part of a pipeline, a behavior must inherit from the `Behavior<,>` class.
