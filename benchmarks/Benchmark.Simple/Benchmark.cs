@@ -39,10 +39,10 @@ public sealed partial class SomeHandlerClass
 	) => TResponse;
 
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
-	private static Task<SomeResponse> HandleAsync(
+	private static ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => TResponse;
+	) => VtResponse;
 }
 
 [MemoryDiagnoser]
@@ -99,7 +99,7 @@ public class RequestBenchmarks
 	}
 
 	[Benchmark]
-	public Task<SomeResponse> SendRequest_ImmediateHandler()
+	public ValueTask<SomeResponse> SendRequest_ImmediateHandler()
 	{
 		return _immediateHandler!.HandleAsync(_request!, CancellationToken.None);
 	}

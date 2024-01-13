@@ -18,10 +18,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\Immediate.Handlers.Analyzers\Immediate.Handlers.Analyzers.csproj" OutputItemType="Analyzer" />
-	  <ProjectReference Include="..\..\src\Immediate.Handlers.CodeFixes\Immediate.Handlers.CodeFixes.csproj" OutputItemType="Analyzer" />
-	  <ProjectReference Include="..\..\src\Immediate.Handlers.Generators\Immediate.Handlers.Generators.csproj" OutputItemType="Analyzer" />
-	  <ProjectReference Include="..\..\src\Immediate.Handlers.Shared\Immediate.Handlers.Shared.csproj" />
+		<ProjectReference Include="..\..\src\Immediate.Handlers.Analyzers\Immediate.Handlers.Analyzers.csproj" OutputItemType="Analyzer" />
+		<ProjectReference Include="..\..\src\Immediate.Handlers.CodeFixes\Immediate.Handlers.CodeFixes.csproj" OutputItemType="Analyzer" />
+		<ProjectReference Include="..\..\src\Immediate.Handlers.Generators\Immediate.Handlers.Generators.csproj" OutputItemType="Analyzer" />
+		<ProjectReference Include="..\..\src\Immediate.Handlers.Shared\Immediate.Handlers.Shared.csproj" />
 	</ItemGroup>
 
 </Project>
