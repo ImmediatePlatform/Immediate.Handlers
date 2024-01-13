@@ -3,5 +3,5 @@
 using BenchmarkDotNet.Running;
 using Immediate.Handlers.Benchmarks;
 
-BenchmarkRunner.Run<Benchmark>();
+BenchmarkRunner.Run<RequestBenchmarks>();
 
