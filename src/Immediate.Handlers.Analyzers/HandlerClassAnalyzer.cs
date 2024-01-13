@@ -85,6 +85,9 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	private static void AnalyzeSymbol(SymbolAnalysisContext context)
 	{
+		var token = context.CancellationToken;
+		token.ThrowIfCancellationRequested();
+
 		if (context.Symbol is not INamedTypeSymbol namedTypeSymbol)
 			return;
 
@@ -96,6 +99,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			return;
 		}
 
+		token.ThrowIfCancellationRequested();
 		if (namedTypeSymbol.ContainingType is not null)
 		{
 			context.ReportDiagnostic(
@@ -123,46 +127,50 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			return;
 		}
 
-		if (!methods.Any(m => m.IsStatic))
+		token.ThrowIfCancellationRequested();
+		switch (methods.Where(m => m.IsStatic).ToList())
 		{
-			foreach (var method in methods)
+			case { Count: var cnt and not 1 }:
 			{
-				context.ReportDiagnostic(
-					Diagnostic.Create(
-						HandlerMethodMustBeStatic,
-						method.Locations[0],
-						method.Name)
-				);
+				token.ThrowIfCancellationRequested();
+
+				var diagnostic = cnt == 0
+					? HandlerMethodMustBeStatic
+					: HandlerMethodMustBeUnique;
+
+				foreach (var method in methods)
+				{
+					context.ReportDiagnostic(
+						Diagnostic.Create(
+							diagnostic,
+							method.Locations[0],
+							method.Name)
+					);
+				}
+
+				break;
 			}
 
-			return;
-		}
-
-		methods = methods.Where(m => m.IsStatic).ToList();
-		if (methods is not [var methodSymbol])
-		{
-			foreach (var method in methods)
+			case [var methodSymbol]:
 			{
-				context.ReportDiagnostic(
-					Diagnostic.Create(
-						HandlerMethodMustBeUnique,
-						method.Locations[0],
-						method.Name)
-				);
+				token.ThrowIfCancellationRequested();
+				if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol
+					&& returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.ValueTask<TResult>")
+				{
+					context.ReportDiagnostic(
+						Diagnostic.Create(
+							HandlerMethodMustReturnTask,
+							methodSymbol.Locations[0],
+							methodSymbol.Name)
+					);
+				}
+
+				break;
 			}
 
-			return;
-		}
-
-		if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol
-			&& returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.ValueTask<TResult>")
-		{
-			context.ReportDiagnostic(
-				Diagnostic.Create(
-					HandlerMethodMustReturnTask,
-					methodSymbol.Locations[0],
-					methodSymbol.Name)
-			);
+			default:
+				// should never happen - all count cases are covered above
+				break;
 		}
 	}
 }
