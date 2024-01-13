@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task HandlerClassNotNested_DoesNotAlert() =>
+	public async Task HandleMethodIsNotStatic_AlertDiagnostic() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -20,17 +20,38 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static class GetUsersQuery
+			public class GetUsersQuery
 			{
 				public record Query;
-
-				private static Task<int> HandleAsync(
+			
+				private IEnumerable<User>? {|IHR0009:Handle|}(
 					Query _,
+					UsersService usersService,
 					CancellationToken token)
 				{
-					return Task.FromResult(0);
+					return null;
+				}
+			
+				private IEnumerable<User>? {|IHR0009:HandleAsync|}(
+					Query _,
+					UsersService usersService,
+					CancellationToken token)
+				{
+					return null;
+				}
+						}
+
+			public class User { }
+			public class UsersService(ILogger<UsersService> logger)
+			{
+				public Task<IEnumerable<User>> GetUsers()
+				{
+					_ = logger.ToString();
+					return Task.FromResult(Enumerable.Empty<User>());
 				}
 			}
+
+			public interface ILogger<T>;
 			""",
 			DriverReferenceAssemblies.Normal,
 			[]
