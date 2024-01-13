@@ -21,12 +21,12 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 	private static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
 		new(
 			id: DiagnosticIds.IHR0002HandlerMethodMustReturnTask,
-			title: "Handler method must return a Task<T>",
-			messageFormat: "Method '{0}' must return a Task<T>",
+			title: "Handler method must return a ValueTask<T>",
+			messageFormat: "Method '{0}' must return a ValueTask<T>",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handler methods must return a Task<T>."
+			description: "Handler methods must return a ValueTask<T>."
 		);
 
 	private static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
@@ -155,7 +155,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		}
 
 		if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol
-			&& returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.Task<TResult>")
+			&& returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.ValueTask<TResult>")
 		{
 			context.ReportDiagnostic(
 				Diagnostic.Create(

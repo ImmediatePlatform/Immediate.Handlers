@@ -41,9 +41,9 @@ public partial class Tests
 			{
 				public record Query;
 
-				private static Task<int> HandleAsync(Query _, CancellationToken token)
+				private static ValueTask<int> HandleAsync(Query _, CancellationToken token)
 				{
-					return null;
+					return default;
 				}
 			}
 			""",

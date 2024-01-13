@@ -42,7 +42,7 @@ public partial class ImmediateHandlersGenerator
 		var requestType = BuildGenericType((INamedTypeSymbol)handleMethod.Parameters[0].Type);
 
 		var compilation = context.SemanticModel.Compilation;
-		var taskSymbol = compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1")!;
+		var taskSymbol = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1")!;
 
 		cancellationToken.ThrowIfCancellationRequested();
 		var responseTypeSymbol = handleMethod.GetTaskReturnType(taskSymbol);

@@ -44,10 +44,10 @@ public partial class Tests
 			public class User { }
 			public class UsersService(ILogger<UsersService> logger)
 			{
-				public Task<IEnumerable<User>> GetUsers()
+				public ValueTask<IEnumerable<User>> GetUsers()
 				{
 					_ = logger.ToString();
-					return Task.FromResult(Enumerable.Empty<User>());
+					return ValueTask.FromResult(Enumerable.Empty<User>());
 				}
 			}
 

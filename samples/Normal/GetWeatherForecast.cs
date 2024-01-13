@@ -26,7 +26,7 @@ public static partial class GetWeatherForecast
 		public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 	}
 
-	private static Task<IEnumerable<Response>> HandleAsync(
+	private static ValueTask<IEnumerable<Response>> HandleAsync(
 		Query _,
 		CancellationToken token
 	)
@@ -43,6 +43,6 @@ public static partial class GetWeatherForecast
 				)
 			);
 
-		return Task.FromResult(forecast);
+		return ValueTask.FromResult(forecast);
 	}
 }

@@ -47,7 +47,7 @@ public abstract class Behavior<TRequest, TResponse>
 	///	    A <see cref="Task{TResult}"/> representing a promise to return a <typeparamref name="TResponse"/> from the
 	///	    next entry in the pipeline.
 	/// </returns>
-	protected Task<TResponse> Next(TRequest request, CancellationToken cancellationToken)
+	protected ValueTask<TResponse> Next(TRequest request, CancellationToken cancellationToken)
 	{
 		if (_innerHandler == null)
 			ThrowException("`_innerHandler` must be set before calling `Next()`");
@@ -67,5 +67,5 @@ public abstract class Behavior<TRequest, TResponse>
 	/// <returns>
 	///	    A <see cref="Task{TResult}"/> representing a promise to return a <typeparamref name="TResponse"/>.
 	/// </returns>
-	public abstract Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
+	public abstract ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
 }

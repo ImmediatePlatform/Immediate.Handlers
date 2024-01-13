@@ -6,4 +6,8 @@
 		<NoWarn>$(NoWarn);CA1716</NoWarn>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="System.Threading.Tasks.Extensions" />
+	</ItemGroup>
+
 </Project>
