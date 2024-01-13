@@ -6,6 +6,24 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Immediate.Handlers.Benchmarks;
 
+public sealed class DirectTimingBehavior(
+	SomeHandlerClass handler
+)
+{
+	private TimeSpan _elapsed;
+
+	public async ValueTask<SomeResponse> HandleAsync(
+		SomeRequest request,
+		CancellationToken cancellationToken
+	)
+	{
+		var sw = Stopwatch.StartNew();
+		var response = await handler.Handle(request, cancellationToken);
+		_elapsed = sw.Elapsed;
+		return response;
+	}
+}
+
 public sealed class IhTimingBehavior<TRequest, TResponse>
 	: Behavior<TRequest, TResponse>
 {
@@ -118,7 +136,7 @@ public class RequestBenchmarks
 	private Mediator.Mediator? _concreteMediator;
 	private MediatR.IMediator? _mediatr;
 	private SomeHandlerClass.Handler? _immediateHandler;
-	private SomeHandlerClass? _handler;
+	private DirectTimingBehavior? _handler;
 	private SomeRequest? _request;
 
 	[GlobalSetup]
@@ -132,10 +150,22 @@ public class RequestBenchmarks
 		_ = services.AddBehaviors();
 
 		_ = services.AddMediator(opts => opts.ServiceLifetime = ServiceLifetime.Scoped);
+		_ = services.AddScoped(
+			typeof(Mediator.IPipelineBehavior<,>),
+			typeof(MTimingBehavior<,>)
+		);
+
 		_ = services.AddMediatR(
 			cfg => cfg.RegisterServicesFromAssemblyContaining(
 				typeof(SomeRequest))
 		);
+		_ = services.AddScoped(
+			typeof(MediatR.IPipelineBehavior<,>),
+			typeof(MTimingBehavior<,>)
+		);
+
+		_ = services.AddScoped<DirectTimingBehavior>();
+		_ = services.AddScoped<SomeHandlerClass>();
 
 		_serviceProvider = services.BuildServiceProvider();
 
@@ -146,7 +176,7 @@ public class RequestBenchmarks
 		_concreteMediator = _serviceProvider.GetRequiredService<Mediator.Mediator>();
 		_mediatr = _serviceProvider.GetRequiredService<MediatR.IMediator>();
 		_immediateHandler = _serviceProvider.GetRequiredService<SomeHandlerClass.Handler>();
-		_handler = _serviceProvider.GetRequiredService<SomeHandlerClass>();
+		_handler = _serviceProvider.GetRequiredService<DirectTimingBehavior>();
 		_request = new(Guid.NewGuid());
 	}
 
@@ -186,6 +216,6 @@ public class RequestBenchmarks
 	[Benchmark(Baseline = true)]
 	public ValueTask<SomeResponse> SendRequest_Baseline()
 	{
-		return _handler!.Handle(_request!, CancellationToken.None);
+		return _handler!.HandleAsync(_request!, CancellationToken.None);
 	}
 }

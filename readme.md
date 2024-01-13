@@ -179,10 +179,10 @@ This benchmark tests the various mediator implementations in the face of 999 req
 
 This benchmark tests a more realistic scenario of using 1 behavior and 1 service.
 
-| Method                       | Mean     | Error    | StdDev   | Ratio | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
-|----------------------------- |---------:|---------:|---------:|------:|--------:|-----:|-------:|----------:|------------:|
-| SendRequest_Baseline         | 11.38 ns | 0.047 ns | 0.044 ns |  1.00 |    0.00 |    1 |      - |         - |          NA |
-| SendRequest_Mediator         | 33.32 ns | 0.092 ns | 0.086 ns |  2.93 |    0.01 |    2 |      - |         - |          NA |
-| SendRequest_IMediator        | 36.18 ns | 0.164 ns | 0.146 ns |  3.18 |    0.01 |    3 |      - |         - |          NA |
-| SendRequest_ImmediateHandler | 78.74 ns | 0.322 ns | 0.301 ns |  6.92 |    0.04 |    4 | 0.0031 |      40 B |          NA |
-| SendRequest_MediatR          | 97.57 ns | 1.471 ns | 1.304 ns |  8.57 |    0.12 |    5 | 0.0248 |     312 B |          NA |
+| Method                       | Mean      | Error    | StdDev   | Ratio | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
+|----------------------------- |----------:|---------:|---------:|------:|--------:|-----:|-------:|----------:|------------:|
+| SendRequest_Baseline         |  54.90 ns | 0.177 ns | 0.166 ns |  1.00 |    0.00 |    1 | 0.0032 |      40 B |        1.00 |
+| SendRequest_ImmediateHandler |  78.11 ns | 0.286 ns | 0.268 ns |  1.42 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_Mediator         |  96.94 ns | 0.268 ns | 0.224 ns |  1.77 |    0.01 |    3 | 0.0031 |      40 B |        1.00 |
+| SendRequest_IMediator        | 106.64 ns | 0.588 ns | 0.550 ns |  1.94 |    0.01 |    4 | 0.0031 |      40 B |        1.00 |
+| SendRequest_MediatR          | 198.24 ns | 0.860 ns | 0.718 ns |  3.61 |    0.02 |    5 | 0.0446 |     560 B |       14.00 |
