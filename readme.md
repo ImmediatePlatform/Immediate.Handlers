@@ -163,3 +163,15 @@ This benchmark tests the various mediator implementations with a single request/
 | SendRequest_IMediator        | 31.2996 ns | 0.0943 ns | 0.0882 ns | 33.65 |    0.43 |    4 |      - |         - |          NA |
 | SendRequest_MediatR          | 74.5688 ns | 1.1917 ns | 1.0564 ns | 80.12 |    1.77 |    5 | 0.0191 |     240 B |          NA |
 
+#### [Benchmarks.Large](./Benchmarks/Benchmark.Large)
+
+This benchmark tests the various mediator implementations in the face of 999 request/response handlers.
+
+| Method                       | Mean        | Error     | StdDev    | Ratio  | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
+|----------------------------- |------------:|----------:|----------:|-------:|--------:|-----:|-------:|----------:|------------:|
+| SendRequest_Baseline         |   0.9190 ns | 0.0272 ns | 0.0254 ns |   1.00 |    0.00 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateHandler |  15.4860 ns | 0.0990 ns | 0.0827 ns |  16.87 |    0.49 |    2 |      - |         - |          NA |
+| SendRequest_Mediator         |  27.7373 ns | 0.4364 ns | 0.4082 ns |  30.21 |    1.04 |    3 |      - |         - |          NA |
+| SendRequest_MediatR          |  79.6346 ns | 0.5683 ns | 0.4746 ns |  86.77 |    2.31 |    4 | 0.0191 |     240 B |          NA |
+| SendRequest_IMediator        | 429.8377 ns | 7.4163 ns | 6.9372 ns | 468.07 |   15.50 |    5 |      - |         - |          NA |
+
