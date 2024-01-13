@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Immediate.Handlers.Shared;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
@@ -10,10 +11,24 @@ public partial class ImmediateHandlersGenerator
 	[ExcludeFromCodeCoverage]
 	private sealed record Behavior
 	{
+		private string? _registrationTypeAsIdentifier;
+
 		public required string RegistrationType { get; init; }
 		public required string NonGenericTypeName { get; init; }
 		public required string? RequestType { get; init; }
 		public required string? ResponseType { get; init; }
+
+		public string? RegistrationTypeAsIdentifier
+		{
+			get => _registrationTypeAsIdentifier ??=
+				new StringBuilder(RegistrationType)
+					.Replace("<,>", string.Empty, RegistrationType.Length - 3, 3)
+					.Replace("global::", string.Empty, 0, 8)
+					.Replace(".", string.Empty)
+					.ToString();
+
+			init => _registrationTypeAsIdentifier = value;
+		}
 	}
 
 	[ExcludeFromCodeCoverage]
