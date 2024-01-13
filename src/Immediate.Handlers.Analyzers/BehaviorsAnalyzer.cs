@@ -9,6 +9,17 @@ namespace Immediate.Handlers.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 {
+	private static readonly DiagnosticDescriptor BehaviorsMustNotBeRepeated =
+		new(
+			id: DiagnosticIds.IHR0003BehaviorsMustNotBeRepeated,
+			title: "Behaviors must not be repeated",
+			messageFormat: "Behavior type '{0}' must be used only once",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Behaviors may not be used more than once in a single pipeline."
+		);
+
 	private static readonly DiagnosticDescriptor BehaviorsMustInheritFromBehavior =
 		new(
 			id: DiagnosticIds.IHR0006BehaviorsMustInheritFromBehavior,
@@ -42,24 +53,13 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			description: "All behaviors must use a generic type without type arguments."
 		);
 
-	private static readonly DiagnosticDescriptor BehaviorsMustNotBeRepeated =
-		new(
-			id: DiagnosticIds.IHR0010BehaviorsMustNotBeRepeated,
-			title: "Behaviors must not be repeated",
-			messageFormat: "Behavior type '{0}' must be used only once",
-			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
-			isEnabledByDefault: true,
-			description: "Behaviors may not be used more than once in a single pipeline."
-		);
-
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create<DiagnosticDescriptor>(
 		[
+			BehaviorsMustNotBeRepeated,
 			BehaviorsMustInheritFromBehavior,
 			BehaviorsMustHaveTwoGenericParameters,
 			BehaviorsMustUseUnboundGenerics,
-			BehaviorsMustNotBeRepeated,
 		]);
 
 	public override void Initialize(AnalysisContext context)

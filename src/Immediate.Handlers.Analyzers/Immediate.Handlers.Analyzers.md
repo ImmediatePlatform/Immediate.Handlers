@@ -24,6 +24,18 @@ Handler methods must return a `Task<T>`
 | CodeFix  | False            |
 ---
 
+## IHR0003: Behaviors must not be repeated in a pipeline
+
+Behaviors are not reentrant, and must not be specified more than once in a single pipeline. 
+
+|Item|Value|
+|-|-|
+|Category|ImmediateHandler|
+|Enabled|True|
+|Severity|Error|
+|CodeFix|False|
+---
+
 ## IHR0004: RenderMode attribute must be set to a valid RenderMode
 
 An invalid value on the `RenderMode` attribute on the assembly or a Handler is unsupported and will lead to compilation
@@ -81,18 +93,6 @@ possible to bind the behavior to the target request and response types.
 
 Behaviors must be referenced using the unbound generic syntax. Referencing a generic type using a specific type will
 introduce inconsistencies in connecting multiple behaviors in a pipeline. 
-
-|Item|Value|
-|-|-|
-|Category|ImmediateHandler|
-|Enabled|True|
-|Severity|Error|
-|CodeFix|False|
----
-
-## IHR0010: Behaviors must not be repeated in a pipeline
-
-Behaviors are not reentrant, and must not be specified more than once in a single pipeline. 
 
 |Item|Value|
 |-|-|

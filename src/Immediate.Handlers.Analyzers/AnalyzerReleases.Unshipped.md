@@ -7,9 +7,9 @@ Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
 IHR0001 | ImmediateHandler | Error    | HandlerClassAnalyzer
 IHR0002 | ImmediateHandler | Error    | HandlerClassAnalyzer
+IHR0003 | ImmediateHandler | Error    | BehaviorsAnalyzer
 IHR0004 | ImmediateHandler | Error    | RenderModeAnalyzer
 IHR0005 | ImmediateHandler | Error    | HandlerClassAnalyzer
 IHR0006 | ImmediateHandler | Error    | BehaviorsAnalyzer
 IHR0007 | ImmediateHandler | Error    | BehaviorsAnalyzer
 IHR0008 | ImmediateHandler | Error    | BehaviorsAnalyzer
-IHR0010 | ImmediateHandler | Error    | BehaviorsAnalyzer
