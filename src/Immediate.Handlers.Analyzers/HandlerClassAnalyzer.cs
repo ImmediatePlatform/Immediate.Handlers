@@ -40,12 +40,36 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler class must not be nested in another type."
 		);
 
+	private static readonly DiagnosticDescriptor HandlerMethodMustBeStatic =
+		new(
+			id: DiagnosticIds.IHR0009HandlerMethodMustBeStatic,
+			title: "Handler method must be static",
+			messageFormat: "Method '{0}' must be static",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Handler method must be static."
+		);
+
+	private static readonly DiagnosticDescriptor HandlerMethodMustBeUnique =
+		new(
+			id: DiagnosticIds.IHR0010HandlerMethodMustBeUnique,
+			title: "Handler method must be unique",
+			messageFormat: "Method '{0}' must not conflict with another static handler method",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Static handler method must be static."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 			[
 				HandlerMethodMustExist,
 				HandlerMethodMustReturnTask,
 				HandlerMustNotBeNestedInAnotherClass,
+				HandlerMethodMustBeStatic,
+				HandlerMethodMustBeUnique,
 			]);
 
 	public override void Initialize(AnalysisContext context)
@@ -74,41 +98,71 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		if (namedTypeSymbol.ContainingType is not null)
 		{
-			var mustNotBeWrappedInAnotherType = Diagnostic.Create(
-				HandlerMustNotBeNestedInAnotherClass,
-				namedTypeSymbol.Locations[0],
-				namedTypeSymbol.Name
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMustNotBeNestedInAnotherClass,
+					namedTypeSymbol.Locations[0],
+					namedTypeSymbol.Name)
 			);
-
-			context.ReportDiagnostic(mustNotBeWrappedInAnotherType);
 		}
 
 		if (namedTypeSymbol
 				.GetMembers()
 				.OfType<IMethodSymbol>()
-				.FirstOrDefault(x => x.Name is "Handle" or "HandleAsync")
-			is not { } methodSymbol)
+				.Where(x => x.Name is "Handle" or "HandleAsync")
+				.ToList()
+			is not { Count: > 0 } methods)
 		{
-			var doesNotExistDiagnostic = Diagnostic.Create(
-				HandlerMethodMustExist,
-				namedTypeSymbol.Locations[0],
-				namedTypeSymbol.Name
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodMustExist,
+					namedTypeSymbol.Locations[0],
+					namedTypeSymbol.Name)
 			);
 
-			context.ReportDiagnostic(doesNotExistDiagnostic);
+			return;
+		}
+
+		if (!methods.Any(m => m.IsStatic))
+		{
+			foreach (var method in methods)
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						HandlerMethodMustBeStatic,
+						method.Locations[0],
+						method.Name)
+				);
+			}
+
+			return;
+		}
+
+		methods = methods.Where(m => m.IsStatic).ToList();
+		if (methods is not [var methodSymbol])
+		{
+			foreach (var method in methods)
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						HandlerMethodMustBeUnique,
+						method.Locations[0],
+						method.Name)
+				);
+			}
+
 			return;
 		}
 
 		if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol
 			&& returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.Task<TResult>")
 		{
-			var mustReturnTaskT = Diagnostic.Create(
-				HandlerMethodMustReturnTask,
-				methodSymbol.Locations[0],
-				methodSymbol.Name
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodMustReturnTask,
+					methodSymbol.Locations[0],
+					methodSymbol.Name)
 			);
-
-			context.ReportDiagnostic(mustReturnTaskT);
 		}
 	}
 }

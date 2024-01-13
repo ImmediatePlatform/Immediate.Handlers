@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task HandleMethodIsCorrect_DoesNotAlert() =>
+	public async Task HandleMethodIsNotUnique_AlertDiagnostic() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -23,15 +23,15 @@ public partial class Tests
 			public class GetUsersQuery
 			{
 				public record Query;
-
-				private static Task<int> HandleAsync(
+			
+				private static Task<int> {|IHR0010:HandleAsync|}(
 					Query _,
 					CancellationToken token)
 				{
 					return Task.FromResult(0);
 				}
 			
-				private Task<int> Handle(
+				private static Task<int> {|IHR0010:Handle|}(
 					Query _,
 					CancellationToken token)
 				{
