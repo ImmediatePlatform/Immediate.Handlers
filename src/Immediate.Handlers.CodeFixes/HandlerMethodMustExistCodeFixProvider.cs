@@ -52,7 +52,7 @@ public class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 
 		var methodDeclaration = MethodDeclaration(
 				GenericName(
-						Identifier("Task"))
+						Identifier("ValueTask"))
 					.WithTypeArgumentList(
 						TypeArgumentList(
 							SingletonSeparatedList<TypeSyntax>(
@@ -90,7 +90,7 @@ public class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 					SingletonList<StatementSyntax>(
 						ReturnStatement(
 							LiteralExpression(
-								SyntaxKind.NullLiteralExpression)))))
+								SyntaxKind.DefaultLiteralExpression)))))
 			.WithAdditionalAnnotations(Formatter.Annotation);
 
 		var newClassDecl = classDeclarationSyntax.AddMembers(methodDeclaration);

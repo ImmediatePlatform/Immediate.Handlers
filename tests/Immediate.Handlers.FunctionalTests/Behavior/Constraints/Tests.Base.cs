@@ -34,7 +34,7 @@ public class BehaviorWalker
 
 public class BehaviorA<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : A
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		walker.BehaviorsRan.Add("BehaviorA");
 		return await Next(request, cancellationToken);
@@ -43,7 +43,7 @@ public class BehaviorA<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TR
 
 public class BehaviorB<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : B
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		walker.BehaviorsRan.Add("BehaviorB");
 		return await Next(request, cancellationToken);
@@ -52,7 +52,7 @@ public class BehaviorB<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TR
 
 public class BehaviorC<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : C
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		walker.BehaviorsRan.Add("BehaviorC");
 		return await Next(request, cancellationToken);
@@ -61,7 +61,7 @@ public class BehaviorC<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TR
 
 public class BehaviorD<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : D
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		walker.BehaviorsRan.Add("BehaviorD");
 		return await Next(request, cancellationToken);

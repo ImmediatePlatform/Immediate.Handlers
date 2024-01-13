@@ -11,11 +11,11 @@ public static partial class BehaviorShouldConstrainB
 {
 	public sealed record Query(int Input) : B;
 
-	private static Task<int> Handle(
+	private static ValueTask<int> Handle(
 		Query query,
 		CancellationToken _)
 	{
-		return Task.FromResult(query.Input + 1);
+		return ValueTask.FromResult(query.Input + 1);
 	}
 }
 

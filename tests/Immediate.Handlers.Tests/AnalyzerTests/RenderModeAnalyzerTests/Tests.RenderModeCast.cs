@@ -27,11 +27,11 @@ public partial class Tests
 			{
 				public record Query;
 
-				private static Task<int> HandleAsync(
+				private static ValueTask<int> HandleAsync(
 					Query _,
 					CancellationToken token)
 				{
-					return Task.FromResult(0);
+					return ValueTask.FromResult(0);
 				}
 			}
 			""",

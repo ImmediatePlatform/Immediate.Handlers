@@ -20,7 +20,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -29,7 +29,7 @@ public static class GetUsersQuery
 {
 	public record Query;
 
-	private static Task<IEnumerable<User>> HandleAsync(
+	private static ValueTask<IEnumerable<User>> HandleAsync(
 		Query _,
 		UsersService usersService,
 		CancellationToken token)
@@ -41,7 +41,7 @@ public static class GetUsersQuery
 public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
 	: Behavior<TRequest, TResponse>
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		var response = await Next(request, cancellationToken);
 
@@ -52,8 +52,8 @@ public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TReque
 public class User { }
 public class UsersService
 {
-	public Task<IEnumerable<User>> GetUsers() =>
-		Task.FromResult(Enumerable.Empty<User>());
+	public ValueTask<IEnumerable<User>> GetUsers() =>
+		ValueTask.FromResult(Enumerable.Empty<User>());
 }
 
 public interface ILogger<T>;

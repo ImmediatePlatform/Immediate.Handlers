@@ -20,7 +20,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -29,7 +29,7 @@ public static class GetUsersQuery
 {
 	public record Query;
 
-	private static async Task<IEnumerable<User>> HandleAsync(
+	private static async ValueTask<IEnumerable<User>> HandleAsync(
 		Query _,
 		CancellationToken token)
 	{
@@ -61,7 +61,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -71,7 +71,7 @@ public static class GetUsersQuery
 {
 	public record Query;
 
-	private static async Task<IEnumerable<User>> HandleAsync(
+	private static async ValueTask<IEnumerable<User>> HandleAsync(
 		Query _,
 		CancellationToken token)
 	{

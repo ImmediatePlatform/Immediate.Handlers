@@ -19,7 +19,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -32,8 +32,8 @@ public static class GetUsersQuery
 public class User { }
 public class UsersService
 {
-	public Task<IEnumerable<User>> GetUsers() =>
-		Task.FromResult(Enumerable.Empty<User>());
+	public ValueTask<IEnumerable<User>> GetUsers() =>
+		ValueTask.FromResult(Enumerable.Empty<User>());
 }
 
 public interface ILogger<T>;
@@ -60,7 +60,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -69,7 +69,7 @@ public static class GetUsersQuery
 {
 	public record Query;
 
-	private static Task<IEnumerable<User>> Handle(
+	private static ValueTask<IEnumerable<User>> Handle(
 		Query _,
 		UsersService usersService,
 		CancellationToken token)
@@ -77,7 +77,7 @@ public static class GetUsersQuery
 		return usersService.GetUsers();
 	}
 
-	private static Task<IEnumerable<User>> HandleAsync(
+	private static ValueTask<IEnumerable<User>> HandleAsync(
 		Query _,
 		UsersService usersService,
 		CancellationToken token)
@@ -89,8 +89,8 @@ public static class GetUsersQuery
 public class User { }
 public class UsersService
 {
-	public Task<IEnumerable<User>> GetUsers() =>
-		Task.FromResult(Enumerable.Empty<User>());
+	public ValueTask<IEnumerable<User>> GetUsers() =>
+		ValueTask.FromResult(Enumerable.Empty<User>());
 }
 
 public interface ILogger<T>;
@@ -117,7 +117,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -126,7 +126,7 @@ public static class GetUsersQuery
 {
 	public record Query;
 
-	private static Task<IEnumerable<User>> HandleAsync(
+	private static ValueTask<IEnumerable<User>> HandleAsync(
 		Query _)
 	{
 		return usersService.GetUsers();
@@ -136,8 +136,8 @@ public static class GetUsersQuery
 public class User { }
 public class UsersService
 {
-	public Task<IEnumerable<User>> GetUsers() =>
-		Task.FromResult(Enumerable.Empty<User>());
+	public ValueTask<IEnumerable<User>> GetUsers() =>
+		ValueTask.FromResult(Enumerable.Empty<User>());
 }
 
 public interface ILogger<T>;
@@ -164,7 +164,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -184,8 +184,8 @@ public static class GetUsersQuery
 public class User { }
 public class UsersService
 {
-	public Task<IEnumerable<User>> GetUsers() =>
-		Task.FromResult(Enumerable.Empty<User>());
+	public ValueTask<IEnumerable<User>> GetUsers() =>
+		ValueTask.FromResult(Enumerable.Empty<User>());
 }
 
 public interface ILogger<T>;
@@ -212,7 +212,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -233,8 +233,8 @@ public static class GetUsersQuery
 public class User { }
 public class UsersService
 {
-	public Task<IEnumerable<User>> GetUsers() =>
-		Task.FromResult(Enumerable.Empty<User>());
+	public ValueTask<IEnumerable<User>> GetUsers() =>
+		ValueTask.FromResult(Enumerable.Empty<User>());
 }
 
 public interface ILogger<T>;
@@ -261,7 +261,7 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async Task<IEnumerable<User>> GetUsers() =>
+	public async ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
@@ -272,7 +272,7 @@ public class Wrapper
 	{
 		public record Query;
 
-		private static Task<IEnumerable<User>> HandleAsync(
+		private static ValueTask<IEnumerable<User>> HandleAsync(
 			Query _,
 			UsersService usersService,
 			CancellationToken token)
@@ -285,8 +285,8 @@ public class Wrapper
 public class User { }
 public class UsersService
 {
-	public Task<IEnumerable<User>> GetUsers() =>
-		Task.FromResult(Enumerable.Empty<User>());
+	public ValueTask<IEnumerable<User>> GetUsers() =>
+		ValueTask.FromResult(Enumerable.Empty<User>());
 }
 
 public interface ILogger<T>;

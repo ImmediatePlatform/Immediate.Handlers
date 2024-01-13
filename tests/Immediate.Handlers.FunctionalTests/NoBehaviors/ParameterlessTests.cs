@@ -9,11 +9,11 @@ public static partial class NoBehaviorParameterlessOneAdder
 {
 	public sealed record Query(int Input);
 
-	private static Task<int> HandleAsync(
+	private static ValueTask<int> HandleAsync(
 		Query query,
 		CancellationToken _)
 	{
-		return Task.FromResult(query.Input + 1);
+		return ValueTask.FromResult(query.Input + 1);
 	}
 }
 

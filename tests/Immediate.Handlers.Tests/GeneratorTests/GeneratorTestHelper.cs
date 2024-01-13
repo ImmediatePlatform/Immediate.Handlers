@@ -18,7 +18,7 @@ public static class GeneratorTestHelper
 			syntaxTrees: new[] { syntaxTree },
 			references:
 			[
-				.. Basic.Reference.Assemblies.NetStandard20.References.All,
+				.. Basic.Reference.Assemblies.Net80.References.All,
 				.. assemblies.GetAdditionalReferences(),
 			]
 		);

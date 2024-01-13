@@ -38,7 +38,7 @@ public static class GetUsersQuery
 {
     public record Query;
 
-    private static Task<IEnumerable<User>> HandleAsync(
+    private static ValueTask<IEnumerable<User>> HandleAsync(
         Query _,
         UsersService usersService,
         CancellationToken token)
@@ -71,7 +71,7 @@ Create a behavior by implementing the `Immediate.Handlers.Shared.Behaviors<,>` c
 public sealed class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
 	: Behavior<TRequest, TResponse>
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		logger.LogInformation("LoggingBehavior.Enter");
 		var response = await Next(request, cancellationToken);

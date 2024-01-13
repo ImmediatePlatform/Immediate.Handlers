@@ -2,7 +2,7 @@
 
 ## IHR0001: Handler method must exist
 
-Handler classes must define a method with the signature `private static Task<T> HandleAsync(TRequest command, CancellationToken)`.
+Handler classes must define a method with the signature `private static ValueTask<T> HandleAsync(TRequest command, CancellationToken)`.
 
 | Item     | Value            |
 |----------|------------------|
@@ -12,9 +12,9 @@ Handler classes must define a method with the signature `private static Task<T> 
 | CodeFix  | True             |
 ---
 
-## IHR0002: Handler method must return Task<T>
+## IHR0002: Handler method must return ValueTask<T>
 
-Handler methods must return a `Task<T>`
+Handler methods must return a `ValueTask<T>`
 
 | Item     | Value            |
 |----------|------------------|

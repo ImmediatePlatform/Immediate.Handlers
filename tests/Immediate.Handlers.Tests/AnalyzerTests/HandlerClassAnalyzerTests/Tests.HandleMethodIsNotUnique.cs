@@ -24,18 +24,18 @@ public partial class Tests
 			{
 				public record Query;
 			
-				private static Task<int> {|IHR0010:HandleAsync|}(
+				private static ValueTask<int> {|IHR0010:HandleAsync|}(
 					Query _,
 					CancellationToken token)
 				{
-					return Task.FromResult(0);
+					return ValueTask.FromResult(0);
 				}
 			
-				private static Task<int> {|IHR0010:Handle|}(
+				private static ValueTask<int> {|IHR0010:Handle|}(
 					Query _,
 					CancellationToken token)
 				{
-					return Task.FromResult(0);
+					return ValueTask.FromResult(0);
 				}
 			}
 			""",

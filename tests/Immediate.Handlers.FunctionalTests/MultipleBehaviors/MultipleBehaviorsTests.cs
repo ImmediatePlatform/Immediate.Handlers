@@ -6,7 +6,7 @@ namespace Immediate.Handlers.FunctionalTests.MultipleBehaviors;
 public class Behavior1<TRequest, TResponse> : Behavior<TRequest, TResponse>
 	where TRequest : List<string>
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		ArgumentNullException.ThrowIfNull(request);
 
@@ -21,7 +21,7 @@ public class Behavior1<TRequest, TResponse> : Behavior<TRequest, TResponse>
 public class Behavior2<TRequest, TResponse> : Behavior<TRequest, TResponse>
 	where TRequest : List<string>
 {
-	public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
 		ArgumentNullException.ThrowIfNull(request);
 
@@ -42,7 +42,7 @@ public static partial class MultipleBehaviorHandler
 {
 	public class Query : List<string>;
 
-	private static async Task<int> HandleAsync(Query query, CancellationToken cancellationToken)
+	private static async ValueTask<int> HandleAsync(Query query, CancellationToken cancellationToken)
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 		query.Add("Query.HandleAsync");

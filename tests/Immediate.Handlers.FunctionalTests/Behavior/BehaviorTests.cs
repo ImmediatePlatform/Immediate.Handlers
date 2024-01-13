@@ -6,7 +6,7 @@ public sealed class BehaviorTests
 {
 	private sealed class TestBehavior : Shared.Behavior<int, int>
 	{
-		public override async Task<int> HandleAsync(int request, CancellationToken cancellationToken)
+		public override async ValueTask<int> HandleAsync(int request, CancellationToken cancellationToken)
 		{
 			return await Next(request, cancellationToken);
 		}
@@ -25,7 +25,7 @@ public sealed class BehaviorTests
 	public async Task MustSetHandlerBeforeCallingNext()
 	{
 		var handler = new TestBehavior();
-		_ = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-			handler.HandleAsync(1, CancellationToken.None));
+		_ = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+			await handler.HandleAsync(1, CancellationToken.None));
 	}
 }

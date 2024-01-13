@@ -9,12 +9,12 @@ public static partial class NoBehaviorParameterizedOneAdder
 {
 	public sealed record Query(int Input);
 
-	private static Task<int> Handle(
+	private static ValueTask<int> Handle(
 		Query query,
 		AddendProvider addendProvider,
 		CancellationToken _)
 	{
-		return Task.FromResult(query.Input + addendProvider.Addend);
+		return ValueTask.FromResult(query.Input + addendProvider.Addend);
 	}
 }
 

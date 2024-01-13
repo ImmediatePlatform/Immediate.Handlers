@@ -36,7 +36,7 @@ public partial class Tests
 			public class LoggingBehavior<TRequest, TResponse, TExtra>(ILogger<LoggingBehavior<TRequest, TResponse, TExtra>> logger)
 				: Immediate.Handlers.Shared.Behavior<TRequest, TResponse>
 			{
-				public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 				{
 					_ = logger.ToString();
 					var response = await Next(request, cancellationToken);
@@ -47,10 +47,10 @@ public partial class Tests
 
 			public class UsersService(ILogger<UsersService> logger)
 			{
-				public Task<IEnumerable<User>> GetUsers()
+				public ValueTask<IEnumerable<User>> GetUsers()
 				{
 					_ = logger.ToString();
-					return Task.FromResult(Enumerable.Empty<User>());
+					return ValueTask.FromResult(Enumerable.Empty<User>());
 				}
 			}
 
@@ -62,7 +62,7 @@ public partial class Tests
 			{
 				public record Query;
 
-				private static Task<IEnumerable<User>> HandleAsync(
+				private static ValueTask<IEnumerable<User>> HandleAsync(
 					Query _,
 					UsersService usersService,
 					CancellationToken token)
