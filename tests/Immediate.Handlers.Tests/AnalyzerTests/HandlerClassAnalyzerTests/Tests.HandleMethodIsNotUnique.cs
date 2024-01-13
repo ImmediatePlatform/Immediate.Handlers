@@ -18,7 +18,7 @@ public partial class Tests
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
-			
+
 			[Handler]
 			public class GetUsersQuery
 			{
