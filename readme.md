@@ -137,3 +137,29 @@ services.AddBehaviors();
 ```
 
 This registers all behaviors referenced in any `[Behaviors]` attribute.
+
+## Performance Comparisons
+
+All performance benchmarks reported use the following environment:
+```
+// * Summary *
+
+BenchmarkDotNet v0.13.12, Windows 11 (10.0.22621.3007/22H2/2022Update/SunValley2)
+12th Gen Intel Core i7-12700H, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 8.0.101
+  [Host]     : .NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2
+  DefaultJob : .NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2
+```
+
+#### [Benchmarks.Simple](./Benchmarks/Benchmark.Simple)
+
+This benchmark tests the various mediator implementations with a single request/response handler.
+
+| Method                       | Mean       | Error     | StdDev    | Ratio | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
+|----------------------------- |-----------:|----------:|----------:|------:|--------:|-----:|-------:|----------:|------------:|
+| SendRequest_Baseline         |  0.9303 ns | 0.0120 ns | 0.0113 ns |  1.00 |    0.00 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateHandler | 15.2625 ns | 0.0691 ns | 0.0646 ns | 16.41 |    0.19 |    2 |      - |         - |          NA |
+| SendRequest_Mediator         | 27.0657 ns | 0.1025 ns | 0.0959 ns | 29.10 |    0.33 |    3 |      - |         - |          NA |
+| SendRequest_IMediator        | 31.2996 ns | 0.0943 ns | 0.0882 ns | 33.65 |    0.43 |    4 |      - |         - |          NA |
+| SendRequest_MediatR          | 74.5688 ns | 1.1917 ns | 1.0564 ns | 80.12 |    1.77 |    5 | 0.0191 |     240 B |          NA |
+
