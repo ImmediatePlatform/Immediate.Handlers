@@ -1,7 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 
 using BenchmarkDotNet.Running;
-using Benchmarks;
+using Immediate.Handlers.Benchmarks;
 
 BenchmarkRunner.Run<Benchmark>();
 

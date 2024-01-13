@@ -18,6 +18,7 @@
 
 # TestResults
 [Tt]est[Rr]esults/
+BenchmarkDotNet.Artifacts/
 
 # Verify
 *.received.*

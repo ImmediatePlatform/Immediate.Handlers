@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Mediator;
 
-namespace Benchmarks;
+namespace Immediate.Handlers.Benchmarks;
 
 public sealed class MediatorBehavior<TMessage, TResponse> : IPipelineBehavior<TMessage, TResponse> where TMessage : IMessage
 {

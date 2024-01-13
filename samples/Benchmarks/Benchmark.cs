@@ -1,7 +1,7 @@
 using BenchmarkDotNet.Attributes;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Benchmarks;
+namespace Immediate.Handlers.Benchmarks;
 
 public class Benchmark
 {

@@ -2,9 +2,9 @@ using System.Diagnostics;
 using MediatR;
 using IRequest = MediatR.IRequest;
 
-namespace Benchmarks;
+namespace Immediate.Handlers.Benchmarks;
 
-public sealed class MediatrBehavior<TMessage, TResponse> : MediatR.IPipelineBehavior<TMessage, TResponse> where TMessage : IRequest
+public sealed class MediatrBehavior<TMessage, TResponse> : IPipelineBehavior<TMessage, TResponse> where TMessage : IRequest
 {
 	private TimeSpan _elapsed;
 	public async Task<TResponse> Handle(TMessage request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

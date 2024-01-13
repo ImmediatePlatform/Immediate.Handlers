@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Immediate.Handlers.Shared;
 
-namespace Benchmarks;
+namespace Immediate.Handlers.Benchmarks;
 
 public class ImmediateHandlersBehavior<TRequest, TResponse> : Behavior<TRequest, TResponse>
 {
