@@ -49,7 +49,7 @@ partial class {{ class_name }}
 					.ConfigureAwait(false);
 			{{~ end ~}}
 
-			return await _behaviors_0
+			return await _behavior_0
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 		}
