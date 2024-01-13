@@ -29,14 +29,11 @@ public sealed partial class Tests
 		services = BehaviorShouldConstrainC.AddHandlers(services);
 		var serviceProvider = services.BuildServiceProvider();
 
-		var handler = ActivatorUtilities.CreateInstance<BehaviorShouldConstrainC.Handler>(serviceProvider);
+		var handler = serviceProvider.GetRequiredService<BehaviorShouldConstrainC.Handler>();
 		_ = await handler.HandleAsync(new(1));
 
 		var behaviorWalker = serviceProvider.GetRequiredService<BehaviorWalker>();
 
-		Assert.Contains("BehaviorA", behaviorWalker.BehaviorsRan);
-		Assert.DoesNotContain("BehaviorB", behaviorWalker.BehaviorsRan);
-		Assert.Contains("BehaviorC", behaviorWalker.BehaviorsRan);
-		Assert.DoesNotContain("BehaviorD", behaviorWalker.BehaviorsRan);
+		Assert.Equal(["BehaviorA", "BehaviorC"], behaviorWalker.BehaviorsRan);
 	}
 }

@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Shared;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +29,7 @@ public sealed partial class Tests
 
 public class BehaviorWalker
 {
-	public Collection<string> BehaviorsRan { get; init; } = [];
+	public IList<string> BehaviorsRan { get; init; } = [];
 }
 
 public class BehaviorA<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : A
