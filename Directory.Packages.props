@@ -5,9 +5,14 @@
 
 	<ItemGroup>
 		<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.4.5" />
+		<PackageVersion Include="BenchmarkDotNet" Version="0.13.12" />
 		<PackageVersion Include="coverlet.collector" Version="6.0.0" />
 		<PackageVersion Include="coverlet.msbuild" Version="6.0.0" />
 		<PackageVersion Include="GitHubActionsTestLogger" Version="2.3.3" />
+		<PackageVersion Include="Immediate.Handlers" Version="0.1.0" />
+		<PackageVersion Include="Mediator.Abstractions" Version="2.1.7" />
+		<PackageVersion Include="Mediator.SourceGenerator" Version="2.1.7" />
+		<PackageVersion Include="MediatR" Version="12.2.0" />
 		<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
 		<PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
 		<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
