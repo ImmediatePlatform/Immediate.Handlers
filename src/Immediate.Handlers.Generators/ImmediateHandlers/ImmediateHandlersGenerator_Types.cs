@@ -24,7 +24,7 @@ public partial class ImmediateHandlersGenerator
 				new StringBuilder(RegistrationType)
 					.Replace("<,>", string.Empty, RegistrationType.Length - 3, 3)
 					.Replace("global::", string.Empty, 0, 8)
-					.Replace(".", string.Empty)
+					.Replace(".", "_")
 					.ToString();
 
 			init => _registrationTypeAsIdentifier = value;

@@ -14,8 +14,60 @@ using Immediate.Handlers.Shared;
 
 [assembly: Behaviors(
 	typeof(LoggingBehavior<,>),
-	typeof(SecondLoggingBehavior<,>)
+	typeof(YetAnotherDummy.OtherBehavior<,>),
+	typeof(SecondLoggingBehavior<,>),
+	typeof(YetAnotherDummy.LoggingBehavior<,>),
+	typeof(YetAnotherDummy.SecondLoggingBehavior<,>)
 )]
+
+namespace YetAnotherDummy
+{
+	public class User { }
+	public class UsersService
+	{
+		public Task<IEnumerable<User>> GetUsers() =>
+			Task.FromResult(Enumerable.Empty<User>());
+	}
+
+	public class OtherService
+	{
+		public Task<IEnumerable<User>> GetUsers() =>
+			Task.FromResult(Enumerable.Empty<User>());
+	}
+	
+	public class OtherBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+		: Behavior<TRequest, TResponse>
+	{
+		public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		{
+			var response = await Next(request, cancellationToken);
+
+			return response;
+		}
+	}
+	
+	public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+		: Behavior<TRequest, TResponse>
+	{
+		public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		{
+			var response = await Next(request, cancellationToken);
+
+			return response;
+		}
+	}
+
+	public class SecondLoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+		: Behavior<TRequest, TResponse>
+	{
+		public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		{
+			var response = await Next(request, cancellationToken);
+
+			return response;
+		}
+	}
+}
 
 namespace Dummy;
 

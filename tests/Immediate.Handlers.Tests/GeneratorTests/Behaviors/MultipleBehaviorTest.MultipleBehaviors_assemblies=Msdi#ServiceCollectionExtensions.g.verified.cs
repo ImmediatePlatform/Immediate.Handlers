@@ -9,7 +9,10 @@ public static class HandlerServiceCollectionExtensions
 		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
 	{
 		services.AddScoped(typeof(global::Dummy.LoggingBehavior<,>));
+		services.AddScoped(typeof(global::YetAnotherDummy.OtherBehavior<,>));
 		services.AddScoped(typeof(global::Dummy.SecondLoggingBehavior<,>));
+		services.AddScoped(typeof(global::YetAnotherDummy.LoggingBehavior<,>));
+		services.AddScoped(typeof(global::YetAnotherDummy.SecondLoggingBehavior<,>));
 		
 		return services;
 	}
