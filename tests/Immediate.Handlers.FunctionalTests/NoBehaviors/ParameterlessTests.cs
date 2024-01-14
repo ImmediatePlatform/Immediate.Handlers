@@ -1,5 +1,4 @@
 using Immediate.Handlers.Shared;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Immediate.Handlers.FunctionalTests.NoBehaviors;
@@ -24,11 +23,7 @@ public class ParameterlessTests
 	{
 		const int Input = 1;
 
-		var serviceProvider = new ServiceCollection()
-			.AddHandlers()
-			.BuildServiceProvider();
-
-		var handler = serviceProvider.GetRequiredService<NoBehaviorParameterlessOneAdder.Handler>();
+		var handler = HandlerResolver.Resolve<NoBehaviorParameterlessOneAdder.Handler>();
 
 		var query = new NoBehaviorParameterlessOneAdder.Query(Input);
 

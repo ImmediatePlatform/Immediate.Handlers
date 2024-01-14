@@ -64,6 +64,20 @@ public class Consumer(GetUsersQuery.Handler handler)
 }
 ```
 
+In case your project layout does not allow direct for references between consumer and handler, the handler will also be
+registered as an `IHandler<TRequest, Response>`.
+
+```cs
+public class Consumer(IHandler<Query, IEnumerable<User>> handler)
+{
+	public async Task Consumer(CancellationToken token)
+	{
+		var response = await handler.HandleAsync(new(), token);
+		// do something with response
+	}
+}
+```
+
 ### Creating Behaviors
 
 Create a behavior by implementing the `Immediate.Handlers.Shared.Behaviors<,>` class, as so:
@@ -155,34 +169,37 @@ BenchmarkDotNet v0.13.12, Windows 11 (10.0.22621.3007/22H2/2022Update/SunValley2
 
 This benchmark tests the various mediator implementations with a single request/response handler.
 
-| Method                       | Mean       | Error     | StdDev    | Ratio | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
-|----------------------------- |-----------:|----------:|----------:|------:|--------:|-----:|-------:|----------:|------------:|
-| SendRequest_Baseline         |  0.9303 ns | 0.0120 ns | 0.0113 ns |  1.00 |    0.00 |    1 |      - |         - |          NA |
-| SendRequest_ImmediateHandler | 15.2625 ns | 0.0691 ns | 0.0646 ns | 16.41 |    0.19 |    2 |      - |         - |          NA |
-| SendRequest_Mediator         | 27.0657 ns | 0.1025 ns | 0.0959 ns | 29.10 |    0.33 |    3 |      - |         - |          NA |
-| SendRequest_IMediator        | 31.2996 ns | 0.0943 ns | 0.0882 ns | 33.65 |    0.43 |    4 |      - |         - |          NA |
-| SendRequest_MediatR          | 74.5688 ns | 1.1917 ns | 1.0564 ns | 80.12 |    1.77 |    5 | 0.0191 |     240 B |          NA |
+| Method                       | Mean       | Error     | Ratio | Rank | Allocated |
+|----------------------------- |-----------:|----------:|------:|-----:|----------:|
+| SendRequest_Baseline         |  0.7701 ns | 0.0180 ns |  1.00 |    1 |         - |
+| SendRequest_IHandler         | 15.6780 ns | 0.0476 ns | 20.36 |    2 |         - |
+| SendRequest_ImmediateHandler | 16.6023 ns | 0.0561 ns | 21.56 |    3 |         - |
+| SendRequest_Mediator         | 27.2993 ns | 0.4269 ns | 35.49 |    4 |         - |
+| SendRequest_IMediator        | 31.3420 ns | 0.1006 ns | 40.64 |    5 |         - |
+| SendRequest_MediatR          | 68.3384 ns | 0.3453 ns | 88.73 |    6 |     240 B |
 
 #### [Benchmarks.Large](./Benchmarks/Benchmark.Large)
 
 This benchmark tests the various mediator implementations in the face of 999 request/response handlers.
 
-| Method                       | Mean        | Error     | StdDev    | Ratio  | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
-|----------------------------- |------------:|----------:|----------:|-------:|--------:|-----:|-------:|----------:|------------:|
-| SendRequest_Baseline         |   0.9190 ns | 0.0272 ns | 0.0254 ns |   1.00 |    0.00 |    1 |      - |         - |          NA |
-| SendRequest_ImmediateHandler |  15.4860 ns | 0.0990 ns | 0.0827 ns |  16.87 |    0.49 |    2 |      - |         - |          NA |
-| SendRequest_Mediator         |  27.7373 ns | 0.4364 ns | 0.4082 ns |  30.21 |    1.04 |    3 |      - |         - |          NA |
-| SendRequest_MediatR          |  79.6346 ns | 0.5683 ns | 0.4746 ns |  86.77 |    2.31 |    4 | 0.0191 |     240 B |          NA |
-| SendRequest_IMediator        | 429.8377 ns | 7.4163 ns | 6.9372 ns | 468.07 |   15.50 |    5 |      - |         - |          NA |
+| Method                        | Mean        | Error     | Ratio  | Rank | Allocated |
+|------------------------------ |------------:|----------:|-------:|-----:|----------:|
+| SendRequest_Baseline          |   0.5656 ns | 0.0252 ns |   1.00 |    1 |         - |
+| SendRequest_ImmediateHandler  |  15.4346 ns | 0.0516 ns |  27.34 |    2 |         - |
+| SendRequest_IHandler          |  16.0959 ns | 0.0552 ns |  28.50 |    3 |         - |
+| SendRequest_Mediator          |  27.4104 ns | 0.0449 ns |  48.54 |    4 |         - |
+| SendRequest_MediatR           |  80.0953 ns | 0.4749 ns | 141.83 |    5 |     240 B |
+| SendRequest_IMediator         | 435.3890 ns | 1.6399 ns | 771.01 |    6 |         - |
 
 #### [Benchmarks.Behaviors](./Benchmarks/Benchmark.Behaviors)
 
 This benchmark tests a more realistic scenario of using 1 behavior and 1 service.
 
-| Method                       | Mean      | Error    | StdDev   | Ratio | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
-|----------------------------- |----------:|---------:|---------:|------:|--------:|-----:|-------:|----------:|------------:|
-| SendRequest_Baseline         |  54.90 ns | 0.177 ns | 0.166 ns |  1.00 |    0.00 |    1 | 0.0032 |      40 B |        1.00 |
-| SendRequest_ImmediateHandler |  78.11 ns | 0.286 ns | 0.268 ns |  1.42 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
-| SendRequest_Mediator         |  96.94 ns | 0.268 ns | 0.224 ns |  1.77 |    0.01 |    3 | 0.0031 |      40 B |        1.00 |
-| SendRequest_IMediator        | 106.64 ns | 0.588 ns | 0.550 ns |  1.94 |    0.01 |    4 | 0.0031 |      40 B |        1.00 |
-| SendRequest_MediatR          | 198.24 ns | 0.860 ns | 0.718 ns |  3.61 |    0.02 |    5 | 0.0446 |     560 B |       14.00 |
+| Method                       | Mean      | Error    | Ratio | Rank | Allocated |
+|----------------------------- |----------:|---------:|------:|-----:|----------:|
+| SendRequest_Baseline         |  56.71 ns | 0.174 ns |  1.00 |    1 |      40 B |
+| SendRequest_IHandler         |  78.90 ns | 0.304 ns |  1.39 |    2 |      40 B |
+| SendRequest_ImmediateHandler |  80.02 ns | 0.288 ns |  1.41 |    3 |      40 B |
+| SendRequest_Mediator         | 101.23 ns | 0.263 ns |  1.78 |    4 |      40 B |
+| SendRequest_IMediator        | 104.92 ns | 0.297 ns |  1.85 |    5 |      40 B |
+| SendRequest_MediatR          | 201.27 ns | 1.023 ns |  3.55 |    6 |     560 B |
