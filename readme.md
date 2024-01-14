@@ -64,6 +64,20 @@ public class Consumer(GetUsersQuery.Handler handler)
 }
 ```
 
+In case your project layout does not allow direct for references between consumer and handler, the handler will also be
+registered as an `IHandler<TRequest, Response>`.
+
+```cs
+public class Consumer(IHandler<Query, IEnumerable<User>> handler)
+{
+	public async Task Consumer(CancellationToken token)
+	{
+		var response = await handler.HandleAsync(new(), token);
+		// do something with response
+	}
+}
+```
+
 ### Creating Behaviors
 
 Create a behavior by implementing the `Immediate.Handlers.Shared.Behaviors<,>` class, as so:

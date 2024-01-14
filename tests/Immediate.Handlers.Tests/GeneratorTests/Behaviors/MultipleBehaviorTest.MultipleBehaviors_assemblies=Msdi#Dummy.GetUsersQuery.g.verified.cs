@@ -7,7 +7,7 @@ namespace Dummy;
 
 partial class GetUsersQuery
 {
-	public sealed class Handler
+	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
 	{
 		private readonly global::Dummy.GetUsersQuery.HandleBehavior _behavior_0;
 		private readonly global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _behavior_1;
@@ -71,6 +71,7 @@ partial class GetUsersQuery
 	)
 	{
 		services.AddScoped<global::Dummy.GetUsersQuery.Handler>();
+		services.AddScoped<global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>, global::Dummy.GetUsersQuery.Handler>();
 		services.AddScoped<global::Dummy.GetUsersQuery.HandleBehavior>();
 		return services;
 	}
