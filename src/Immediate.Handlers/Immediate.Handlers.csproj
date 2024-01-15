@@ -8,7 +8,7 @@
 
 	<PropertyGroup Label="Nuget">
 		<Title>Immediate.Handlers</Title>
-		<Description>TBD</Description>
+		<Description>An implementation of the mediator pattern in .NET using source-generation.</Description>
 
 		<Authors>Immediate.Handlers Developers</Authors>
 
