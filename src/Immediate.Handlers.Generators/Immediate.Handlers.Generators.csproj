@@ -16,6 +16,7 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
 		<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="MinVer" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -32,5 +33,11 @@
 			<TargetPathWithTargetPlatformMoniker Include="$(MSBuildThisFileDirectory)bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.dll" IncludeRuntimeDependency="false" />
 		</ItemGroup>
 	</Target>
+
+	<PropertyGroup Label="MinVer">
+		<MinVerAutoIncrement>minor</MinVerAutoIncrement>
+		<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
+		<MinVerTagPrefix>v</MinVerTagPrefix>
+	</PropertyGroup>
 
 </Project>
