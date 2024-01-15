@@ -14,6 +14,8 @@ public partial class ImmediateHandlersGenerator
 		public required string NonGenericTypeName { get; init; }
 		public required string? RequestType { get; init; }
 		public required string? ResponseType { get; init; }
+
+		public required string Name { get; init; }
 	}
 
 	[ExcludeFromCodeCoverage]

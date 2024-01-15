@@ -7,30 +7,42 @@ partial class GetUsersQuery
 {
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
 	{
-		private readonly global::Dummy.GetUsersQuery.HandleBehavior _behavior_0;
-		private readonly global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _behavior_1;
-		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _behavior_2;
-	
+		private readonly global::Dummy.GetUsersQuery.HandleBehavior _HandleBehavior;
+		private readonly global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _secondLoggingBehavior1;
+		private readonly global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior1;
+		private readonly global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _secondLoggingBehavior;
+		private readonly global::YetAnotherDummy.OtherBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _otherBehavior;
+		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior;
+
 		public Handler(
-			global::Dummy.GetUsersQuery.HandleBehavior behavior_0,
-			global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> behavior_1,
-			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> behavior_2
+			global::Dummy.GetUsersQuery.HandleBehavior HandleBehavior,
+			global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> secondLoggingBehavior1,
+			global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior1,
+			global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> secondLoggingBehavior,
+			global::YetAnotherDummy.OtherBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> otherBehavior,
+			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior
 		)
 		{
-			_behavior_0 = behavior_0;
-			_behavior_1 = behavior_1;
-			_behavior_2 = behavior_2;
+			_HandleBehavior = HandleBehavior;
+			_loggingBehavior = loggingBehavior;
+			_otherBehavior = otherBehavior;
+			_secondLoggingBehavior = secondLoggingBehavior;
+			_loggingBehavior1 = loggingBehavior1;
+			_secondLoggingBehavior1 = secondLoggingBehavior1;
 
-			_behavior_1.SetInnerHandler(_behavior_0);
-			_behavior_2.SetInnerHandler(_behavior_1);
+			_secondLoggingBehavior1.SetInnerHandler(_HandleBehavior);
+			_loggingBehavior1.SetInnerHandler(_secondLoggingBehavior1);
+			_secondLoggingBehavior.SetInnerHandler(_loggingBehavior1);
+			_otherBehavior.SetInnerHandler(_secondLoggingBehavior);
+			_loggingBehavior.SetInnerHandler(_otherBehavior);
 		}
-	
+
 		public async global::System.Threading.Tasks.ValueTask<IEnumerable<global::Dummy.User>> HandleAsync(
 			global::Dummy.GetUsersQuery.Query request,
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
 		{
-			return await _behavior_2
+			return await _loggingBehavior
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 		}
@@ -40,14 +52,14 @@ partial class GetUsersQuery
 	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
 	{
 		private readonly global::Dummy.UsersService _usersService;
-	
+
 		public HandleBehavior(
 			global::Dummy.UsersService usersService
 		)
 		{
 			_usersService = usersService;
 		}
-	
+
 		public override async global::System.Threading.Tasks.ValueTask<IEnumerable<global::Dummy.User>> HandleAsync(
 			global::Dummy.GetUsersQuery.Query request,
 			global::System.Threading.CancellationToken cancellationToken
@@ -55,7 +67,7 @@ partial class GetUsersQuery
 		{
 			return await global::Dummy.GetUsersQuery
 				.HandleAsync(
-					request,                
+					request,
 					_usersService,
 					cancellationToken
 				)

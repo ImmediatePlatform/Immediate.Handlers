@@ -12,39 +12,46 @@ partial class {{ class_name }}
 {
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>
 	{
-		private readonly {{ class_fully_qualified_name }}.HandleBehavior _behavior_0;
+		private readonly {{ class_fully_qualified_name }}.HandleBehavior _HandleBehavior;
 		{{~ for behavior in (behaviors | array.reverse) ~}}
-		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _behavior_{{for.index + 1}};
-		{{~ end ~}}    
-	
+		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _{{ behavior.variable_name }};
+		{{~ end ~}}
+
 		public Handler(
-			{{ class_fully_qualified_name }}.HandleBehavior behavior_0{{ if behaviors.size > 0 }},{{ end }}
+			{{ class_fully_qualified_name }}.HandleBehavior HandleBehavior{{ if behaviors.size > 0 }},{{ end }}
 			{{~ for behavior in (behaviors | array.reverse) ~}}
-			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> behavior_{{for.index + 1}}{{ if !for.last }},{{end }}
+			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> {{ behavior.variable_name }}{{ if !for.last }},{{end }}
 			{{~ end ~}}
 		)
 		{
-			_behavior_0 = behavior_0;
+			_HandleBehavior = HandleBehavior;
 			{{~ for behavior in behaviors ~}}
-			_behavior_{{for.index + 1}} = behavior_{{for.index + 1}};
+			_{{ behavior.variable_name }} = {{ behavior.variable_name }};
 			{{~ end ~}}
 
-			{{~ $length = behaviors.size ~}}
-			{{~ if $length > 0 ~}}
-			{{~ for i in 1..$length ~}}
-			_behavior_{{ i }}.SetInnerHandler(_behavior_{{ i - 1 }});
+			{{~ for behavior in (behaviors | array.reverse) ~}}
+			{{~ if for.first ~}}
+			_{{ behavior.variable_name }}.SetInnerHandler(_HandleBehavior);
+			{{~ else ~}}
+			_{{ behavior.variable_name }}.SetInnerHandler(_{{ behaviors[behaviors.size - for.index].variable_name }});
 			{{~ end ~}}
 			{{~ end ~}}
 		}
-	
+
 		public async global::System.Threading.Tasks.ValueTask<{{ response_type }}> HandleAsync(
 			{{ request_type }} request,
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
 		{
-			return await _behavior_{{ $length }}
+			{{~ if behaviors.size > 0 ~}}
+			return await _{{ behaviors[0].variable_name }}
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
+			{{~ else ~}}
+			return await _HandleBehavior
+				.HandleAsync(request, cancellationToken)
+				.ConfigureAwait(false);
+			{{~ end ~}}
 		}
 	}
 
@@ -54,7 +61,7 @@ partial class {{ class_name }}
 		{{~ for parameter in handler_parameters ~}}
 		private readonly {{ parameter.type }} _{{ parameter.name }};
 		{{~ end ~}}
-	
+
 		public HandleBehavior(
 			{{~ for parameter in handler_parameters ~}}
 			{{ parameter.type }} {{ parameter.name }}{{ if !for.last }},{{ end }}
@@ -65,7 +72,7 @@ partial class {{ class_name }}
 			_{{ parameter.name }} = {{ parameter.name }};
 			{{~ end ~}}
 		}
-	
+
 		public override async global::System.Threading.Tasks.ValueTask<{{ response_type }}> HandleAsync(
 			{{ request_type }} request,
 			global::System.Threading.CancellationToken cancellationToken
@@ -73,7 +80,7 @@ partial class {{ class_name }}
 		{
 			return await {{ class_fully_qualified_name }}
 				.{{ method_name }}(
-					request,                
+					request,
 					{{~ for parameter in handler_parameters ~}}
 					_{{ parameter.name }},
 					{{~ end ~}}
