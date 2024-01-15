@@ -12,28 +12,28 @@ partial class {{ class_name }}
 {
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>
 	{
-		private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
+		private readonly {{ class_fully_qualified_name }}.HandleBehavior _HandleBehavior;
 		{{~ for behavior in (behaviors | array.reverse) ~}}
-		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _{{ behavior.registration_type_as_identifier }};
+		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _{{ behavior.variable_name }};
 		{{~ end ~}}
 
 		public Handler(
-			{{ class_fully_qualified_name }}.HandleBehavior handleBehavior{{ if behaviors.size > 0 }},{{ end }}
+			{{ class_fully_qualified_name }}.HandleBehavior HandleBehavior{{ if behaviors.size > 0 }},{{ end }}
 			{{~ for behavior in (behaviors | array.reverse) ~}}
-			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> {{ behavior.registration_type_as_identifier }}{{ if !for.last }},{{end }}
+			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> {{ behavior.variable_name }}{{ if !for.last }},{{end }}
 			{{~ end ~}}
 		)
 		{
-			_handleBehavior = handleBehavior;
+			_HandleBehavior = HandleBehavior;
 			{{~ for behavior in behaviors ~}}
-			_{{ behavior.registration_type_as_identifier }} = {{ behavior.registration_type_as_identifier }};
+			_{{ behavior.variable_name }} = {{ behavior.variable_name }};
 			{{~ end ~}}
 
 			{{~ for behavior in (behaviors | array.reverse) ~}}
 			{{~ if for.first ~}}
-			_{{ behavior.registration_type_as_identifier }}.SetInnerHandler(_handleBehavior);
+			_{{ behavior.variable_name }}.SetInnerHandler(_HandleBehavior);
 			{{~ else ~}}
-			_{{ behavior.registration_type_as_identifier }}.SetInnerHandler(_{{ behaviors[behaviors.size - for.index].registration_type_as_identifier }});
+			_{{ behavior.variable_name }}.SetInnerHandler(_{{ behaviors[behaviors.size - for.index].variable_name }});
 			{{~ end ~}}
 			{{~ end ~}}
 		}
@@ -44,11 +44,11 @@ partial class {{ class_name }}
 		)
 		{
 			{{~ if behaviors.size > 0 ~}}
-			return await _{{ behaviors[0].registration_type_as_identifier }}
+			return await _{{ behaviors[0].variable_name }}
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 			{{~ else ~}}
-			return await _handleBehavior
+			return await _HandleBehavior
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 			{{~ end ~}}

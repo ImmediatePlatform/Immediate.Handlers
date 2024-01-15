@@ -146,6 +146,28 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (pipelineBehaviors.Any(b => b is null))
 			return;
 
+		var typesCount = new Dictionary<string, int>()
+		{
+			["HandleBehavior"] = 1,
+		};
+
+		string GetVariableNameSuffix(string typeName)
+		{
+			if (!typesCount.TryGetValue(typeName, out var count))
+				count = 0;
+
+			typesCount[typeName] = count + 1;
+			return count == 0 ? string.Empty : $"{count}";
+		}
+
+		var renderBehaviors = pipelineBehaviors.Select(b =>
+			new
+			{
+				b!.NonGenericTypeName,
+				VariableName = b.Name + GetVariableNameSuffix(b.Name)
+			}
+		).ToList();
+
 		var handlerSource = template.Render(new
 		{
 			ClassFullyQualifiedName = handler.DisplayName,
@@ -158,7 +180,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			RequestType = handler.RequestType.Name,
 			ResponseType = handler.ResponseType.Name,
 
-			Behaviors = pipelineBehaviors,
+			Behaviors = renderBehaviors,
 			HasMsDi = hasMsDi,
 		});
 

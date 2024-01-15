@@ -88,16 +88,16 @@ public partial class ImmediateHandlersGenerator
 
 	private static RenderMode? GetOverrideRenderMode(INamedTypeSymbol symbol) =>
 		symbol.GetAttribute("Immediate.Handlers.Shared.RenderModeAttribute")
-				is { } rma
+			is { } rma
 			? ParseRenderMode(rma)
 			: null;
 
 	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(
-			INamedTypeSymbol symbol,
-			Compilation compilation,
-			CancellationToken cancellationToken) =>
+		INamedTypeSymbol symbol,
+		Compilation compilation,
+		CancellationToken cancellationToken) =>
 		symbol.GetAttribute("Immediate.Handlers.Shared.BehaviorsAttribute")
-				is { } ba
+			is { } ba
 			? ParseBehaviors(ba, compilation, cancellationToken)
 			: null;
 
@@ -118,9 +118,9 @@ public partial class ImmediateHandlersGenerator
 	private static void AddBaseTypes(ITypeSymbol type, List<string> implements)
 	{
 		if (type.OriginalDefinition.ToString() is
-				"object"
-				or "System.Collections.IEnumerable"
-				or "System.IEquatable<T>"
+			"object"
+			or "System.Collections.IEnumerable"
+			or "System.IEquatable<T>"
 		)
 		{
 			return;
