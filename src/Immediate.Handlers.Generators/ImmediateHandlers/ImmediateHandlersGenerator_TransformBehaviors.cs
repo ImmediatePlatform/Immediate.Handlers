@@ -87,7 +87,7 @@ public partial class ImmediateHandlersGenerator
 					NonGenericTypeName = constructorType,
 					RequestType = constraint.RequestType,
 					ResponseType = constraint.ResponseType,
-					Name = originalDefinition.Name
+					Name = originalDefinition.Name,
 				};
 			})
 			.ToEquatableReadOnlyList();

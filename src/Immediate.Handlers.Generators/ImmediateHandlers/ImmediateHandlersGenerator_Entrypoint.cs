@@ -160,13 +160,13 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			return count == 0 ? string.Empty : $"{count}";
 		}
 
-		var renderBehaviors = pipelineBehaviors.Select(b =>
-			new
+		var renderBehaviors = pipelineBehaviors
+			.Select(b => new
 			{
 				b!.NonGenericTypeName,
 				VariableName = b.Name + GetVariableNameSuffix(b.Name)
-			}
-		).ToList();
+			})
+			.ToList();
 
 		var handlerSource = template.Render(new
 		{
