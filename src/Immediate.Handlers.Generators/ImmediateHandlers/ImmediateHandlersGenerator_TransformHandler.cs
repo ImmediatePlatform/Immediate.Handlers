@@ -96,7 +96,7 @@ public partial class ImmediateHandlersGenerator
 			INamedTypeSymbol symbol,
 			Compilation compilation,
 			CancellationToken cancellationToken) =>
-			symbol.GetAttribute("Immediate.Handlers.Shared.BehaviorsAttribute")
+		symbol.GetAttribute("Immediate.Handlers.Shared.BehaviorsAttribute")
 				is { } ba
 			? ParseBehaviors(ba, compilation, cancellationToken)
 			: null;
