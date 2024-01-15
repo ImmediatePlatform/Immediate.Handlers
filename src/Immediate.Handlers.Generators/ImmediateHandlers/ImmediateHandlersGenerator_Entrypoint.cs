@@ -135,9 +135,15 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (renderMode is not RenderMode.Normal)
 			return;
 
+		var responseType = handler.ResponseType ?? new()
+		{
+			Name = "global::System.ValueTuple",
+			Implements = default,
+		};
+
 		var pipelineBehaviors = BuildPipeline(
 			handler.RequestType,
-			handler.ResponseType,
+			responseType,
 			handler.OverrideBehaviors?.AsEnumerable()
 				?? behaviors.AsEnumerable()
 		);
@@ -146,6 +152,44 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (pipelineBehaviors.Any(b => b is null))
 			return;
 
+		var handlerSource = template.Render(new
+		{
+			ClassFullyQualifiedName = handler.DisplayName,
+			handler.ClassName,
+			handler.Namespace,
+
+			handler.MethodName,
+			HandlerParameters = handler.Parameters,
+
+			RequestType = handler.RequestType.Name,
+			ResponseType = responseType.Name,
+			IsImplicitValueTuple = handler.ResponseType is null,
+
+			Behaviors = BuildRenderBehaviors(pipelineBehaviors),
+			HasMsDi = hasMsDi,
+		});
+
+		cancellationToken.ThrowIfCancellationRequested();
+		context.AddSource($"{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
+	}
+
+	private static List<Behavior?> BuildPipeline(
+			GenericType requestType,
+			GenericType responseType,
+			IEnumerable<Behavior?> enumerable) =>
+		enumerable
+			.Where(b => b is null || ValidateType(b.RequestType, requestType))
+			.Where(b => b is null || ValidateType(b.ResponseType, responseType))
+			.ToList();
+
+	private sealed record RenderBehavior
+	{
+		public required string NonGenericTypeName { get; init; }
+		public required string VariableName { get; init; }
+	}
+
+	private static List<RenderBehavior> BuildRenderBehaviors(List<Behavior?> pipelineBehaviors)
+	{
 		var typesCount = new Dictionary<string, int>()
 		{
 			["HandleBehavior"] = 1,
@@ -162,9 +206,9 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 #pragma warning disable CA1308 // Normalize strings to uppercase
 		var renderBehaviors = pipelineBehaviors
-			.Select(b => new
+			.Select(b => new RenderBehavior
 			{
-				b!.NonGenericTypeName,
+				NonGenericTypeName = b!.NonGenericTypeName,
 				VariableName = b.Name[0..1].ToLowerInvariant()
 					+ b.Name[1..]
 					+ GetVariableNameSuffix(b.Name)
@@ -172,34 +216,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.ToList();
 #pragma warning restore CA1308 // Normalize strings to uppercase
 
-		var handlerSource = template.Render(new
-		{
-			ClassFullyQualifiedName = handler.DisplayName,
-			handler.ClassName,
-			handler.Namespace,
-
-			handler.MethodName,
-			HandlerParameters = handler.Parameters,
-
-			RequestType = handler.RequestType.Name,
-			ResponseType = handler.ResponseType.Name,
-
-			Behaviors = renderBehaviors,
-			HasMsDi = hasMsDi,
-		});
-
-		cancellationToken.ThrowIfCancellationRequested();
-		context.AddSource($"{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
+		return renderBehaviors;
 	}
-
-	private static List<Behavior?> BuildPipeline(
-			GenericType requestType,
-			GenericType responseType,
-			IEnumerable<Behavior?> enumerable) =>
-		enumerable
-			.Where(b => b is null || ValidateType(b.RequestType, requestType))
-			.Where(b => b is null || ValidateType(b.ResponseType, responseType))
-			.ToList();
 
 	private static bool ValidateType(string? type, GenericType implementedTypes) =>
 		type is null

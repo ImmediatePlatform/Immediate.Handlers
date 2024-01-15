@@ -155,7 +155,10 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			{
 				token.ThrowIfCancellationRequested();
 				if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol
-					&& returnTypeSymbol.ConstructedFrom.ToString() is not "System.Threading.Tasks.ValueTask<TResult>")
+					&& returnTypeSymbol.ConstructedFrom.ToString() is not (
+						"System.Threading.Tasks.ValueTask<TResult>"
+						or "System.Threading.Tasks.ValueTask")
+				)
 				{
 					context.ReportDiagnostic(
 						Diagnostic.Create(

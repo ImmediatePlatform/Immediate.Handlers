@@ -11,7 +11,7 @@ internal static class Utility
 		   );
 
 	public static ITypeSymbol? GetTaskReturnType(this IMethodSymbol method, INamedTypeSymbol taskSymbol) =>
-		!method.ReturnsVoid && SymbolEqualityComparer.Default.Equals(method.ReturnType.OriginalDefinition, taskSymbol)
+		SymbolEqualityComparer.Default.Equals(method.ReturnType.OriginalDefinition, taskSymbol)
 			? ((INamedTypeSymbol)method.ReturnType).TypeArguments.FirstOrDefault()
 			: null;
 
