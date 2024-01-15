@@ -18,12 +18,7 @@ public static partial class NoBehaviorParameterizedOneAdder
 	}
 }
 
-public class AddendProvider
-{
-#pragma warning disable CA1822
-	public int Addend => 1;
-#pragma warning restore CA1822
-}
+public record AddendProvider(int Addend);
 
 public class ParameterizedTests
 {
@@ -31,18 +26,14 @@ public class ParameterizedTests
 	public async Task NoBehaviorShouldReturnExpectedResponse()
 	{
 		const int Input = 1;
+		var addendProvider = new AddendProvider(1);
 
-		var serviceProvider = new ServiceCollection()
-			.AddHandlers()
-			.AddScoped<AddendProvider>()
-			.BuildServiceProvider();
-
-		var handler = serviceProvider.GetRequiredService<NoBehaviorParameterizedOneAdder.Handler>();
+		var handler = HandlerResolver.Resolve<NoBehaviorParameterizedOneAdder.Handler>(x => x.AddScoped(_ => addendProvider));
 
 		var query = new NoBehaviorParameterizedOneAdder.Query(Input);
 
 		var result = await handler.HandleAsync(query);
 
-		Assert.Equal(Input + serviceProvider.GetRequiredService<AddendProvider>().Addend, result);
+		Assert.Equal(Input + addendProvider.Addend, result);
 	}
 }

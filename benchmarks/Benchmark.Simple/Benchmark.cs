@@ -55,11 +55,14 @@ public sealed partial class SomeHandlerClass
 public class RequestBenchmarks
 {
 	private IServiceProvider? _serviceProvider;
+	private IServiceProvider? _abstractionServiceProvider;
 	private IServiceScope? _serviceScope;
+	private IServiceScope? _abstractionServiceScope;
 	private Mediator.IMediator? _mediator;
 	private Mediator.Mediator? _concreteMediator;
 	private MediatR.IMediator? _mediatr;
 	private SomeHandlerClass.Handler? _immediateHandler;
+	private IHandler<SomeRequest, SomeResponse>? _immediateHandlerAbstraction;
 	private SomeHandlerClass? _handler;
 	private SomeRequest? _request;
 
@@ -87,6 +90,10 @@ public class RequestBenchmarks
 		_immediateHandler = _serviceProvider.GetRequiredService<SomeHandlerClass.Handler>();
 		_handler = _serviceProvider.GetRequiredService<SomeHandlerClass>();
 		_request = new(Guid.NewGuid());
+
+		_abstractionServiceScope = _serviceProvider.CreateScope();
+		_abstractionServiceProvider = _abstractionServiceScope.ServiceProvider;
+		_immediateHandlerAbstraction = _abstractionServiceProvider.GetRequiredService<IHandler<SomeRequest, SomeResponse>>();
 	}
 
 	[GlobalCleanup]
@@ -102,6 +109,12 @@ public class RequestBenchmarks
 	public ValueTask<SomeResponse> SendRequest_ImmediateHandler()
 	{
 		return _immediateHandler!.HandleAsync(_request!, CancellationToken.None);
+	}
+
+	[Benchmark]
+	public ValueTask<SomeResponse> SendRequest_ImmediateHandler_Abstraction()
+	{
+		return _immediateHandlerAbstraction!.HandleAsync(_request!, CancellationToken.None);
 	}
 
 	[Benchmark]

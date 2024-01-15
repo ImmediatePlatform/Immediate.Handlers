@@ -10,7 +10,7 @@ namespace {{ namespace }};
 {{~ end ~}}
 partial class {{ class_name }}
 {
-	public sealed class Handler
+	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>
 	{
 		private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
 		{{~ for behavior in (behaviors | array.reverse) ~}}
@@ -97,6 +97,7 @@ partial class {{ class_name }}
 	)
 	{
 		services.AddScoped<{{ class_fully_qualified_name }}.Handler>();
+		services.AddScoped<global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>, {{ class_fully_qualified_name }}.Handler>();
 		services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
 		return services;
 	}
