@@ -12,10 +12,9 @@ public partial class ImmediateHandlersGenerator
 	{
 		public required string RegistrationType { get; init; }
 		public required string NonGenericTypeName { get; init; }
+		public required string Name { get; init; }
 		public required string? RequestType { get; init; }
 		public required string? ResponseType { get; init; }
-
-		public required string Name { get; init; }
 	}
 
 	[ExcludeFromCodeCoverage]
@@ -43,7 +42,7 @@ public partial class ImmediateHandlersGenerator
 		public required EquatableReadOnlyList<Parameter> Parameters { get; init; }
 
 		public required GenericType RequestType { get; init; }
-		public required GenericType ResponseType { get; init; }
+		public required GenericType? ResponseType { get; init; }
 
 		public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
 		public RenderMode? OverrideRenderMode { get; init; }

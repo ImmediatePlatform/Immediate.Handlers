@@ -78,6 +78,7 @@ partial class {{ class_name }}
 			global::System.Threading.CancellationToken cancellationToken
 		)
 		{
+			{{~ if !is_implicit_value_tuple ~}}
 			return await {{ class_fully_qualified_name }}
 				.{{ method_name }}(
 					request,
@@ -87,6 +88,19 @@ partial class {{ class_name }}
 					cancellationToken
 				)
 				.ConfigureAwait(false);
+			{{~ else ~}}
+			await {{ class_fully_qualified_name }}
+				.{{ method_name }}(
+					request,
+					{{~ for parameter in handler_parameters ~}}
+					_{{ parameter.name }},
+					{{~ end ~}}
+					cancellationToken
+				)
+				.ConfigureAwait(false);
+
+			return default;
+			{{~ end ~}}
 		}
 	}
 	{{~ if has_ms_di ~}}

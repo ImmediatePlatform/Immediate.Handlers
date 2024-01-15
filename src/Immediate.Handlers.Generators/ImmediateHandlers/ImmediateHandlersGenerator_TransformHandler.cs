@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 
@@ -38,8 +39,11 @@ public partial class ImmediateHandlersGenerator
 		if (handleMethod.Parameters.Length < 2)
 			return null;
 
+		if (handleMethod.ReturnsVoid)
+			return null;
+
 		cancellationToken.ThrowIfCancellationRequested();
-		var requestType = BuildGenericType((INamedTypeSymbol)handleMethod.Parameters[0].Type);
+		var requestType = BuildGenericType(handleMethod.Parameters[0].Type);
 
 		var compilation = context.SemanticModel.Compilation;
 		var taskSymbol = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1")!;
@@ -47,9 +51,15 @@ public partial class ImmediateHandlersGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 		var responseTypeSymbol = handleMethod.GetTaskReturnType(taskSymbol);
 		if (responseTypeSymbol is null)
-			return null;
+		{
+			taskSymbol = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask")!;
 
-		var responseType = BuildGenericType((INamedTypeSymbol)responseTypeSymbol);
+			cancellationToken.ThrowIfCancellationRequested();
+			if (!SymbolEqualityComparer.Default.Equals(handleMethod.ReturnType.OriginalDefinition, taskSymbol))
+				return null;
+		}
+
+		var responseType = BuildGenericType(responseTypeSymbol);
 
 		cancellationToken.ThrowIfCancellationRequested();
 		var parameters = handleMethod.Parameters
@@ -101,8 +111,12 @@ public partial class ImmediateHandlersGenerator
 			? ParseBehaviors(ba, compilation, cancellationToken)
 			: null;
 
-	private static GenericType BuildGenericType(ITypeSymbol type)
+	[return: NotNullIfNotNull(nameof(type))]
+	private static GenericType? BuildGenericType(ITypeSymbol? type)
 	{
+		if (type == null)
+			return null;
+
 		var name = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
 		var implements = new List<string>();
