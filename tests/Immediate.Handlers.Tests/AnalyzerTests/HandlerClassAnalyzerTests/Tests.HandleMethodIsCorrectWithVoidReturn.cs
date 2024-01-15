@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task HandleMethodIsCorrect_DoesNotAlert() =>
+	public async Task HandleMethodIsCorrectWithVoidReturn_DoesNotAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -24,18 +24,16 @@ public partial class Tests
 			{
 				public record Query;
 
-				private static ValueTask<int> HandleAsync(
+				private static async ValueTask HandleAsync(
 					Query _,
 					CancellationToken token)
 				{
-					return ValueTask.FromResult(0);
 				}
 			
-				private ValueTask<int> Handle(
+				private async ValueTask Handle(
 					Query _,
 					CancellationToken token)
 				{
-					return ValueTask.FromResult(0);
 				}
 			}
 			""",
