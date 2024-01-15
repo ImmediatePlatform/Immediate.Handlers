@@ -8,17 +8,17 @@ partial class GetUsersQuery
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
 	{
 		private readonly global::Dummy.GetUsersQuery.HandleBehavior _HandleBehavior;
-		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _LoggingBehavior;
+		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior;
 
 		public Handler(
 			global::Dummy.GetUsersQuery.HandleBehavior HandleBehavior,
-			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> LoggingBehavior
+			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior
 		)
 		{
 			_HandleBehavior = HandleBehavior;
-			_LoggingBehavior = LoggingBehavior;
+			_loggingBehavior = loggingBehavior;
 
-			_LoggingBehavior.SetInnerHandler(_HandleBehavior);
+			_loggingBehavior.SetInnerHandler(_HandleBehavior);
 		}
 
 		public async global::System.Threading.Tasks.ValueTask<IEnumerable<global::Dummy.User>> HandleAsync(
@@ -26,7 +26,7 @@ partial class GetUsersQuery
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
 		{
-			return await _LoggingBehavior
+			return await _loggingBehavior
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 		}

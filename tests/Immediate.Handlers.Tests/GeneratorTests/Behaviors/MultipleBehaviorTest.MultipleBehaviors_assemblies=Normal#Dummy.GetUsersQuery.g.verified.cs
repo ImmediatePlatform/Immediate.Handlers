@@ -8,33 +8,33 @@ partial class GetUsersQuery
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
 	{
 		private readonly global::Dummy.GetUsersQuery.HandleBehavior _HandleBehavior;
-		private readonly global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _SecondLoggingBehavior1;
-		private readonly global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _LoggingBehavior1;
-		private readonly global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _SecondLoggingBehavior;
-		private readonly global::YetAnotherDummy.OtherBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _OtherBehavior;
-		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _LoggingBehavior;
+		private readonly global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _secondLoggingBehavior1;
+		private readonly global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior1;
+		private readonly global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _secondLoggingBehavior;
+		private readonly global::YetAnotherDummy.OtherBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _otherBehavior;
+		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior;
 
 		public Handler(
 			global::Dummy.GetUsersQuery.HandleBehavior HandleBehavior,
-			global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> SecondLoggingBehavior1,
-			global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> LoggingBehavior1,
-			global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> SecondLoggingBehavior,
-			global::YetAnotherDummy.OtherBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> OtherBehavior,
-			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> LoggingBehavior
+			global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> secondLoggingBehavior1,
+			global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior1,
+			global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> secondLoggingBehavior,
+			global::YetAnotherDummy.OtherBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> otherBehavior,
+			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior
 		)
 		{
 			_HandleBehavior = HandleBehavior;
-			_LoggingBehavior = LoggingBehavior;
-			_OtherBehavior = OtherBehavior;
-			_SecondLoggingBehavior = SecondLoggingBehavior;
-			_LoggingBehavior1 = LoggingBehavior1;
-			_SecondLoggingBehavior1 = SecondLoggingBehavior1;
+			_loggingBehavior = loggingBehavior;
+			_otherBehavior = otherBehavior;
+			_secondLoggingBehavior = secondLoggingBehavior;
+			_loggingBehavior1 = loggingBehavior1;
+			_secondLoggingBehavior1 = secondLoggingBehavior1;
 
-			_SecondLoggingBehavior1.SetInnerHandler(_HandleBehavior);
-			_LoggingBehavior1.SetInnerHandler(_SecondLoggingBehavior1);
-			_SecondLoggingBehavior.SetInnerHandler(_LoggingBehavior1);
-			_OtherBehavior.SetInnerHandler(_SecondLoggingBehavior);
-			_LoggingBehavior.SetInnerHandler(_OtherBehavior);
+			_secondLoggingBehavior1.SetInnerHandler(_HandleBehavior);
+			_loggingBehavior1.SetInnerHandler(_secondLoggingBehavior1);
+			_secondLoggingBehavior.SetInnerHandler(_loggingBehavior1);
+			_otherBehavior.SetInnerHandler(_secondLoggingBehavior);
+			_loggingBehavior.SetInnerHandler(_otherBehavior);
 		}
 
 		public async global::System.Threading.Tasks.ValueTask<IEnumerable<global::Dummy.User>> HandleAsync(
@@ -42,7 +42,7 @@ partial class GetUsersQuery
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
 		{
-			return await _LoggingBehavior
+			return await _loggingBehavior
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 		}

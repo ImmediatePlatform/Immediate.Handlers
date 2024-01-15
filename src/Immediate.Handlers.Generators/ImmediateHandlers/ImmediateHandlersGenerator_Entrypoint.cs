@@ -160,13 +160,17 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			return count == 0 ? string.Empty : $"{count}";
 		}
 
+#pragma warning disable CA1308 // Normalize strings to uppercase
 		var renderBehaviors = pipelineBehaviors
 			.Select(b => new
 			{
 				b!.NonGenericTypeName,
-				VariableName = b.Name + GetVariableNameSuffix(b.Name)
+				VariableName = b.Name[0..1].ToLowerInvariant()
+					+ b.Name[1..]
+					+ GetVariableNameSuffix(b.Name)
 			})
 			.ToList();
+#pragma warning restore CA1308 // Normalize strings to uppercase
 
 		var handlerSource = template.Render(new
 		{
