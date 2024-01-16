@@ -1,7 +1,11 @@
+using Microsoft.Extensions.DependencyInjection;
+
 #pragma warning disable CS1591
 
-namespace Microsoft.Extensions.DependencyInjection;
+{{~ if !string.empty namespace ~}}
+namespace {{ namespace }};
 
+{{~ end ~}}
 public static class HandlerServiceCollectionExtensions
 {
 	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddBehaviors(
