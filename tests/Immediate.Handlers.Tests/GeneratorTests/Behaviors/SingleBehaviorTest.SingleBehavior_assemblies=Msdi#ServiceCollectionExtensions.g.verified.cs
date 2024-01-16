@@ -1,7 +1,7 @@
 ﻿//HintName: ServiceCollectionExtensions.g.cs
-#pragma warning disable CS1591
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+#pragma warning disable CS1591
 
 public static class HandlerServiceCollectionExtensions
 {
