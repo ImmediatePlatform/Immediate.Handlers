@@ -19,6 +19,12 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				.Any(r => (r.Display ?? "")
 					.Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
 
+		var @namespace = context
+			.AnalyzerConfigOptionsProvider
+			.Select((c, _) => c.GlobalOptions
+				.TryGetValue("build_property.rootnamespace", out var ns)
+					? ns : null);
+
 		var globalRenderMode = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.RenderModeAttribute",
@@ -63,7 +69,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.Select((h, _) => (h?.DisplayName, h?.OverrideBehaviors))
 			.Collect()
 			.Combine(behaviors)
-			.Combine(hasMsDi);
+			.Combine(@namespace
+				.Combine(hasMsDi));
 
 		context.RegisterSourceOutput(
 			registrationNodes,
@@ -71,7 +78,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				spc,
 				handlers: node.Left.Left,
 				behaviors: node.Left.Right,
-				hasDi: node.Right)
+				hasDi: node.Right.Right,
+				@namespace: node.Right.Left)
 		);
 	}
 
@@ -79,8 +87,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		SourceProductionContext context,
 		ImmutableArray<(string? displayName, EquatableReadOnlyList<Behavior?>? behaviors)> handlers,
 		ImmutableArray<Behavior?> behaviors,
-		bool hasDi
-	)
+		bool hasDi,
+		string? @namespace)
 	{
 		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
@@ -100,6 +108,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 		var source = template.Render(new
 		{
+			Namespace = @namespace,
 			Handlers = handlers.Select(x => x.displayName),
 			Behaviors = behaviors
 				.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))
