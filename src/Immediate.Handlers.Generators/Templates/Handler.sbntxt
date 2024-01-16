@@ -12,26 +12,26 @@ partial class {{ class_name }}
 {
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>
 	{
-		private readonly {{ class_fully_qualified_name }}.HandleBehavior _HandleBehavior;
+		private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
 		{{~ for behavior in (behaviors | array.reverse) ~}}
 		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _{{ behavior.variable_name }};
 		{{~ end ~}}
 
 		public Handler(
-			{{ class_fully_qualified_name }}.HandleBehavior HandleBehavior{{ if behaviors.size > 0 }},{{ end }}
+			{{ class_fully_qualified_name }}.HandleBehavior handleBehavior{{ if behaviors.size > 0 }},{{ end }}
 			{{~ for behavior in (behaviors | array.reverse) ~}}
 			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> {{ behavior.variable_name }}{{ if !for.last }},{{end }}
 			{{~ end ~}}
 		)
 		{
-			_HandleBehavior = HandleBehavior;
+			_handleBehavior = handleBehavior;
 			{{~ for behavior in behaviors ~}}
 			_{{ behavior.variable_name }} = {{ behavior.variable_name }};
 			{{~ end ~}}
 
 			{{~ for behavior in (behaviors | array.reverse) ~}}
 			{{~ if for.first ~}}
-			_{{ behavior.variable_name }}.SetInnerHandler(_HandleBehavior);
+			_{{ behavior.variable_name }}.SetInnerHandler(_handleBehavior);
 			{{~ else ~}}
 			_{{ behavior.variable_name }}.SetInnerHandler(_{{ behaviors[behaviors.size - for.index].variable_name }});
 			{{~ end ~}}
@@ -48,7 +48,7 @@ partial class {{ class_name }}
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 			{{~ else ~}}
-			return await _HandleBehavior
+			return await _handleBehavior
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 			{{~ end ~}}

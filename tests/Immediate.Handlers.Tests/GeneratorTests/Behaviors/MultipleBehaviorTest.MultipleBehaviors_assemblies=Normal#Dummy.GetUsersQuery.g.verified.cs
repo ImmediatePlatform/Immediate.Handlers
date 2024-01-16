@@ -7,7 +7,7 @@ partial class GetUsersQuery
 {
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
 	{
-		private readonly global::Dummy.GetUsersQuery.HandleBehavior _HandleBehavior;
+		private readonly global::Dummy.GetUsersQuery.HandleBehavior _handleBehavior;
 		private readonly global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _secondLoggingBehavior1;
 		private readonly global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior1;
 		private readonly global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _secondLoggingBehavior;
@@ -15,7 +15,7 @@ partial class GetUsersQuery
 		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior;
 
 		public Handler(
-			global::Dummy.GetUsersQuery.HandleBehavior HandleBehavior,
+			global::Dummy.GetUsersQuery.HandleBehavior handleBehavior,
 			global::YetAnotherDummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> secondLoggingBehavior1,
 			global::YetAnotherDummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior1,
 			global::Dummy.SecondLoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> secondLoggingBehavior,
@@ -23,14 +23,14 @@ partial class GetUsersQuery
 			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior
 		)
 		{
-			_HandleBehavior = HandleBehavior;
+			_handleBehavior = handleBehavior;
 			_loggingBehavior = loggingBehavior;
 			_otherBehavior = otherBehavior;
 			_secondLoggingBehavior = secondLoggingBehavior;
 			_loggingBehavior1 = loggingBehavior1;
 			_secondLoggingBehavior1 = secondLoggingBehavior1;
 
-			_secondLoggingBehavior1.SetInnerHandler(_HandleBehavior);
+			_secondLoggingBehavior1.SetInnerHandler(_handleBehavior);
 			_loggingBehavior1.SetInnerHandler(_secondLoggingBehavior1);
 			_secondLoggingBehavior.SetInnerHandler(_loggingBehavior1);
 			_otherBehavior.SetInnerHandler(_secondLoggingBehavior);

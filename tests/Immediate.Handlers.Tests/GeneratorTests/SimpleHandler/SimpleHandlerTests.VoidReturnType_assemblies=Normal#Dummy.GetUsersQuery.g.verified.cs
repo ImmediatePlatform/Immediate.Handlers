@@ -7,13 +7,13 @@ partial class GetUsersQuery
 {
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::System.ValueTuple>
 	{
-		private readonly global::Dummy.GetUsersQuery.HandleBehavior _HandleBehavior;
+		private readonly global::Dummy.GetUsersQuery.HandleBehavior _handleBehavior;
 
 		public Handler(
-			global::Dummy.GetUsersQuery.HandleBehavior HandleBehavior
+			global::Dummy.GetUsersQuery.HandleBehavior handleBehavior
 		)
 		{
-			_HandleBehavior = HandleBehavior;
+			_handleBehavior = handleBehavior;
 
 		}
 
@@ -22,7 +22,7 @@ partial class GetUsersQuery
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
 		{
-			return await _HandleBehavior
+			return await _handleBehavior
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 		}

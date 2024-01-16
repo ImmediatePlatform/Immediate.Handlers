@@ -7,18 +7,18 @@ partial class GetUsersQuery
 {
 	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
 	{
-		private readonly global::Dummy.GetUsersQuery.HandleBehavior _HandleBehavior;
+		private readonly global::Dummy.GetUsersQuery.HandleBehavior _handleBehavior;
 		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior;
 
 		public Handler(
-			global::Dummy.GetUsersQuery.HandleBehavior HandleBehavior,
+			global::Dummy.GetUsersQuery.HandleBehavior handleBehavior,
 			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior
 		)
 		{
-			_HandleBehavior = HandleBehavior;
+			_handleBehavior = handleBehavior;
 			_loggingBehavior = loggingBehavior;
 
-			_loggingBehavior.SetInnerHandler(_HandleBehavior);
+			_loggingBehavior.SetInnerHandler(_handleBehavior);
 		}
 
 		public async global::System.Threading.Tasks.ValueTask<IEnumerable<global::Dummy.User>> HandleAsync(
