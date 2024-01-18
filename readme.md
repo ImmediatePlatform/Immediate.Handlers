@@ -34,7 +34,7 @@ Create a Handler by adding the following code:
 
 ```cs
 [Handler]
-public static class GetUsersQuery
+public static partial class GetUsersQuery
 {
     public record Query;
 
@@ -61,6 +61,23 @@ public class Consumer(GetUsersQuery.Handler handler)
 		var response = await handler.HandleAsync(new(), token);
 		// do something with response
 	}
+}
+```
+
+For Command handlers the code is exactly same, only naming changes:
+```cs
+[Handler]
+public static partial class CreateUserCommand
+{
+    public record Command(string Email);
+
+    private static async ValueTask HandleAsync( 
+        Command _,
+        UsersService usersService,
+        CancellationToken token )
+    {
+        await usersService.CreateUser(_.Email);
+    }
 }
 ```
 
