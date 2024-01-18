@@ -64,7 +64,8 @@ public class Consumer(GetUsersQuery.Handler handler)
 }
 ```
 
-For Command handlers the code is exactly same, only naming changes:
+For Command handlers, use a `ValueTask`, and Immediate.Handlers will insert a return type
+of `ValueTuple` to your handler automatically. 
 ```cs
 [Handler]
 public static partial class CreateUserCommand
