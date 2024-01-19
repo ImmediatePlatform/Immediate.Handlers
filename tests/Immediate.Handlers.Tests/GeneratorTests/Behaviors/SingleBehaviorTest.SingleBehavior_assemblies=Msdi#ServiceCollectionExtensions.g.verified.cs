@@ -5,18 +5,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class HandlerServiceCollectionExtensions
 {
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddBehaviors(
-		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	public static IServiceCollection AddBehaviors(
+		this IServiceCollection services)
 	{
-		services.AddScoped(typeof(global::Dummy.LoggingBehavior<,>));
+		services.AddTransient(typeof(global::Dummy.LoggingBehavior<,>));
 		
 		return services;
 	}
 
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
-		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+	public static IServiceCollection AddHandlers(
+		this IServiceCollection services,
+		ServiceLifetime lifetime = ServiceLifetime.Scoped
+	)
 	{
-		global::Dummy.GetUsersQuery.AddHandlers(services);
+		global::Dummy.GetUsersQuery.AddHandlers(services, lifetime);
 		
 		return services;
 	}

@@ -22,7 +22,7 @@ public partial class Tests
 
 			[assembly: Behaviors(
 				typeof(LoggingBehavior<,>),
-				typeof({|IHR0003:LoggingBehavior<,>|})
+				typeof(LoggingBehavior<,>)
 			)]
 
 			namespace Normal;
@@ -54,7 +54,7 @@ public partial class Tests
 			[Handler]
 			[Behaviors(
 				typeof(LoggingBehavior<,>),
-				typeof({|IHR0003:LoggingBehavior<,>|})
+				typeof(LoggingBehavior<,>)
 			)]
 			public static partial class GetUsersQuery
 			{
