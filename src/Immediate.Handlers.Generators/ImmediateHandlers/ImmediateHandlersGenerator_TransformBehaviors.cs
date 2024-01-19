@@ -39,7 +39,6 @@ public partial class ImmediateHandlersGenerator
 		if (!SymbolEqualityComparer.Default.Equals(ca.Type, arrayTypeSymbol))
 			return [];
 
-		var seenBehaviors = new HashSet<string>();
 		cancellationToken.ThrowIfCancellationRequested();
 		return ca.Values
 			.Select(v =>
@@ -59,9 +58,6 @@ public partial class ImmediateHandlersGenerator
 					return null;
 
 				if (!originalDefinition.ImplementsBaseClass(behaviorTypeSymbol))
-					return null;
-
-				if (!seenBehaviors.Add(originalDefinition.ToString()))
 					return null;
 
 				cancellationToken.ThrowIfCancellationRequested();

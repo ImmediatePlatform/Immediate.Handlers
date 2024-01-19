@@ -106,13 +106,14 @@ partial class {{ class_name }}
 	{{~ if has_ms_di ~}}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
-		global::Microsoft.Extensions.DependencyInjection.IServiceCollection services
+	public static IServiceCollection AddHandlers(
+		IServiceCollection services,
+		ServiceLifetime lifetime = ServiceLifetime.Scoped
 	)
 	{
-		services.AddScoped<{{ class_fully_qualified_name }}.Handler>();
-		services.AddScoped<global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>, {{ class_fully_qualified_name }}.Handler>();
-		services.AddScoped<{{ class_fully_qualified_name }}.HandleBehavior>();
+		services.Add(new(typeof({{ class_fully_qualified_name }}.Handler), typeof({{ class_fully_qualified_name }}.Handler), lifetime));
+		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>), typeof({{ class_fully_qualified_name }}.Handler), lifetime));
+		services.Add(new(typeof({{ class_fully_qualified_name }}.HandleBehavior), typeof({{ class_fully_qualified_name }}.HandleBehavior), lifetime));
 		return services;
 	}
 	{{~ end ~}}

@@ -36,7 +36,8 @@ public class Behavior2<TRequest, TResponse> : Behavior<TRequest, TResponse>
 [Handler]
 [Behaviors(
 	typeof(Behavior1<,>),
-	typeof(Behavior2<,>)
+	typeof(Behavior2<,>),
+	typeof(Behavior1<,>)
 )]
 public static partial class MultipleBehaviorHandler
 {
@@ -58,7 +59,7 @@ public sealed class MultipleBehaviorsTests
 	{
 		var query = new MultipleBehaviorHandler.Query();
 		var handler = new MultipleBehaviorHandler.Handler(
-			new(), new(), new());
+			new(), new(), new(), new());
 
 		_ = await handler.HandleAsync(query);
 
@@ -66,7 +67,9 @@ public sealed class MultipleBehaviorsTests
 			[
 				"Behavior1.Enter",
 				"Behavior2.Enter",
+				"Behavior1.Enter",
 				"Query.HandleAsync",
+				"Behavior1.Exit",
 				"Behavior2.Exit",
 				"Behavior1.Exit",
 			],

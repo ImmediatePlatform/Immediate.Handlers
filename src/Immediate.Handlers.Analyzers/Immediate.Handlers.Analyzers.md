@@ -24,18 +24,6 @@ Handler methods must return a `ValueTask<T>`
 | CodeFix  | False            |
 ---
 
-## IHR0003: Behaviors must not be repeated in a pipeline
-
-Behaviors are not reentrant, and must not be specified more than once in a single pipeline. 
-
-|Item|Value|
-|-|-|
-|Category|ImmediateHandler|
-|Enabled|True|
-|Severity|Error|
-|CodeFix|False|
----
-
 ## IHR0004: RenderMode attribute must be set to a valid RenderMode
 
 An invalid value on the `RenderMode` attribute on the assembly or a Handler is unsupported and will lead to compilation

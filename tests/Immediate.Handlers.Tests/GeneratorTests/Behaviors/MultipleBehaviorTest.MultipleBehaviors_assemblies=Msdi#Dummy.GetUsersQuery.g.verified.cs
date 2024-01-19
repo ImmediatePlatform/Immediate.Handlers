@@ -78,13 +78,14 @@ partial class GetUsersQuery
 	}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(
-		global::Microsoft.Extensions.DependencyInjection.IServiceCollection services
+	public static IServiceCollection AddHandlers(
+		IServiceCollection services,
+		ServiceLifetime lifetime = ServiceLifetime.Scoped
 	)
 	{
-		services.AddScoped<global::Dummy.GetUsersQuery.Handler>();
-		services.AddScoped<global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>, global::Dummy.GetUsersQuery.Handler>();
-		services.AddScoped<global::Dummy.GetUsersQuery.HandleBehavior>();
+		services.Add(new(typeof(global::Dummy.GetUsersQuery.Handler), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
+		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
+		services.Add(new(typeof(global::Dummy.GetUsersQuery.HandleBehavior), typeof(global::Dummy.GetUsersQuery.HandleBehavior), lifetime));
 		return services;
 	}
 }
