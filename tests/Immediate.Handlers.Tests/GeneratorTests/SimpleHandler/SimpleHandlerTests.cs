@@ -2,7 +2,7 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.SimpleHandler;
 
-[UsesVerify]
+
 public class SimpleHandlerTests
 {
 	[Theory]
