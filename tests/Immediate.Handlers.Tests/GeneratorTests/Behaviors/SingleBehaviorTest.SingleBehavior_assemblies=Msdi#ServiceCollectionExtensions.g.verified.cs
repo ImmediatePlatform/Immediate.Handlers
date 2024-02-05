@@ -1,5 +1,6 @@
 ﻿//HintName: ServiceCollectionExtensions.g.cs
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 #pragma warning disable CS1591
 
@@ -8,7 +9,7 @@ public static class HandlerServiceCollectionExtensions
 	public static IServiceCollection AddBehaviors(
 		this IServiceCollection services)
 	{
-		services.AddTransient(typeof(global::Dummy.LoggingBehavior<,>));
+		services.TryAddTransient(typeof(global::Dummy.LoggingBehavior<,>));
 		
 		return services;
 	}

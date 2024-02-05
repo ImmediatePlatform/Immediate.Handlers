@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 #pragma warning disable CS1591
 
@@ -12,7 +13,7 @@ public static class HandlerServiceCollectionExtensions
 		this IServiceCollection services)
 	{
 		{{~ for b in behaviors ~}}
-		services.AddTransient(typeof({{ b.registration_type }}));
+		services.TryAddTransient(typeof({{ b.registration_type }}));
 		{{~ end ~}}
 		
 		return services;
