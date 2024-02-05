@@ -2,7 +2,7 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.InvalidCode;
 
-[UsesVerify]
+
 public class InvalidRenderModeTest
 {
 	[Theory]
