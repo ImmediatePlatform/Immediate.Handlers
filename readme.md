@@ -203,7 +203,7 @@ BenchmarkDotNet v0.13.12, Windows 11 (10.0.22621.3007/22H2/2022Update/SunValley2
   DefaultJob : .NET 8.0.1 (8.0.123.58001), X64 RyuJIT AVX2
 ```
 
-#### [Benchmarks.Simple](./Benchmarks/Benchmark.Simple)
+#### [Benchmarks.Simple](./benchmarks/Benchmark.Simple)
 
 This benchmark tests the various mediator implementations with a single request/response handler.
 
@@ -216,7 +216,7 @@ This benchmark tests the various mediator implementations with a single request/
 | SendRequest_IMediator        | 31.3420 ns | 0.1006 ns | 40.64 |    5 |         - |
 | SendRequest_MediatR          | 68.3384 ns | 0.3453 ns | 88.73 |    6 |     240 B |
 
-#### [Benchmarks.Large](./Benchmarks/Benchmark.Large)
+#### [Benchmarks.Large](./benchmarks/Benchmark.Large)
 
 This benchmark tests the various mediator implementations in the face of 999 request/response handlers.
 
@@ -229,7 +229,7 @@ This benchmark tests the various mediator implementations in the face of 999 req
 | SendRequest_MediatR           |  80.0953 ns | 0.4749 ns | 141.83 |    5 |     240 B |
 | SendRequest_IMediator         | 435.3890 ns | 1.6399 ns | 771.01 |    6 |         - |
 
-#### [Benchmarks.Behaviors](./Benchmarks/Benchmark.Behaviors)
+#### [Benchmarks.Behaviors](./benchmarks/Benchmark.Behaviors)
 
 This benchmark tests a more realistic scenario of using 1 behavior and 1 service.
 
