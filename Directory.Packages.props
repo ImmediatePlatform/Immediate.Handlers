@@ -23,7 +23,7 @@
 		<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
 		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
 		<PackageVersion Include="MinVer" Version="4.3.0" />
 		<PackageVersion Include="PolySharp" Version="1.14.1" />
