@@ -44,18 +44,14 @@ public sealed class RenderModeAnalyzer : DiagnosticAnalyzer
 		if (context.Operation is not IAttributeOperation { Operation: IObjectCreationOperation attribute })
 			return;
 
-		var renderModeAttributeSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.RenderModeAttribute");
-
-		token.ThrowIfCancellationRequested();
-		if (!SymbolEqualityComparer.Default.Equals(attribute.Type?.OriginalDefinition, renderModeAttributeSymbol))
+		if (!attribute.Type.IsRenderModeAttribute())
 			return;
 
 		token.ThrowIfCancellationRequested();
-		var renderModeSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.RenderMode");
 
 		if (attribute.Arguments.Length != 1
 			|| attribute.Arguments[0].Value is not IFieldReferenceOperation value
-			|| !SymbolEqualityComparer.Default.Equals(value.Type?.OriginalDefinition, renderModeSymbol)
+			|| !value.Type.IsRenderMode()
 			|| value.Member.Name is "None")
 		{
 			context.ReportDiagnostic(Diagnostic.Create(

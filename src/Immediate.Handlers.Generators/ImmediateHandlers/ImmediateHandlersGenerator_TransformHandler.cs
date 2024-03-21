@@ -26,10 +26,7 @@ public partial class ImmediateHandlersGenerator
 				.GetMembers()
 				.OfType<IMethodSymbol>()
 				.Where(m => m.IsStatic)
-				.Where(m =>
-					m.Name.Equals("Handle", StringComparison.Ordinal)
-					|| m.Name.Equals("HandleAsync", StringComparison.Ordinal)
-				)
+				.Where(m => m.Name is "Handle" or "HandleAsync")
 				.ToList() is not [var handleMethod])
 		{
 			return null;
@@ -45,17 +42,12 @@ public partial class ImmediateHandlersGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 		var requestType = BuildGenericType(handleMethod.Parameters[0].Type);
 
-		var compilation = context.SemanticModel.Compilation;
-		var taskSymbol = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask`1")!;
-
 		cancellationToken.ThrowIfCancellationRequested();
-		var responseTypeSymbol = handleMethod.GetTaskReturnType(taskSymbol);
+		var responseTypeSymbol = handleMethod.GetTaskReturnType();
 		if (responseTypeSymbol is null)
 		{
-			taskSymbol = compilation.GetTypeByMetadataName("System.Threading.Tasks.ValueTask")!;
-
 			cancellationToken.ThrowIfCancellationRequested();
-			if (!SymbolEqualityComparer.Default.Equals(handleMethod.ReturnType.OriginalDefinition, taskSymbol))
+			if (!handleMethod.ReturnType.IsValueTask())
 				return null;
 		}
 
@@ -75,7 +67,7 @@ public partial class ImmediateHandlersGenerator
 		var renderMode = GetOverrideRenderMode(symbol);
 
 		cancellationToken.ThrowIfCancellationRequested();
-		var behaviors = GetOverrideBehaviors(symbol, context.SemanticModel.Compilation, cancellationToken);
+		var behaviors = GetOverrideBehaviors(symbol, cancellationToken);
 
 		cancellationToken.ThrowIfCancellationRequested();
 		return new()
@@ -104,11 +96,10 @@ public partial class ImmediateHandlersGenerator
 
 	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(
 			INamedTypeSymbol symbol,
-			Compilation compilation,
 			CancellationToken cancellationToken) =>
 		symbol.GetAttribute("Immediate.Handlers.Shared.BehaviorsAttribute")
 				is { } ba
-			? ParseBehaviors(ba, compilation, cancellationToken)
+			? ParseBehaviors(ba, cancellationToken)
 			: null;
 
 	[return: NotNullIfNotNull(nameof(type))]
@@ -131,11 +122,8 @@ public partial class ImmediateHandlersGenerator
 
 	private static void AddBaseTypes(ITypeSymbol type, List<string> implements)
 	{
-		if (type.OriginalDefinition.ToString() is
-				"object"
-				or "System.Collections.IEnumerable"
-				or "System.IEquatable<T>"
-		)
+		if (type.SpecialType is SpecialType.System_Object or SpecialType.System_Collections_IEnumerable
+			|| type.IsIEquatable1())
 		{
 			return;
 		}

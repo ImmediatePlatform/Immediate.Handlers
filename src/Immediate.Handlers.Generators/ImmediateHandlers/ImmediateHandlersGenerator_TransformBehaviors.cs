@@ -1,4 +1,3 @@
-using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
@@ -12,32 +11,35 @@ public partial class ImmediateHandlersGenerator
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var semanticModel = context.SemanticModel;
-		var compilation = semanticModel.Compilation;
-		cancellationToken.ThrowIfCancellationRequested();
-
-		return ParseBehaviors(context.Attributes[0], compilation, cancellationToken);
+		return ParseBehaviors(context.Attributes[0], cancellationToken);
 	}
 
 	private static EquatableReadOnlyList<Behavior?> ParseBehaviors(
 		AttributeData attribute,
-		Compilation compilation,
 		CancellationToken cancellationToken
 	)
 	{
 		cancellationToken.ThrowIfCancellationRequested();
-		var behaviorType = typeof(Behavior<,>);
-		var behaviorTypeSymbol = compilation.GetTypeByMetadataName(behaviorType.FullName!);
-		if (behaviorTypeSymbol is null)
-			return [];
 
 		if (attribute.ConstructorArguments.Length != 1)
 			return [];
 
 		var ca = attribute.ConstructorArguments[0];
-		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(compilation.GetTypeByMetadataName("System.Type")!, 1);
-		if (!SymbolEqualityComparer.Default.Equals(ca.Type, arrayTypeSymbol))
+		if (ca.Type is not IArrayTypeSymbol
+			{
+				ElementType:
+				{
+					Name: "Type",
+					ContainingNamespace:
+					{
+						Name: "System",
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
+			})
+		{
 			return [];
+		}
 
 		cancellationToken.ThrowIfCancellationRequested();
 		return ca.Values
@@ -57,7 +59,7 @@ public partial class ImmediateHandlersGenerator
 				if (originalDefinition.IsAbstract)
 					return null;
 
-				if (!originalDefinition.ImplementsBaseClass(behaviorTypeSymbol))
+				if (!originalDefinition.ImplementsBehavior())
 					return null;
 
 				cancellationToken.ThrowIfCancellationRequested();

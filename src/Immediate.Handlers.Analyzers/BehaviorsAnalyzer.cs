@@ -69,12 +69,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		if (context.Operation is not IAttributeOperation { Operation: IObjectCreationOperation attribute })
 			return;
 
-		var behaviorsAttributeSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.BehaviorsAttribute");
-		if (behaviorsAttributeSymbol is null)
-			return;
-
-		token.ThrowIfCancellationRequested();
-		if (!SymbolEqualityComparer.Default.Equals(attribute.Type?.OriginalDefinition, behaviorsAttributeSymbol))
+		if (!attribute.Type.IsBehaviorsAttribute())
 			return;
 
 		if (attribute.Arguments.Length != 1)
@@ -86,10 +81,22 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		token.ThrowIfCancellationRequested();
 		var array = attribute.Arguments[0].Value;
 
-		var compilation = context.Compilation;
-		var arrayTypeSymbol = compilation.CreateArrayTypeSymbol(compilation.GetTypeByMetadataName("System.Type")!, 1);
-		if (!SymbolEqualityComparer.Default.Equals(array.Type, arrayTypeSymbol)
-			|| array.ChildOperations.Count != 2
+		if (array is not
+			{
+				Type: IArrayTypeSymbol
+				{
+					ElementType:
+					{
+						Name: "Type",
+						ContainingNamespace:
+						{
+							Name: "System",
+							ContainingNamespace.IsGlobalNamespace: true,
+						},
+					},
+				},
+				ChildOperations.Count: 2
+			}
 			|| array.ChildOperations.ElementAt(1) is not IArrayInitializerOperation aio)
 		{
 			// note: this will already be a compiler error anyway
@@ -117,7 +124,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			var location = toes.Type.GetLocation();
 			var originalDefinition = behaviorType.OriginalDefinition;
 
-			if (!ImplementsBaseClass(originalDefinition, baseBehaviorSymbol))
+			if (!originalDefinition.ImplementsBehavior())
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(
@@ -148,10 +155,4 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			}
 		}
 	}
-
-	private static bool ImplementsBaseClass(INamedTypeSymbol typeSymbol, INamedTypeSymbol typeToCheck) =>
-		SymbolEqualityComparer.Default.Equals(typeSymbol, typeToCheck)
-		|| (typeSymbol.BaseType is not null
-			&& ImplementsBaseClass(typeSymbol.BaseType.OriginalDefinition, typeToCheck)
-		);
 }

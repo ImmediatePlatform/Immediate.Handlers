@@ -230,8 +230,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static bool ValidateType(string? type, GenericType implementedTypes) =>
 		type is null
-		|| implementedTypes.Implements
-			.Contains(type);
+		|| implementedTypes.Implements.Contains(type);
 
 	private static Template GetTemplate(string name)
 	{
