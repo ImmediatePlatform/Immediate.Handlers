@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<IsPackable>true</IsPackable>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 	</PropertyGroup>
@@ -25,12 +25,11 @@
 	<ItemGroup>
 		<None Include="../../readme.md" Pack="true" PackagePath="/" />
 		<None Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="false" />
-		<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-		<None Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Analyzers.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-		<None Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.CodeFixes.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-		<None Include="../Immediate.Handlers.Generators/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Generators.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-		<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.dll" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
-		<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.xml" Pack="true" PackagePath="lib/netstandard2.0" Visible="true" />
+		<None Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Analyzers.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
+		<None Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.CodeFixes.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
+		<None Include="../Immediate.Handlers.Generators/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Generators.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
+		<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.dll" Pack="true" PackagePath="lib/net8.0" Visible="true" />
+		<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.xml" Pack="true" PackagePath="lib/net8.0" Visible="true" />
 	</ItemGroup>
 
 	<ItemGroup>

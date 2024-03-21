@@ -15,7 +15,7 @@ public static class GeneratorTestHelper
 		// Create a Roslyn compilation for the syntax tree.
 		var compilation = CSharpCompilation.Create(
 			assemblyName: "Tests",
-			syntaxTrees: new[] { syntaxTree },
+			syntaxTrees: [syntaxTree],
 			references:
 			[
 				.. Basic.Reference.Assemblies.Net80.References.All,
