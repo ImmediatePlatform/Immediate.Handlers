@@ -61,7 +61,7 @@ internal static class ITypeSymbolExtensions
 			},
 		};
 
-	public static bool ImplementsBehavior(this INamedTypeSymbol typeSymbol) =>
+	public static bool IsBehavior2(this ITypeSymbol typeSymbol) =>
 		typeSymbol is
 		{
 			MetadataName: "Behavior`2",
@@ -78,6 +78,9 @@ internal static class ITypeSymbolExtensions
 					},
 				},
 			},
-		}
+		};
+
+	public static bool ImplementsBehavior(this INamedTypeSymbol typeSymbol) =>
+		typeSymbol.IsBehavior2()
 		|| (typeSymbol.BaseType is not null && ImplementsBehavior(typeSymbol.BaseType.OriginalDefinition));
 }
