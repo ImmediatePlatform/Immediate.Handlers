@@ -14,4 +14,5 @@ internal static class DiagnosticIds
 	public const string IHR0008BehaviorsMustUseUnboundGenerics = "IHR0008";
 	public const string IHR0009HandlerMethodMustBeStatic = "IHR0009";
 	public const string IHR0010HandlerMethodMustBeUnique = "IHR0010";
+	public const string IHR0011HandlerMethodMustBePrivate = "IHR0011";
 }

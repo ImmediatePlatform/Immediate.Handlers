@@ -25,7 +25,6 @@ public partial class Tests
 				public record Query;
 			}
 			""",
-			DriverReferenceAssemblies.Normal,
-			[]
+			DriverReferenceAssemblies.Normal
 		).RunAsync();
 }

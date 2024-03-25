@@ -62,6 +62,17 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Static handler method must be static."
 		);
 
+	private static readonly DiagnosticDescriptor HandlerMethodMustBePrivate =
+		new(
+			id: DiagnosticIds.IHR0011HandlerMethodMustBePrivate,
+			title: "Handler method must be private",
+			messageFormat: "Method '{0}' must not conflict with another static handler method",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Static handler method must be static."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 			[
@@ -70,6 +81,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 				HandlerMustNotBeNestedInAnotherClass,
 				HandlerMethodMustBeStatic,
 				HandlerMethodMustBeUnique,
+				HandlerMethodMustBePrivate,
 			]);
 
 	public override void Initialize(AnalysisContext context)
@@ -164,7 +176,19 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 						Diagnostic.Create(
 							HandlerMethodMustReturnTask,
 							methodSymbol.Locations[0],
-							methodSymbol.Name)
+							methodSymbol.Name
+						)
+					);
+				}
+
+				if (methodSymbol.DeclaredAccessibility is not Accessibility.Private)
+				{
+					context.ReportDiagnostic(
+						Diagnostic.Create(
+							HandlerMethodMustBePrivate,
+							methodSymbol.Locations[0],
+							methodSymbol.Name
+						)
 					);
 				}
 

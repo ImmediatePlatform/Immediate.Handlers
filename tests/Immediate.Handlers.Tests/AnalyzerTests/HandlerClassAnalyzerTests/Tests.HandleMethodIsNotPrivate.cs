@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task HandleMethodIsNotStatic_AlertDiagnostic() =>
+	public async Task HandleMethodIsNotPrivate_AlertDiagnostic() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -24,34 +24,13 @@ public partial class Tests
 			{
 				public record Query;
 			
-				private IEnumerable<User>? {|IHR0009:Handle|}(
+				public static ValueTask<int> {|IHR0011:HandleAsync|}(
 					Query _,
-					UsersService usersService,
 					CancellationToken token)
 				{
-					return null;
-				}
-			
-				private IEnumerable<User>? {|IHR0009:HandleAsync|}(
-					Query _,
-					UsersService usersService,
-					CancellationToken token)
-				{
-					return null;
-				}
-						}
-
-			public class User { }
-			public class UsersService(ILogger<UsersService> logger)
-			{
-				public ValueTask<IEnumerable<User>> GetUsers()
-				{
-					_ = logger.ToString();
-					return ValueTask.FromResult(Enumerable.Empty<User>());
+					return ValueTask.FromResult(0);
 				}
 			}
-
-			public interface ILogger<T>;
 			""",
 			DriverReferenceAssemblies.Normal
 		).RunAsync();
