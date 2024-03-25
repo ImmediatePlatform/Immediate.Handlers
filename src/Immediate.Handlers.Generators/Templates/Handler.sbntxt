@@ -24,9 +24,13 @@ partial class {{ class_name }}
 			{{~ end ~}}
 		)
 		{
+			var handlerType = typeof({{ class_name }});
+
 			_handleBehavior = handleBehavior;
 			{{~ for behavior in behaviors ~}}
+
 			_{{ behavior.variable_name }} = {{ behavior.variable_name }};
+			_{{ behavior.variable_name }}.HandlerType = handlerType;
 			{{~ end ~}}
 
 			{{~ for behavior in (behaviors | array.reverse) ~}}
