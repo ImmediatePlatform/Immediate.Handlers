@@ -53,7 +53,6 @@ public partial class Tests
 
 			public interface ILogger<T>;
 			""",
-			DriverReferenceAssemblies.Normal,
-			[]
+			DriverReferenceAssemblies.Normal
 		).RunAsync();
 }

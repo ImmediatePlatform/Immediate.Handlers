@@ -71,7 +71,6 @@ public partial class Tests
 				}
 			}
 			""",
-			DriverReferenceAssemblies.Normal,
-			[]
+			DriverReferenceAssemblies.Normal
 		).RunAsync();
 }

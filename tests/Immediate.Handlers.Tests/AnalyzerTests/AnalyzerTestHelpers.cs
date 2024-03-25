@@ -9,9 +9,7 @@ public static class AnalyzerTestHelpers
 {
 	public static CSharpAnalyzerTest<TAnalyzer, DefaultVerifier> CreateAnalyzerTest<TAnalyzer>(
 		string inputSource,
-		DriverReferenceAssemblies assemblies,
-		IEnumerable<DiagnosticResult> expectedDiagnostics
-	)
+		DriverReferenceAssemblies assemblies)
 		where TAnalyzer : DiagnosticAnalyzer, new()
 	{
 		var csTest = new CSharpAnalyzerTest<TAnalyzer, DefaultVerifier>
@@ -30,9 +28,6 @@ public static class AnalyzerTestHelpers
 
 		csTest.TestState.AdditionalReferences
 			.AddRange(assemblies.GetAdditionalReferences());
-
-		csTest.TestState.ExpectedDiagnostics
-			.AddRange(expectedDiagnostics);
 
 		return csTest;
 	}
