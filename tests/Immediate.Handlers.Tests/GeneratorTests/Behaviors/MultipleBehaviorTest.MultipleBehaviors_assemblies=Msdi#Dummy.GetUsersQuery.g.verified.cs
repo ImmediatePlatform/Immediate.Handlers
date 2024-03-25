@@ -25,12 +25,24 @@ partial class GetUsersQuery
 			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior
 		)
 		{
+			var handlerType = typeof(GetUsersQuery);
+
 			_handleBehavior = handleBehavior;
+
 			_loggingBehavior = loggingBehavior;
+			_loggingBehavior.HandlerType = handlerType;
+
 			_otherBehavior = otherBehavior;
+			_otherBehavior.HandlerType = handlerType;
+
 			_secondLoggingBehavior = secondLoggingBehavior;
+			_secondLoggingBehavior.HandlerType = handlerType;
+
 			_loggingBehavior1 = loggingBehavior1;
+			_loggingBehavior1.HandlerType = handlerType;
+
 			_secondLoggingBehavior1 = secondLoggingBehavior1;
+			_secondLoggingBehavior1.HandlerType = handlerType;
 
 			_secondLoggingBehavior1.SetInnerHandler(_handleBehavior);
 			_loggingBehavior1.SetInnerHandler(_secondLoggingBehavior1);

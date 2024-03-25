@@ -13,6 +13,8 @@ partial class GetUsersQuery
 			global::Dummy.GetUsersQuery.HandleBehavior handleBehavior
 		)
 		{
+			var handlerType = typeof(GetUsersQuery);
+
 			_handleBehavior = handleBehavior;
 
 		}

@@ -14,6 +14,11 @@ namespace Immediate.Handlers.Shared;
 /// </typeparam>
 public abstract class Behavior<TRequest, TResponse>
 {
+	/// <summary>
+	///		The <see cref="Type"/> of the Handler class for the current request.
+	/// </summary>
+	public Type HandlerType { get; [EditorBrowsable(EditorBrowsableState.Never)] set; } = default!;
+
 	private Behavior<TRequest, TResponse>? _innerHandler;
 
 	[DoesNotReturn]
