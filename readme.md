@@ -41,7 +41,8 @@ public static partial class GetUsersQuery
     private static ValueTask<IEnumerable<User>> HandleAsync(
         Query _,
         UsersService usersService,
-        CancellationToken token)
+        CancellationToken token
+	)
     {
         return usersService.GetUsers();
     }
@@ -73,11 +74,12 @@ public static partial class CreateUserCommand
     public record Command(string Email);
 
     private static async ValueTask HandleAsync( 
-        Command _,
+        Command command,
         UsersService usersService,
-        CancellationToken token )
+        CancellationToken token
+	)
     {
-        await usersService.CreateUser(_.Email);
+        await usersService.CreateUser(command.Email);
     }
 }
 ```
