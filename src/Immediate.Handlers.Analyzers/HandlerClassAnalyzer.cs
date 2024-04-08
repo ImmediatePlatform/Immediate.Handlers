@@ -66,7 +66,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0011HandlerMethodMustBePrivate,
 			title: "Handler method must be private",
-			messageFormat: "Method '{0}' must not conflict with another static handler method",
+			messageFormat: "Method '{0}' must be set to private",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
