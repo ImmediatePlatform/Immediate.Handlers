@@ -27,7 +27,7 @@
 		<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
 		<PackageVersion Include="MinVer" Version="5.0.0" />
 		<PackageVersion Include="PolySharp" Version="1.14.1" />
-		<PackageVersion Include="Scriban" Version="5.9.1" />
+		<PackageVersion Include="Scriban" Version="5.10.0" />
 		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 		<PackageVersion Include="Verify.SourceGenerators" Version="2.2.0" />
