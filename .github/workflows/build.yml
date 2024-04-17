@@ -33,4 +33,6 @@ jobs:
       run: dotnet test -c Release --no-build --logger GitHubActions
 
     - name: Upload coverage reports to Codecov with GitHub Action
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
