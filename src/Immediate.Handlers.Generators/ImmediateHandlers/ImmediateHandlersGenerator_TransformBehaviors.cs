@@ -97,32 +97,47 @@ public partial class ImmediateHandlersGenerator
 
 		var originalDefinition = symbol.OriginalDefinition;
 
-		var requestConstraints = originalDefinition
-			.TypeParameters[0]
-			.ConstraintTypes;
-		if (requestConstraints.Length > 1)
+		if (GetConstraintType(originalDefinition.TypeParameters[0]) is not (true, var requestType))
 			return null;
 
-		var requestType = requestConstraints.Length == 1
-			? requestConstraints[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
-			: null;
-
 		cancellationToken.ThrowIfCancellationRequested();
-		var responseConstraints = originalDefinition
-			.TypeParameters[1]
-			.ConstraintTypes;
-		if (responseConstraints.Length > 1)
+
+		if (GetConstraintType(originalDefinition.TypeParameters[1]) is not (true, var responseType))
 			return null;
 
-		var responseType = responseConstraints.Length == 1
-			? responseConstraints[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
-			: null;
-
 		cancellationToken.ThrowIfCancellationRequested();
+
 		return new()
 		{
 			RequestType = requestType,
 			ResponseType = responseType,
 		};
+	}
+
+	private static (bool Valid, string? Constraint) GetConstraintType(ITypeParameterSymbol parameter)
+	{
+		if (parameter.ConstraintTypes is [])
+			return (true, null);
+
+		if (parameter.ConstraintTypes is not [var constraint])
+			return default;
+
+		var displayString = constraint.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+		if (constraint is INamedTypeSymbol
+			{
+				IsGenericType: true,
+				TypeArguments:
+				[
+					ITypeParameterSymbol s,
+				]
+			}
+			&& s.Name == parameter.Name
+		)
+		{
+			displayString = displayString.Replace(parameter.Name, "_TRequest_");
+		}
+
+		return (true, displayString);
 	}
 }
