@@ -97,11 +97,13 @@ public partial class ImmediateHandlersGenerator
 
 		var originalDefinition = symbol.OriginalDefinition;
 
-		var requestType = GetConstraintType(originalDefinition.TypeParameters[0]);
+		if (GetConstraintType(originalDefinition.TypeParameters[0]) is not (true, var requestType))
+			return null;
 
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var responseType = GetConstraintType(originalDefinition.TypeParameters[1]);
+		if (GetConstraintType(originalDefinition.TypeParameters[1]) is not (true, var responseType))
+			return null;
 
 		cancellationToken.ThrowIfCancellationRequested();
 
@@ -112,10 +114,13 @@ public partial class ImmediateHandlersGenerator
 		};
 	}
 
-	private static string? GetConstraintType(ITypeParameterSymbol parameter)
+	private static (bool Valid, string? Constraint) GetConstraintType(ITypeParameterSymbol parameter)
 	{
-		if (parameter.ConstraintTypes is not [{ } constraint])
-			return null;
+		if (parameter.ConstraintTypes is [])
+			return (true, null);
+
+		if (parameter.ConstraintTypes is not [var constraint])
+			return default;
 
 		var displayString = constraint.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
@@ -133,6 +138,6 @@ public partial class ImmediateHandlersGenerator
 			displayString = displayString.Replace(parameter.Name, "_TRequest_");
 		}
 
-		return displayString;
+		return (true, displayString);
 	}
 }
