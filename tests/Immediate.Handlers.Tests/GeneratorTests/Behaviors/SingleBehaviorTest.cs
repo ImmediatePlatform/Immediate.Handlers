@@ -6,6 +6,7 @@ namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
 public class SingleBehaviorTest
 {
 	private const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;

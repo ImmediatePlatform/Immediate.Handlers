@@ -2,7 +2,6 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.SimpleHandler;
 
-
 public class SimpleHandlerTests
 {
 	[Theory]
@@ -11,6 +10,7 @@ public class SimpleHandlerTests
 	{
 		var driver = GeneratorTestHelper.GetDriver(
 			"""
+			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 			
@@ -44,6 +44,7 @@ public class SimpleHandlerTests
 	{
 		var driver = GeneratorTestHelper.GetDriver(
 			"""
+			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 			
@@ -58,6 +59,40 @@ public class SimpleHandlerTests
 					Query _,
 					CancellationToken token)
 				{
+				}
+			}
+			""",
+			assemblies);
+
+		var result = driver.GetRunResult();
+		Assert.Empty(result.Diagnostics);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join("_", assemblies));
+	}
+
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	public async Task MissingCancellationToken(DriverReferenceAssemblies assemblies)
+	{
+		var driver = GeneratorTestHelper.GetDriver(
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			
+			namespace Dummy;
+
+			[Handler]
+			public static class GetUsersQuery
+			{
+				public record Query;
+
+				private static ValueTask<int> HandleAsync(
+					Query _
+				)
+				{
+					return 0;
 				}
 			}
 			""",

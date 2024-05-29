@@ -11,6 +11,7 @@ public sealed class CrtpBehaviorTest
 	{
 		var driver = GeneratorTestHelper.GetDriver(
 			"""
+			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 

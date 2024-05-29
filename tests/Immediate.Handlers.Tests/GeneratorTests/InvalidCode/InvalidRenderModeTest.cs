@@ -10,6 +10,7 @@ public class InvalidRenderModeTest
 	public async Task InvalidRenderModeOnAssemblyShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
@@ -54,6 +55,7 @@ public interface ILogger<T>;
 	public async Task InvalidRenderModeOnHandlerShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Immediate.Handlers.Shared;
 

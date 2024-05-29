@@ -52,8 +52,8 @@ partial class ConstraintHandler
 		{
 			await global::ConstraintHandler
 				.HandleAsync(
-					request,
-					cancellationToken
+					request
+					, cancellationToken
 				)
 				.ConfigureAwait(false);
 

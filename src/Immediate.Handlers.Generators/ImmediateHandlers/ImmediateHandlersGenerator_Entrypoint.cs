@@ -169,6 +169,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 			handler.MethodName,
 			HandlerParameters = handler.Parameters,
+			handler.UseToken,
 
 			RequestType = handler.RequestType.Name,
 			ResponseType = responseType.Name,
