@@ -75,4 +75,19 @@ internal static class ITypeSymbolExtensions
 				ContainingNamespace.IsGlobalNamespace: true
 			},
 		};
+
+	public static bool IsCancellationToken(this ITypeSymbol typeSymbol) =>
+		typeSymbol is INamedTypeSymbol
+		{
+			Name: "CancellationToken",
+			ContainingNamespace:
+			{
+				Name: "Threading",
+				ContainingNamespace:
+				{
+					Name: "System",
+					ContainingNamespace.IsGlobalNamespace: true
+				}
+			}
+		};
 }

@@ -40,6 +40,7 @@ public partial class ImmediateHandlersGenerator
 
 		public required string MethodName { get; init; }
 		public required EquatableReadOnlyList<Parameter> Parameters { get; init; }
+		public required bool UseToken { get; init; }
 
 		public required GenericType RequestType { get; init; }
 		public required GenericType? ResponseType { get; init; }

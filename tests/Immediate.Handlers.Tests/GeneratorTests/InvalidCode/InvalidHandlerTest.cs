@@ -11,6 +11,7 @@ public class InvalidHandlerTest
 	public async Task HandlerWithoutHandlerMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
@@ -52,6 +53,7 @@ public interface ILogger<T>;
 	public async Task HandlerWithTwoHandlersMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
@@ -106,9 +108,10 @@ public interface ILogger<T>;
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task HandlerWithOneParameterShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	public async Task HandlerWithNoParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
@@ -126,8 +129,7 @@ public static class GetUsersQuery
 {
 	public record Query;
 
-	private static ValueTask<IEnumerable<User>> HandleAsync(
-		Query _)
+	private static ValueTask<IEnumerable<User>> HandleAsync()
 	{
 		return usersService.GetUsers();
 	}
@@ -156,6 +158,7 @@ public interface ILogger<T>;
 	public async Task HandlerWithVoidResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
@@ -204,6 +207,7 @@ public interface ILogger<T>;
 	public async Task HandlerWithTaskResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
@@ -253,6 +257,7 @@ public interface ILogger<T>;
 	public async Task NestedHandlerShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;

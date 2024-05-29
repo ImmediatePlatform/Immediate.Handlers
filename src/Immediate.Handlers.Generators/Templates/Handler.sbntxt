@@ -85,21 +85,25 @@ partial class {{ class_name }}
 			{{~ if !is_implicit_value_tuple ~}}
 			return await {{ class_fully_qualified_name }}
 				.{{ method_name }}(
-					request,
+					request
 					{{~ for parameter in handler_parameters ~}}
-					_{{ parameter.name }},
+					, _{{ parameter.name }}
 					{{~ end ~}}
-					cancellationToken
+					{{~ if use_token ~}}
+					, cancellationToken
+					{{~ end ~}}
 				)
 				.ConfigureAwait(false);
 			{{~ else ~}}
 			await {{ class_fully_qualified_name }}
 				.{{ method_name }}(
-					request,
+					request
 					{{~ for parameter in handler_parameters ~}}
-					_{{ parameter.name }},
+					, _{{ parameter.name }}
 					{{~ end ~}}
-					cancellationToken
+					{{~ if use_token ~}}
+					, cancellationToken
+					{{~ end ~}}
 				)
 				.ConfigureAwait(false);
 

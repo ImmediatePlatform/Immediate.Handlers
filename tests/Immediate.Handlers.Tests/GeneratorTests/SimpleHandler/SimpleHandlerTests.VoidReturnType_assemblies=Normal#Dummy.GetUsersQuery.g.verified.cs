@@ -46,8 +46,8 @@ partial class GetUsersQuery
 		{
 			await global::Dummy.GetUsersQuery
 				.HandleAsync(
-					request,
-					cancellationToken
+					request
+					, cancellationToken
 				)
 				.ConfigureAwait(false);
 

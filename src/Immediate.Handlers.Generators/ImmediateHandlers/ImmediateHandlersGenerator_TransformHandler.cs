@@ -33,14 +33,17 @@ public partial class ImmediateHandlersGenerator
 		}
 
 		// must have request type and cancellation token
-		if (handleMethod.Parameters.Length < 2)
+		if (handleMethod.Parameters is [])
 			return null;
 
 		if (handleMethod.ReturnsVoid)
 			return null;
 
 		cancellationToken.ThrowIfCancellationRequested();
+
 		var requestType = BuildGenericType(handleMethod.Parameters[0].Type);
+		var useToken = handleMethod.Parameters[^1]
+			.Type.IsCancellationToken();
 
 		cancellationToken.ThrowIfCancellationRequested();
 		var responseTypeSymbol = handleMethod.GetTaskReturnType();
@@ -55,7 +58,8 @@ public partial class ImmediateHandlersGenerator
 
 		cancellationToken.ThrowIfCancellationRequested();
 		var parameters = handleMethod.Parameters
-			.Skip(1).Take(handleMethod.Parameters.Length - 2)
+			.Skip(1)
+			.Take(handleMethod.Parameters.Length - (useToken ? 2 : 1))
 			.Select(p => new Parameter
 			{
 				Type = p.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
@@ -77,11 +81,11 @@ public partial class ImmediateHandlersGenerator
 			DisplayName = displayName,
 
 			MethodName = handleMethod.Name,
+			Parameters = parameters,
+			UseToken = useToken,
 
 			RequestType = requestType,
 			ResponseType = responseType,
-
-			Parameters = parameters,
 
 			OverrideRenderMode = renderMode,
 			OverrideBehaviors = behaviors,
