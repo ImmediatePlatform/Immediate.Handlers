@@ -10,7 +10,7 @@ namespace {{ namespace }};
 {{~ end ~}}
 partial class {{ class_name }}
 {
-	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>
+	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>
 	{
 		private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
 		{{~ for behavior in (behaviors | array.reverse) ~}}
