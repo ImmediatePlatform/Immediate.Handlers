@@ -3,7 +3,7 @@
 
 partial class ConstraintHandler
 {
-	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::ConstraintHandler.Command, global::System.ValueTuple>
+	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<global::ConstraintHandler.Command, global::System.ValueTuple>
 	{
 		private readonly global::ConstraintHandler.HandleBehavior _handleBehavior;
 		private readonly global::ConstraintBehavior<global::ConstraintHandler.Command, global::System.ValueTuple> _constraintBehavior;

@@ -5,7 +5,7 @@ namespace Dummy;
 
 partial class GetUsersQuery
 {
-	public sealed class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::System.ValueTuple>
+	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::System.ValueTuple>
 	{
 		private readonly global::Dummy.GetUsersQuery.HandleBehavior _handleBehavior;
 
