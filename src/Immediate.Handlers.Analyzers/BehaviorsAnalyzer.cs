@@ -43,7 +43,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-		ImmutableArray.Create<DiagnosticDescriptor>(
+		ImmutableArray.Create(
 		[
 			BehaviorsMustInheritFromBehavior,
 			BehaviorsMustHaveTwoGenericParameters,

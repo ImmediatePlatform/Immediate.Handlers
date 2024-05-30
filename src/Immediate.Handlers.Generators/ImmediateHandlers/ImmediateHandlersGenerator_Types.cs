@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Immediate.Handlers.Shared;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
@@ -46,7 +45,6 @@ public partial class ImmediateHandlersGenerator
 		public required GenericType? ResponseType { get; init; }
 
 		public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
-		public RenderMode? OverrideRenderMode { get; init; }
 	}
 
 	[ExcludeFromCodeCoverage]

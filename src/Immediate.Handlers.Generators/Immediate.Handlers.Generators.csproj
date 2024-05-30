@@ -13,10 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Include="../Immediate.Handlers.Shared/RenderMode.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.Bcl.HashCode" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />

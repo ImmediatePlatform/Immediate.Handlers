@@ -75,14 +75,14 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
-			[
-				HandlerMethodMustExist,
-				HandlerMethodMustReturnTask,
-				HandlerMustNotBeNestedInAnotherClass,
-				HandlerMethodMustBeStatic,
-				HandlerMethodMustBeUnique,
-				HandlerMethodMustBePrivate,
-			]);
+		[
+			HandlerMethodMustExist,
+			HandlerMethodMustReturnTask,
+			HandlerMustNotBeNestedInAnotherClass,
+			HandlerMethodMustBeStatic,
+			HandlerMethodMustBeUnique,
+			HandlerMethodMustBePrivate,
+		]);
 
 	public override void Initialize(AnalysisContext context)
 	{

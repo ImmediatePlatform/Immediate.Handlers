@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-[assembly: RenderMode(renderMode: RenderMode.Normal)]
-
 [assembly: Behaviors(
 	typeof(LoggingBehavior<,>),
 	typeof(YetAnotherDummy.OtherBehavior<,>),
