@@ -2,7 +2,6 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
 
-
 public class SingleBehaviorTest
 {
 	private const string Input = """

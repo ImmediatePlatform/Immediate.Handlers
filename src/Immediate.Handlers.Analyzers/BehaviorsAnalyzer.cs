@@ -9,7 +9,7 @@ namespace Immediate.Handlers.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 {
-	private static readonly DiagnosticDescriptor BehaviorsMustInheritFromBehavior =
+	public static readonly DiagnosticDescriptor BehaviorsMustInheritFromBehavior =
 		new(
 			id: DiagnosticIds.IHR0006BehaviorsMustInheritFromBehavior,
 			title: "Behaviors must inherit from Behavior<,>",
@@ -20,7 +20,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			description: "All Behaviors must inherit from Behavior<,>."
 		);
 
-	private static readonly DiagnosticDescriptor BehaviorsMustHaveTwoGenericParameters =
+	public static readonly DiagnosticDescriptor BehaviorsMustHaveTwoGenericParameters =
 		new(
 			id: DiagnosticIds.IHR0007BehaviorsMustHaveTwoGenericParameters,
 			title: "Behaviors must have two generic parameters",
@@ -31,7 +31,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			description: "All Behaviors must have two generic parameters, correctly referencing `TRequest` and `TResponse`."
 		);
 
-	private static readonly DiagnosticDescriptor BehaviorsMustUseUnboundGenerics =
+	public static readonly DiagnosticDescriptor BehaviorsMustUseUnboundGenerics =
 		new(
 			id: DiagnosticIds.IHR0008BehaviorsMustUseUnboundGenerics,
 			title: "Behaviors must use unbound generics",

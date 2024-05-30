@@ -2,7 +2,6 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.InvalidCode;
 
-
 public class InvalidBehaviorsTest
 {
 	[Theory]

@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 {
-	private static readonly DiagnosticDescriptor HandlerMethodMustExist =
+	public static readonly DiagnosticDescriptor HandlerMethodMustExist =
 		new(
 			id: DiagnosticIds.IHR0001HandlerMethodMustExist,
 			title: "Handler type should implement a Handle/HandleAsync method",
@@ -18,7 +18,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Classes annotated with a Handler attribute should implement a Handle/HandleAsync method."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
+	public static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
 		new(
 			id: DiagnosticIds.IHR0002HandlerMethodMustReturnTask,
 			title: "Handler method must return a ValueTask<T>",
@@ -29,7 +29,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler methods must return a ValueTask<T>."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
+	public static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
 		new(
 			id: DiagnosticIds.IHR0005HandlerClassMustNotBeNested,
 			title: "Handler nesting is not allowed",
@@ -40,7 +40,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler class must not be nested in another type."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerMethodMustBeStatic =
+	public static readonly DiagnosticDescriptor HandlerMethodMustBeStatic =
 		new(
 			id: DiagnosticIds.IHR0009HandlerMethodMustBeStatic,
 			title: "Handler method must be static",
@@ -51,7 +51,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handler method must be static."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerMethodMustBeUnique =
+	public static readonly DiagnosticDescriptor HandlerMethodMustBeUnique =
 		new(
 			id: DiagnosticIds.IHR0010HandlerMethodMustBeUnique,
 			title: "Handler method must be unique",
@@ -62,7 +62,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Static handler method must be static."
 		);
 
-	private static readonly DiagnosticDescriptor HandlerMethodMustBePrivate =
+	public static readonly DiagnosticDescriptor HandlerMethodMustBePrivate =
 		new(
 			id: DiagnosticIds.IHR0011HandlerMethodMustBePrivate,
 			title: "Handler method must be private",
