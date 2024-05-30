@@ -2,7 +2,6 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
 
-
 public class MultipleBehaviorTest
 {
 	private const string Input = """
@@ -10,8 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
-
-[assembly: RenderMode(renderMode: RenderMode.Normal)]
 
 [assembly: Behaviors(
 	typeof(LoggingBehavior<,>),

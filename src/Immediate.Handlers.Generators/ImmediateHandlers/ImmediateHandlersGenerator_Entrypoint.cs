@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using System.Reflection;
-using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Scriban;
@@ -25,14 +24,6 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				.TryGetValue("build_property.rootnamespace", out var ns)
 					? ns : null);
 
-		var globalRenderMode = context.SyntaxProvider
-			.ForAttributeWithMetadataName(
-				"Immediate.Handlers.Shared.RenderModeAttribute",
-				(node, _) => node is CompilationUnitSyntax,
-				TransformRenderMode
-			)
-			.Collect();
-
 		var behaviors = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.BehaviorsAttribute",
@@ -50,8 +41,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var handlerNodes = handlers
 			.Combine(behaviors)
-			.Combine(globalRenderMode
-				.Combine(hasMsDi));
+			.Combine(hasMsDi);
 
 		var template = GetTemplate("Handler");
 		context.RegisterSourceOutput(
@@ -60,8 +50,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				spc,
 				handler: node.Left.Left,
 				behaviors: node.Left.Right,
-				renderModes: node.Right.Left,
-				hasMsDi: node.Right.Right,
+				hasMsDi: node.Right,
 				template)
 		);
 
@@ -123,7 +112,6 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		SourceProductionContext context,
 		Handler? handler,
 		ImmutableArray<Behavior?> behaviors,
-		ImmutableArray<RenderMode> renderModes,
 		bool hasMsDi,
 		Template template
 	)
@@ -132,16 +120,6 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		cancellationToken.ThrowIfCancellationRequested();
 
 		if (handler == null)
-			return;
-
-		if (renderModes.Length > 1)
-			return;
-
-		var renderMode = handler.OverrideRenderMode
-			?? (renderModes.Length == 0 ? RenderMode.Normal : renderModes[0]);
-
-		// Only support normal render mode for now
-		if (renderMode is not RenderMode.Normal)
 			return;
 
 		var responseType = handler.ResponseType ?? new()

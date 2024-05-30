@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
@@ -68,9 +67,6 @@ public partial class ImmediateHandlersGenerator
 			.ToEquatableReadOnlyList();
 
 		cancellationToken.ThrowIfCancellationRequested();
-		var renderMode = GetOverrideRenderMode(symbol);
-
-		cancellationToken.ThrowIfCancellationRequested();
 		var behaviors = GetOverrideBehaviors(symbol, cancellationToken);
 
 		cancellationToken.ThrowIfCancellationRequested();
@@ -87,16 +83,9 @@ public partial class ImmediateHandlersGenerator
 			RequestType = requestType,
 			ResponseType = responseType,
 
-			OverrideRenderMode = renderMode,
 			OverrideBehaviors = behaviors,
 		};
 	}
-
-	private static RenderMode? GetOverrideRenderMode(INamedTypeSymbol symbol) =>
-		symbol.GetAttribute("Immediate.Handlers.Shared.RenderModeAttribute")
-				is { } rma
-			? ParseRenderMode(rma)
-			: null;
 
 	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(
 			INamedTypeSymbol symbol,

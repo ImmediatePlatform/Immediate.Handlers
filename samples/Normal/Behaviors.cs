@@ -1,8 +1,6 @@
 using Immediate.Handlers.Shared;
 using Normal;
 
-[assembly: RenderMode(renderMode: RenderMode.Normal)]
-
 [assembly: Behaviors(
 	typeof(LoggingBehavior<,>)
 )]

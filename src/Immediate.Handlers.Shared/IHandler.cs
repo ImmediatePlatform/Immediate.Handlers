@@ -1,4 +1,4 @@
-﻿namespace Immediate.Handlers.Shared;
+namespace Immediate.Handlers.Shared;
 
 /// <summary>
 ///		Represents an abstraction implemented by the source-generated handlers

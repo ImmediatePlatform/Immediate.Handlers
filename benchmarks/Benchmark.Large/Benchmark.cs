@@ -16,10 +16,10 @@ public sealed partial class SomeHandlerClass
 	: Mediator.IRequestHandler<SomeRequest, SomeResponse>,
 	  MediatR.IRequestHandler<SomeRequest, SomeResponse>
 {
-	private static readonly SomeResponse Response = new(Guid.NewGuid());
+	private static readonly SomeResponse s_response = new(Guid.NewGuid());
 
-	private static readonly Task<SomeResponse> TResponse = Task.FromResult(Response);
-	private static ValueTask<SomeResponse> VtResponse => new(Response);
+	private static readonly Task<SomeResponse> s_tResponse = Task.FromResult(s_response);
+	private static ValueTask<SomeResponse> VtResponse => new(s_response);
 
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
@@ -36,7 +36,7 @@ public sealed partial class SomeHandlerClass
 	Task<SomeResponse> MediatR.IRequestHandler<SomeRequest, SomeResponse>.Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => TResponse;
+	) => s_tResponse;
 
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	private static ValueTask<SomeResponse> HandleAsync(

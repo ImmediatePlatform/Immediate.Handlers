@@ -5,7 +5,7 @@ namespace Normal;
 [Handler]
 public static partial class GetWeatherForecast
 {
-	private static readonly string[] Summaries =
+	private static readonly string[] s_summaries =
 	[
 		"Freezing",
 		"Bracing",
@@ -39,7 +39,7 @@ public static partial class GetWeatherForecast
 				(
 					DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
 					Random.Shared.Next(-20, 55),
-					Summaries[Random.Shared.Next(Summaries.Length)]
+					s_summaries[Random.Shared.Next(s_summaries.Length)]
 				)
 			);
 

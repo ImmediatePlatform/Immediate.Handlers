@@ -23,44 +23,6 @@ internal static class ITypeSymbolExtensions
 			},
 		};
 
-	public static bool IsRenderModeAttribute(this ITypeSymbol? typeSymbol) =>
-		typeSymbol is
-		{
-			Name: "RenderModeAttribute",
-			ContainingNamespace:
-			{
-				Name: "Shared",
-				ContainingNamespace:
-				{
-					Name: "Handlers",
-					ContainingNamespace:
-					{
-						Name: "Immediate",
-						ContainingNamespace.IsGlobalNamespace: true,
-					},
-				},
-			},
-		};
-
-	public static bool IsRenderMode(this ITypeSymbol? typeSymbol) =>
-		typeSymbol is
-		{
-			Name: "RenderMode",
-			ContainingNamespace:
-			{
-				Name: "Shared",
-				ContainingNamespace:
-				{
-					Name: "Handlers",
-					ContainingNamespace:
-					{
-						Name: "Immediate",
-						ContainingNamespace.IsGlobalNamespace: true,
-					},
-				},
-			},
-		};
-
 	public static bool IsBehavior2(this ITypeSymbol typeSymbol) =>
 		typeSymbol is
 		{

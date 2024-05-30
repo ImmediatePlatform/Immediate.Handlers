@@ -79,9 +79,9 @@ public sealed record SomeResponse(Guid Id);
 
 public class SomeService
 {
-	private static readonly SomeResponse Response = new(Guid.NewGuid());
+	private static readonly SomeResponse s_response = new(Guid.NewGuid());
 
-	private static ValueTask<SomeResponse> VtResponse => new(Response);
+	private static ValueTask<SomeResponse> VtResponse => new(s_response);
 
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
