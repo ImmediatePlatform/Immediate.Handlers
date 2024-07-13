@@ -73,6 +73,17 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Static handler method must be static."
 		);
 
+	public static readonly DiagnosticDescriptor HandlerShouldUseCancellationToken =
+		new(
+			id: DiagnosticIds.IHR0012HandlerShouldUseCancellationToken,
+			title: "Handler method should use CancellationToken",
+			messageFormat: "Method '{0}' should receive a `CancellationToken`",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Warning,
+			isEnabledByDefault: true,
+			description: "Handlers should use CancellationToken to properly support cancellation."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
@@ -82,6 +93,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			HandlerMethodMustBeStatic,
 			HandlerMethodMustBeUnique,
 			HandlerMethodMustBePrivate,
+			HandlerShouldUseCancellationToken,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -186,6 +198,17 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 					context.ReportDiagnostic(
 						Diagnostic.Create(
 							HandlerMethodMustBePrivate,
+							methodSymbol.Locations[0],
+							methodSymbol.Name
+						)
+					);
+				}
+
+				if (!methodSymbol.Parameters[^1].Type.IsCancellationToken())
+				{
+					context.ReportDiagnostic(
+						Diagnostic.Create(
+							HandlerShouldUseCancellationToken,
 							methodSymbol.Locations[0],
 							methodSymbol.Name
 						)
