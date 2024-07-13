@@ -45,4 +45,19 @@ internal static class ITypeSymbolExtensions
 	public static bool ImplementsBehavior(this INamedTypeSymbol typeSymbol) =>
 		typeSymbol.IsBehavior2()
 		|| (typeSymbol.BaseType is not null && ImplementsBehavior(typeSymbol.BaseType.OriginalDefinition));
+
+	public static bool IsCancellationToken(this ITypeSymbol typeSymbol) =>
+		typeSymbol is INamedTypeSymbol
+		{
+			Name: "CancellationToken",
+			ContainingNamespace:
+			{
+				Name: "Threading",
+				ContainingNamespace:
+				{
+					Name: "System",
+					ContainingNamespace.IsGlobalNamespace: true
+				}
+			}
+		};
 }
