@@ -5,7 +5,18 @@
 
 version: 2
 updates:
-  - package-ecosystem: "nuget"
+  - package-ecosystem: nuget
+    directory: "/"
+    schedule:
+      interval: weekly
+    rebase-strategy: auto
+    ignore:
+      - dependency-name: "Microsoft.CodeAnalysis.Common"
+      - dependency-name: "Microsoft.CodeAnalysis.CSharp"
+      - dependency-name: "Microsoft.CodeAnalysis.CSharp.Workspaces"
+      - dependency-name: "Microsoft.CodeAnalysis.Workspaces.Common"
+
+  - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
