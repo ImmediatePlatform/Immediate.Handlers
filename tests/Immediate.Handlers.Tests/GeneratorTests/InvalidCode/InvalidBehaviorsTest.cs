@@ -10,18 +10,16 @@ public class InvalidBehaviorsTest
 	public async Task NonBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-namespace Dummy;
+#pragma warning disable CS9113
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
+namespace Dummy;
 
 [Handler]
 [Behaviors(
@@ -42,11 +40,11 @@ public static class GetUsersQuery
 
 public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
 {
-	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
-		var response = await Next(request, cancellationToken);
+		await Task.Delay(1000, cancellationToken);
 
-		return response;
+		return default!;
 	}
 }
 
@@ -60,10 +58,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -73,18 +75,16 @@ public interface ILogger<T>;
 	public async Task BoundGenericShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-namespace Dummy;
+#pragma warning disable CS9113
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
+namespace Dummy;
 
 [Handler]
 [Behaviors(
@@ -124,10 +124,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -137,18 +141,16 @@ public interface ILogger<T>;
 	public async Task NonGenericBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-namespace Dummy;
+#pragma warning disable CS9113
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
+namespace Dummy;
 
 [Handler]
 [Behaviors(
@@ -167,10 +169,10 @@ public static class GetUsersQuery
 	}
 }
 
-public class LoggingBehavior(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
-	: Behavior<GetUsersQuery.Query,IEnumerable<User>>
+public class LoggingBehavior(ILogger<LoggingBehavior> logger)
+	: Behavior<GetUsersQuery.Query, IEnumerable<User>>
 {
-	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public override async ValueTask<IEnumerable<User>> HandleAsync(GetUsersQuery.Query request, CancellationToken cancellationToken)
 	{
 		var response = await Next(request, cancellationToken);
 
@@ -188,10 +190,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -201,18 +207,16 @@ public interface ILogger<T>;
 	public async Task AbstractBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-namespace Dummy;
+#pragma warning disable CS9113
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
+namespace Dummy;
 
 [Handler]
 [Behaviors(
@@ -244,10 +248,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -257,18 +265,18 @@ public interface ILogger<T>;
 	public async Task BehaviorHasTooManyTRequestConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-namespace Dummy;
+#pragma warning disable CS9113
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
+namespace Dummy;
 
 [Handler]
 [Behaviors(
@@ -308,10 +316,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -321,18 +333,18 @@ public interface ILogger<T>;
 	public async Task BehaviorHasTooManyTResponseConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-namespace Dummy;
+#pragma warning disable CS9113
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
+namespace Dummy;
 
 [Handler]
 [Behaviors(
@@ -372,10 +384,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -385,18 +401,16 @@ public interface ILogger<T>;
 	public async Task BehaviorHasTooManyTypeParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
-namespace Dummy;
+#pragma warning disable CS9113
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
+namespace Dummy;
 
 [Handler]
 [Behaviors(
@@ -415,7 +429,7 @@ public static class GetUsersQuery
 	}
 }
 
-public class LoggingBehavior<TRequest, TResponse, TExtra>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+public class LoggingBehavior<TRequest, TResponse, TExtra>(ILogger<LoggingBehavior<TRequest, TResponse, TExtra>> logger)
 	: Behavior<TRequest, TResponse>
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
@@ -436,10 +450,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 }

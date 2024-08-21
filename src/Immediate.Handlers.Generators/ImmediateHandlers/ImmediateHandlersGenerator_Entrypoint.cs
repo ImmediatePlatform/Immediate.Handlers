@@ -105,7 +105,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();
-		context.AddSource("ServiceCollectionExtensions.g.cs", source);
+		context.AddSource("IH.ServiceCollectionExtensions.g.cs", source);
 	}
 
 	private static void RenderHandler(
@@ -158,7 +158,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();
-		context.AddSource($"{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
+		context.AddSource($"IH.{handler.Namespace}.{handler.ClassName}.g.cs", handlerSource);
 	}
 
 	private static List<Behavior?> BuildPipeline(

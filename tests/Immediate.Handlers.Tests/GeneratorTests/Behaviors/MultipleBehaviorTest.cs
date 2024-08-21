@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
@@ -5,10 +6,14 @@ namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
 public class MultipleBehaviorTest
 {
 	private const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
+
+#pragma warning disable CS9113
 
 [assembly: Behaviors(
 	typeof(LoggingBehavior<,>),
@@ -36,7 +41,7 @@ namespace YetAnotherDummy
 	public class OtherBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
 		: Behavior<TRequest, TResponse>
 	{
-		public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 		{
 			var response = await Next(request, cancellationToken);
 
@@ -47,7 +52,7 @@ namespace YetAnotherDummy
 	public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
 		: Behavior<TRequest, TResponse>
 	{
-		public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 		{
 			var response = await Next(request, cancellationToken);
 
@@ -58,7 +63,7 @@ namespace YetAnotherDummy
 	public class SecondLoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
 		: Behavior<TRequest, TResponse>
 	{
-		public override async Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 		{
 			var response = await Next(request, cancellationToken);
 
@@ -67,58 +72,59 @@ namespace YetAnotherDummy
 	}
 }
 
-namespace Dummy;
-
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
+namespace Dummy
 {
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
-
-[Handler]
-public static class GetUsersQuery
-{
-	public record Query;
-
-	private static ValueTask<IEnumerable<User>> HandleAsync(
-		Query _,
-		UsersService usersService,
-		CancellationToken token)
+	public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 	{
-		return usersService.GetUsers();
+		public ValueTask<IEnumerable<User>> GetUsers() =>
+			handler.HandleAsync(new GetUsersQuery.Query());
 	}
-}
 
-public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
-	: Behavior<TRequest, TResponse>
-{
-	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	[Handler]
+	public static partial class GetUsersQuery
 	{
-		var response = await Next(request, cancellationToken);
+		public record Query;
 
-		return response;
+		private static ValueTask<IEnumerable<User>> HandleAsync(
+			Query _,
+			UsersService usersService,
+			CancellationToken token)
+		{
+			return usersService.GetUsers();
+		}
 	}
-}
 
-public class SecondLoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
-	: Behavior<TRequest, TResponse>
-{
-	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+		: Behavior<TRequest, TResponse>
 	{
-		var response = await Next(request, cancellationToken);
+		public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		{
+			var response = await Next(request, cancellationToken);
 
-		return response;
+			return response;
+		}
 	}
-}
 
-public class User { }
-public class UsersService
-{
-	public ValueTask<IEnumerable<User>> GetUsers() =>
-		ValueTask.FromResult(Enumerable.Empty<User>());
-}
+	public class SecondLoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+		: Behavior<TRequest, TResponse>
+	{
+		public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+		{
+			var response = await Next(request, cancellationToken);
 
-public interface ILogger<T>;
+			return response;
+		}
+	}
+
+	public class User { }
+	public class UsersService
+	{
+		public ValueTask<IEnumerable<User>> GetUsers() =>
+			ValueTask.FromResult(Enumerable.Empty<User>());
+	}
+
+	public interface ILogger<T>;
+}
 """;
 
 	[Theory]
@@ -126,10 +132,24 @@ public interface ILogger<T>;
 	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task MultipleBehaviors(DriverReferenceAssemblies assemblies)
 	{
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				.. assemblies switch
+				{
+					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
+					DriverReferenceAssemblies.Msdi =>
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+
+					_ => throw new UnreachableException(),
+				},
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 }
