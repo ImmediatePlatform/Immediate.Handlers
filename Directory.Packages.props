@@ -28,7 +28,7 @@
 	<PackageVersion Include="MinVer" Version="5.0.0" />
 	<PackageVersion Include="PolySharp" Version="1.14.1" />
 	<PackageVersion Include="Scriban" Version="5.10.0" />
-	<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.7.1" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.3.0" />
 	<PackageVersion Include="Verify.Xunit" Version="25.3.1" />
