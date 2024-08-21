@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
@@ -9,8 +10,9 @@ public sealed class CrtpBehaviorTest
 	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task CrtpBehavior(DriverReferenceAssemblies assemblies)
 	{
-		var driver = GeneratorTestHelper.GetDriver(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
+			using System;
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
@@ -53,10 +55,22 @@ public sealed class CrtpBehaviorTest
 			assemblies
 		);
 
-		var runResult = driver.GetRunResult();
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH..ConstraintHandler.g.cs",
+				.. assemblies switch
+				{
+					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
+					DriverReferenceAssemblies.Msdi =>
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
-		_ = await Verify(runResult)
+					_ => throw new UnreachableException(),
+				},
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
-
 }

@@ -1,4 +1,6 @@
-﻿//HintName: .ConstraintHandler.g.cs
+﻿//HintName: IH..ConstraintHandler.g.cs
+using Microsoft.Extensions.DependencyInjection;
+
 #pragma warning disable CS1591
 
 partial class ConstraintHandler
@@ -57,5 +59,17 @@ partial class ConstraintHandler
 
 			return default;
 		}
+	}
+
+	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+	public static IServiceCollection AddHandlers(
+		IServiceCollection services,
+		ServiceLifetime lifetime = ServiceLifetime.Scoped
+	)
+	{
+		services.Add(new(typeof(global::ConstraintHandler.Handler), typeof(global::ConstraintHandler.Handler), lifetime));
+		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<global::ConstraintHandler.Command, global::System.ValueTuple>), typeof(global::ConstraintHandler.Handler), lifetime));
+		services.Add(new(typeof(global::ConstraintHandler.HandleBehavior), typeof(global::ConstraintHandler.HandleBehavior), lifetime));
+		return services;
 	}
 }

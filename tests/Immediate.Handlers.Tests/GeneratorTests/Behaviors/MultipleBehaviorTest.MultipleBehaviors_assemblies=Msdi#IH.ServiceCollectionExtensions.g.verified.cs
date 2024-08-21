@@ -1,4 +1,4 @@
-﻿//HintName: ServiceCollectionExtensions.g.cs
+﻿//HintName: IH.ServiceCollectionExtensions.g.cs
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -10,6 +10,10 @@ public static class HandlerServiceCollectionExtensions
 		this IServiceCollection services)
 	{
 		services.TryAddTransient(typeof(global::Dummy.LoggingBehavior<,>));
+		services.TryAddTransient(typeof(global::YetAnotherDummy.OtherBehavior<,>));
+		services.TryAddTransient(typeof(global::Dummy.SecondLoggingBehavior<,>));
+		services.TryAddTransient(typeof(global::YetAnotherDummy.LoggingBehavior<,>));
+		services.TryAddTransient(typeof(global::YetAnotherDummy.SecondLoggingBehavior<,>));
 		
 		return services;
 	}

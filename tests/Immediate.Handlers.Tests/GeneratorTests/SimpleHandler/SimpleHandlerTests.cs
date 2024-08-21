@@ -8,7 +8,7 @@ public class SimpleHandlerTests
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	public async Task IntReturnType(DriverReferenceAssemblies assemblies)
 	{
-		var driver = GeneratorTestHelper.GetDriver(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -17,7 +17,7 @@ public class SimpleHandlerTests
 			namespace Dummy;
 
 			[Handler]
-			public static class GetUsersQuery
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 
@@ -25,14 +25,19 @@ public class SimpleHandlerTests
 					Query _,
 					CancellationToken token)
 				{
-					return 0;
+					return ValueTask.FromResult(0);
 				}
 			}
 			""",
-			assemblies);
+			assemblies
+		);
 
-		var result = driver.GetRunResult();
-		Assert.Empty(result.Diagnostics);
+		Assert.Equal(
+			[
+				@"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -42,7 +47,7 @@ public class SimpleHandlerTests
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	public async Task VoidReturnType(DriverReferenceAssemblies assemblies)
 	{
-		var driver = GeneratorTestHelper.GetDriver(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -51,7 +56,7 @@ public class SimpleHandlerTests
 			namespace Dummy;
 
 			[Handler]
-			public static class GetUsersQuery
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 
@@ -59,13 +64,19 @@ public class SimpleHandlerTests
 					Query _,
 					CancellationToken token)
 				{
+					return ValueTask.CompletedTask;
 				}
 			}
 			""",
-			assemblies);
+			assemblies
+		);
 
-		var result = driver.GetRunResult();
-		Assert.Empty(result.Diagnostics);
+		Assert.Equal(
+			[
+				@"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -75,7 +86,7 @@ public class SimpleHandlerTests
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	public async Task MissingCancellationToken(DriverReferenceAssemblies assemblies)
 	{
-		var driver = GeneratorTestHelper.GetDriver(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -84,7 +95,7 @@ public class SimpleHandlerTests
 			namespace Dummy;
 
 			[Handler]
-			public static class GetUsersQuery
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 
@@ -92,14 +103,19 @@ public class SimpleHandlerTests
 					Query _
 				)
 				{
-					return 0;
+					return ValueTask.FromResult(0);
 				}
 			}
 			""",
-			assemblies);
+			assemblies
+		);
 
-		var result = driver.GetRunResult();
-		Assert.Empty(result.Diagnostics);
+		Assert.Equal(
+			[
+				@"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));

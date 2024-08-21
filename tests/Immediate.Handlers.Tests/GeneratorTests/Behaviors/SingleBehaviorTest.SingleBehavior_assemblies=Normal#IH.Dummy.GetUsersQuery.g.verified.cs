@@ -1,18 +1,18 @@
-﻿//HintName: Dummy.GetUsersQuery.g.cs
+﻿//HintName: IH.Dummy.GetUsersQuery.g.cs
 #pragma warning disable CS1591
 
 namespace Dummy;
 
 partial class GetUsersQuery
 {
-	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
+	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>>
 	{
 		private readonly global::Dummy.GetUsersQuery.HandleBehavior _handleBehavior;
-		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> _loggingBehavior;
+		private readonly global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>> _loggingBehavior;
 
 		public Handler(
 			global::Dummy.GetUsersQuery.HandleBehavior handleBehavior,
-			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>> loggingBehavior
+			global::Dummy.LoggingBehavior<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>> loggingBehavior
 		)
 		{
 			var handlerType = typeof(GetUsersQuery);
@@ -25,7 +25,7 @@ partial class GetUsersQuery
 			_loggingBehavior.SetInnerHandler(_handleBehavior);
 		}
 
-		public async global::System.Threading.Tasks.ValueTask<IEnumerable<global::Dummy.User>> HandleAsync(
+		public async global::System.Threading.Tasks.ValueTask<global::System.Collections.Generic.IEnumerable<global::Dummy.User>> HandleAsync(
 			global::Dummy.GetUsersQuery.Query request,
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
@@ -37,7 +37,7 @@ partial class GetUsersQuery
 	}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<global::Dummy.GetUsersQuery.Query, IEnumerable<global::Dummy.User>>
+	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>>
 	{
 		private readonly global::Dummy.UsersService _usersService;
 
@@ -48,7 +48,7 @@ partial class GetUsersQuery
 			_usersService = usersService;
 		}
 
-		public override async global::System.Threading.Tasks.ValueTask<IEnumerable<global::Dummy.User>> HandleAsync(
+		public override async global::System.Threading.Tasks.ValueTask<global::System.Collections.Generic.IEnumerable<global::Dummy.User>> HandleAsync(
 			global::Dummy.GetUsersQuery.Query request,
 			global::System.Threading.CancellationToken cancellationToken
 		)

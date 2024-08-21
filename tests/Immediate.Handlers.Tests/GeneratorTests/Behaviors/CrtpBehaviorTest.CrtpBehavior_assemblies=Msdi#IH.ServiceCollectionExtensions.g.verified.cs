@@ -1,4 +1,4 @@
-﻿//HintName: ServiceCollectionExtensions.g.cs
+﻿//HintName: IH.ServiceCollectionExtensions.g.cs
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

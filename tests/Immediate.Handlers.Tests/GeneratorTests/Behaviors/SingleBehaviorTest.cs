@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
@@ -5,10 +6,14 @@ namespace Immediate.Handlers.Tests.GeneratorTests.Behaviors;
 public class SingleBehaviorTest
 {
 	private const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
+
+#pragma warning disable CS9113
 
 [assembly: Behaviors(
 	typeof(LoggingBehavior<,>)
@@ -18,12 +23,12 @@ namespace Dummy;
 
 public class GetUsersEndpoint(GetUsersQuery.Handler handler)
 {
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
+	public ValueTask<IEnumerable<User>> GetUsers() =>
 		handler.HandleAsync(new GetUsersQuery.Query());
 }
 
 [Handler]
-public static class GetUsersQuery
+public static partial class GetUsersQuery
 {
 	public record Query;
 
@@ -62,10 +67,24 @@ public interface ILogger<T>;
 	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task SingleBehavior(DriverReferenceAssemblies assemblies)
 	{
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				.. assemblies switch
+				{
+					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
+					DriverReferenceAssemblies.Msdi =>
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+
+					_ => throw new UnreachableException(),
+				},
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 }

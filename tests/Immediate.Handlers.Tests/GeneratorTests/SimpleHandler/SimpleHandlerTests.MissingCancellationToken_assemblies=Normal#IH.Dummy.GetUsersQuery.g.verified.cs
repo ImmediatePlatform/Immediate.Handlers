@@ -1,4 +1,4 @@
-﻿//HintName: Dummy.GetUsersQuery.g.cs
+﻿//HintName: IH.Dummy.GetUsersQuery.g.cs
 #pragma warning disable CS1591
 
 namespace Dummy;
@@ -47,7 +47,6 @@ partial class GetUsersQuery
 			return await global::Dummy.GetUsersQuery
 				.HandleAsync(
 					request
-					, cancellationToken
 				)
 				.ConfigureAwait(false);
 		}

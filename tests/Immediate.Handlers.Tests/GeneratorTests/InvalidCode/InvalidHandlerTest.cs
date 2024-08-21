@@ -10,6 +10,8 @@ public class InvalidHandlerTest
 	public async Task HandlerWithoutHandlerMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
@@ -17,32 +19,21 @@ using Immediate.Handlers.Shared;
 
 namespace Dummy;
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
-
 [Handler]
 public static class GetUsersQuery
 {
 	public record Query;
 }
-
-public class User { }
-public class UsersService
-{
-	public ValueTask<IEnumerable<User>> GetUsers() =>
-		ValueTask.FromResult(Enumerable.Empty<User>());
-}
-
-public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -52,18 +43,14 @@ public interface ILogger<T>;
 	public async Task HandlerWithTwoHandlersMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
 namespace Dummy;
-
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
 
 [Handler]
 public static class GetUsersQuery
@@ -97,10 +84,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -110,18 +101,14 @@ public interface ILogger<T>;
 	public async Task HandlerWithNoParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
 namespace Dummy;
-
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
 
 [Handler]
 public static class GetUsersQuery
@@ -130,7 +117,7 @@ public static class GetUsersQuery
 
 	private static ValueTask<IEnumerable<User>> HandleAsync()
 	{
-		return usersService.GetUsers();
+		return ValueTask.FromResult(Enumerable.Empty<User>());
 	}
 }
 
@@ -144,10 +131,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -157,18 +148,14 @@ public interface ILogger<T>;
 	public async Task HandlerWithVoidResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
 namespace Dummy;
-
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
 
 [Handler]
 public static class GetUsersQuery
@@ -193,10 +180,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -206,6 +197,8 @@ public interface ILogger<T>;
 	public async Task HandlerWithTaskResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
@@ -213,23 +206,17 @@ using Immediate.Handlers.Shared;
 
 namespace Dummy;
 
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
-
 [Handler]
 public static class GetUsersQuery
 {
 	public record Query;
 
-	private static Task HandleAsync(
+	private static async Task<IEnumerable<User>> HandleAsync(
 		Query _,
 		UsersService usersService,
 		CancellationToken token)
 	{
-		return usersService.GetUsers();
+		return await usersService.GetUsers();
 	}
 }
 
@@ -243,10 +230,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
@@ -256,18 +247,14 @@ public interface ILogger<T>;
 	public async Task NestedHandlerShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		const string Input = """
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dummy;
 using Immediate.Handlers.Shared;
 
 namespace Dummy;
-
-public class GetUsersEndpoint(GetUsersQuery.Handler handler)
-{
-	public async ValueTask<IEnumerable<User>> GetUsers() =>
-		handler.HandleAsync(new GetUsersQuery.Query());
-}
 
 public class Wrapper
 {
@@ -296,10 +283,14 @@ public class UsersService
 public interface ILogger<T>;
 """;
 
-		var driver = GeneratorTestHelper.GetDriver(Input, assemblies);
+		var result = GeneratorTestHelper.RunGenerator(Input, assemblies);
 
-		var runResult = driver.GetRunResult();
-		_ = await Verify(runResult)
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 }
