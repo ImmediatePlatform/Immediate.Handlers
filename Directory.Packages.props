@@ -5,7 +5,7 @@
 
   <ItemGroup>
 	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.6.0" />
-	<PackageVersion Include="BenchmarkDotNet" Version="0.13.12" />
+	<PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
 	<PackageVersion Include="coverlet.collector" Version="6.0.2" />
 	<PackageVersion Include="coverlet.msbuild" Version="6.0.2" />
 	<PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
