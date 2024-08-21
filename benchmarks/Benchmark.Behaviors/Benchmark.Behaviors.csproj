@@ -15,6 +15,7 @@
 		<PackageReference Include="Mediator.SourceGenerator" PrivateAssets="All" />
 		<PackageReference Include="MediatR" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 	</ItemGroup>
 
 	<ItemGroup>
