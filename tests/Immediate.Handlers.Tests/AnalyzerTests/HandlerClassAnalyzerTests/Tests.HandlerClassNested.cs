@@ -18,7 +18,7 @@ public partial class Tests
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 
-			public class Wrapper {
+			public static partial class Wrapper {
 				[Handler]
 				public static class {|IHR0005:GetUsersQuery|}
 				{

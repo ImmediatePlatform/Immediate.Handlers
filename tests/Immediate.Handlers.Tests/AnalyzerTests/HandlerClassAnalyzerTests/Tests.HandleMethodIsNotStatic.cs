@@ -20,7 +20,7 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public class GetUsersQuery
+			public partial class GetUsersQuery
 			{
 				public record Query;
 			
