@@ -15,4 +15,5 @@ internal static class DiagnosticIds
 	public const string IHR0010HandlerMethodMustBeUnique = "IHR0010";
 	public const string IHR0011HandlerMethodMustBePrivate = "IHR0011";
 	public const string IHR0012HandlerShouldUseCancellationToken = "IHR0012";
+	public const string IHR0013IHandlerMissingImplementation = "IHR0013";
 }

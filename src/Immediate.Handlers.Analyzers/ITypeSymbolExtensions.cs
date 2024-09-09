@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Analyzers;
@@ -59,5 +60,24 @@ internal static class ITypeSymbolExtensions
 					ContainingNamespace.IsGlobalNamespace: true
 				}
 			}
+		};
+
+	public static bool IsIHandler([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
+		typeSymbol is INamedTypeSymbol
+		{
+			MetadataName: "IHandler`2",
+			ContainingNamespace:
+			{
+				Name: "Shared",
+				ContainingNamespace:
+				{
+					Name: "Handlers",
+					ContainingNamespace:
+					{
+						Name: "Immediate",
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
+			},
 		};
 }

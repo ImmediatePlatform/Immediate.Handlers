@@ -22,3 +22,12 @@ IHR0011 | ImmediateHandler | Error | HandlerClassAnalyzer
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
 IHR0012 | ImmediateHandler | Warning | HandlerClassAnalyzer
+
+
+## Release 1.6
+
+### New Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|--------------------
+IHR0013 | ImmediateHandler | Warning | InvalidIHandlerAnalyzer
