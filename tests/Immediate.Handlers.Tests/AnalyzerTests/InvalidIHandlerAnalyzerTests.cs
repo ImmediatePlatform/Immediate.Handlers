@@ -67,4 +67,31 @@ public sealed class InvalidIHandlerAnalyzerTests
 			""",
 			DriverReferenceAssemblies.Normal
 		).RunAsync();
+
+	[Fact]
+	public async Task AnalyzerDoesNotTriggerForGenericParameter() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidIHandlerAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			public static class Test<TRequest>
+			{
+				public static void Method(IHandler<TRequest, int> handler)
+				{
+				}
+
+				public static void Method<TResponse>(IHandler<int, TResponse> handler)
+				{
+				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync();
 }
