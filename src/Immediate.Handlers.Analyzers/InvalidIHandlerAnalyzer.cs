@@ -46,6 +46,12 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 			if (!type.IsIHandler())
 				continue;
 
+			if (type.TypeArguments[0].TypeKind is TypeKind.TypeParameter
+				|| type.TypeArguments[1].TypeKind is TypeKind.TypeParameter)
+			{
+				continue;
+			}
+
 			var hasConcrete = context.Compilation
 				.GetSymbolsWithName("Handler", SymbolFilter.Type, context.CancellationToken)
 				.Any(h =>
@@ -60,8 +66,8 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 				Diagnostic.Create(
 					IHandlerMissingImplementation,
 					parameter.Locations[0],
-					type.TypeParameters[0].ToDisplayString(),
-					type.TypeParameters[1].ToDisplayString()
+					type.TypeArguments[0].ToDisplayString(),
+					type.TypeArguments[1].ToDisplayString()
 				)
 			);
 		}
