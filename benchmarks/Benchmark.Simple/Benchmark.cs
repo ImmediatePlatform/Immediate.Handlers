@@ -75,8 +75,7 @@ public class RequestBenchmarks
 
 		_ = services.AddMediator(opts => opts.ServiceLifetime = ServiceLifetime.Scoped);
 		_ = services.AddMediatR(
-			cfg => cfg.RegisterServicesFromAssemblyContaining(
-				typeof(SomeRequest))
+			cfg => cfg.RegisterServicesFromAssemblyContaining<SomeRequest>()
 		);
 
 		_serviceProvider = services.BuildServiceProvider();

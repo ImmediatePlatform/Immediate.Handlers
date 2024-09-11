@@ -10,7 +10,7 @@ public sealed class DirectTimingBehavior(
 	SomeHandlerClass handler
 )
 {
-	private TimeSpan _elapsed;
+	public TimeSpan Elapsed { get; private set; }
 
 	public async ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
@@ -19,7 +19,7 @@ public sealed class DirectTimingBehavior(
 	{
 		var sw = Stopwatch.StartNew();
 		var response = await handler.Handle(request, cancellationToken);
-		_elapsed = sw.Elapsed;
+		Elapsed = sw.Elapsed;
 		return response;
 	}
 }
@@ -27,7 +27,7 @@ public sealed class DirectTimingBehavior(
 public sealed class IhTimingBehavior<TRequest, TResponse>
 	: Behavior<TRequest, TResponse>
 {
-	private TimeSpan _elapsed;
+	public TimeSpan Elapsed { get; private set; }
 
 	public override async ValueTask<TResponse> HandleAsync(
 		TRequest request,
@@ -36,7 +36,7 @@ public sealed class IhTimingBehavior<TRequest, TResponse>
 	{
 		var sw = Stopwatch.StartNew();
 		var response = await Next(request, cancellationToken);
-		_elapsed = sw.Elapsed;
+		Elapsed = sw.Elapsed;
 		return response;
 	}
 }
@@ -46,7 +46,7 @@ public sealed class MTimingBehavior<TRequest, TResponse>
 	  MediatR.IPipelineBehavior<TRequest, TResponse>
 	where TRequest : Mediator.IRequest<TResponse>, MediatR.IRequest<TResponse>
 {
-	private TimeSpan _elapsed;
+	public TimeSpan Elapsed { get; private set; }
 
 	async ValueTask<TResponse> Mediator.IPipelineBehavior<TRequest, TResponse>.Handle(
 		TRequest message,
@@ -55,7 +55,7 @@ public sealed class MTimingBehavior<TRequest, TResponse>
 	{
 		var sw = Stopwatch.StartNew();
 		var response = await next(message, cancellationToken);
-		_elapsed = sw.Elapsed;
+		Elapsed = sw.Elapsed;
 		return response;
 	}
 
@@ -66,7 +66,7 @@ public sealed class MTimingBehavior<TRequest, TResponse>
 	{
 		var sw = Stopwatch.StartNew();
 		var response = await next();
-		_elapsed = sw.Elapsed;
+		Elapsed = sw.Elapsed;
 		return response;
 	}
 }
@@ -159,8 +159,7 @@ public class RequestBenchmarks
 		);
 
 		_ = services.AddMediatR(
-			cfg => cfg.RegisterServicesFromAssemblyContaining(
-				typeof(SomeRequest))
+			cfg => cfg.RegisterServicesFromAssemblyContaining<SomeRequest>()
 		);
 		_ = services.AddScoped(
 			typeof(MediatR.IPipelineBehavior<,>),
