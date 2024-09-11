@@ -1,32 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<ItemGroup>
-		<PackageReference Include="Basic.Reference.Assemblies.Net80" />
-		<PackageReference Include="coverlet.collector" PrivateAssets="All" />
-		<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
-		<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" />
-		<PackageReference Include="Verify.SourceGenerators" />
-		<PackageReference Include="Verify.Xunit" />
-		<PackageReference Include="xunit" />
-		<PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
-	</ItemGroup>
+  <PropertyGroup>
+	<NoWarn>$(NoWarn);NU1903</NoWarn>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="../../src/Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
-		<ProjectReference Include="../../src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" />
-		<ProjectReference Include="../../src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" />
-		<ProjectReference Include="../../src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="Basic.Reference.Assemblies.Net80" />
+	<PackageReference Include="coverlet.collector" PrivateAssets="All" />
+	<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
+	<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
+	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" />
+	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" />
+	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" />
+	<PackageReference Include="Verify.SourceGenerators" />
+	<PackageReference Include="Verify.Xunit" />
+	<PackageReference Include="xunit" />
+	<PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Compile Include="../../src/Immediate.Handlers.Analyzers/DiagnosticIds.cs" />
-	</ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="../../src/Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
+	<ProjectReference Include="../../src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" />
+	<ProjectReference Include="../../src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" />
+	<ProjectReference Include="../../src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Compile Include="../../src/Immediate.Handlers.Analyzers/DiagnosticIds.cs" />
+  </ItemGroup>
 
 </Project>
