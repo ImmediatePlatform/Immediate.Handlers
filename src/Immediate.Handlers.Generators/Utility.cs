@@ -9,13 +9,6 @@ internal static class Utility
 			? ((INamedTypeSymbol)method.ReturnType).TypeArguments.FirstOrDefault()
 			: null;
 
-	public static AttributeData? GetAttribute(this INamedTypeSymbol symbol, string attribute) =>
-		symbol
-			.GetAttributes()
-			.FirstOrDefault(a =>
-				a.AttributeClass?.ToString() == attribute
-			);
-
 	public static string? NullIf(this string value, string check) =>
 		value.Equals(check, StringComparison.Ordinal) ? null : value;
 }

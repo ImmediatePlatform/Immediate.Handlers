@@ -1,6 +1,7 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 
-namespace Immediate.Handlers.Generators;
+namespace Immediate.Handlers;
 
 internal static class ITypeSymbolExtensions
 {
@@ -89,5 +90,43 @@ internal static class ITypeSymbolExtensions
 					ContainingNamespace.IsGlobalNamespace: true
 				}
 			}
+		};
+
+	public static bool IsBehaviorsAttribute(this ITypeSymbol? typeSymbol) =>
+		typeSymbol is
+		{
+			Name: "BehaviorsAttribute",
+			ContainingNamespace:
+			{
+				Name: "Shared",
+				ContainingNamespace:
+				{
+					Name: "Handlers",
+					ContainingNamespace:
+					{
+						Name: "Immediate",
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
+			},
+		};
+
+	public static bool IsIHandler([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
+		typeSymbol is INamedTypeSymbol
+		{
+			MetadataName: "IHandler`2",
+			ContainingNamespace:
+			{
+				Name: "Shared",
+				ContainingNamespace:
+				{
+					Name: "Handlers",
+					ContainingNamespace:
+					{
+						Name: "Immediate",
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
+			},
 		};
 }

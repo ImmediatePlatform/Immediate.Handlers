@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Tests.Helpers;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Testing;
@@ -20,8 +21,8 @@ public static class CodeFixTestHelper
 		""";
 
 	public static CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier> CreateCodeFixTest<TAnalyzer, TCodeFix>(
-		string inputSource,
-		string fixedSource,
+		[StringSyntax("c#-test")] string inputSource,
+		[StringSyntax("c#-test")] string fixedSource,
 		DriverReferenceAssemblies assemblies,
 		int codeActionIndex = 0
 	)
