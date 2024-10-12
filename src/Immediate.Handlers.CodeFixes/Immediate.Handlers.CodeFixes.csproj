@@ -1,26 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-		<IsRoslynComponent>true</IsRoslynComponent>
-	</PropertyGroup>
+  <PropertyGroup>
+	<TargetFramework>netstandard2.0</TargetFramework>
+	<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+	<IsRoslynComponent>true</IsRoslynComponent>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<Compile Include="../Immediate.Handlers.Analyzers/DiagnosticIds.cs" />
-	</ItemGroup>
+  <ItemGroup>
+	<Compile Include="../Common/*.cs" Link="Common/%(Filename).cs" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="All" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" />
-		<PackageReference Include="MinVer" PrivateAssets="all" />
-	</ItemGroup>
+  <ItemGroup>
+	<Compile Include="../Immediate.Handlers.Analyzers/DiagnosticIds.cs" />
+  </ItemGroup>
 
-	<PropertyGroup Label="MinVer">
-		<MinVerAutoIncrement>minor</MinVerAutoIncrement>
-		<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
-		<MinVerTagPrefix>v</MinVerTagPrefix>
-	</PropertyGroup>
+  <ItemGroup>
+	<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="All" />
+	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+	<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" />
+	<PackageReference Include="MinVer" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup Label="MinVer">
+	<MinVerAutoIncrement>minor</MinVerAutoIncrement>
+	<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
+	<MinVerTagPrefix>v</MinVerTagPrefix>
+  </PropertyGroup>
 
 </Project>

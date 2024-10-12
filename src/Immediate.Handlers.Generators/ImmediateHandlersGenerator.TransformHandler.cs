@@ -90,7 +90,7 @@ public partial class ImmediateHandlersGenerator
 	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(
 			INamedTypeSymbol symbol,
 			CancellationToken cancellationToken) =>
-		symbol.GetAttribute("Immediate.Handlers.Shared.BehaviorsAttribute")
+		symbol.GetBehaviorsAttribute()
 				is { } ba
 			? ParseBehaviors(ba, cancellationToken)
 			: null;
@@ -128,4 +128,12 @@ public partial class ImmediateHandlersGenerator
 		foreach (var i in type.Interfaces)
 			AddBaseTypes(i, implements);
 	}
+}
+
+file static class Extensions
+{
+	public static AttributeData? GetBehaviorsAttribute(this INamedTypeSymbol symbol) =>
+		symbol
+			.GetAttributes()
+			.FirstOrDefault(a => a.AttributeClass.IsBehaviorsAttribute());
 }

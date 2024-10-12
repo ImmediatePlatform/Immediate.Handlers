@@ -2,7 +2,7 @@ using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.CodeFixes;
 using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.CodeFixTests.HandlerClassCodeFixTests;
+namespace Immediate.Handlers.Tests.CodeFixTests;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public partial class Tests

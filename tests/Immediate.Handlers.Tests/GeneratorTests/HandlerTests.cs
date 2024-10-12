@@ -1,8 +1,8 @@
 using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.GeneratorTests.SimpleHandler;
+namespace Immediate.Handlers.Tests.GeneratorTests;
 
-public class SimpleHandlerTests
+public class HandlerTests
 {
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
