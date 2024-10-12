@@ -19,6 +19,7 @@ public partial class ImmediateHandlersGenerator
 	[ExcludeFromCodeCoverage]
 	private sealed record Parameter
 	{
+		public required string? Attributes { get; init; }
 		public required string Type { get; init; }
 		public required string Name { get; init; }
 	}

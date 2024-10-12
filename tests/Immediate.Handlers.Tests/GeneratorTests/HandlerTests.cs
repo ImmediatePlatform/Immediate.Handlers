@@ -34,7 +34,7 @@ public class HandlerTests
 
 		Assert.Equal(
 			[
-				@"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
 		);
@@ -73,7 +73,7 @@ public class HandlerTests
 
 		Assert.Equal(
 			[
-				@"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
 		);
@@ -112,7 +112,155 @@ public class HandlerTests
 
 		Assert.Equal(
 			[
-				@"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join("_", assemblies));
+	}
+
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task SimpleParameterAttribute(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			using Microsoft.Extensions.DependencyInjection;
+			
+			namespace Dummy;
+
+			public sealed class SomeKeyedService;
+
+			[Handler]
+			public static partial class GetUsersQuery
+			{
+				public record Query;
+
+				private static ValueTask<int> HandleAsync(
+					Query _,
+					[FromKeyedServices("SomeServiceKey")] SomeKeyedService service,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult(0);
+				}
+			}
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join("_", assemblies));
+	}
+
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task MultipleParameterAttributes(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			using Microsoft.Extensions.DependencyInjection;
+			
+			namespace Dummy;
+
+			[AttributeUsage(AttributeTargets.Parameter)]
+			public sealed class TestAttribute : Attribute
+			{
+				public required string Message { get; init; }
+			}
+			
+			public sealed class SomeKeyedService;
+
+			[Handler]
+			public static partial class GetUsersQuery
+			{
+				public record Query;
+
+				private static ValueTask<int> HandleAsync(
+					Query _,
+					[FromKeyedServices("SomeServiceKey")] [Test(Message = "Test")] SomeKeyedService service,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult(0);
+				}
+			}
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join("_", assemblies));
+	}
+
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task ComplexParameterAttribute(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			using Microsoft.Extensions.DependencyInjection;
+			
+			namespace Dummy;
+
+			[AttributeUsage(AttributeTargets.Parameter)]
+			public sealed class TestAttribute(string[] param1, string[] param2, params string[] param3) : Attribute
+			{
+				public string[] Param1 => param1;
+				public string[] Param2 => param2;
+				public string[] Param3 => param3;
+			}
+
+			public sealed class Service;
+
+			[Handler]
+			public static partial class GetUsersQuery
+			{
+				public record Query;
+
+				private static ValueTask<int> HandleAsync(
+					Query _,
+					[Test(["Dummy1", "Dummy2"], param2: ["Dummy1", "Dummy2"], "Dummy3", "Dummy4")] Service service,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult(0);
+				}
+			}
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
 		);

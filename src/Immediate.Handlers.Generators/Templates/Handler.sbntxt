@@ -68,7 +68,7 @@ partial class {{ class_name }}
 
 		public HandleBehavior(
 			{{~ for parameter in handler_parameters ~}}
-			{{ parameter.type }} {{ parameter.name }}{{ if !for.last }},{{ end }}
+			{{ parameter.attributes }}{{ parameter.type }} {{ parameter.name }}{{ if !for.last }},{{ end }}
 			{{~ end ~}}
 		)
 		{
