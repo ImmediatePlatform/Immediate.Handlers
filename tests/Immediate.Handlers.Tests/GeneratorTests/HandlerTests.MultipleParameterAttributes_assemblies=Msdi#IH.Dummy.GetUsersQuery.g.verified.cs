@@ -38,7 +38,7 @@ partial class GetUsersQuery
 		private readonly global::Dummy.SomeKeyedService _service;
 
 		public HandleBehavior(
-			[global::Microsoft.Extensions.DependencyInjection.FromKeyedServicesAttribute("SomeServiceKey"), global::Dummy.TestAttribute(Message = "Test")] global::Dummy.SomeKeyedService service
+			[global::Microsoft.Extensions.DependencyInjection.FromKeyedServicesAttribute("SomeServiceKey"), global::Dummy.TestAttribute(Message = "Test"), global::Dummy.Test2Attribute] global::Dummy.SomeKeyedService service
 		)
 		{
 			_service = service;

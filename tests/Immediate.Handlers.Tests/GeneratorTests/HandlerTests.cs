@@ -184,7 +184,10 @@ public class HandlerTests
 			{
 				public required string Message { get; init; }
 			}
-			
+
+			[AttributeUsage(AttributeTargets.Parameter)]
+			public sealed class Test2Attribute : Attribute;
+
 			public sealed class SomeKeyedService;
 
 			[Handler]
@@ -194,7 +197,7 @@ public class HandlerTests
 
 				private static ValueTask<int> HandleAsync(
 					Query _,
-					[FromKeyedServices("SomeServiceKey")] [Test(Message = "Test")] SomeKeyedService service,
+					[FromKeyedServices("SomeServiceKey")] [Test(Message = "Test"), Test2] SomeKeyedService service,
 					CancellationToken token)
 				{
 					return ValueTask.FromResult(0);
