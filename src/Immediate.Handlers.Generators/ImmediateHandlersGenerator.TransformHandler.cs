@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
 
@@ -61,6 +62,7 @@ public partial class ImmediateHandlersGenerator
 			.Take(handleMethod.Parameters.Length - (useToken ? 2 : 1))
 			.Select(p => new Parameter
 			{
+				Attributes = p.GetAttributesString(),
 				Type = p.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
 				Name = p.Name,
 			})
@@ -136,4 +138,44 @@ file static class Extensions
 		symbol
 			.GetAttributes()
 			.FirstOrDefault(a => a.AttributeClass.IsBehaviorsAttribute());
+
+	public static string? GetAttributesString(this IParameterSymbol parameter)
+	{
+		var attributes = parameter.GetAttributes();
+		if (attributes.Length == 0)
+			return null;
+
+		return $"[{string.Join(", ", attributes.Select(GetAttributeString))}] ";
+	}
+
+	private static string GetAttributeString(AttributeData attributeData)
+	{
+		var @class = attributeData.AttributeClass!.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+		var parameters = new List<string>();
+
+		foreach (var tc in attributeData.ConstructorArguments)
+		{
+			if (tc.GetTypedConstantString() is { } str)
+				parameters.Add(str);
+		}
+
+		foreach (var na in attributeData.NamedArguments)
+		{
+			if (na.Value.GetTypedConstantString() is { } str)
+				parameters.Add($"{na.Key} = {str}");
+		}
+
+		return parameters.Count == 0
+			? @class
+			: $"{@class}({string.Join(", ", parameters)})";
+	}
+
+	[SuppressMessage("Style", "IDE0072:Add missing cases")]
+	private static string? GetTypedConstantString(this TypedConstant tc) =>
+		tc.Kind switch
+		{
+			TypedConstantKind.Array => $"[{string.Join(", ", tc.Values.Select(GetTypedConstantString))}]",
+			_ => tc.ToCSharpString(),
+		};
 }
