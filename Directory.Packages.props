@@ -23,16 +23,14 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
-	<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
 	<PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
 	<PackageVersion Include="MinVer" Version="6.0.0" />
 	<PackageVersion Include="PolySharp" Version="1.14.1" />
 	<PackageVersion Include="Scriban" Version="5.10.0" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.7.3" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+	<PackageVersion Include="TUnit" Version="0.1.1043" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-	<PackageVersion Include="Verify.Xunit" Version="26.6.0" />
-	<PackageVersion Include="xunit" Version="2.9.0" />
-	<PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+	<PackageVersion Include="Verify.TUnit" Version="27.0.1" />
   </ItemGroup>
 </Project>

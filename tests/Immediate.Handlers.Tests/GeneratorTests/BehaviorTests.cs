@@ -3,14 +3,14 @@ using System.Diagnostics;
 
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
-public class BehaviorTests
+public sealed class BehaviorTests
 {
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
+	[Test]
+	[Arguments(DriverReferenceAssemblies.Normal)]
+	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task SingleBehavior(DriverReferenceAssemblies assemblies)
 	{
-		var result = GeneratorTestHelper.RunGenerator(
+		var result = await GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Collections.Generic;
 			using System.Linq;
@@ -70,8 +70,9 @@ public class BehaviorTests
 			assemblies
 		);
 
-		Assert.Equal(
-			[
+		_ = await Assert
+			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
+			.IsEquivalentCollectionTo([
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				.. assemblies switch
 				{
@@ -81,20 +82,18 @@ public class BehaviorTests
 
 					_ => throw new UnreachableException(),
 				},
-			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
-		);
+			]);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
+	[Test]
+	[Arguments(DriverReferenceAssemblies.Normal)]
+	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task MultipleBehaviors(DriverReferenceAssemblies assemblies)
 	{
-		var result = GeneratorTestHelper.RunGenerator(
+		var result = await GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Collections.Generic;
 			using System.Linq;
@@ -219,8 +218,9 @@ public class BehaviorTests
 			assemblies
 		);
 
-		Assert.Equal(
-			[
+		_ = await Assert
+			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
+			.IsEquivalentCollectionTo([
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				.. assemblies switch
 				{
@@ -230,20 +230,18 @@ public class BehaviorTests
 
 					_ => throw new UnreachableException(),
 				},
-			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
-		);
+			]);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
+	[Test]
+	[Arguments(DriverReferenceAssemblies.Normal)]
+	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task CrtpBehavior(DriverReferenceAssemblies assemblies)
 	{
-		var result = GeneratorTestHelper.RunGenerator(
+		var result = await GeneratorTestHelper.RunGenerator(
 			"""
 			using System;
 			using System.Threading;
@@ -288,8 +286,9 @@ public class BehaviorTests
 			assemblies
 		);
 
-		Assert.Equal(
-			[
+		_ = await Assert
+			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
+			.IsEquivalentCollectionTo([
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH..ConstraintHandler.g.cs",
 				.. assemblies switch
 				{
@@ -299,9 +298,7 @@ public class BehaviorTests
 
 					_ => throw new UnreachableException(),
 				},
-			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
-		);
+			]);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));

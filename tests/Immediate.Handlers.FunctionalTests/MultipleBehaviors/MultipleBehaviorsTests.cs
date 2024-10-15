@@ -1,5 +1,4 @@
 using Immediate.Handlers.Shared;
-using Xunit;
 
 namespace Immediate.Handlers.FunctionalTests.MultipleBehaviors;
 
@@ -54,7 +53,7 @@ public static partial class MultipleBehaviorHandler
 
 public sealed class MultipleBehaviorsTests
 {
-	[Fact]
+	[Test]
 	public async Task TestBehaviorOrdering()
 	{
 		var query = new MultipleBehaviorHandler.Query();
@@ -63,8 +62,9 @@ public sealed class MultipleBehaviorsTests
 
 		_ = await handler.HandleAsync(query);
 
-		Assert.Equal(
-			[
+		_ = await Assert
+			.That(query)
+			.IsEquivalentCollectionTo([
 				"Behavior1.Enter",
 				"Behavior2.Enter",
 				"Behavior1.Enter",
@@ -72,7 +72,6 @@ public sealed class MultipleBehaviorsTests
 				"Behavior1.Exit",
 				"Behavior2.Exit",
 				"Behavior1.Exit",
-			],
-			query);
+			]);
 	}
 }

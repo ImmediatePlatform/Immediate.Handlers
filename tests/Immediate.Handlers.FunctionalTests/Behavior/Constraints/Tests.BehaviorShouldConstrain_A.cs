@@ -1,6 +1,5 @@
 using Immediate.Handlers.Shared;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
 
 namespace Immediate.Handlers.FunctionalTests.Behavior.Constraints;
 
@@ -20,7 +19,7 @@ public static partial class BehaviorShouldConstrainA
 
 public sealed partial class Tests
 {
-	[Fact]
+	[Test]
 	public async Task BehaviorShouldConstrain_A()
 	{
 		IServiceCollection services = new ServiceCollection();
@@ -33,6 +32,6 @@ public sealed partial class Tests
 
 		var behaviorWalker = serviceProvider.GetRequiredService<BehaviorWalker>();
 
-		Assert.Equal(["BehaviorA"], behaviorWalker.BehaviorsRan);
+		_ = await Assert.That(behaviorWalker.BehaviorsRan).IsEquivalentCollectionTo(["BehaviorA"]);
 	}
 }

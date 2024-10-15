@@ -1,5 +1,4 @@
-﻿using Immediate.Handlers.Shared;
-using Xunit;
+using Immediate.Handlers.Shared;
 
 namespace Immediate.Handlers.FunctionalTests.HandlerAbstraction;
 
@@ -18,7 +17,7 @@ public static partial class HandlerAbstractionOneAdder
 
 public class HandlerAbstractionTests
 {
-	[Fact]
+	[Test]
 	public async Task NoBehaviorShouldReturnExpectedResponseForAbstraction()
 	{
 		const int Input = 1;
@@ -29,6 +28,6 @@ public class HandlerAbstractionTests
 
 		var result = await handler.HandleAsync(query);
 
-		Assert.Equal(Input + 1, result);
+		_ = await Assert.That(result).IsEqualTo(Input + 1);
 	}
 }
