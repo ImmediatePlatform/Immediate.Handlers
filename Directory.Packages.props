@@ -16,10 +16,10 @@
 	<PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" Version="1.1.2" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="1.1.2" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
