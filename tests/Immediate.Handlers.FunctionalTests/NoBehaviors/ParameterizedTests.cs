@@ -1,6 +1,5 @@
 using Immediate.Handlers.Shared;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
 
 namespace Immediate.Handlers.FunctionalTests.NoBehaviors;
 
@@ -22,7 +21,7 @@ public record AddendProvider(int Addend);
 
 public class ParameterizedTests
 {
-	[Fact]
+	[Test]
 	public async Task NoBehaviorShouldReturnExpectedResponse()
 	{
 		const int Input = 1;
@@ -34,6 +33,6 @@ public class ParameterizedTests
 
 		var result = await handler.HandleAsync(query);
 
-		Assert.Equal(Input + addendProvider.Addend, result);
+		_ = await Assert.That(result).IsEqualTo(Input + addendProvider.Addend);
 	}
 }

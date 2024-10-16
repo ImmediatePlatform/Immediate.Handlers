@@ -5,7 +5,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
 public partial class Tests
 {
-	[Fact]
+	[Test]
 	public async Task HandlerClassNested_DoesAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""

@@ -1,5 +1,4 @@
 using Immediate.Handlers.Shared;
-using Xunit;
 
 namespace Immediate.Handlers.FunctionalTests.NoBehaviors;
 
@@ -31,7 +30,7 @@ public static partial class NoBehaviorNoTokenOneAdder
 
 public class ParameterlessTests
 {
-	[Fact]
+	[Test]
 	public async Task NoBehaviorShouldReturnExpectedResponse()
 	{
 		const int Input = 1;
@@ -42,10 +41,10 @@ public class ParameterlessTests
 
 		var result = await handler.HandleAsync(query);
 
-		Assert.Equal(Input + 1, result);
+		_ = await Assert.That(result).IsEqualTo(Input + 1);
 	}
 
-	[Fact]
+	[Test]
 	public async Task NoTokenShouldReturnExpectedResponse()
 	{
 		const int Input = 1;
@@ -56,6 +55,6 @@ public class ParameterlessTests
 
 		var result = await handler.HandleAsync(query);
 
-		Assert.Equal(Input + 1, result);
+		_ = await Assert.That(result).IsEqualTo(Input + 1);
 	}
 }

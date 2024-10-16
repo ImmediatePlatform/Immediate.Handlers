@@ -1,5 +1,3 @@
-using Xunit;
-
 namespace Immediate.Handlers.FunctionalTests.Behavior;
 
 public sealed class BehaviorTests
@@ -12,7 +10,7 @@ public sealed class BehaviorTests
 		}
 	}
 
-	[Fact]
+	[Test]
 	public void CannotSetHandlerTwice()
 	{
 		var handler = new TestBehavior();
@@ -21,7 +19,7 @@ public sealed class BehaviorTests
 			handler.SetInnerHandler(handler));
 	}
 
-	[Fact]
+	[Test]
 	public async Task MustSetHandlerBeforeCallingNext()
 	{
 		var handler = new TestBehavior();
