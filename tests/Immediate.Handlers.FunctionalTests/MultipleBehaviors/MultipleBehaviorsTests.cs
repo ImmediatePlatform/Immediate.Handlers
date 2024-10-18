@@ -62,9 +62,8 @@ public sealed class MultipleBehaviorsTests
 
 		_ = await handler.HandleAsync(query);
 
-		_ = await Assert
-			.That(query)
-			.IsEquivalentCollectionTo([
+		Assert.Equal(
+			[
 				"Behavior1.Enter",
 				"Behavior2.Enter",
 				"Behavior1.Enter",
@@ -72,6 +71,8 @@ public sealed class MultipleBehaviorsTests
 				"Behavior1.Exit",
 				"Behavior2.Exit",
 				"Behavior1.Exit",
-			]);
+			],
+			query
+		);
 	}
 }
