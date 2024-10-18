@@ -4,21 +4,26 @@
 	<NoWarn>$(NoWarn);NU1903</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup Label="Usings">
+	<Using Include="Xunit" />
+  </ItemGroup>
+
   <ItemGroup>
 	<PackageReference Include="Basic.Reference.Assemblies.Net80" />
 	<PackageReference Include="coverlet.collector" PrivateAssets="All" />
 	<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
 	<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="4.9.2" />
-	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" />
-	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" />
+	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" />
+	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" VersionOverride="4.9.2" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 	<PackageReference Include="Scriban" />
-	<PackageReference Include="TUnit" />
+	<PackageReference Include="TUnit.Engine" />
 	<PackageReference Include="Verify.SourceGenerators" />
 	<PackageReference Include="Verify.TUnit" />
+	<PackageReference Include="xunit.v3.assert" />
   </ItemGroup>
 
   <ItemGroup>

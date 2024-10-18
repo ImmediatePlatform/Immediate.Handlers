@@ -9,7 +9,7 @@ public class InvalidBehaviorsTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task NonBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Collections.Generic;
 			using System.Linq;
@@ -61,9 +61,10 @@ public class InvalidBehaviorsTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo(Enumerable.Empty<string>());
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -74,7 +75,7 @@ public class InvalidBehaviorsTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task BoundGenericShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Collections.Generic;
 			using System.Linq;
@@ -127,9 +128,10 @@ public class InvalidBehaviorsTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo(Enumerable.Empty<string>());
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -140,7 +142,7 @@ public class InvalidBehaviorsTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task NonGenericBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Collections.Generic;
 			using System.Linq;
@@ -193,9 +195,10 @@ public class InvalidBehaviorsTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo(Enumerable.Empty<string>());
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -206,7 +209,7 @@ public class InvalidBehaviorsTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task AbstractBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Collections.Generic;
 			using System.Linq;
@@ -251,9 +254,10 @@ public class InvalidBehaviorsTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo(Enumerable.Empty<string>());
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -264,7 +268,7 @@ public class InvalidBehaviorsTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTRequestConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System;
 			using System.Collections;
@@ -319,9 +323,10 @@ public class InvalidBehaviorsTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo(Enumerable.Empty<string>());
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -332,7 +337,7 @@ public class InvalidBehaviorsTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTResponseConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System;
 			using System.Collections;
@@ -387,9 +392,10 @@ public class InvalidBehaviorsTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo(Enumerable.Empty<string>());
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -400,7 +406,7 @@ public class InvalidBehaviorsTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTypeParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Collections.Generic;
 			using System.Linq;
@@ -453,9 +459,10 @@ public class InvalidBehaviorsTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo(Enumerable.Empty<string>());
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));

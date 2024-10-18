@@ -8,7 +8,7 @@ public class HandlerTests
 	[Arguments(DriverReferenceAssemblies.Normal)]
 	public async Task IntReturnType(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -32,11 +32,12 @@ public class HandlerTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo([
+		Assert.Equal(
+			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-			]);
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -46,7 +47,7 @@ public class HandlerTests
 	[Arguments(DriverReferenceAssemblies.Normal)]
 	public async Task VoidReturnType(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -70,11 +71,12 @@ public class HandlerTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo([
+		Assert.Equal(
+			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-			]);
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -84,7 +86,7 @@ public class HandlerTests
 	[Arguments(DriverReferenceAssemblies.Normal)]
 	public async Task MissingCancellationToken(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -108,11 +110,12 @@ public class HandlerTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo([
+		Assert.Equal(
+			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-			]);
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -122,7 +125,7 @@ public class HandlerTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task SimpleParameterAttribute(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -150,12 +153,13 @@ public class HandlerTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo([
+		Assert.Equal(
+			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
-			]);
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -165,7 +169,7 @@ public class HandlerTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task MultipleParameterAttributes(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System;
 			using System.Threading;
@@ -203,12 +207,13 @@ public class HandlerTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo([
+		Assert.Equal(
+			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
-			]);
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
@@ -218,7 +223,7 @@ public class HandlerTests
 	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task ComplexParameterAttribute(DriverReferenceAssemblies assemblies)
 	{
-		var result = await GeneratorTestHelper.RunGenerator(
+		var result = GeneratorTestHelper.RunGenerator(
 			"""
 			using System;
 			using System.Threading;
@@ -255,12 +260,13 @@ public class HandlerTests
 			assemblies
 		);
 
-		_ = await Assert
-			.That(result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal)))
-			.IsEquivalentCollectionTo([
+		Assert.Equal(
+			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
-			]);
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));

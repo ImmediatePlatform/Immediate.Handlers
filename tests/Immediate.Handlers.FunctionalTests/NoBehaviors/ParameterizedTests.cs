@@ -33,6 +33,6 @@ public class ParameterizedTests
 
 		var result = await handler.HandleAsync(query);
 
-		_ = await Assert.That(result).IsEqualTo(Input + addendProvider.Addend);
+		Assert.Equal(Input + addendProvider.Addend, result);
 	}
 }

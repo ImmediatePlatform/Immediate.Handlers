@@ -41,7 +41,7 @@ public class ParameterlessTests
 
 		var result = await handler.HandleAsync(query);
 
-		_ = await Assert.That(result).IsEqualTo(Input + 1);
+		Assert.Equal(Input + 1, result);
 	}
 
 	[Test]
@@ -55,6 +55,6 @@ public class ParameterlessTests
 
 		var result = await handler.HandleAsync(query);
 
-		_ = await Assert.That(result).IsEqualTo(Input + 1);
+		Assert.Equal(Input + 1, result);
 	}
 }

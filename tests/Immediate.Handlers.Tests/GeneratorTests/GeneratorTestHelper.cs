@@ -8,7 +8,7 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public static class GeneratorTestHelper
 {
-	public static async Task<GeneratorDriverRunResult> RunGenerator(
+	public static GeneratorDriverRunResult RunGenerator(
 		[StringSyntax("c#-test")] string source,
 		DriverReferenceAssemblies assemblies
 	)
@@ -38,16 +38,13 @@ public static class GeneratorTestHelper
 				out var diagnostics
 			);
 
-		_ = await Assert
-			.That(
-				outputCompilation
-					.GetDiagnostics()
-					.Where(d => d.Severity is DiagnosticSeverity.Error or DiagnosticSeverity.Warning)
-			)
-			.IsEmpty();
+		Assert.Empty(
+			outputCompilation
+				.GetDiagnostics()
+				.Where(d => d.Severity is DiagnosticSeverity.Error or DiagnosticSeverity.Warning)
+		);
 
-		_ = await Assert.That(diagnostics).IsEmpty();
-
+		Assert.Empty(diagnostics);
 		return driver.GetRunResult();
 	}
 }

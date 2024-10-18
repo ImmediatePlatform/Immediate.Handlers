@@ -33,8 +33,6 @@ public sealed partial class Tests
 
 		var behaviorWalker = serviceProvider.GetRequiredService<BehaviorWalker>();
 
-		_ = await Assert
-			.That(behaviorWalker.BehaviorsRan)
-			.IsEquivalentCollectionTo(["BehaviorA", "BehaviorB", "BehaviorD"]);
+		Assert.Equal(["BehaviorA", "BehaviorB", "BehaviorD"], behaviorWalker.BehaviorsRan);
 	}
 }
