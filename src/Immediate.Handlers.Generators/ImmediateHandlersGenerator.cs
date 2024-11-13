@@ -85,6 +85,9 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		if (!hasDi)
 			return;
 
+		if (!handlers.Any())
+			return;
+
 		if (handlers.Any(h => h.displayName is null || (h.behaviors?.Any(b => b is null) ?? false)))
 			return;
 

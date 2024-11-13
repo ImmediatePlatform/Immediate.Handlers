@@ -271,4 +271,25 @@ public class HandlerTests
 		_ = await Verify(result)
 			.UseParameters(string.Join("_", assemblies));
 	}
+
+	[Test]
+	[Arguments(DriverReferenceAssemblies.Msdi)]
+	public async Task NoHandlersGeneratesZeroFiles(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			namespace Dummy;
+
+			public sealed class Test;
+			""",
+			assemblies
+		);
+
+		Assert.Empty(
+			result.GeneratedTrees
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join("_", assemblies));
+	}
 }
