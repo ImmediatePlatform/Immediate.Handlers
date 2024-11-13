@@ -18,6 +18,13 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				.Any(r => (r.Display ?? "")
 					.Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
 
+		var assemblyName = context.CompilationProvider
+			.Select((cp, _) => cp.AssemblyName!
+				.Replace(".", string.Empty)
+				.Replace(" ", string.Empty)
+				.Trim()
+			);
+
 		var @namespace = context
 			.AnalyzerConfigOptionsProvider
 			.Select((c, _) => c.GlobalOptions
@@ -59,7 +66,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.Collect()
 			.Combine(behaviors)
 			.Combine(@namespace
-				.Combine(hasMsDi));
+				.Combine(hasMsDi)
+				.Combine(assemblyName));
 
 		context.RegisterSourceOutput(
 			registrationNodes,
@@ -67,8 +75,10 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				spc,
 				handlers: node.Left.Left,
 				behaviors: node.Left.Right,
-				hasDi: node.Right.Right,
-				@namespace: node.Right.Left)
+				hasDi: node.Right.Left.Right,
+				@namespace: node.Right.Left.Left,
+				assemblyName: node.Right.Right
+			)
 		);
 	}
 
@@ -77,7 +87,9 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		ImmutableArray<(string? displayName, EquatableReadOnlyList<Behavior?>? behaviors)> handlers,
 		ImmutableArray<Behavior?> behaviors,
 		bool hasDi,
-		string? @namespace)
+		string? @namespace,
+		string assemblyName
+	)
 	{
 		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
@@ -101,6 +113,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var source = template.Render(new
 		{
 			Namespace = @namespace,
+			AssemblyName = assemblyName,
 			Handlers = handlers.Select(x => x.displayName),
 			Behaviors = behaviors
 				.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))

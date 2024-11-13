@@ -71,7 +71,7 @@ public class RequestBenchmarks
 	{
 		var services = new ServiceCollection();
 
-		_ = services.AddHandlers();
+		_ = services.AddBenchmarkSimpleHandlers();
 
 		_ = services.AddMediator(opts => opts.ServiceLifetime = ServiceLifetime.Scoped);
 		_ = services.AddMediatR(

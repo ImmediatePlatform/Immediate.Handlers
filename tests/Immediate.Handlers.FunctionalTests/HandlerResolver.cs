@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Immediate.Handlers.FunctionalTests;
 
@@ -8,8 +8,8 @@ public static class HandlerResolver
 		where T : notnull
 	{
 		var serviceCollection = new ServiceCollection()
-			.AddHandlers()
-			.AddBehaviors();
+			.AddImmediateHandlersFunctionalTestsHandlers()
+			.AddImmediateHandlersFunctionalTestsBehaviors();
 
 		serviceCollectionConfigurator?.Invoke(serviceCollection);
 

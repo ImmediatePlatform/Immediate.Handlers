@@ -6,14 +6,14 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 public static class HandlerServiceCollectionExtensions
 {
-	public static IServiceCollection AddBehaviors(
+	public static IServiceCollection AddTestsBehaviors(
 		this IServiceCollection services)
 	{
 		
 		return services;
 	}
 
-	public static IServiceCollection AddHandlers(
+	public static IServiceCollection AddTestsHandlers(
 		this IServiceCollection services,
 		ServiceLifetime lifetime = ServiceLifetime.Scoped
 	)
