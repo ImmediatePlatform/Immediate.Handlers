@@ -9,7 +9,7 @@ namespace {{ namespace }};
 {{~ end ~}}
 public static class HandlerServiceCollectionExtensions
 {
-	public static IServiceCollection AddBehaviors(
+	public static IServiceCollection Add{{ assembly_name }}Behaviors(
 		this IServiceCollection services)
 	{
 		{{~ for b in behaviors ~}}
@@ -19,7 +19,7 @@ public static class HandlerServiceCollectionExtensions
 		return services;
 	}
 
-	public static IServiceCollection AddHandlers(
+	public static IServiceCollection Add{{ assembly_name }}Handlers(
 		this IServiceCollection services,
 		ServiceLifetime lifetime = ServiceLifetime.Scoped
 	)

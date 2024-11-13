@@ -149,8 +149,8 @@ public class RequestBenchmarks
 
 		_ = services.AddScoped<SomeService>();
 
-		_ = services.AddHandlers();
-		_ = services.AddBehaviors();
+		_ = services.AddBenchmarkBehaviorsHandlers();
+		_ = services.AddBenchmarkBehaviorsBehaviors();
 
 		_ = services.AddMediator(opts => opts.ServiceLifetime = ServiceLifetime.Scoped);
 		_ = services.AddScoped(

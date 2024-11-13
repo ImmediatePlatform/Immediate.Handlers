@@ -4,8 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddBehaviors();
-builder.Services.AddHandlers();
+builder.Services.AddNormalBehaviors();
+builder.Services.AddNormalHandlers();
 
 var app = builder.Build();
 

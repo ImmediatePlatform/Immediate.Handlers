@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 public static class HandlerServiceCollectionExtensions
 {
-	public static IServiceCollection AddBehaviors(
+	public static IServiceCollection AddTestsBehaviors(
 		this IServiceCollection services)
 	{
 		services.TryAddTransient(typeof(global::Dummy.LoggingBehavior<,>));
@@ -14,7 +14,7 @@ public static class HandlerServiceCollectionExtensions
 		return services;
 	}
 
-	public static IServiceCollection AddHandlers(
+	public static IServiceCollection AddTestsHandlers(
 		this IServiceCollection services,
 		ServiceLifetime lifetime = ServiceLifetime.Scoped
 	)
