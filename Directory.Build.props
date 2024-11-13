@@ -1,30 +1,31 @@
 <Project>
-	<PropertyGroup>
-		<LangVersion>latest</LangVersion>
-		<TargetFramework>net8.0</TargetFramework>
+  <PropertyGroup>
+	<LangVersion>latest</LangVersion>
+	<TargetFramework>net8.0</TargetFramework>
 
-		<Nullable>enable</Nullable>
-		<WarningsAsErrors>$(WarningsAsErrors);nullable;</WarningsAsErrors>
+	<Nullable>enable</Nullable>
+	<WarningsAsErrors>$(WarningsAsErrors);nullable;</WarningsAsErrors>
 
-		<ImplicitUsings>enable</ImplicitUsings>
+	<ImplicitUsings>enable</ImplicitUsings>
 
-		<AnalysisLevel>latest-all</AnalysisLevel>
-		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	<AnalysisLevel>latest-all</AnalysisLevel>
+	<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-		<IsPackable>false</IsPackable>
-	</PropertyGroup>
+	<IsPackable>false</IsPackable>
+	<WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="PolySharp" PrivateAssets="All" />
-	</ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="PolySharp" PrivateAssets="All" />
+  </ItemGroup>
 
-	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<CollectCoverage>true</CollectCoverage>
-		<CoverletOutputFormat>opencover</CoverletOutputFormat>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	<CollectCoverage>true</CollectCoverage>
+	<CoverletOutputFormat>opencover</CoverletOutputFormat>
+  </PropertyGroup>
 </Project>

@@ -1,53 +1,56 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<IsPackable>true</IsPackable>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-	</PropertyGroup>
+  <PropertyGroup>
+	<TargetFramework>net8.0</TargetFramework>
+	<IsPackable>true</IsPackable>
+	<IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
 
-	<PropertyGroup Label="Nuget">
-		<Title>Immediate.Handlers</Title>
-		<Description>An implementation of the mediator pattern in .NET using source-generation.</Description>
+  <PropertyGroup Label="Nuget">
+	<Title>Immediate.Handlers</Title>
+	<Description>An implementation of the mediator pattern in .NET using source-generation.</Description>
 
-		<Authors>Immediate.Handlers Developers</Authors>
+	<Authors>Immediate.Handlers Developers</Authors>
+	<Copyright>© 2024 Immediate.Handlers Developers</Copyright>
 
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReadmeFile>readme.md</PackageReadmeFile>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageReadmeFile>readme.md</PackageReadmeFile>
+	<PackageTags>csharp-sourcegenerator;mediator;mediator-pattern</PackageTags>
 
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<RepositoryUrl>https://github.com/viceroypenguin/Immediate.Handlers</RepositoryUrl>
-	</PropertyGroup>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	<RepositoryUrl>https://github.com/viceroypenguin/Immediate.Handlers</RepositoryUrl>
+  </PropertyGroup>
 
-	<!--
+  <!--
 	This ensures the library will be packaged as a source generator when we use `dotnet pack`
 	-->
-	<ItemGroup>
-		<None Include="../../readme.md" Pack="true" PackagePath="/" />
-		<None Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="false" />
-		<None Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Analyzers.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-		<None Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.CodeFixes.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-		<None Include="../Immediate.Handlers.Generators/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Generators.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-		<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.dll" Pack="true" PackagePath="lib/net8.0" Visible="true" />
-		<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.xml" Pack="true" PackagePath="lib/net8.0" Visible="true" />
-	</ItemGroup>
+  <ItemGroup>
+	<None Include="../../readme.md" Pack="true" PackagePath="/" />
+	<None Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="false" />
+	<None Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Analyzers.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
+	<None Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.CodeFixes.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
+	<None Include="../Immediate.Handlers.Generators/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Generators.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
+	<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.dll" Pack="true" PackagePath="lib/net8.0" Visible="true" />
+	<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.xml" Pack="true" PackagePath="lib/net8.0" Visible="true" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
-		<PackageReference Include="MinVer" PrivateAssets="all" />
-	</ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="All" />
+	<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
+	<PackageReference Include="MinVer" PrivateAssets="all" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="../Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" ReferenceOutputAssembly="false" />
-		<ProjectReference Include="../Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" ReferenceOutputAssembly="false" />
-		<ProjectReference Include="../Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" ReferenceOutputAssembly="false" />
-		<ProjectReference Include="../Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" ReferenceOutputAssembly="false" />
-	</ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="../Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" ReferenceOutputAssembly="false" />
+	<ProjectReference Include="../Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" ReferenceOutputAssembly="false" />
+	<ProjectReference Include="../Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" ReferenceOutputAssembly="false" />
+	<ProjectReference Include="../Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 
-	<PropertyGroup Label="MinVer">
-		<MinVerAutoIncrement>minor</MinVerAutoIncrement>
-		<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
-		<MinVerTagPrefix>v</MinVerTagPrefix>
-	</PropertyGroup>
+  <PropertyGroup Label="MinVer">
+	<MinVerAutoIncrement>minor</MinVerAutoIncrement>
+	<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
+	<MinVerTagPrefix>v</MinVerTagPrefix>
+  </PropertyGroup>
 
 </Project>
