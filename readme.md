@@ -158,17 +158,17 @@ Immediate.Handlers supports `Microsoft.Extensions.DependencyInjection.Abstractio
 
 #### Registering Handlers
 
-```cs
-services.AddHandlers();
-```
+In your `Program.cs`, add a call to `app.MapXxxHandlers()`, where `Xxx` is the shortened form of the project name.
+* For a project named `Web`, it will be `app.MapWebHandlers()`
+* For a project named `Application.Web`, it will be `app.MapApplicationWebHandlers()`
 
 This registers all classes in the assembly marked with `[Handler]`.
 
 #### Registering Behaviors
 
-```cs
-services.AddBehaviors();
-```
+In your `Program.cs`, add a call to `app.MapXxxBehaviors()`, where `Xxx` is the shortened form of the project name.
+* For a project named `Web`, it will be `app.MapWebBehaviors()`
+* For a project named `Application.Web`, it will be `app.MapApplicationWebBehaviors()`
 
 This registers all behaviors referenced in any `[Behaviors]` attribute.
 
