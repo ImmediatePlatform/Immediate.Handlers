@@ -309,3 +309,11 @@ dotnet_diagnostic.CA2000.severity = error               # CA2000: Dispose object
 dotnet_diagnostic.CA1515.severity = none                # CA1515: Consider making public types internal
 dotnet_diagnostic.CA1708.severity = none                # CA1708: Identifiers should differ by more than case
 dotnet_diagnostic.CA1716.severity = none                # CA1716: Identifiers should not match keywords
+
+MA0053.public_class_should_be_sealed = true
+MA0053.exceptions_should_be_sealed = true
+
+dotnet_diagnostic.MA0004.severity = none
+dotnet_diagnostic.MA0048.severity = none
+dotnet_diagnostic.MA0051.severity = none
+dotnet_diagnostic.MA0053.severity = warning

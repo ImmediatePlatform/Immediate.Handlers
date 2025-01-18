@@ -2,7 +2,7 @@ using Immediate.Handlers.Shared;
 
 namespace Immediate.Handlers.FunctionalTests.MultipleBehaviors;
 
-public class Behavior1<TRequest, TResponse> : Behavior<TRequest, TResponse>
+public sealed class Behavior1<TRequest, TResponse> : Behavior<TRequest, TResponse>
 	where TRequest : List<string>
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
@@ -17,7 +17,7 @@ public class Behavior1<TRequest, TResponse> : Behavior<TRequest, TResponse>
 	}
 }
 
-public class Behavior2<TRequest, TResponse> : Behavior<TRequest, TResponse>
+public sealed class Behavior2<TRequest, TResponse> : Behavior<TRequest, TResponse>
 	where TRequest : List<string>
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
@@ -40,7 +40,7 @@ public class Behavior2<TRequest, TResponse> : Behavior<TRequest, TResponse>
 )]
 public static partial class MultipleBehaviorHandler
 {
-	public class Query : List<string>;
+	public sealed class Query : List<string>;
 
 	private static async ValueTask<int> HandleAsync(Query query, CancellationToken cancellationToken)
 	{

@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
 
-public partial class ImmediateHandlersGenerator
+public sealed partial class ImmediateHandlersGenerator
 {
 	private static EquatableReadOnlyList<Behavior?> TransformBehaviors(
 		GeneratorAttributeSyntaxContext context,
@@ -132,7 +132,7 @@ public partial class ImmediateHandlersGenerator
 					ITypeParameterSymbol s,
 				]
 			}
-			&& s.Name == parameter.Name
+			&& s.Name.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase)
 		)
 		{
 			displayString = displayString.Replace(parameter.Name, "_TRequest_");

@@ -7,7 +7,7 @@ using Scriban;
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
 
 [Generator]
-public partial class ImmediateHandlersGenerator : IIncrementalGenerator
+public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 {
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
@@ -191,8 +191,10 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			GenericType responseType,
 			IEnumerable<Behavior?> enumerable) =>
 		enumerable
-			.Where(b => b is null || ValidateType(b.RequestType, requestType))
-			.Where(b => b is null || ValidateType(b.ResponseType, responseType))
+			.Where(b =>
+				(b is null || ValidateType(b.RequestType, requestType))
+				&& (b is null || ValidateType(b.ResponseType, responseType))
+			)
 			.ToList();
 
 	private sealed record RenderBehavior
@@ -203,7 +205,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static List<RenderBehavior> BuildRenderBehaviors(List<Behavior?> pipelineBehaviors)
 	{
-		var typesCount = new Dictionary<string, int>()
+		var typesCount = new Dictionary<string, int>(StringComparer.Ordinal)
 		{
 			["HandleBehavior"] = 1,
 		};
@@ -224,7 +226,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				NonGenericTypeName = b!.NonGenericTypeName,
 				VariableName = b.Name[0..1].ToLowerInvariant()
 					+ b.Name[1..]
-					+ GetVariableNameSuffix(b.Name)
+					+ GetVariableNameSuffix(b.Name),
 			})
 			.ToList();
 #pragma warning restore CA1308 // Normalize strings to uppercase
@@ -234,7 +236,7 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static bool ValidateType(string? type, GenericType implementedTypes) =>
 		type is null
-		|| implementedTypes.Implements.Contains(type.Replace("_TRequest_", implementedTypes.Name));
+		|| implementedTypes.Implements.Contains(type.Replace("_TRequest_", implementedTypes.Name), StringComparer.Ordinal);
 
 	private static Template GetTemplate(string name)
 	{

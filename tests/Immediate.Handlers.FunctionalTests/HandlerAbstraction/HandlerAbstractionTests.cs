@@ -15,7 +15,7 @@ public static partial class HandlerAbstractionOneAdder
 	}
 }
 
-public class HandlerAbstractionTests
+public sealed class HandlerAbstractionTests
 {
 	[Test]
 	public async Task NoBehaviorShouldReturnExpectedResponseForAbstraction()

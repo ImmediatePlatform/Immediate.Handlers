@@ -19,7 +19,7 @@ public static partial class NoBehaviorParameterizedOneAdder
 
 public record AddendProvider(int Addend);
 
-public class ParameterizedTests
+public sealed class ParameterizedTests
 {
 	[Test]
 	public async Task NoBehaviorShouldReturnExpectedResponse()

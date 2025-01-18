@@ -35,4 +35,8 @@
 	<PackageVersion Include="Verify.TUnit" Version="28.9.0" />
 	<PackageVersion Include="xunit.v3.assert" Version="1.0.1" />
   </ItemGroup>
+
+  <ItemGroup>
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.186" />
+  </ItemGroup>
 </Project>

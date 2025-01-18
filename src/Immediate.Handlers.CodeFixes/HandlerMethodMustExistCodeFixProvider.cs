@@ -11,7 +11,7 @@ using SyntaxKind = Microsoft.CodeAnalysis.CSharp.SyntaxKind;
 namespace Immediate.Handlers.CodeFixes;
 
 [ExportCodeFixProvider(LanguageNames.CSharp)]
-public class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
+public sealed class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 {
 	public override ImmutableArray<string> FixableDiagnosticIds { get; } =
 		ImmutableArray.Create([DiagnosticIds.IHR0001HandlerMethodMustExist]);
