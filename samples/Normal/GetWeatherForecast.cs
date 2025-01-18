@@ -19,9 +19,9 @@ public static partial class GetWeatherForecast
 		"Scorching",
 	];
 
-	public record Query;
+	public sealed record Query;
 
-	public record Response(DateOnly Date, int TemperatureC, string? Summary)
+	public sealed record Response(DateOnly Date, int TemperatureC, string? Summary)
 	{
 		public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 	}

@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
 
-public partial class ImmediateHandlersGenerator
+public sealed partial class ImmediateHandlersGenerator
 {
 	private static Handler? TransformHandler(
 		GeneratorAttributeSyntaxContext context,
@@ -111,7 +111,7 @@ public partial class ImmediateHandlersGenerator
 		return new()
 		{
 			Name = name,
-			Implements = implements.Distinct().ToEquatableReadOnlyList(),
+			Implements = implements.Distinct(StringComparer.Ordinal).ToEquatableReadOnlyList(),
 		};
 	}
 

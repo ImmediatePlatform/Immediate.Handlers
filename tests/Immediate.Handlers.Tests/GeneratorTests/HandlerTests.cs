@@ -2,7 +2,7 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
-public class HandlerTests
+public sealed class HandlerTests
 {
 	[Test]
 	[Arguments(DriverReferenceAssemblies.Normal)]
@@ -36,11 +36,11 @@ public class HandlerTests
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -75,11 +75,11 @@ public class HandlerTests
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -114,11 +114,11 @@ public class HandlerTests
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -158,11 +158,11 @@ public class HandlerTests
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -212,11 +212,11 @@ public class HandlerTests
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -265,11 +265,11 @@ public class HandlerTests
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -290,6 +290,6 @@ public class HandlerTests
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 }

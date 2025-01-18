@@ -117,7 +117,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		if (!namedTypeSymbol
 				.GetAttributes()
-				.Any(x => x.AttributeClass?.ToString() == "Immediate.Handlers.Shared.HandlerAttribute")
+				.Any(x => x.AttributeClass.IsHandlerAttribute())
 		)
 		{
 			return;
@@ -178,10 +178,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			case [var methodSymbol]:
 			{
 				token.ThrowIfCancellationRequested();
-				if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol
-					&& returnTypeSymbol.ConstructedFrom.ToString() is not (
-						"System.Threading.Tasks.ValueTask<TResult>"
-						or "System.Threading.Tasks.ValueTask")
+				if (methodSymbol.ReturnType is INamedTypeSymbol { ConstructedFrom: { } from }
+					&& !from.IsValueTask() && !from.IsValueTask1()
 				)
 				{
 					context.ReportDiagnostic(

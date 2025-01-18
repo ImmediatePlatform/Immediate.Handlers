@@ -28,7 +28,7 @@ public static partial class NoBehaviorNoTokenOneAdder
 	}
 }
 
-public class ParameterlessTests
+public sealed class ParameterlessTests
 {
 	[Test]
 	public async Task NoBehaviorShouldReturnExpectedResponse()

@@ -27,12 +27,12 @@ public sealed partial class Tests
 	}
 }
 
-public class BehaviorWalker
+public sealed class BehaviorWalker
 {
 	public IList<string> BehaviorsRan { get; init; } = [];
 }
 
-public class BehaviorA<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : A
+public sealed class BehaviorA<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : A
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
@@ -41,7 +41,7 @@ public class BehaviorA<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TR
 	}
 }
 
-public class BehaviorB<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : B
+public sealed class BehaviorB<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : B
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
@@ -50,7 +50,7 @@ public class BehaviorB<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TR
 	}
 }
 
-public class BehaviorC<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : C
+public sealed class BehaviorC<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : C
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
@@ -59,7 +59,7 @@ public class BehaviorC<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TR
 	}
 }
 
-public class BehaviorD<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : D
+public sealed class BehaviorD<TRequest, TResponse>(BehaviorWalker walker) : Behavior<TRequest, TResponse> where TRequest : D
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{

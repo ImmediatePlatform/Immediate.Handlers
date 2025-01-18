@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 
 namespace Immediate.Handlers.Tests.Helpers;
@@ -25,12 +26,13 @@ public static class ReferenceAssemblyHelpers
 			return references;
 
 		// to be done with other renderers
-		throw new NotImplementedException();
+		throw new UnreachableException();
 	}
 }
 
 public enum DriverReferenceAssemblies
 {
+	None = 0,
 	Normal,
 	Msdi,
 }

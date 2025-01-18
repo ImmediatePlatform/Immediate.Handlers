@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Immediate.Handlers.Generators.ImmediateHandlers;
 
-public partial class ImmediateHandlersGenerator
+public sealed partial class ImmediateHandlersGenerator
 {
 	[ExcludeFromCodeCoverage]
 	private sealed record Behavior

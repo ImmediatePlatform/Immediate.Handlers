@@ -7,7 +7,7 @@ using Normal;
 
 namespace Normal;
 
-public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+public sealed class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
 	: Behavior<TRequest, TResponse>
 {
 	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)

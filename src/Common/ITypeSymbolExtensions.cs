@@ -5,6 +5,25 @@ namespace Immediate.Handlers;
 
 internal static class ITypeSymbolExtensions
 {
+	public static bool IsHandlerAttribute(this ITypeSymbol? typeSymbol) =>
+		typeSymbol is
+		{
+			Name: "HandlerAttribute",
+			ContainingNamespace:
+			{
+				Name: "Shared",
+				ContainingNamespace:
+				{
+					Name: "Handlers",
+					ContainingNamespace:
+					{
+						Name: "Immediate",
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
+			},
+		};
+
 	public static bool IsBehavior2(this ITypeSymbol typeSymbol) =>
 		typeSymbol is
 		{

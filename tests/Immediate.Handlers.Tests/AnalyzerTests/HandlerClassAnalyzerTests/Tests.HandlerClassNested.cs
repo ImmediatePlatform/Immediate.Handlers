@@ -3,7 +3,7 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
-public partial class Tests
+public sealed partial class Tests
 {
 	[Test]
 	public async Task HandlerClassNested_DoesAlert() =>

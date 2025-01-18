@@ -2,7 +2,7 @@ using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
-public class InvalidHandlerTests
+public sealed class InvalidHandlerTests
 {
 	[Test]
 	[Arguments(DriverReferenceAssemblies.Normal)]
@@ -31,11 +31,11 @@ public class InvalidHandlerTests
 
 		Assert.Equal(
 			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -90,11 +90,11 @@ public class InvalidHandlerTests
 
 		Assert.Equal(
 			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -138,11 +138,11 @@ public class InvalidHandlerTests
 
 		Assert.Equal(
 			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -188,11 +188,11 @@ public class InvalidHandlerTests
 
 		Assert.Equal(
 			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -239,11 +239,11 @@ public class InvalidHandlerTests
 
 		Assert.Equal(
 			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -293,10 +293,10 @@ public class InvalidHandlerTests
 
 		Assert.Equal(
 			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 }

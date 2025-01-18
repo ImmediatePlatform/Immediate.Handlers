@@ -77,7 +77,7 @@ public sealed record SomeRequest(Guid Id)
 
 public sealed record SomeResponse(Guid Id);
 
-public class SomeService
+public sealed class SomeService
 {
 	private static readonly SomeResponse s_response = new(Guid.NewGuid());
 

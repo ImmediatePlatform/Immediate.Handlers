@@ -79,14 +79,14 @@ public sealed class BehaviorTests
 					DriverReferenceAssemblies.Msdi =>
 						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
-					_ => throw new UnreachableException(),
+					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 				},
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -228,14 +228,14 @@ public sealed class BehaviorTests
 					DriverReferenceAssemblies.Msdi =>
 						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
-					_ => throw new UnreachableException(),
+					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 				},
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 
 	[Test]
@@ -297,13 +297,13 @@ public sealed class BehaviorTests
 					DriverReferenceAssemblies.Msdi =>
 						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
-					_ => throw new UnreachableException(),
+					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 				},
 			],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace("\\", "/", StringComparison.Ordinal))
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result)
-			.UseParameters(string.Join("_", assemblies));
+			.UseParameters(string.Join('_', assemblies));
 	}
 }
