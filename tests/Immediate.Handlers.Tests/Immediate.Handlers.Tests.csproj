@@ -13,6 +13,7 @@
 	<PackageReference Include="coverlet.collector" PrivateAssets="All" />
 	<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
 	<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
+	<PackageReference Include="Microsoft.CodeAnalysis.Common" VersionOverride="4.9.2" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="4.9.2" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" />
@@ -20,6 +21,7 @@
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 	<PackageReference Include="Scriban" />
+	<PackageReference Include="System.Formats.Asn1" />
 	<PackageReference Include="TUnit.Engine" />
 	<PackageReference Include="Verify.SourceGenerators" />
 	<PackageReference Include="Verify.TUnit" />
