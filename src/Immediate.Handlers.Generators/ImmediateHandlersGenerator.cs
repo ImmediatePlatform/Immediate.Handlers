@@ -14,9 +14,13 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var hasMsDi = context
 			.MetadataReferencesProvider
 			.Collect()
-			.Select((refs, _) => refs
-				.Any(r => (r.Display ?? "")
-					.Contains("Microsoft.Extensions.DependencyInjection.Abstractions")));
+			.Select(
+				(refs, _) => refs
+					.Any(
+						r => (r.Display ?? "")
+							.Contains("Microsoft.Extensions.DependencyInjection.Abstractions")
+					)
+			);
 
 		var assemblyName = context.CompilationProvider
 			.Select((cp, _) => cp.AssemblyName!
@@ -27,9 +31,11 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var @namespace = context
 			.AnalyzerConfigOptionsProvider
-			.Select((c, _) => c.GlobalOptions
-				.TryGetValue("build_property.rootnamespace", out var ns)
-					? ns : null);
+			.Select(
+				(c, _) => c.GlobalOptions
+					.TryGetValue("build_property.rootnamespace", out var ns)
+						? ns : null
+			);
 
 		var behaviors = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
@@ -43,8 +49,9 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var handlers = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.HandlerAttribute",
-				predicate: (_, _) => true,
-				TransformHandler);
+				predicate: (node, _) => node is TypeDeclarationSyntax,
+				TransformHandler
+			);
 
 		var handlerNodes = handlers
 			.Combine(behaviors)
@@ -58,7 +65,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				handler: node.Left.Left,
 				behaviors: node.Left.Right,
 				hasMsDi: node.Right,
-				template)
+				template
+			)
 		);
 
 		var registrationNodes = handlers
@@ -67,7 +75,8 @@ public partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.Combine(behaviors)
 			.Combine(@namespace
 				.Combine(hasMsDi)
-				.Combine(assemblyName));
+				.Combine(assemblyName)
+			);
 
 		context.RegisterSourceOutput(
 			registrationNodes,
