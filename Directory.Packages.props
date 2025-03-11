@@ -6,14 +6,14 @@
   <ItemGroup>
 	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.6.0" />
 	<PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
-	<PackageVersion Include="coverlet.collector" Version="6.0.3" />
-	<PackageVersion Include="coverlet.msbuild" Version="6.0.3" />
+	<PackageVersion Include="coverlet.collector" Version="6.0.4" />
+	<PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
 	<PackageVersion Include="DotNet.ReproducibleBuilds" Version="1.2.25" />
 	<PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
 	<PackageVersion Include="Mediator.Abstractions" Version="2.1.7" />
 	<PackageVersion Include="Mediator.SourceGenerator" Version="2.1.7" />
 	<PackageVersion Include="MediatR" Version="12.4.1" />
-	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
+	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.13" />
 	<PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
@@ -26,17 +26,17 @@
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 	<PackageVersion Include="MinVer" Version="6.0.0" />
 	<PackageVersion Include="PolySharp" Version="1.15.0" />
-	<PackageVersion Include="Scriban" Version="5.12.1" />
-	<PackageVersion Include="Swashbuckle.AspNetCore" Version="7.2.0" />
-	<PackageVersion Include="System.Formats.Asn1" Version="9.0.1" />
+	<PackageVersion Include="Scriban" Version="6.0.0" />
+	<PackageVersion Include="Swashbuckle.AspNetCore" Version="7.3.1" />
+	<PackageVersion Include="System.Formats.Asn1" Version="9.0.2" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.0" />
-	<PackageVersion Include="TUnit.Engine" Version="0.6.131" />
+	<PackageVersion Include="TUnit.Engine" Version="0.17.14" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-	<PackageVersion Include="Verify.TUnit" Version="28.9.0" />
-	<PackageVersion Include="xunit.v3.assert" Version="1.0.1" />
+	<PackageVersion Include="Verify.TUnit" Version="28.14.0" />
+	<PackageVersion Include="xunit.v3.assert" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.186" />
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.188" />
   </ItemGroup>
 </Project>
