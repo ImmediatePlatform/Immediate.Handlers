@@ -1,0 +1,33 @@
+<Solution>
+  <Folder Name="/.root/">
+    <File Path=".editorconfig" />
+    <File Path=".github/dependabot.yml" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="readme.md" />
+  </Folder>
+  <Folder Name="/.root/workflows/">
+    <File Path=".github/workflows/build.yml" />
+    <File Path=".github/workflows/release.yml" />
+  </Folder>
+  <Folder Name="/Benchmarks/">
+    <Project Path="benchmarks/Benchmark.Behaviors/Benchmark.Behaviors.csproj" />
+    <Project Path="benchmarks/Benchmark.Large/Benchmark.Large.csproj" />
+    <Project Path="benchmarks/Benchmark.Simple/Benchmark.Simple.csproj" />
+  </Folder>
+  <Folder Name="/Samples/">
+    <Project Path="samples/Normal/Normal.csproj" />
+  </Folder>
+  <Folder Name="/Source/">
+    <Project Path="src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" />
+    <Project Path="src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" />
+    <Project Path="src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" />
+    <Project Path="src/Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
+    <Project Path="src/Immediate.Handlers/Immediate.Handlers.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/Immediate.Handlers.FunctionalTests/Immediate.Handlers.FunctionalTests.csproj" />
+    <Project Path="tests/Immediate.Handlers.Tests/Immediate.Handlers.Tests.csproj" />
+  </Folder>
+</Solution>
