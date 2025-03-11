@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Generators;
 public static class EquatableReadOnlyList
 {
 	public static EquatableReadOnlyList<T> ToEquatableReadOnlyList<T>(this IEnumerable<T> enumerable)
-		=> new(enumerable.ToArray());
+		=> new(enumerable is IReadOnlyList<T> l ? l : [.. enumerable]);
 }
 
 /// <summary>

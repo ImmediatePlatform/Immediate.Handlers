@@ -190,12 +190,13 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			GenericType requestType,
 			GenericType responseType,
 			IEnumerable<Behavior?> enumerable) =>
-		enumerable
-			.Where(b =>
-				(b is null || ValidateType(b.RequestType, requestType))
-				&& (b is null || ValidateType(b.ResponseType, responseType))
-			)
-			.ToList();
+		[
+			.. enumerable
+				.Where(b =>
+					(b is null || ValidateType(b.RequestType, requestType))
+					&& (b is null || ValidateType(b.ResponseType, responseType))
+				),
+		];
 
 	private sealed record RenderBehavior
 	{
