@@ -39,12 +39,7 @@ public static class CodeFixTestHelper
 				{
 					{ ("/.editorconfig", EditorConfig) },
 				},
-				ReferenceAssemblies = new ReferenceAssemblies(
-					"net8.0",
-					new PackageIdentity(
-						"Microsoft.NETCore.App.Ref",
-						"8.0.0"),
-					Path.Combine("ref", "net8.0")),
+				ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
 			},
 			FixedState =
 			{
@@ -58,5 +53,4 @@ public static class CodeFixTestHelper
 
 		return csTest;
 	}
-
 }
