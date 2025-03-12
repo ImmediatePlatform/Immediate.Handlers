@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>net8.0</TargetFramework>
+	<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 	<IsPackable>true</IsPackable>
 	<IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
@@ -11,7 +11,7 @@
 	<Description>An implementation of the mediator pattern in .NET using source-generation.</Description>
 
 	<Authors>Immediate.Handlers Developers</Authors>
-	<Copyright>© 2024 Immediate.Handlers Developers</Copyright>
+	<Copyright>© 2024-2025 Immediate.Handlers Developers</Copyright>
 
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageReadmeFile>readme.md</PackageReadmeFile>
@@ -26,12 +26,25 @@
 	-->
   <ItemGroup>
 	<None Include="../../readme.md" Pack="true" PackagePath="/" />
-	<None Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="false" />
 	<None Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Analyzers.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
 	<None Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.CodeFixes.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
 	<None Include="../Immediate.Handlers.Generators/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Generators.dll" Pack="true" PackagePath="analyzers/roslyn4.8/dotnet/cs" Visible="true" />
-	<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.dll" Pack="true" PackagePath="lib/net8.0" Visible="true" />
-	<None Include="../Immediate.Handlers.Shared/bin/$(Configuration)/net8.0/Immediate.Handlers.Shared.xml" Pack="true" PackagePath="lib/net8.0" Visible="true" />
+
+	<TfmSpecificPackageFile
+	  Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll"
+	  Pack="true"
+	  PackagePath="analyzers/roslyn4.8/dotnet/cs"
+	  Condition=" '$(TargetFramework)' == 'net8.0' " />
+
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.Shared/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.dll"
+	  Pack="true"
+	  PackagePath="lib/$(TargetFramework)" />
+
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.Shared/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.xml"
+	  Pack="true"
+	  PackagePath="lib/$(TargetFramework)" />
   </ItemGroup>
 
   <ItemGroup>
