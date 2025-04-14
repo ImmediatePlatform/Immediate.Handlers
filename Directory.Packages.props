@@ -26,10 +26,10 @@
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 	<PackageVersion Include="MinVer" Version="6.0.0" />
 	<PackageVersion Include="PolySharp" Version="1.15.0" />
-	<PackageVersion Include="Scriban" Version="6.0.0" />
+	<PackageVersion Include="Scriban" Version="6.1.0" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="7.3.1" />
 	<PackageVersion Include="System.Formats.Asn1" Version="9.0.2" />
-	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.0" />
+	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
 	<PackageVersion Include="TUnit.Engine" Version="0.17.14" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
 	<PackageVersion Include="Verify.TUnit" Version="28.14.0" />
