@@ -22,8 +22,8 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" Version="1.1.2" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
-	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
-	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.4" />
 	<PackageVersion Include="MinVer" Version="6.0.0" />
 	<PackageVersion Include="PolySharp" Version="1.15.0" />
 	<PackageVersion Include="Scriban" Version="6.0.0" />
