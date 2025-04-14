@@ -65,7 +65,7 @@ public sealed class MTimingBehavior<TRequest, TResponse>
 		CancellationToken cancellationToken)
 	{
 		var sw = Stopwatch.StartNew();
-		var response = await next();
+		var response = await next(cancellationToken);
 		Elapsed = sw.Elapsed;
 		return response;
 	}
