@@ -7,7 +7,6 @@
 
   <ItemGroup>
 	<PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="All" />
-	<PackageReference Include="System.Threading.Tasks.Extensions" />
   </ItemGroup>
 
 </Project>
