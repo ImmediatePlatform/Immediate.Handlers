@@ -115,14 +115,19 @@ public sealed class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior
 }
 ```
 
-This can be registered assembly-wide using:
+### Using Behaviors
+
+Once added to the pipeline, the behavior will be called as part of the pipeline to handle a request. They can be added
+to the pipeline one of three ways: 
+
+* Behaviors can be registered assembly-wide by using an `[assembly: ]` attribute, as shown here:
 ```cs
 [assembly: Behaviors(
 	typeof(LoggingBehavior<,>)
 )]
 ```
 
-or on an individual handler using:
+* Behaviors can be applied on an individual handler using:
 ```cs
 [Handler]
 [Behavior(
@@ -134,7 +139,21 @@ public static class GetUsersQuery
 }
 ```
 
-Once added to the pipeline, the behavior will be called as part of the pipeline to handle a request.
+* Common behavior pipelines can be defined by applying a `[Behaviors]` attribute another attribute, as shown here:
+```cs
+[Behaviors(
+  typeof(ValidationBehavior<,>), typeof(TransactionBehavior<,>)
+)]
+public sealed class DefaultBehaviorsAttribute : Attribute;
+
+// usage
+[Handler]
+[DefaultBehaviors]
+public static class GetUsersQuery
+{
+	// ..
+}
+```
 
 Note: adding a `[Behavior]` attribute to a handler will disregard all assembly-wide behaviors for that handler, so any
 global behaviors necessary must be independently added to the handler override behaviors list.
