@@ -134,10 +134,25 @@ public sealed partial class ImmediateHandlersGenerator
 
 file static class Extensions
 {
-	public static AttributeData? GetBehaviorsAttribute(this INamedTypeSymbol symbol) =>
-		symbol
-			.GetAttributes()
-			.FirstOrDefault(a => a.AttributeClass.IsBehaviorsAttribute());
+	public static AttributeData? GetBehaviorsAttribute(this INamedTypeSymbol symbol)
+	{
+		foreach (var a in symbol.GetAttributes())
+		{
+			if (a.AttributeClass is null)
+				continue;
+
+			if (a.AttributeClass.IsBehaviorsAttribute())
+				return a;
+
+			foreach (var aa in a.AttributeClass.GetAttributes())
+			{
+				if (aa.AttributeClass.IsBehaviorsAttribute())
+					return aa;
+			}
+		}
+
+		return null;
+	}
 
 	public static string? GetAttributesString(this IParameterSymbol parameter)
 	{
