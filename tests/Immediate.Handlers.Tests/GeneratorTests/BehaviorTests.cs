@@ -306,4 +306,92 @@ public sealed class BehaviorTests
 		_ = await Verify(result)
 			.UseParameters(string.Join('_', assemblies));
 	}
+
+	[Test]
+	[Arguments(DriverReferenceAssemblies.Normal)]
+	[Arguments(DriverReferenceAssemblies.Msdi)]
+	public async Task NestedBehavior(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.Linq;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Dummy;
+			using Immediate.Handlers.Shared;
+
+			#pragma warning disable CS9113
+
+			namespace Dummy;
+
+			[Behaviors(
+				typeof(LoggingBehavior<,>)
+			)]
+			[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
+			public sealed class DefaultBehaviorsAttribute : Attribute;
+
+			public class GetUsersEndpoint(GetUsersQuery.Handler handler)
+			{
+				public ValueTask<IEnumerable<User>> GetUsers() =>
+					handler.HandleAsync(new GetUsersQuery.Query());
+			}
+
+			[Handler]
+			[DefaultBehaviors]
+			public static partial class GetUsersQuery
+			{
+				public record Query;
+
+				private static ValueTask<IEnumerable<User>> HandleAsync(
+					Query _,
+					UsersService usersService,
+					CancellationToken token)
+				{
+					return usersService.GetUsers();
+				}
+			}
+
+			public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+				: Behavior<TRequest, TResponse>
+			{
+				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+				{
+					var response = await Next(request, cancellationToken);
+
+					return response;
+				}
+			}
+
+			public class User { }
+			public class UsersService
+			{
+				public ValueTask<IEnumerable<User>> GetUsers() =>
+					ValueTask.FromResult(Enumerable.Empty<User>());
+			}
+
+			public interface ILogger<T>;
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				.. assemblies switch
+				{
+					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
+					DriverReferenceAssemblies.Msdi =>
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+
+					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
+				},
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join('_', assemblies));
+	}
 }
