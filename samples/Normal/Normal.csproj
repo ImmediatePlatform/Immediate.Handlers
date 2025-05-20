@@ -12,7 +12,6 @@
 
   <ItemGroup>
 	<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
-	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 	<PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
 
