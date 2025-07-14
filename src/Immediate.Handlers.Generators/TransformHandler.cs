@@ -2,11 +2,11 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace Immediate.Handlers.Generators.ImmediateHandlers;
+namespace Immediate.Handlers.Generators;
 
-public sealed partial class ImmediateHandlersGenerator
+internal static class TransformHandler
 {
-	private static Handler? TransformHandler(
+	public static Handler? ParseHandler(
 		GeneratorAttributeSyntaxContext context,
 		CancellationToken cancellationToken
 	)
@@ -92,9 +92,8 @@ public sealed partial class ImmediateHandlersGenerator
 	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(
 			INamedTypeSymbol symbol,
 			CancellationToken cancellationToken) =>
-		symbol.GetBehaviorsAttribute()
-				is { } ba
-			? ParseBehaviors(ba, cancellationToken)
+		symbol.GetBehaviorsAttribute() is { } ba
+			? ba.ParseBehaviors(cancellationToken)
 			: null;
 
 	[return: NotNullIfNotNull(nameof(type))]

@@ -1,21 +1,16 @@
 using Microsoft.CodeAnalysis;
 
-namespace Immediate.Handlers.Generators.ImmediateHandlers;
+namespace Immediate.Handlers.Generators;
 
-public sealed partial class ImmediateHandlersGenerator
+internal static class TransformBehaviors
 {
-	private static EquatableReadOnlyList<Behavior?> TransformBehaviors(
+	public static EquatableReadOnlyList<Behavior?> ParseBehaviors(
 		GeneratorAttributeSyntaxContext context,
 		CancellationToken cancellationToken
-	)
-	{
-		cancellationToken.ThrowIfCancellationRequested();
+	) => context.Attributes[0].ParseBehaviors(cancellationToken);
 
-		return ParseBehaviors(context.Attributes[0], cancellationToken);
-	}
-
-	private static EquatableReadOnlyList<Behavior?> ParseBehaviors(
-		AttributeData attribute,
+	public static EquatableReadOnlyList<Behavior?> ParseBehaviors(
+		this AttributeData attribute,
 		CancellationToken cancellationToken
 	)
 	{

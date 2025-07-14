@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Immediate.Handlers.Generators.ImmediateHandlers;
+using Immediate.Handlers.Generators;
 using Immediate.Handlers.Tests.Helpers;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;

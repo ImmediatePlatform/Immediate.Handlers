@@ -72,12 +72,12 @@ public sealed class BehaviorTests
 
 		Assert.Equal(
 			[
-				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				.. assemblies switch
 				{
 					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
 					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
 					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 				},
@@ -221,12 +221,12 @@ public sealed class BehaviorTests
 
 		Assert.Equal(
 			[
-				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				.. assemblies switch
 				{
 					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
 					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
 					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 				},
@@ -290,12 +290,12 @@ public sealed class BehaviorTests
 
 		Assert.Equal(
 			[
-				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH..ConstraintHandler.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH..ConstraintHandler.g.cs",
 				.. assemblies switch
 				{
 					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
 					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
 					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 				},
@@ -378,12 +378,12 @@ public sealed class BehaviorTests
 
 		Assert.Equal(
 			[
-				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
 				.. assemblies switch
 				{
 					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
 					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlers.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
 
 					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 				},

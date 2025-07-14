@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Scriban;
 
-namespace Immediate.Handlers.Generators.ImmediateHandlers;
+namespace Immediate.Handlers.Generators;
 
 [Generator]
 public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
@@ -13,14 +13,9 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 	{
 		var hasMsDi = context
 			.MetadataReferencesProvider
+			.Where(r => (r.Display ?? "").Contains("Microsoft.Extensions.DependencyInjection.Abstractions"))
 			.Collect()
-			.Select(
-				(refs, _) => refs
-					.Any(
-						r => (r.Display ?? "")
-							.Contains("Microsoft.Extensions.DependencyInjection.Abstractions")
-					)
-			);
+			.Select((refs, _) => refs.Any());
 
 		var assemblyName = context.CompilationProvider
 			.Select((cp, _) => cp.AssemblyName!
@@ -41,7 +36,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.BehaviorsAttribute",
 				(node, _) => node is CompilationUnitSyntax,
-				TransformBehaviors
+				TransformBehaviors.ParseBehaviors
 			)
 			.SelectMany((x, _) => x)
 			.Collect();
@@ -50,7 +45,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.HandlerAttribute",
 				predicate: (node, _) => node is TypeDeclarationSyntax,
-				TransformHandler
+				TransformHandler.ParseHandler
 			);
 
 		var handlerNodes = handlers
@@ -161,7 +156,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		);
 
 		cancellationToken.ThrowIfCancellationRequested();
-		if (pipelineBehaviors.Any(b => b is null))
+		if (pipelineBehaviors.Exists(b => b is null))
 			return;
 
 		var handlerSource = template.Render(new

@@ -14,7 +14,6 @@ public static class CodeFixTestHelper
 
 		[*.cs]
 		charset = utf-8
-		end_of_line = lf
 		indent_style = tab
 		insert_final_newline = true
 		indent_size = 4
