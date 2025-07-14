@@ -19,8 +19,8 @@
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" VersionOverride="4.9.2" />
-	<PackageReference Include="Microsoft.Extensions.DependencyInjection" VersionOverride="8.0.1" />
-	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" VersionOverride="8.0.2" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection" VersionOverride="9.0.7" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" VersionOverride="9.0.7" />
 	<PackageReference Include="Scriban" />
 	<PackageReference Include="System.Formats.Asn1" />
 	<PackageReference Include="TUnit.Engine" />
