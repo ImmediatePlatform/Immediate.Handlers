@@ -15,14 +15,16 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.MetadataReferencesProvider
 			.Where(r => (r.Display ?? "").Contains("Microsoft.Extensions.DependencyInjection.Abstractions"))
 			.Collect()
-			.Select((refs, _) => refs.Any());
+			.Select((refs, _) => refs.Any())
+			.WithTrackingName("MsDi");
 
 		var assemblyName = context.CompilationProvider
 			.Select((cp, _) => cp.AssemblyName!
 				.Replace(".", string.Empty)
 				.Replace(" ", string.Empty)
 				.Trim()
-			);
+			)
+			.WithTrackingName("AssemblyName");
 
 		var @namespace = context
 			.AnalyzerConfigOptionsProvider
@@ -30,7 +32,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				(c, _) => c.GlobalOptions
 					.TryGetValue("build_property.rootnamespace", out var ns)
 						? ns : null
-			);
+			)
+			.WithTrackingName("RootNamespace");
 
 		var behaviors = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
@@ -39,18 +42,21 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				TransformBehaviors.ParseBehaviors
 			)
 			.SelectMany((x, _) => x)
-			.Collect();
+			.Collect()
+			.WithTrackingName("Behaviors");
 
 		var handlers = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.HandlerAttribute",
 				predicate: (node, _) => node is TypeDeclarationSyntax,
 				TransformHandler.ParseHandler
-			);
+			)
+			.WithTrackingName("Handlers");
 
 		var handlerNodes = handlers
 			.Combine(behaviors)
-			.Combine(hasMsDi);
+			.Combine(hasMsDi)
+			.WithTrackingName("HandlersWithBehaviors");
 
 		var template = GetTemplate("Handler");
 		context.RegisterSourceOutput(
@@ -71,7 +77,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.Combine(@namespace
 				.Combine(hasMsDi)
 				.Combine(assemblyName)
-			);
+			)
+			.WithTrackingName("Registrations");
 
 		context.RegisterSourceOutput(
 			registrationNodes,
