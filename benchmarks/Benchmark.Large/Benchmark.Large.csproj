@@ -14,7 +14,8 @@
 	<PackageReference Include="Mediator.Abstractions" />
 	<PackageReference Include="Mediator.SourceGenerator" PrivateAssets="All" />
 	<PackageReference Include="MediatR" />
-	<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="All" />
+	<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="All" VersionOverride="4.14.0" />
+	<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" PrivateAssets="All" VersionOverride="4.14.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
