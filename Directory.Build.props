@@ -17,10 +17,6 @@
 	<WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
   </PropertyGroup>
 
-  <ItemGroup>
-	<PackageReference Include="PolySharp" PrivateAssets="All" />
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
 	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	<EmbedUntrackedSources>true</EmbedUntrackedSources>
