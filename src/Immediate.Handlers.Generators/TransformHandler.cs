@@ -19,44 +19,54 @@ internal static class TransformHandler
 		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
 		cancellationToken.ThrowIfCancellationRequested();
+
 		if (symbol.ContainingType is not null)
 			return null;
 
 		if (symbol
 				.GetMembers()
 				.OfType<IMethodSymbol>()
-				.Where(m => m.IsStatic)
 				.Where(m => m.Name is "Handle" or "HandleAsync")
 				.ToList() is not [var handleMethod])
 		{
 			return null;
 		}
 
-		// must have request type and cancellation token
-		if (handleMethod.Parameters is [])
+		if (handleMethod
+				// must have request type and cancellation token
+				is { Parameters: [] }
+				// void means not a valuetask return
+				or { ReturnsVoid: true }
+				// only private methods are considered
+				or { DeclaredAccessibility: not Accessibility.Private })
+		{
 			return null;
-
-		if (handleMethod.ReturnsVoid)
-			return null;
+		}
 
 		cancellationToken.ThrowIfCancellationRequested();
 
 		var requestType = BuildGenericType(handleMethod.Parameters[0].Type);
+		var isStatic = handleMethod.IsStatic;
 		var useToken = handleMethod.Parameters[^1]
 			.Type.IsCancellationToken();
 
+		// non-static methods should not have parameters
+		if (!isStatic && handleMethod.Parameters.Length > (useToken ? 2 : 1))
+			return null;
+
 		cancellationToken.ThrowIfCancellationRequested();
+
 		var responseTypeSymbol = handleMethod.GetTaskReturnType();
-		if (responseTypeSymbol is null)
+		if (responseTypeSymbol is null
+			&& !handleMethod.ReturnType.IsValueTask())
 		{
-			cancellationToken.ThrowIfCancellationRequested();
-			if (!handleMethod.ReturnType.IsValueTask())
-				return null;
+			return null;
 		}
 
 		var responseType = BuildGenericType(responseTypeSymbol);
 
 		cancellationToken.ThrowIfCancellationRequested();
+
 		var parameters = handleMethod.Parameters
 			.Skip(1)
 			.Take(handleMethod.Parameters.Length - (useToken ? 2 : 1))
@@ -69,9 +79,11 @@ internal static class TransformHandler
 			.ToEquatableReadOnlyList();
 
 		cancellationToken.ThrowIfCancellationRequested();
+
 		var behaviors = GetOverrideBehaviors(symbol, cancellationToken);
 
 		cancellationToken.ThrowIfCancellationRequested();
+
 		return new()
 		{
 			Namespace = @namespace,
@@ -80,6 +92,7 @@ internal static class TransformHandler
 
 			MethodName = handleMethod.Name,
 			Parameters = parameters,
+			IsStatic = isStatic,
 			UseToken = useToken,
 
 			RequestType = requestType,
