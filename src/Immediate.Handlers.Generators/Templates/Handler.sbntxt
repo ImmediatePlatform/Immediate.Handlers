@@ -59,6 +59,7 @@ partial class {{ class_name }}
 		}
 	}
 
+	{{~ if is_static ~}}
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
 	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
 	{
@@ -111,6 +112,48 @@ partial class {{ class_name }}
 			{{~ end ~}}
 		}
 	}
+	{{~ else ~}}
+	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
+	{
+		private readonly {{ class_fully_qualified_name }} _container;
+
+		public HandleBehavior(
+			{{ class_fully_qualified_name }} container
+		)
+		{
+			_container = container;
+		}
+
+		public override async global::System.Threading.Tasks.ValueTask<{{ response_type }}> HandleAsync(
+			{{ request_type }} request,
+			global::System.Threading.CancellationToken cancellationToken
+		)
+		{
+			{{~ if !is_implicit_value_tuple ~}}
+			return await _container
+				.{{ method_name }}(
+					request
+					{{~ if use_token ~}}
+					, cancellationToken
+					{{~ end ~}}
+				)
+				.ConfigureAwait(false);
+			{{~ else ~}}
+			await _container
+				.{{ method_name }}(
+					request
+					{{~ if use_token ~}}
+					, cancellationToken
+					{{~ end ~}}
+				)
+				.ConfigureAwait(false);
+
+			return default;
+			{{~ end ~}}
+		}
+	}
+	{{~ end ~}}
 	{{~ if has_ms_di ~}}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
@@ -122,6 +165,9 @@ partial class {{ class_name }}
 		services.Add(new(typeof({{ class_fully_qualified_name }}.Handler), typeof({{ class_fully_qualified_name }}.Handler), lifetime));
 		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>), typeof({{ class_fully_qualified_name }}.Handler), lifetime));
 		services.Add(new(typeof({{ class_fully_qualified_name }}.HandleBehavior), typeof({{ class_fully_qualified_name }}.HandleBehavior), lifetime));
+		{{~ if !is_static ~}}
+		services.Add(new(typeof({{ class_fully_qualified_name }}), typeof({{ class_fully_qualified_name }}), lifetime));
+		{{~ end ~}}
 		return services;
 	}
 	{{~ end ~}}

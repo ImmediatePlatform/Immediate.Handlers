@@ -34,13 +34,12 @@ public sealed class BehaviorTests
 			}
 
 			[Handler]
-			public static partial class GetUsersQuery
+			public partial class GetUsersQuery(UsersService usersService)
 			{
 				public record Query;
 
-				private static ValueTask<IEnumerable<User>> HandleAsync(
+				private ValueTask<IEnumerable<User>> HandleAsync(
 					Query _,
-					UsersService usersService,
 					CancellationToken token)
 				{
 					return usersService.GetUsers();

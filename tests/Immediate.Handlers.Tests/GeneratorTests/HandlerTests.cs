@@ -5,11 +5,12 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 public sealed class HandlerTests
 {
 	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	public async Task IntReturnType(DriverReferenceAssemblies assemblies)
+	[Arguments("")]
+	[Arguments("static")]
+	public async Task IntReturnType(string modifier)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
-			"""
+			$$"""
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
@@ -17,11 +18,11 @@ public sealed class HandlerTests
 			namespace Dummy;
 
 			[Handler]
-			public static partial class GetUsersQuery
+			public {{modifier}} partial class GetUsersQuery
 			{
 				public record Query;
 
-				private static ValueTask<int> HandleAsync(
+				private {{modifier}} ValueTask<int> HandleAsync(
 					Query _,
 					CancellationToken token)
 				{
@@ -29,7 +30,7 @@ public sealed class HandlerTests
 				}
 			}
 			""",
-			assemblies
+			DriverReferenceAssemblies.Normal
 		);
 
 		Assert.Equal(
@@ -39,16 +40,16 @@ public sealed class HandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
 	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	public async Task VoidReturnType(DriverReferenceAssemblies assemblies)
+	[Arguments("")]
+	[Arguments("static")]
+	public async Task VoidReturnType(string modifier)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
-			"""
+			$$"""
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
@@ -56,11 +57,11 @@ public sealed class HandlerTests
 			namespace Dummy;
 
 			[Handler]
-			public static partial class GetUsersQuery
+			public {{modifier}} partial class GetUsersQuery
 			{
 				public record Query;
 
-				private static ValueTask HandleAsync(
+				private {{modifier}} ValueTask HandleAsync(
 					Query _,
 					CancellationToken token)
 				{
@@ -68,7 +69,7 @@ public sealed class HandlerTests
 				}
 			}
 			""",
-			assemblies
+			DriverReferenceAssemblies.Normal
 		);
 
 		Assert.Equal(
@@ -78,16 +79,16 @@ public sealed class HandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
 	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	public async Task MissingCancellationToken(DriverReferenceAssemblies assemblies)
+	[Arguments("")]
+	[Arguments("static")]
+	public async Task MissingCancellationToken(string modifier)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
-			"""
+			$$"""
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
@@ -95,19 +96,18 @@ public sealed class HandlerTests
 			namespace Dummy;
 
 			[Handler]
-			public static partial class GetUsersQuery
+			public {{modifier}} partial class GetUsersQuery
 			{
 				public record Query;
 
-				private static ValueTask<int> HandleAsync(
-					Query _
-				)
+				private {{modifier}} ValueTask<int> HandleAsync(
+					Query _)
 				{
 					return ValueTask.FromResult(0);
 				}
 			}
 			""",
-			assemblies
+			DriverReferenceAssemblies.Normal
 		);
 
 		Assert.Equal(
@@ -117,8 +117,7 @@ public sealed class HandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
 	[Test]
@@ -161,8 +160,7 @@ public sealed class HandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
 	[Test]
@@ -215,8 +213,7 @@ public sealed class HandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
 	[Test]
@@ -268,8 +265,7 @@ public sealed class HandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
 	[Test]
@@ -289,7 +285,6 @@ public sealed class HandlerTests
 			result.GeneratedTrees
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 }

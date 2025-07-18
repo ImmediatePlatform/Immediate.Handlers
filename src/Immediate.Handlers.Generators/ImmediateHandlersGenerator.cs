@@ -174,6 +174,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 			handler.MethodName,
 			HandlerParameters = handler.Parameters,
+			handler.IsStatic,
 			handler.UseToken,
 
 			RequestType = handler.RequestType.Name,
