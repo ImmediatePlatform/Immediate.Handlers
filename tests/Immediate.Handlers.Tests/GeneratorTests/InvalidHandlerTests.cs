@@ -41,6 +41,55 @@ public sealed class InvalidHandlerTests
 	[Test]
 	[Arguments(DriverReferenceAssemblies.Normal)]
 	[Arguments(DriverReferenceAssemblies.Msdi)]
+	public async Task InstanceHandlerMethodWithTooManyParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System.Collections.Generic;
+			using System.Linq;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Dummy;
+			using Immediate.Handlers.Shared;
+
+			namespace Dummy;
+
+			[Handler]
+			public sealed class GetUsersQuery
+			{
+				public record Query;
+			
+				private ValueTask<IEnumerable<User>> Handle(
+					Query _,
+					UsersService usersService,
+					CancellationToken token)
+				{
+					return usersService.GetUsers();
+				}
+			}
+			
+			public class User { }
+			public class UsersService
+			{
+				public ValueTask<IEnumerable<User>> GetUsers() =>
+					ValueTask.FromResult(Enumerable.Empty<User>());
+			}
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join('_', assemblies));
+	}
+
+	[Test]
+	[Arguments(DriverReferenceAssemblies.Normal)]
+	[Arguments(DriverReferenceAssemblies.Msdi)]
 	public async Task HandlerWithTwoHandlersMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
