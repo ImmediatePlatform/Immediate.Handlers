@@ -23,18 +23,11 @@ internal static class TransformHandler
 		if (symbol.ContainingType is not null)
 			return null;
 
-		if (symbol
-				.GetMembers()
-				.OfType<IMethodSymbol>()
-				.Where(m => m.Name is "Handle" or "HandleAsync")
-				.ToList() is not [var handleMethod])
-		{
-			return null;
-		}
+		var handleMethod = symbol.GetHandleMethod();
 
 		if (handleMethod
-				// must have request type and cancellation token
-				is { Parameters: [] }
+				// no potential candidates
+				is null
 				// void means not a valuetask return
 				or { ReturnsVoid: true }
 				// only private methods are considered
@@ -50,8 +43,16 @@ internal static class TransformHandler
 		var useToken = handleMethod.Parameters[^1]
 			.Type.IsCancellationToken();
 
-		// non-static methods should not have parameters
-		if (!isStatic && handleMethod.Parameters.Length > (useToken ? 2 : 1))
+		var isParameterCountValid =
+			(isStatic, useToken) switch
+			{
+				(true, true) => handleMethod.Parameters.Length >= 2,
+				(true, false) => handleMethod.Parameters.Length >= 1,
+				(false, true) => handleMethod.Parameters.Length == 2,
+				_ => handleMethod.Parameters.Length == 1,
+			};
+
+		if (!isParameterCountValid)
 			return null;
 
 		cancellationToken.ThrowIfCancellationRequested();
@@ -146,6 +147,24 @@ internal static class TransformHandler
 
 file static class Extensions
 {
+	public static IMethodSymbol? GetHandleMethod(this INamedTypeSymbol symbol)
+	{
+		var candidates = symbol
+			.GetMembers()
+			.OfType<IMethodSymbol>()
+			.Where(m => m.Name is "Handle" or "HandleAsync")
+			.ToList();
+
+		if (candidates.Count == 1)
+			return candidates[0];
+
+		_ = candidates.RemoveAll(ims => !ims.IsStatic);
+		if (candidates.Count == 1)
+			return candidates[0];
+
+		return null;
+	}
+
 	public static AttributeData? GetBehaviorsAttribute(this INamedTypeSymbol symbol)
 	{
 		foreach (var a in symbol.GetAttributes())
