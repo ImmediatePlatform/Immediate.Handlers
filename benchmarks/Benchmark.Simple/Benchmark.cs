@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 using Immediate.Handlers.Shared;
@@ -11,63 +12,76 @@ public sealed record SomeRequest(Guid Id)
 
 public sealed record SomeResponse(Guid Id);
 
-[Handler]
-public sealed partial class SomeHandlerClass
+public sealed partial class TraditionalExample
 	: Mediator.IRequestHandler<SomeRequest, SomeResponse>,
 	  MediatR.IRequestHandler<SomeRequest, SomeResponse>
 {
 	private static readonly SomeResponse s_response = new(Guid.NewGuid());
 
-	private static readonly Task<SomeResponse> s_tResponse = Task.FromResult(s_response);
-	private static ValueTask<SomeResponse> VtResponse => new(s_response);
-
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	public ValueTask<SomeResponse> Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => VtResponse;
+	) => ValueTask.FromResult(s_response);
 
 	ValueTask<SomeResponse> Mediator.IRequestHandler<SomeRequest, SomeResponse>.Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => VtResponse;
+	) => ValueTask.FromResult(s_response);
 
 	Task<SomeResponse> MediatR.IRequestHandler<SomeRequest, SomeResponse>.Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => s_tResponse;
+	) => Task.FromResult(s_response);
+}
 
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+[Handler]
+public static partial class StaticIhExample
+{
+	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	private static ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
-		CancellationToken cancellationToken
-	) => VtResponse;
+		CancellationToken token
+	) => ValueTask.FromResult(s_response);
+}
+
+[Handler]
+public sealed partial class SealedIhExample
+{
+	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
+	[SuppressMessage("ImmediateHandler", "IHR0009:Handler method must be static", Justification = "Analyzer to be fixed")]
+	private ValueTask<SomeResponse> HandleAsync(
+		SomeRequest request,
+		CancellationToken token
+	) => ValueTask.FromResult(s_response);
 }
 
 [MemoryDiagnoser]
 [Orderer(SummaryOrderPolicy.FastestToSlowest, MethodOrderPolicy.Declared)]
 [RankColumn]
-//[EventPipeProfiler(EventPipeProfile.CpuSampling)]
-//[DisassemblyDiagnoser]
-//[InliningDiagnoser(logFailuresOnly: true, allowedNamespaces: new[] { "Mediator" })]
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 public class RequestBenchmarks
 {
-	private IServiceProvider? _serviceProvider;
-	private IServiceProvider? _abstractionServiceProvider;
-	private IServiceScope? _serviceScope;
-	private IServiceScope? _abstractionServiceScope;
-	private Mediator.IMediator? _mediator;
-	private Mediator.Mediator? _concreteMediator;
-	private MediatR.IMediator? _mediatr;
-	private SomeHandlerClass.Handler? _immediateHandler;
-	private IHandler<SomeRequest, SomeResponse>? _immediateHandlerAbstraction;
-	private SomeHandlerClass? _handler;
-	private SomeRequest? _request;
+	private readonly IServiceProvider _serviceProvider;
+	private readonly IServiceProvider _abstractionServiceProvider;
+	private readonly IServiceScope _serviceScope;
+	private readonly IServiceScope _abstractionServiceScope;
+	private readonly Mediator.IMediator _mediator;
+	private readonly Mediator.Mediator _concreteMediator;
+	private readonly MediatR.IMediator _mediatr;
+	private readonly StaticIhExample.Handler _immediateStaticHandler;
+	private readonly SealedIhExample.Handler _immediateSealedHandler;
+	private readonly IHandler<SomeRequest, SomeResponse> _immediateHandlerAbstraction;
+	private readonly TraditionalExample _handler;
+	private readonly SomeRequest _request;
 
-	[GlobalSetup]
-	public void Setup()
+	public RequestBenchmarks()
 	{
 		var services = new ServiceCollection();
 
@@ -86,8 +100,9 @@ public class RequestBenchmarks
 		_mediator = _serviceProvider.GetRequiredService<Mediator.IMediator>();
 		_concreteMediator = _serviceProvider.GetRequiredService<Mediator.Mediator>();
 		_mediatr = _serviceProvider.GetRequiredService<MediatR.IMediator>();
-		_immediateHandler = _serviceProvider.GetRequiredService<SomeHandlerClass.Handler>();
-		_handler = _serviceProvider.GetRequiredService<SomeHandlerClass>();
+		_immediateStaticHandler = _serviceProvider.GetRequiredService<StaticIhExample.Handler>();
+		_immediateSealedHandler = _serviceProvider.GetRequiredService<SealedIhExample.Handler>();
+		_handler = _serviceProvider.GetRequiredService<TraditionalExample>();
 		_request = new(Guid.NewGuid());
 
 		_abstractionServiceScope = _serviceProvider.CreateScope();
@@ -105,9 +120,15 @@ public class RequestBenchmarks
 	}
 
 	[Benchmark]
-	public ValueTask<SomeResponse> SendRequest_ImmediateHandler()
+	public ValueTask<SomeResponse> SendRequest_ImmediateStaticHandler()
 	{
-		return _immediateHandler!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateStaticHandler!.HandleAsync(_request!, CancellationToken.None);
+	}
+
+	[Benchmark]
+	public ValueTask<SomeResponse> SendRequest_ImmediateSealedHandler()
+	{
+		return _immediateSealedHandler!.HandleAsync(_request!, CancellationToken.None);
 	}
 
 	[Benchmark]
