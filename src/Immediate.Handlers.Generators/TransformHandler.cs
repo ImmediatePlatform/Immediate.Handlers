@@ -28,8 +28,11 @@ internal static class TransformHandler
 		if (handleMethod
 				// no potential candidates
 				is null
-				// void means not a valuetask return
-				or { ReturnsVoid: true }
+				// no parameters
+				or { Parameters: [] }
+				// not a valuetask return
+				// nb: both `ValueTask` and `ValueTask<>` will pass here
+				or { ReturnType: not INamedTypeSymbol { OriginalDefinition.Name: "ValueTask" } }
 				// only private methods are considered
 				or { DeclaredAccessibility: not Accessibility.Private })
 		{
@@ -57,14 +60,7 @@ internal static class TransformHandler
 
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var responseTypeSymbol = handleMethod.GetTaskReturnType();
-		if (responseTypeSymbol is null
-			&& !handleMethod.ReturnType.IsValueTask())
-		{
-			return null;
-		}
-
-		var responseType = BuildGenericType(responseTypeSymbol);
+		var responseType = BuildGenericType(handleMethod.GetTaskReturnType());
 
 		cancellationToken.ThrowIfCancellationRequested();
 
