@@ -55,7 +55,6 @@ public sealed partial class SealedIhExample
 
 	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
-	[SuppressMessage("ImmediateHandler", "IHR0009:Handler method must be static", Justification = "Analyzer to be fixed")]
 	private ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
 		CancellationToken token

@@ -129,7 +129,6 @@ public static partial class StaticIhExample
 )]
 public sealed partial class SealedIhExample(SomeService service)
 {
-	[SuppressMessage("ImmediateHandler", "IHR0009:Handler method must be static", Justification = "Analyzer to be fixed")]
 	private async ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
 		CancellationToken cancellationToken

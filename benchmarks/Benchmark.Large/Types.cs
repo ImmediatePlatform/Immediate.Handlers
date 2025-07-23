@@ -2,7 +2,6 @@ using Immediate.Handlers.Shared;
 
 #pragma warning disable CA1822
 #pragma warning disable IDE0060
-#pragma warning disable IHR0009
 #pragma warning disable MA0022
 
 namespace Immediate.Handlers.Benchmarks;
