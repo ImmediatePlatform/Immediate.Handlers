@@ -31,8 +31,29 @@ internal static class TransformHandler
 				// no parameters
 				or { Parameters: [] }
 				// not a valuetask return
-				// nb: both `ValueTask` and `ValueTask<>` will pass here
-				or { ReturnType: not INamedTypeSymbol { OriginalDefinition.Name: "ValueTask" } }
+				or
+				{
+					ReturnType: not INamedTypeSymbol
+					{
+						OriginalDefinition:
+						{
+							MetadataName: "ValueTask" or "ValueTask`1",
+							ContainingNamespace:
+							{
+								Name: "Tasks",
+								ContainingNamespace:
+								{
+									Name: "Threading",
+									ContainingNamespace:
+									{
+										Name: "System",
+										ContainingNamespace.IsGlobalNamespace: true
+									}
+								}
+							}
+						}
+					}
+				}
 				// only private methods are considered
 				or { DeclaredAccessibility: not Accessibility.Private })
 		{

@@ -6,7 +6,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public sealed partial class Tests
 {
 	[Test]
-	public async Task HandlerClassNested_DoesAlert() =>
+	public async Task HandlerClassNotSealed_DoesAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -18,19 +18,16 @@ public sealed partial class Tests
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 
-			public static partial class Wrapper
+			[Handler]
+			public partial class {|IHR0016:GetUsersQuery|}
 			{
-				[Handler]
-				public static class {|IHR0005:GetUsersQuery|}
-				{
-					public record Query;
+				public record Query;
 
-					private static ValueTask<int> HandleAsync(
-						Query _,
-						CancellationToken token)
-					{
-						return ValueTask.FromResult(0);
-					}
+				private ValueTask<int> HandleAsync(
+					Query _,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult(0);
 				}
 			}
 			""",

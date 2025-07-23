@@ -11,9 +11,14 @@ internal static class DiagnosticIds
 	public const string IHR0006BehaviorsMustInheritFromBehavior = "IHR0006";
 	public const string IHR0007BehaviorsMustHaveTwoGenericParameters = "IHR0007";
 	public const string IHR0008BehaviorsMustUseUnboundGenerics = "IHR0008";
-	public const string IHR0009HandlerMethodMustBeStatic = "IHR0009";
 	public const string IHR0010HandlerMethodMustBeUnique = "IHR0010";
 	public const string IHR0011HandlerMethodMustBePrivate = "IHR0011";
 	public const string IHR0012HandlerShouldUseCancellationToken = "IHR0012";
 	public const string IHR0013IHandlerMissingImplementation = "IHR0013";
+	public const string IHR0014HandlerMethodMissingRequest = "IHR0014";
+	public const string IHR0015HandlerMethodHasTooManyParameters = "IHR0015";
+	public const string IHR0016ContainingClassMustBeSealed = "IHR0016";
+	public const string IHR0017ContainingClassInstanceMembersMustBePrivate = "IHR0017";
+	public const string IHR0018ContainingClassMustBeStatic = "IHR0018";
+	public const string IHR0019HandlerContainerMustNotBeReferenced = "IHR0019";
 }
