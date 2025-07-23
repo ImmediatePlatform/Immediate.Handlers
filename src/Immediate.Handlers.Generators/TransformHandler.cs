@@ -31,8 +31,29 @@ internal static class TransformHandler
 				// no parameters
 				or { Parameters: [] }
 				// not a valuetask return
-				// nb: both `ValueTask` and `ValueTask<>` will pass here
-				or { ReturnType: not INamedTypeSymbol { OriginalDefinition.Name: "ValueTask" } }
+				or
+				{
+					ReturnType: not INamedTypeSymbol
+					{
+						OriginalDefinition:
+						{
+							MetadataName: "ValueTask" or "ValueTask`1",
+							ContainingNamespace:
+							{
+								Name: "Tasks",
+								ContainingNamespace:
+								{
+									Name: "Threading",
+									ContainingNamespace:
+									{
+										Name: "System",
+										ContainingNamespace.IsGlobalNamespace: true
+									}
+								}
+							}
+						}
+					}
+				}
 				// only private methods are considered
 				or { DeclaredAccessibility: not Accessibility.Private })
 		{
@@ -149,12 +170,9 @@ file static class Extensions
 			.GetMembers()
 			.OfType<IMethodSymbol>()
 			.Where(m => m.Name is "Handle" or "HandleAsync")
+			.Take(2)
 			.ToList();
 
-		if (candidates.Count == 1)
-			return candidates[0];
-
-		_ = candidates.RemoveAll(ims => !ims.IsStatic);
 		if (candidates.Count == 1)
 			return candidates[0];
 

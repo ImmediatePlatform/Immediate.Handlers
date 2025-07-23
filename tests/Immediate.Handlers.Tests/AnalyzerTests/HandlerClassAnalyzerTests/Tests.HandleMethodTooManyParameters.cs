@@ -7,43 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Test]
-	public async Task HandleMethodIsNotUnique_Static_AlertDiagnostic() =>
-		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
-			"""
-			using System;
-			using System.Collections.Generic;
-			using System.IO;
-			using System.Linq;
-			using System.Net.Http;
-			using System.Threading;
-			using System.Threading.Tasks;
-			using Immediate.Handlers.Shared;
-
-			[Handler]
-			public static partial class GetUsersQuery
-			{
-				public record Query;
-			
-				private static ValueTask<int> {|IHR0010:HandleAsync|}(
-					Query _,
-					CancellationToken token)
-				{
-					return ValueTask.FromResult(0);
-				}
-			
-				private static ValueTask<int> {|IHR0010:Handle|}(
-					Query _,
-					CancellationToken token)
-				{
-					return ValueTask.FromResult(0);
-				}
-			}
-			""",
-			DriverReferenceAssemblies.Normal
-		).RunAsync();
-
-	[Test]
-	public async Task HandleMethodIsNotUnique_Instance_AlertDiagnostic() =>
+	public async Task HandleMethodWithTooManyParameters_Instance_AlertDiagnostic() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -60,16 +24,41 @@ public partial class Tests
 			{
 				public record Query;
 			
-				private ValueTask<int> {|IHR0010:HandleAsync|}(
-					Query _,
-					CancellationToken token)
+				private ValueTask<int> {|IHR0012:{|IHR0015:HandleAsync|}|}(
+					Query query1,
+					Query query2
+				)
 				{
 					return ValueTask.FromResult(0);
 				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync();
+
+	[Test]
+	public async Task HandleMethodWithCancellationTokenAndTooManyParameters_Instance_AlertDiagnostic() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public sealed partial class GetUsersQuery
+			{
+				public record Query;
 			
-				private ValueTask<int> {|IHR0010:Handle|}(
-					Query _,
-					CancellationToken token)
+				private ValueTask<int> {|IHR0015:HandleAsync|}(
+					Query query1,
+					Query query2,
+					CancellationToken token
+				)
 				{
 					return ValueTask.FromResult(0);
 				}

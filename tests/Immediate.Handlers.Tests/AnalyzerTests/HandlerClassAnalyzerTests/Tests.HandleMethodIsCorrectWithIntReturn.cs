@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 public partial class Tests
 {
 	[Test]
-	public async Task HandleMethodIsCorrectWithIntReturn_DoesNotAlert() =>
+	public async Task HandleMethodIsCorrectWithIntReturn_Static_DoesNotAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
@@ -20,7 +20,7 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public partial class GetUsersQuery
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 
@@ -30,7 +30,29 @@ public partial class Tests
 				{
 					return ValueTask.FromResult(0);
 				}
-			
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync();
+
+	[Test]
+	public async Task HandleMethodIsCorrectWithIntReturn_Instance_DoesNotAlert() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public sealed partial class GetUsersQuery
+			{
+				public record Query;
+
 				private ValueTask<int> Handle(
 					Query _,
 					CancellationToken token)
