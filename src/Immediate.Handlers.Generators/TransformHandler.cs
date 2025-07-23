@@ -170,12 +170,9 @@ file static class Extensions
 			.GetMembers()
 			.OfType<IMethodSymbol>()
 			.Where(m => m.Name is "Handle" or "HandleAsync")
+			.Take(2)
 			.ToList();
 
-		if (candidates.Count == 1)
-			return candidates[0];
-
-		_ = candidates.RemoveAll(ims => !ims.IsStatic);
 		if (candidates.Count == 1)
 			return candidates[0];
 

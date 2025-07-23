@@ -210,12 +210,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			return;
 		}
 
-		if (methods.Where(m => m.IsStatic).Take(2).Count() == 1)
-		{
-			AnalyzeStaticHandler(context, containerSymbol, methods.First(m => m.IsStatic));
-			return;
-		}
-
 		foreach (var m in methods)
 		{
 			context.ReportDiagnostic(
