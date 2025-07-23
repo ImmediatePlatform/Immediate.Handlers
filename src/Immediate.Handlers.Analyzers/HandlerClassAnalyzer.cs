@@ -99,7 +99,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0016ContainingClassMustBeSealed,
 			title: "Handler type must be `sealed`",
-			messageFormat: "Class '{0}' should must be `sealed`",
+			messageFormat: "Class '{0}' must be `sealed`",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
