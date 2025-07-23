@@ -125,7 +125,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Containing classes must be static to prevent incorect usage."
+			description: "Containing classes must be static to prevent incorrect usage."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
