@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Scriban;
+using Scriban.Runtime;
 
 namespace Immediate.Handlers.Generators;
 
@@ -121,15 +122,29 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var template = GetTemplate("ServiceCollectionExtensions");
 
 		cancellationToken.ThrowIfCancellationRequested();
-		var source = template.Render(new
+
+		var so = new ScriptObject(StringComparer.Ordinal);
+
+		so.Import(
+			new
+			{
+				Namespace = @namespace,
+				AssemblyName = assemblyName,
+				Handlers = handlers.Select(x => x.displayName),
+				Behaviors = behaviors
+					.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))
+					.Distinct(),
+			}
+		);
+
+		var templateContext = new TemplateContext(StringComparer.Ordinal)
 		{
-			Namespace = @namespace,
-			AssemblyName = assemblyName,
-			Handlers = handlers.Select(x => x.displayName),
-			Behaviors = behaviors
-				.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))
-				.Distinct(),
-		});
+			LoopLimit = 0,
+		};
+
+		templateContext.PushGlobal(so);
+
+		var source = template.Render(templateContext);
 
 		cancellationToken.ThrowIfCancellationRequested();
 		context.AddSource("IH.ServiceCollectionExtensions.g.cs", source);
@@ -174,6 +189,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 			handler.MethodName,
 			HandlerParameters = handler.Parameters,
+			handler.IsStatic,
 			handler.UseToken,
 
 			RequestType = handler.RequestType.Name,

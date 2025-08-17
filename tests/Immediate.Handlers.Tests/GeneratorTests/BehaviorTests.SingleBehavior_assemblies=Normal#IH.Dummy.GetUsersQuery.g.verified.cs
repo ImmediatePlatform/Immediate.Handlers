@@ -39,13 +39,13 @@ partial class GetUsersQuery
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
 	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>>
 	{
-		private readonly global::Dummy.UsersService _usersService;
+		private readonly global::Dummy.GetUsersQuery _container;
 
 		public HandleBehavior(
-			global::Dummy.UsersService usersService
+			global::Dummy.GetUsersQuery container
 		)
 		{
-			_usersService = usersService;
+			_container = container;
 		}
 
 		public override async global::System.Threading.Tasks.ValueTask<global::System.Collections.Generic.IEnumerable<global::Dummy.User>> HandleAsync(
@@ -53,10 +53,9 @@ partial class GetUsersQuery
 			global::System.Threading.CancellationToken cancellationToken
 		)
 		{
-			return await global::Dummy.GetUsersQuery
+			return await _container
 				.HandleAsync(
 					request
-					, _usersService
 					, cancellationToken
 				)
 				.ConfigureAwait(false);

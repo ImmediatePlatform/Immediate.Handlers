@@ -21,8 +21,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
 		new(
 			id: DiagnosticIds.IHR0002HandlerMethodMustReturnTask,
-			title: "Handler method must return a ValueTask<T>",
-			messageFormat: "Method '{0}' must return a ValueTask<T>",
+			title: "Handler method must return a ValueTask or ValueTask<T>",
+			messageFormat: "Method '{0}' must return a ValueTask or ValueTask<T>",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
@@ -38,17 +38,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
 			description: "Handler class must not be nested in another type."
-		);
-
-	public static readonly DiagnosticDescriptor HandlerMethodMustBeStatic =
-		new(
-			id: DiagnosticIds.IHR0009HandlerMethodMustBeStatic,
-			title: "Handler method must be static",
-			messageFormat: "Method '{0}' must be static",
-			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
-			isEnabledByDefault: true,
-			description: "Handler method must be static."
 		);
 
 	public static readonly DiagnosticDescriptor HandlerMethodMustBeUnique =
@@ -84,16 +73,75 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Handlers should use CancellationToken to properly support cancellation."
 		);
 
+	public static readonly DiagnosticDescriptor HandlerMethodMissingRequest =
+		new(
+			id: DiagnosticIds.IHR0014HandlerMethodMissingRequest,
+			title: "Handler method is missing request parameter",
+			messageFormat: "Method '{0}' should receive a request parameter",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Handlers must have a request parameter."
+		);
+
+	public static readonly DiagnosticDescriptor HandlerMethodHasTooManyParameters =
+		new(
+			id: DiagnosticIds.IHR0015HandlerMethodHasTooManyParameters,
+			title: "Handler method has too many parameters",
+			messageFormat: "Method '{0}' should have a request parameter and, optionally, a cancellation token parameter only",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Handlers must have only one or two parameters."
+		);
+
+	public static readonly DiagnosticDescriptor ContainingClassMustBeSealed =
+		new(
+			id: DiagnosticIds.IHR0016ContainingClassMustBeSealed,
+			title: "Handler type must be `sealed`",
+			messageFormat: "Class '{0}' must be `sealed`",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Containing classes must be sealed to prevent incorrect usage."
+		);
+
+	public static readonly DiagnosticDescriptor ContainingClassInstanceMembersMustBePrivate =
+		new(
+			id: DiagnosticIds.IHR0017ContainingClassInstanceMembersMustBePrivate,
+			title: "Instances members of handler types must be `private`",
+			messageFormat: "Member '{0}' must be `private`",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "All members of handler classes must be private to prevent incorrect usage."
+		);
+
+	public static readonly DiagnosticDescriptor ContainingClassMustBeStatic =
+		new(
+			id: DiagnosticIds.IHR0018ContainingClassMustBeStatic,
+			title: "Handler types must be `static`",
+			messageFormat: "Class '{0}' must be `static`",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Containing classes must be static to prevent incorrect usage."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
 			HandlerMethodMustExist,
 			HandlerMethodMustReturnTask,
 			HandlerMustNotBeNestedInAnotherClass,
-			HandlerMethodMustBeStatic,
 			HandlerMethodMustBeUnique,
 			HandlerMethodMustBePrivate,
 			HandlerShouldUseCancellationToken,
+			HandlerMethodMissingRequest,
+			HandlerMethodHasTooManyParameters,
+			ContainingClassMustBeSealed,
+			ContainingClassInstanceMembersMustBePrivate,
+			ContainingClassMustBeStatic,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -112,10 +160,9 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		var token = context.CancellationToken;
 		token.ThrowIfCancellationRequested();
 
-		if (context.Symbol is not INamedTypeSymbol namedTypeSymbol)
-			return;
+		var containerSymbol = (INamedTypeSymbol)context.Symbol;
 
-		if (!namedTypeSymbol
+		if (!containerSymbol
 				.GetAttributes()
 				.Any(x => x.AttributeClass.IsHandlerAttribute())
 		)
@@ -124,17 +171,17 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		}
 
 		token.ThrowIfCancellationRequested();
-		if (namedTypeSymbol.ContainingType is not null)
+		if (containerSymbol.ContainingType is not null)
 		{
 			context.ReportDiagnostic(
 				Diagnostic.Create(
 					HandlerMustNotBeNestedInAnotherClass,
-					namedTypeSymbol.Locations[0],
-					namedTypeSymbol.Name)
+					containerSymbol.Locations[0],
+					containerSymbol.Name)
 			);
 		}
 
-		if (namedTypeSymbol
+		if (containerSymbol
 				.GetMembers()
 				.OfType<IMethodSymbol>()
 				.Where(x => x.Name is "Handle" or "HandleAsync")
@@ -144,81 +191,198 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			context.ReportDiagnostic(
 				Diagnostic.Create(
 					HandlerMethodMustExist,
-					namedTypeSymbol.Locations[0],
-					namedTypeSymbol.Name)
+					containerSymbol.Locations[0],
+					containerSymbol.Name)
 			);
 
 			return;
 		}
 
 		token.ThrowIfCancellationRequested();
-		switch (methods.Where(m => m.IsStatic).ToList())
+
+		if (methods is [{ } method])
 		{
-			case { Count: var cnt and not 1 }:
-			{
-				token.ThrowIfCancellationRequested();
+			if (method.IsStatic)
+				AnalyzeStaticHandler(context, containerSymbol, method);
+			else
+				AnalyzeInstanceMethod(context, containerSymbol, method);
 
-				var diagnostic = cnt == 0
-					? HandlerMethodMustBeStatic
-					: HandlerMethodMustBeUnique;
+			return;
+		}
 
-				foreach (var method in methods)
-				{
-					context.ReportDiagnostic(
-						Diagnostic.Create(
-							diagnostic,
-							method.Locations[0],
-							method.Name)
-					);
-				}
+		foreach (var m in methods)
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodMustBeUnique,
+					m.Locations[0],
+					m.Name)
+			);
+		}
+	}
 
-				break;
-			}
+	private static void AnalyzeInstanceMethod(SymbolAnalysisContext context, INamedTypeSymbol containerSymbol, IMethodSymbol method)
+	{
+		AnalyzeAccessibility(context, method);
+		AnalyzeReturnType(context, method);
+		AnalyzeCancellationToken(context, method);
 
-			case [var methodSymbol]:
-			{
-				token.ThrowIfCancellationRequested();
-				if (methodSymbol.ReturnType is INamedTypeSymbol { ConstructedFrom: { } from }
-					&& !from.IsValueTask() && !from.IsValueTask1()
+		if (method.Parameters.Length == 0
+			|| (method.Parameters.Length == 1 && method.Parameters[0].Type.IsCancellationToken()))
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodMissingRequest,
+					method.Locations[0],
+					method.Name
 				)
-				{
-					context.ReportDiagnostic(
-						Diagnostic.Create(
-							HandlerMethodMustReturnTask,
-							methodSymbol.Locations[0],
-							methodSymbol.Name
-						)
-					);
-				}
+			);
+		}
+		else if (method.Parameters.Length > 2
+			|| (method.Parameters.Length > 1 && !method.Parameters[^1].Type.IsCancellationToken()))
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodHasTooManyParameters,
+					method.Locations[0],
+					method.Name
+				)
+			);
+		}
 
-				if (methodSymbol.DeclaredAccessibility is not Accessibility.Private)
-				{
-					context.ReportDiagnostic(
-						Diagnostic.Create(
-							HandlerMethodMustBePrivate,
-							methodSymbol.Locations[0],
-							methodSymbol.Name
-						)
-					);
-				}
+		if (!containerSymbol.IsSealed)
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					ContainingClassMustBeSealed,
+					containerSymbol.Locations[0],
+					containerSymbol.Name
+				)
+			);
+		}
 
-				if (!methodSymbol.Parameters[^1].Type.IsCancellationToken())
-				{
-					context.ReportDiagnostic(
-						Diagnostic.Create(
-							HandlerShouldUseCancellationToken,
-							methodSymbol.Locations[0],
-							methodSymbol.Name
-						)
-					);
-				}
-
-				break;
+		foreach (var member in containerSymbol.GetMembers())
+		{
+			if (ReferenceEquals(member, method)
+				|| member
+					// static members are fine
+					is { IsStatic: true }
+					// private members are fine
+					or { DeclaredAccessibility: Accessibility.Private or Accessibility.NotApplicable }
+					// nested types are fine
+					or INamedTypeSymbol
+					// constructors and property implementations are fine
+					or IMethodSymbol { MethodKind: MethodKind.Constructor or MethodKind.PropertyGet or MethodKind.PropertySet }
+			)
+			{
+				continue;
 			}
 
-			default:
-				// should never happen - all count cases are covered above
-				break;
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					ContainingClassInstanceMembersMustBePrivate,
+					member.Locations[0],
+					member.Name
+				)
+			);
+		}
+	}
+
+	private static void AnalyzeStaticHandler(SymbolAnalysisContext context, INamedTypeSymbol containerSymbol, IMethodSymbol method)
+	{
+		AnalyzeAccessibility(context, method);
+		AnalyzeReturnType(context, method);
+		AnalyzeCancellationToken(context, method);
+
+		if (method.Parameters.Length == 0
+			|| (method.Parameters.Length == 1 && method.Parameters[0].Type.IsCancellationToken()))
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodMissingRequest,
+					method.Locations[0],
+					method.Name
+				)
+			);
+		}
+
+		if (!containerSymbol.IsStatic)
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					ContainingClassMustBeStatic,
+					containerSymbol.Locations[0],
+					containerSymbol.Name
+				)
+			);
+		}
+	}
+
+	private static void AnalyzeAccessibility(SymbolAnalysisContext context, IMethodSymbol method)
+	{
+		if (method.DeclaredAccessibility is not Accessibility.Private)
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodMustBePrivate,
+					method.Locations[0],
+					method.Name
+				)
+			);
+		}
+	}
+
+	private static void AnalyzeReturnType(SymbolAnalysisContext context, IMethodSymbol method)
+	{
+		if (method is not
+			{
+				ReturnType: INamedTypeSymbol
+				{
+					OriginalDefinition:
+					{
+						MetadataName: "ValueTask" or "ValueTask`1",
+						ContainingNamespace:
+						{
+							Name: "Tasks",
+							ContainingNamespace:
+							{
+								Name: "Threading",
+								ContainingNamespace:
+								{
+									Name: "System",
+									ContainingNamespace.IsGlobalNamespace: true
+								}
+							}
+						}
+					}
+				}
+			}
+		)
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerMethodMustReturnTask,
+					method.Locations[0],
+					method.Name
+				)
+			);
+		}
+	}
+
+	private static void AnalyzeCancellationToken(SymbolAnalysisContext context, IMethodSymbol method)
+	{
+		if (method.Parameters.Length == 0)
+			return;
+
+		if (!method.Parameters[^1].Type.IsCancellationToken())
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					HandlerShouldUseCancellationToken,
+					method.Locations[0],
+					method.Name
+				)
+			);
 		}
 	}
 }

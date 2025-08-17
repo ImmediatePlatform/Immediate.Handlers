@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 using Immediate.Handlers.Shared;
@@ -7,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Immediate.Handlers.Benchmarks;
 
 public sealed class DirectTimingBehavior(
-	SomeHandlerClass handler
+	TraditionalExample handler
 )
 {
 	public TimeSpan Elapsed { get; private set; }
@@ -81,21 +82,15 @@ public sealed class SomeService
 {
 	private static readonly SomeResponse s_response = new(Guid.NewGuid());
 
-	private static ValueTask<SomeResponse> VtResponse => new(s_response);
-
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	public ValueTask<SomeResponse> ServiceHandler(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => VtResponse;
+	) => ValueTask.FromResult(s_response);
 }
 
-[Handler]
-[Behaviors(
-	typeof(IhTimingBehavior<,>)
-)]
-public sealed partial class SomeHandlerClass(SomeService service)
+public sealed partial class TraditionalExample(SomeService service)
 	: Mediator.IRequestHandler<SomeRequest, SomeResponse>,
 	  MediatR.IRequestHandler<SomeRequest, SomeResponse>
 {
@@ -113,7 +108,14 @@ public sealed partial class SomeHandlerClass(SomeService service)
 		SomeRequest request,
 		CancellationToken cancellationToken
 	) => await service.ServiceHandler(request, cancellationToken);
+}
 
+[Handler]
+[Behaviors(
+	typeof(IhTimingBehavior<,>)
+)]
+public static partial class StaticIhExample
+{
 	private static async ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
 		SomeService service,
@@ -121,29 +123,38 @@ public sealed partial class SomeHandlerClass(SomeService service)
 	) => await service.ServiceHandler(request, cancellationToken);
 }
 
+[Handler]
+[Behaviors(
+	typeof(IhTimingBehavior<,>)
+)]
+public sealed partial class SealedIhExample(SomeService service)
+{
+	private async ValueTask<SomeResponse> HandleAsync(
+		SomeRequest request,
+		CancellationToken cancellationToken
+	) => await service.ServiceHandler(request, cancellationToken);
+}
+
 [MemoryDiagnoser]
 [Orderer(SummaryOrderPolicy.FastestToSlowest, MethodOrderPolicy.Declared)]
 [RankColumn]
-//[EventPipeProfiler(EventPipeProfile.CpuSampling)]
-//[DisassemblyDiagnoser]
-//[InliningDiagnoser(logFailuresOnly: true, allowedNamespaces: new[] { "Mediator" })]
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 public class RequestBenchmarks
 {
-	private IServiceProvider? _serviceProvider;
-	private IServiceProvider? _abstractionServiceProvider;
-	private IServiceScope? _serviceScope;
-	private IServiceScope? _abstractionServiceScope;
-	private Mediator.IMediator? _mediator;
-	private Mediator.Mediator? _concreteMediator;
-	private MediatR.IMediator? _mediatr;
-	private SomeHandlerClass.Handler? _immediateHandler;
-	private IHandler<SomeRequest, SomeResponse>? _immediateHandlerAbstraction;
-	private DirectTimingBehavior? _handler;
-	private SomeRequest? _request;
+	private readonly IServiceProvider _serviceProvider;
+	private readonly IServiceProvider _abstractionServiceProvider;
+	private readonly IServiceScope _serviceScope;
+	private readonly IServiceScope _abstractionServiceScope;
+	private readonly Mediator.IMediator _mediator;
+	private readonly Mediator.Mediator _concreteMediator;
+	private readonly MediatR.IMediator _mediatr;
+	private readonly StaticIhExample.Handler _immediateStaticHandler;
+	private readonly SealedIhExample.Handler _immediateSealedHandler;
+	private readonly IHandler<SomeRequest, SomeResponse> _immediateHandlerAbstraction;
+	private readonly DirectTimingBehavior _handler;
+	private readonly SomeRequest _request;
 
-	[GlobalSetup]
-	public void Setup()
+	public RequestBenchmarks()
 	{
 		var services = new ServiceCollection();
 
@@ -167,7 +178,7 @@ public class RequestBenchmarks
 		);
 
 		_ = services.AddScoped<DirectTimingBehavior>();
-		_ = services.AddScoped<SomeHandlerClass>();
+		_ = services.AddScoped<TraditionalExample>();
 
 		_serviceProvider = services.BuildServiceProvider();
 
@@ -177,7 +188,8 @@ public class RequestBenchmarks
 		_mediator = _serviceProvider.GetRequiredService<Mediator.IMediator>();
 		_concreteMediator = _serviceProvider.GetRequiredService<Mediator.Mediator>();
 		_mediatr = _serviceProvider.GetRequiredService<MediatR.IMediator>();
-		_immediateHandler = _serviceProvider.GetRequiredService<SomeHandlerClass.Handler>();
+		_immediateStaticHandler = _serviceProvider.GetRequiredService<StaticIhExample.Handler>();
+		_immediateSealedHandler = _serviceProvider.GetRequiredService<SealedIhExample.Handler>();
 		_handler = _serviceProvider.GetRequiredService<DirectTimingBehavior>();
 		_request = new(Guid.NewGuid());
 
@@ -201,9 +213,15 @@ public class RequestBenchmarks
 	}
 
 	[Benchmark]
-	public ValueTask<SomeResponse> SendRequest_ImmediateHandler()
+	public ValueTask<SomeResponse> SendRequest_ImmediateStaticHandler()
 	{
-		return _immediateHandler!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateStaticHandler!.HandleAsync(_request!, CancellationToken.None);
+	}
+
+	[Benchmark]
+	public ValueTask<SomeResponse> SendRequest_ImmediateSealedHandler()
+	{
+		return _immediateSealedHandler!.HandleAsync(_request!, CancellationToken.None);
 	}
 
 	[Benchmark]

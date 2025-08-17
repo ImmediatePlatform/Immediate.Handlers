@@ -76,18 +76,6 @@ introduce inconsistencies in connecting multiple behaviors in a pipeline.
 |CodeFix|False|
 ---
 
-## IHR0009: Handler method must be static
-
-Handler method must be static, in order to be correctly referenced by the handler system.
-
-|Item|Value|
-|-|-|
-|Category|ImmediateHandler|
-|Enabled|True|
-|Severity|Error|
-|CodeFix|False|
----
-
 ## IHR0010: Handler method must be unique
 
 If both `Handle` and `HandleAsync` are provided, it will not be possible to identify which is the correct handler
