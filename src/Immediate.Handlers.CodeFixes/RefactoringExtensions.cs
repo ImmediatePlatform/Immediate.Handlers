@@ -30,6 +30,6 @@ internal static class RefactoringExtensions
 			return semanticModel;
 
 		return await document.GetSemanticModelAsync(cancellationToken)
-			?? throw new InvalidOperationException();
+			?? throw new InvalidOperationException("Could not retrieve semantic model for the document.");
 	}
 }
