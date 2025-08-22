@@ -132,14 +132,14 @@ file sealed class RefactoringService(
 			)
 			.WithModifiers(
 				methodDeclarationSyntax.Modifiers
-					.RemoveAll(static p => p.IsKind(SyntaxKind.StaticKeyword))
+					.RemoveStaticModifier()
 			);
 
 		var newClassDeclarationSyntax = classDeclarationSyntax
 			.ReplaceNode(methodDeclarationSyntax, newMethodDeclarationSyntax)
 			.WithModifiers(
 				classDeclarationSyntax.Modifiers
-					.RemoveAll(static p => p.IsKind(SyntaxKind.StaticKeyword))
+					.RemoveStaticModifier()
 					.Insert(
 						// valid case will have `partial` as final element; insert `sealed` before `partial`
 						classDeclarationSyntax.Modifiers.Count - 2,
@@ -172,20 +172,7 @@ file static class SyntaxExtensions
 		return nodes;
 	}
 
-	public static SyntaxTokenList RemoveAll(
-		this SyntaxTokenList list,
-		Func<SyntaxToken, bool> filter
-	)
-	{
-		for (var i = 0; i < list.Count; i++)
-		{
-			if (filter(list[i]))
-			{
-				list = list.RemoveAt(i);
-				i--;
-			}
-		}
-
-		return list;
-	}
+	public static SyntaxTokenList RemoveStaticModifier(
+		this SyntaxTokenList list
+	) => new(list.Where(static token => !token.IsKind(SyntaxKind.StaticKeyword)));
 }
