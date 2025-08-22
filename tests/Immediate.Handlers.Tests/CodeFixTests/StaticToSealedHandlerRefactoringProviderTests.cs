@@ -136,8 +136,8 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 
 	[Test]
 	public async Task RefactorWithNoDependencyParameters() =>
-	await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
-		"""
+		await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
+			"""
 			using System.Threading;
 			using System.Threading.Tasks;
 
@@ -158,7 +158,7 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 				}
 			}
 			""",
-		"""
+			"""
 			using System.Threading;
 			using System.Threading.Tasks;
 			
@@ -179,5 +179,5 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 				}
 			}
 			"""
-	).RunAsync();
+		).RunAsync();
 }

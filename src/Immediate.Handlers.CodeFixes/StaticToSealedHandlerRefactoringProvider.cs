@@ -115,9 +115,7 @@ file sealed class RefactoringService(
 	{
 		var methodParameters = methodDeclarationSyntax.ParameterList.Parameters;
 
-		var isLastParamCancellationToken =
-			(model.GetSymbolInfo(methodParameters[^1].Type!, token).Symbol as INamedTypeSymbol)
-				.IsCancellationToken();
+		var isLastParamCancellationToken = model.IsCancellationToken(methodParameters[^1].Type, token);
 
 		var classParameters = methodParameters
 			.Skip(1)
@@ -142,7 +140,11 @@ file sealed class RefactoringService(
 			.WithModifiers(
 				classDeclarationSyntax.Modifiers
 					.RemoveAll(static p => p.IsKind(SyntaxKind.StaticKeyword))
-					.Insert(classDeclarationSyntax.Modifiers.Count - 2, Token(SyntaxKind.SealedKeyword).WithTrailingTrivia(ElasticSpace))
+					.Insert(
+						// valid case will have `partial` as final element; insert `sealed` before `partial`
+						classDeclarationSyntax.Modifiers.Count - 2,
+						Token(SyntaxKind.SealedKeyword).WithTrailingTrivia(ElasticSpace)
+					)
 			);
 
 		if (classParameters.Count > 0)
