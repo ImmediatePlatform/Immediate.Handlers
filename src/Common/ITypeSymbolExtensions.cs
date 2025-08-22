@@ -96,7 +96,7 @@ internal static class ITypeSymbolExtensions
 			},
 		};
 
-	public static bool IsCancellationToken(this ITypeSymbol typeSymbol) =>
+	public static bool IsCancellationToken(this ITypeSymbol? typeSymbol) =>
 		typeSymbol is INamedTypeSymbol
 		{
 			Name: "CancellationToken",
