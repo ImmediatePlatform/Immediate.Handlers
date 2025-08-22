@@ -21,7 +21,7 @@ internal static class RefactoringExtensions
 			return root;
 
 		return await document.GetSyntaxRootAsync(cancellationToken)
-			?? throw new InvalidOperationException();
+			?? throw new InvalidOperationException($"Failed to retrieve the syntax root for document '{document.Name ?? document.FilePath ?? "unknown"}'.");
 	}
 
 	public static async ValueTask<SemanticModel> GetRequiredSemanticModelAsync(this Document document, CancellationToken cancellationToken)
