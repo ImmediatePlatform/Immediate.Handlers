@@ -17,7 +17,7 @@ public static partial class HandlerAbstractionOneAdder
 
 public sealed class HandlerAbstractionTests
 {
-	[Test]
+	[Fact]
 	public async Task NoBehaviorShouldReturnExpectedResponseForAbstraction()
 	{
 		const int Input = 1;
@@ -26,7 +26,7 @@ public sealed class HandlerAbstractionTests
 
 		var query = new HandlerAbstractionOneAdderQuery(Input);
 
-		var result = await handler.HandleAsync(query);
+		var result = await handler.HandleAsync(query, TestContext.Current.CancellationToken);
 
 		Assert.Equal(Input + 1, result);
 	}

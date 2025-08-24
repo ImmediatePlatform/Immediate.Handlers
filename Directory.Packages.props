@@ -30,10 +30,9 @@
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="8.1.1" />
     <PackageVersion Include="System.Formats.Asn1" Version="9.0.7" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
-    <PackageVersion Include="TUnit.Engine" Version="0.25.21" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-	<PackageVersion Include="Verify.TUnit" Version="30.4.0" />
-    <PackageVersion Include="xunit.v3.assert" Version="3.0.0" />
+	<PackageVersion Include="Verify.XunitV3" Version="30.7.3" />
+    <PackageVersion Include="xunit.v3" Version="3.0.1" />
   </ItemGroup>
   
   <ItemGroup>

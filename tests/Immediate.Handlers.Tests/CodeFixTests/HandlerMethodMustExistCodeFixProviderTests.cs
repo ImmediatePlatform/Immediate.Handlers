@@ -7,7 +7,7 @@ namespace Immediate.Handlers.Tests.CodeFixTests;
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public sealed partial class HandlerMethodMustExistCodeFixProviderTests
 {
-	[Test]
+	[Fact]
 	public async Task HandleMethodDoesNotExist() =>
 		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerMethodMustExistCodeFixProvider>(
 			"""
@@ -48,5 +48,5 @@ public sealed partial class HandlerMethodMustExistCodeFixProviderTests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 }

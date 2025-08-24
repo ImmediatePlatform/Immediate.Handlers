@@ -10,7 +10,7 @@ public sealed class BehaviorTests
 		}
 	}
 
-	[Test]
+	[Fact]
 	public void CannotSetHandlerTwice()
 	{
 		var handler = new TestBehavior();
@@ -19,7 +19,7 @@ public sealed class BehaviorTests
 			handler.SetInnerHandler(handler));
 	}
 
-	[Test]
+	[Fact]
 	public async Task MustSetHandlerBeforeCallingNext()
 	{
 		var handler = new TestBehavior();

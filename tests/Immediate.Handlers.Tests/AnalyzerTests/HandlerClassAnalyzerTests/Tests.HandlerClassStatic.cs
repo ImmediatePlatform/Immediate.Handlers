@@ -5,7 +5,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
 public sealed partial class Tests
 {
-	[Test]
+	[Fact]
 	public async Task HandlerClassNotStatic_DoesAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
@@ -32,5 +32,5 @@ public sealed partial class Tests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 }

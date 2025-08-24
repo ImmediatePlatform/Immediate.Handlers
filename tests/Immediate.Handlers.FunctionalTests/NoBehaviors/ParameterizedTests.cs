@@ -21,7 +21,7 @@ public record AddendProvider(int Addend);
 
 public sealed class ParameterizedTests
 {
-	[Test]
+	[Fact]
 	public async Task NoBehaviorShouldReturnExpectedResponse()
 	{
 		const int Input = 1;
@@ -31,7 +31,7 @@ public sealed class ParameterizedTests
 
 		var query = new NoBehaviorParameterizedOneAdder.Query(Input);
 
-		var result = await handler.HandleAsync(query);
+		var result = await handler.HandleAsync(query, TestContext.Current.CancellationToken);
 
 		Assert.Equal(Input + addendProvider.Addend, result);
 	}

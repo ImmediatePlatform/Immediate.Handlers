@@ -6,7 +6,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public sealed partial class Tests
 {
-	[Test]
+	[Fact]
 	public async Task BehaviorTypeIsValid_DoesNotAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
 			"""
@@ -80,5 +80,5 @@ public sealed partial class Tests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 }
