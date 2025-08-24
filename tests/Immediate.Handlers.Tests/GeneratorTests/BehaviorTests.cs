@@ -5,9 +5,9 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class BehaviorTests
 {
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task SingleBehavior(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -88,9 +88,9 @@ public sealed class BehaviorTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task MultipleBehaviors(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -237,9 +237,9 @@ public sealed class BehaviorTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task CrtpBehavior(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -306,9 +306,9 @@ public sealed class BehaviorTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task NestedBehavior(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(

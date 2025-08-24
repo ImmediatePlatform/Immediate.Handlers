@@ -6,7 +6,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public partial class Tests
 {
-	[Test]
+	[Fact]
 	public async Task BehaviorTypeDoesNotInheritFromGenericBehavior_Alerts() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
 			"""
@@ -72,5 +72,5 @@ public partial class Tests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 }

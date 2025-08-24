@@ -4,7 +4,7 @@ namespace Immediate.Handlers.Tests.CodeFixTests;
 
 public sealed class StaticToSealedHandlerRefactoringProviderTests
 {
-	[Test]
+	[Fact]
 	public async Task RefactorOnHandlerClass() =>
 		await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
 			"""
@@ -67,9 +67,9 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 				}
 			}
 			"""
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 
-	[Test]
+	[Fact]
 	public async Task RefactorOnHandlerMethod() =>
 		await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
 			"""
@@ -132,9 +132,9 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 				}
 			}
 			"""
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 
-	[Test]
+	[Fact]
 	public async Task RefactorWithNoDependencyParameters() =>
 		await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
 			"""
@@ -179,5 +179,5 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 				}
 			}
 			"""
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 }

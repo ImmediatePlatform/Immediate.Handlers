@@ -20,7 +20,7 @@ public static partial class BehaviorShouldConstrainC
 
 public sealed partial class Tests
 {
-	[Test]
+	[Fact]
 	public async Task BehaviorShouldConstrain_C()
 	{
 		IServiceCollection services = new ServiceCollection();
@@ -29,7 +29,7 @@ public sealed partial class Tests
 		var serviceProvider = services.BuildServiceProvider();
 
 		var handler = serviceProvider.GetRequiredService<BehaviorShouldConstrainC.Handler>();
-		_ = await handler.HandleAsync(new(1));
+		_ = await handler.HandleAsync(new(1), TestContext.Current.CancellationToken);
 
 		var behaviorWalker = serviceProvider.GetRequiredService<BehaviorWalker>();
 

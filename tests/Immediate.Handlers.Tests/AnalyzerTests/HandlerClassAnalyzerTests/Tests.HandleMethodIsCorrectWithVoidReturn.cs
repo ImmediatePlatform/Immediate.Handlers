@@ -6,7 +6,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public partial class Tests
 {
-	[Test]
+	[Fact]
 	public async Task HandleMethodIsCorrectWithVoidReturn_Static_DoesNotAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
@@ -32,9 +32,9 @@ public partial class Tests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 
-	[Test]
+	[Fact]
 	public async Task HandleMethodIsCorrectWithVoidReturn_Instance_DoesNotAlert() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
@@ -60,5 +60,5 @@ public partial class Tests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 }

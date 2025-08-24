@@ -13,9 +13,8 @@
 	<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
 	<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-	<PackageReference Include="TUnit.Engine" />
-	<PackageReference Include="Verify.TUnit" />
-	<PackageReference Include="xunit.v3.assert" />
+	<PackageReference Include="Verify.XunitV3" />
+	<PackageReference Include="xunit.v3" />
   </ItemGroup>
 
   <ItemGroup>

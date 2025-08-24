@@ -53,14 +53,14 @@ public static partial class MultipleBehaviorHandler
 
 public sealed class MultipleBehaviorsTests
 {
-	[Test]
+	[Fact]
 	public async Task TestBehaviorOrdering()
 	{
 		var query = new MultipleBehaviorHandler.Query();
 		var handler = new MultipleBehaviorHandler.Handler(
 			new(), new(), new(), new());
 
-		_ = await handler.HandleAsync(query);
+		_ = await handler.HandleAsync(query, TestContext.Current.CancellationToken);
 
 		Assert.Equal(
 			[

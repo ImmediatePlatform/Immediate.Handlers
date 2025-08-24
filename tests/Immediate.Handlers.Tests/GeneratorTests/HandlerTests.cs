@@ -4,9 +4,9 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class HandlerTests
 {
-	[Test]
-	[Arguments("")]
-	[Arguments("static")]
+	[Theory]
+	[InlineData("")]
+	[InlineData("static")]
 	public async Task IntReturnType(string modifier)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -43,9 +43,9 @@ public sealed class HandlerTests
 		_ = await Verify(result);
 	}
 
-	[Test]
-	[Arguments("")]
-	[Arguments("static")]
+	[Theory]
+	[InlineData("")]
+	[InlineData("static")]
 	public async Task VoidReturnType(string modifier)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -82,9 +82,9 @@ public sealed class HandlerTests
 		_ = await Verify(result);
 	}
 
-	[Test]
-	[Arguments("")]
-	[Arguments("static")]
+	[Theory]
+	[InlineData("")]
+	[InlineData("static")]
 	public async Task MissingCancellationToken(string modifier)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -120,9 +120,8 @@ public sealed class HandlerTests
 		_ = await Verify(result);
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
-	public async Task SimpleParameterAttribute(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task SimpleParameterAttribute()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -149,7 +148,7 @@ public sealed class HandlerTests
 				}
 			}
 			""",
-			assemblies
+			DriverReferenceAssemblies.Msdi
 		);
 
 		Assert.Equal(
@@ -163,9 +162,8 @@ public sealed class HandlerTests
 		_ = await Verify(result);
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
-	public async Task MultipleParameterAttributes(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task MultipleParameterAttributes()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -202,7 +200,7 @@ public sealed class HandlerTests
 				}
 			}
 			""",
-			assemblies
+			DriverReferenceAssemblies.Msdi
 		);
 
 		Assert.Equal(
@@ -216,9 +214,8 @@ public sealed class HandlerTests
 		_ = await Verify(result);
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
-	public async Task ComplexParameterAttribute(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task ComplexParameterAttribute()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -254,7 +251,7 @@ public sealed class HandlerTests
 				}
 			}
 			""",
-			assemblies
+			DriverReferenceAssemblies.Msdi
 		);
 
 		Assert.Equal(
@@ -268,8 +265,9 @@ public sealed class HandlerTests
 		_ = await Verify(result);
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task NoHandlersGeneratesZeroFiles(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(

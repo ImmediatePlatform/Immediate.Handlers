@@ -5,7 +5,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests;
 
 public sealed class InvalidIHandlerAnalyzerTests
 {
-	[Test]
+	[Fact]
 	public async Task AnalyzerTriggersForMissingImplementation() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidIHandlerAnalyzer>(
 			"""
@@ -29,9 +29,9 @@ public sealed class InvalidIHandlerAnalyzerTests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 
-	[Test]
+	[Fact]
 	public async Task AnalyzerDoesNotTriggerForPresentImplementation() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidIHandlerAnalyzer>(
 			"""
@@ -66,9 +66,9 @@ public sealed class InvalidIHandlerAnalyzerTests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 
-	[Test]
+	[Fact]
 	public async Task AnalyzerDoesNotTriggerForGenericParameter() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidIHandlerAnalyzer>(
 			"""
@@ -93,5 +93,5 @@ public sealed class InvalidIHandlerAnalyzerTests
 			}
 			""",
 			DriverReferenceAssemblies.Normal
-		).RunAsync();
+		).RunAsync(TestContext.Current.CancellationToken);
 }

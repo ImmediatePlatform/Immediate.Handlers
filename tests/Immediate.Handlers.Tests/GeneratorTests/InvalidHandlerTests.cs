@@ -4,9 +4,9 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class InvalidHandlerTests
 {
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task HandlerWithoutHandlerMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -38,9 +38,9 @@ public sealed class InvalidHandlerTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task InstanceHandlerMethodWithTooManyParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -87,9 +87,9 @@ public sealed class InvalidHandlerTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task HandlerWithTwoHandlersMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -146,9 +146,9 @@ public sealed class InvalidHandlerTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task HandlerWithNoParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -194,9 +194,9 @@ public sealed class InvalidHandlerTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task HandlerWithVoidResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -244,9 +244,9 @@ public sealed class InvalidHandlerTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task HandlerWithTaskResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -295,9 +295,9 @@ public sealed class InvalidHandlerTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task NestedHandlerShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(

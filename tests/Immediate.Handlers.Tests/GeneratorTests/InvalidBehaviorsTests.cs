@@ -4,9 +4,9 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class InvalidBehaviorsTests
 {
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task NonBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -70,9 +70,9 @@ public sealed class InvalidBehaviorsTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BoundGenericShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -137,9 +137,9 @@ public sealed class InvalidBehaviorsTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task NonGenericBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -204,9 +204,9 @@ public sealed class InvalidBehaviorsTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task AbstractBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -263,9 +263,9 @@ public sealed class InvalidBehaviorsTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTRequestConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -332,9 +332,9 @@ public sealed class InvalidBehaviorsTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTResponseConstraintsShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -401,9 +401,9 @@ public sealed class InvalidBehaviorsTests
 			.UseParameters(string.Join('_', assemblies));
 	}
 
-	[Test]
-	[Arguments(DriverReferenceAssemblies.Normal)]
-	[Arguments(DriverReferenceAssemblies.Msdi)]
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task BehaviorHasTooManyTypeParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
