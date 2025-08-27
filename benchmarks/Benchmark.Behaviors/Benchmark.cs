@@ -51,8 +51,8 @@ public sealed class MTimingBehavior<TRequest, TResponse>
 
 	async ValueTask<TResponse> Mediator.IPipelineBehavior<TRequest, TResponse>.Handle(
 		TRequest message,
-		CancellationToken cancellationToken,
-		Mediator.MessageHandlerDelegate<TRequest, TResponse> next)
+		Mediator.MessageHandlerDelegate<TRequest, TResponse> next,
+		CancellationToken cancellationToken)
 	{
 		var sw = Stopwatch.StartNew();
 		var response = await next(message, cancellationToken);

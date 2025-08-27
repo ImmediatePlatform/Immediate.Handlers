@@ -174,5 +174,5 @@ file static class SyntaxExtensions
 
 	public static SyntaxTokenList RemoveStaticModifier(
 		this SyntaxTokenList list
-	) => new(list.Where(static token => !token.IsKind(SyntaxKind.StaticKeyword)));
+	) => [.. list.Where(static token => !token.IsKind(SyntaxKind.StaticKeyword))];
 }
