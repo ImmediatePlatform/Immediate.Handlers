@@ -1,6 +1,7 @@
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeRefactorings;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Immediate.Handlers.CodeFixes;
@@ -8,10 +9,16 @@ namespace Immediate.Handlers.CodeFixes;
 [ExcludeFromCodeCoverage]
 internal static class RefactoringExtensions
 {
-	internal static void Deconstruct(this CodeRefactoringContext context, out Document document, out TextSpan span, out CancellationToken cancellationToken)
+	internal static void Deconstruct(
+		this CodeFixContext context,
+		out Document document,
+		out TextSpan span,
+		out ImmutableArray<Diagnostic> diagnostics,
+		out CancellationToken cancellationToken)
 	{
 		document = context.Document;
 		span = context.Span;
+		diagnostics = context.Diagnostics;
 		cancellationToken = context.CancellationToken;
 	}
 

@@ -20,4 +20,5 @@ internal static class DiagnosticIds
 	public const string IHR0016ContainingClassMustBeSealed = "IHR0016";
 	public const string IHR0017ContainingClassInstanceMembersMustBePrivate = "IHR0017";
 	public const string IHR0018ContainingClassMustBeStatic = "IHR0018";
+	public const string IHR0019StaticHandlerCouldBeSealed = "IHR0019";
 }

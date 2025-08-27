@@ -1,18 +1,25 @@
+using System.Collections.Immutable;
+using Immediate.Handlers.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CodeRefactorings;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Immediate.Handlers.CodeFixes;
 
-[ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = "Convert to instance handler")]
-public sealed class StaticToSealedHandlerRefactoringProvider : CodeRefactoringProvider
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public sealed class StaticToSealedHandlerCodeFixProvider : CodeFixProvider
 {
-	public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
+	public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+		ImmutableArray.Create([DiagnosticIds.IHR0019StaticHandlerCouldBeSealed]);
+
+	public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+
+	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
-		var (document, span, token) = context;
+		var (document, span, diagnostics, token) = context;
 		token.ThrowIfCancellationRequested();
 
 		if (await document.GetRequiredSyntaxRootAsync(token) is not CompilationUnitSyntax root)
@@ -20,85 +27,43 @@ public sealed class StaticToSealedHandlerRefactoringProvider : CodeRefactoringPr
 
 		var model = await document.GetRequiredSemanticModelAsync(token);
 
-		switch (root.FindNode(span))
-		{
-			case ClassDeclarationSyntax cds:
-			{
-				if (model.GetDeclaredSymbol(cds, token) is not INamedTypeSymbol { IsStatic: true } container)
-					return;
+		if (root.FindNode(span) is not ClassDeclarationSyntax cds)
+			return;
 
-				if (!container.GetAttributes().Any(a => a.AttributeClass.IsHandlerAttribute()))
-					return;
+		if (model.GetDeclaredSymbol(cds, token) is not INamedTypeSymbol { IsStatic: true } container)
+			return;
 
-				var method = container.GetMembers()
-					.OfType<IMethodSymbol>()
-					.FirstOrDefault(m => m is { IsStatic: true, Name: "Handle" or "HandleAsync" });
+		if (!container.GetAttributes().Any(a => a.AttributeClass.IsHandlerAttribute()))
+			return;
 
-				if (method is null)
-					return;
+		var method = container.GetMembers()
+			.OfType<IMethodSymbol>()
+			.FirstOrDefault(m => m is { IsStatic: true, Name: "Handle" or "HandleAsync" });
 
-				var mds = (MethodDeclarationSyntax)await method
-					.DeclaringSyntaxReferences[0]
-					.GetSyntaxAsync(token);
+		if (method is null)
+			return;
 
-				var service = new RefactoringService(
-					document,
-					model,
-					root,
-					cds,
-					mds
-				);
+		var mds = (MethodDeclarationSyntax)await method
+			.DeclaringSyntaxReferences[0]
+			.GetSyntaxAsync(token);
 
-				context.RegisterRefactoring(
-					CodeAction.Create(
-						title: "Convert to instance handler",
-						createChangedDocument: service.ConvertToInstanceHandler,
-						equivalenceKey: nameof(StaticToSealedHandlerRefactoringProvider)
-					)
-				);
+		var service = new RefactoringService(
+			document,
+			model,
+			root,
+			cds,
+			mds
+		);
 
-				break;
-			}
-
-			case MethodDeclarationSyntax mds:
-			{
-				if (model.GetDeclaredSymbol(mds, token) is not IMethodSymbol
-					{
-						IsStatic: true,
-						Name: "Handle" or "HandleAsync",
-						ContainingType: INamedTypeSymbol { IsStatic: true } container,
-					} method)
-				{
-					return;
-				}
-
-				if (!container.GetAttributes().Any(a => a.AttributeClass.IsHandlerAttribute()))
-					return;
-
-				var service = new RefactoringService(
-					document,
-					model,
-					root,
-					(ClassDeclarationSyntax)mds.Parent!,
-					mds
-				);
-
-				context.RegisterRefactoring(
-					CodeAction.Create(
-						title: "Convert to instance handler",
-						createChangedDocument: service.ConvertToInstanceHandler,
-						equivalenceKey: nameof(StaticToSealedHandlerRefactoringProvider)
-					)
-				);
-
-				break;
-			}
-
-			default:
-				break;
-		}
+		context.RegisterCodeFix(
+			CodeAction.Create(
+				title: "Convert to instance handler",
+				createChangedDocument: service.ConvertToInstanceHandler,
+				equivalenceKey: nameof(StaticToSealedHandlerCodeFixProvider)
+			),
+			diagnostics[0]
+		);
 	}
-
 }
 
 file sealed class RefactoringService(

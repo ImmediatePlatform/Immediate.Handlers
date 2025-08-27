@@ -20,11 +20,11 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static partial class GetUsersQuery
+			public static partial class {|IHR0019:GetUsersQuery|}
 			{
 				public record Query;
 
-				private static ValueTask<int> HandleAsync(
+				private static ValueTask<int> {|IHR0019:HandleAsync|}(
 					Query _,
 					CancellationToken token)
 				{

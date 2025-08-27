@@ -37,11 +37,11 @@ public sealed partial class HandlerMethodMustExistCodeFixProviderTests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static class GetUsersQuery
+			public static class {|IHR0019:GetUsersQuery|}
 			{
 				public record Query;
 
-				private static ValueTask<int> HandleAsync(Query _, CancellationToken token)
+				private static ValueTask<int> {|IHR0019:HandleAsync|}(Query _, CancellationToken token)
 				{
 					return default;
 				}
