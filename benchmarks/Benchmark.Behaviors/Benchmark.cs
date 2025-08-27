@@ -135,6 +135,8 @@ public sealed partial class SealedIhExample(SomeService service)
 	) => await service.ServiceHandler(request, cancellationToken);
 }
 
+[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net90)]
+[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net10_0)]
 [MemoryDiagnoser]
 [Orderer(SummaryOrderPolicy.FastestToSlowest, MethodOrderPolicy.Declared)]
 [RankColumn]
