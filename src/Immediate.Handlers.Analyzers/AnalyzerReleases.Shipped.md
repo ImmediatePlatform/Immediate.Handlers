@@ -31,3 +31,22 @@ IHR0012 | ImmediateHandler | Warning | HandlerClassAnalyzer
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
 IHR0013 | ImmediateHandler | Warning | InvalidIHandlerAnalyzer
+
+## Release 3.0
+
+### New Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|-------
+IHR0014 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0015 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0016 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0017 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0018 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0019 | ImmediateHandler | Hidden | HandlerClassAnalyzer
+
+### Removed Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|-------
+IHR0009 | ImmediateHandler | Error | HandlerClassAnalyzer

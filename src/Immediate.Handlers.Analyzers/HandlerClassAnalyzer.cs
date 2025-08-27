@@ -128,6 +128,18 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			description: "Containing classes must be static to prevent incorrect usage."
 		);
 
+	public static readonly DiagnosticDescriptor StaticHandlerCouldBeSealed =
+		new(
+			id: DiagnosticIds.IHR0019StaticHandlerCouldBeSealed,
+			title: "Static handler may be converted to a sealed handler",
+			messageFormat: "Class '{0}' can be converted to be a `sealed` handler",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Hidden,
+			isEnabledByDefault: true,
+			description: "Static handler may be converted to a sealed handler.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
@@ -142,6 +154,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			ContainingClassMustBeSealed,
 			ContainingClassInstanceMembersMustBePrivate,
 			ContainingClassMustBeStatic,
+			StaticHandlerCouldBeSealed,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -293,6 +306,14 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		AnalyzeAccessibility(context, method);
 		AnalyzeReturnType(context, method);
 		AnalyzeCancellationToken(context, method);
+
+		context.ReportDiagnostic(
+			Diagnostic.Create(
+				StaticHandlerCouldBeSealed,
+				containerSymbol.Locations[0],
+				containerSymbol.Name
+			)
+		);
 
 		if (method.Parameters.Length == 0
 			|| (method.Parameters.Length == 1 && method.Parameters[0].Type.IsCancellationToken()))

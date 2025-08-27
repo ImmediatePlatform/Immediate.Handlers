@@ -21,7 +21,7 @@ public sealed partial class Tests
 			public static partial class Wrapper
 			{
 				[Handler]
-				public static class {|IHR0005:GetUsersQuery|}
+				public static class {|IHR0019:{|IHR0005:GetUsersQuery|}|}
 				{
 					public record Query;
 

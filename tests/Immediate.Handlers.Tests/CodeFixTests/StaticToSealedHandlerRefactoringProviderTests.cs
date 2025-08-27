@@ -1,12 +1,13 @@
+using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.CodeFixes;
 
 namespace Immediate.Handlers.Tests.CodeFixTests;
 
-public sealed class StaticToSealedHandlerRefactoringProviderTests
+public sealed class StaticToSealedHandlerCodeFixProviderTests
 {
 	[Fact]
 	public async Task RefactorOnHandlerClass() =>
-		await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, StaticToSealedHandlerCodeFixProvider>(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -17,7 +18,7 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 			public sealed class Dependency2;
 			
 			[Handler]
-			public static partial class {|Refactoring:DoSomething|}
+			public static partial class {|IHR0019:DoSomething|}
 			{
 				public sealed record Query;
 				public sealed record Response;
@@ -66,12 +67,13 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 				{
 				}
 			}
-			"""
+			""",
+			Helpers.DriverReferenceAssemblies.Normal
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
 	public async Task RefactorOnHandlerMethod() =>
-		await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, StaticToSealedHandlerCodeFixProvider>(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -82,12 +84,12 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 			public sealed class Dependency2;
 			
 			[Handler]
-			public static partial class DoSomething
+			public static partial class {|IHR0019:DoSomething|}
 			{
 				public sealed record Query;
 				public sealed record Response;
 
-				private static ValueTask<Response> {|Refactoring:HandleAsync|}(
+				private static ValueTask<Response> HandleAsync(
 					Query query,
 					Dependency1 dependency1,
 					Dependency2 dependency2,
@@ -131,12 +133,13 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 				{
 				}
 			}
-			"""
+			""",
+			Helpers.DriverReferenceAssemblies.Normal
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
 	public async Task RefactorWithNoDependencyParameters() =>
-		await CodeRefactoringTestHelper.CreateCodeRefactoringTest<StaticToSealedHandlerRefactoringProvider>(
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, StaticToSealedHandlerCodeFixProvider>(
 			"""
 			using System.Threading;
 			using System.Threading.Tasks;
@@ -144,7 +147,7 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 			namespace Immediate.Handlers.Shared;
 
 			[Handler]
-			public static partial class {|Refactoring:DoSomething|}
+			public static partial class {|IHR0019:DoSomething|}
 			{
 				public sealed record Query;
 				public sealed record Response;
@@ -178,6 +181,7 @@ public sealed class StaticToSealedHandlerRefactoringProviderTests
 					return new();
 				}
 			}
-			"""
+			""",
+			Helpers.DriverReferenceAssemblies.Normal
 		).RunAsync(TestContext.Current.CancellationToken);
 }

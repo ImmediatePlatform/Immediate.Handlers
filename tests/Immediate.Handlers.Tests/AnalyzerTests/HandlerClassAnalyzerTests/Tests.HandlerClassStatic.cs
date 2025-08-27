@@ -19,7 +19,7 @@ public sealed partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public partial class {|IHR0018:GetUsersQuery|}
+			public partial class {|IHR0019:{|IHR0018:GetUsersQuery|}|}
 			{
 				public record Query;
 
