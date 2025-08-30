@@ -25,9 +25,10 @@ internal static class ITypeSymbolExtensions
 		};
 
 	public static bool IsBehavior2(this ITypeSymbol typeSymbol) =>
-		typeSymbol is
+		typeSymbol is INamedTypeSymbol
 		{
-			MetadataName: "Behavior`2",
+			Arity: 2,
+			Name: "Behavior",
 			ContainingNamespace:
 			{
 				Name: "Shared",
@@ -50,7 +51,8 @@ internal static class ITypeSymbolExtensions
 	public static bool IsValueTask1(this ITypeSymbol typeSymbol) =>
 		typeSymbol is INamedTypeSymbol
 		{
-			MetadataName: "ValueTask`1",
+			Arity: 1,
+			Name: "ValueTask",
 			ContainingNamespace:
 			{
 				Name: "Tasks",
@@ -88,7 +90,8 @@ internal static class ITypeSymbolExtensions
 	public static bool IsIEquatable1(this ITypeSymbol typeSymbol) =>
 		typeSymbol is INamedTypeSymbol
 		{
-			MetadataName: "IEquatable`1",
+			Arity: 1,
+			Name: "IEquatable",
 			ContainingNamespace:
 			{
 				Name: "System",
@@ -133,7 +136,8 @@ internal static class ITypeSymbolExtensions
 	public static bool IsIHandler([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
 		typeSymbol is INamedTypeSymbol
 		{
-			MetadataName: "IHandler`2",
+			Arity: 2,
+			Name: "IHandler",
 			ContainingNamespace:
 			{
 				Name: "Shared",
