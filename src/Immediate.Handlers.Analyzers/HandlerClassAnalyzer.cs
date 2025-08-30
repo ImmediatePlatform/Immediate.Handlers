@@ -361,7 +361,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 				{
 					OriginalDefinition:
 					{
-						MetadataName: "ValueTask" or "ValueTask`1",
+						Arity: 0 or 1,
+						Name: "ValueTask",
 						ContainingNamespace:
 						{
 							Name: "Tasks",
