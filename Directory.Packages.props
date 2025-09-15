@@ -26,7 +26,7 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.7" />
     <PackageVersion Include="MinVer" Version="6.0.0" />
-    <PackageVersion Include="Scriban" Version="6.2.1" />
+    <PackageVersion Include="Scriban" Version="6.3.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="8.1.1" />
     <PackageVersion Include="System.Formats.Asn1" Version="9.0.7" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
