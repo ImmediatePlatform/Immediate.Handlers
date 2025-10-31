@@ -6,11 +6,11 @@ on:
     tags:
       - '**'
 
-permissions:
-  contents: write
-
 jobs:
   release:
+    permissions:
+      id-token: write # enable GitHub OIDC token issuance for this job
+      contents: write # enable github releases
 
     runs-on: ubuntu-latest
 
@@ -18,14 +18,14 @@ jobs:
     - uses: actions/checkout@v5
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: |
           8.0.x
           9.0.x
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-quality: 'preview'
         dotnet-version: |
@@ -38,8 +38,15 @@ jobs:
 
     - name: Package 
       run: dotnet pack -c Release --no-build --property:PackageOutputPath=../../nupkgs
+
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: viceroypenguin
+
     - name: Push to Nuget
-      run: dotnet nuget push "./nupkgs/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGETPUBLISHKEY }}
+      run: dotnet nuget push "./nupkgs/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ steps.login.outputs.NUGET_API_KEY }}
 
     - name: Create Release
       uses: ncipollo/release-action@v1
