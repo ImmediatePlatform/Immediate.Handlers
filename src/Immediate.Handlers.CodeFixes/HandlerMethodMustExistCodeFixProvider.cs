@@ -48,53 +48,77 @@ public sealed class HandlerMethodMustExistCodeFixProvider : CodeFixProvider
 			.OfType<RecordDeclarationSyntax>()
 			.FirstOrDefault(x =>
 				x.Identifier.Text.EndsWith("Query", StringComparison.Ordinal)
-				|| x.Identifier.Text.EndsWith("Command", StringComparison.Ordinal));
+				|| x.Identifier.Text.EndsWith("Command", StringComparison.Ordinal)
+			);
 
-		var methodDeclaration = MethodDeclaration(
+		var responseType = classDeclarationSyntax.Members
+			.OfType<RecordDeclarationSyntax>()
+			.FirstOrDefault(x => x.Identifier.Text.EndsWith("Response", StringComparison.Ordinal));
+
+		var methodDeclaration =
+			MethodDeclaration(
 				GenericName(
-						Identifier("ValueTask"))
+					Identifier("ValueTask")
+				)
 					.WithTypeArgumentList(
 						TypeArgumentList(
 							SingletonSeparatedList<TypeSyntax>(
-								PredefinedType(
-									Token(SyntaxKind.IntKeyword))))),
-				Identifier("HandleAsync"))
+								responseType is { }
+									? IdentifierName(responseType.Identifier.Text)
+									: PredefinedType(Token(SyntaxKind.IntKeyword))
+							)
+						)
+					),
+				Identifier("HandleAsync")
+			)
 			.WithModifiers(
 				TokenList(
-				[
-					Token(SyntaxKind.PrivateKeyword),
-					Token(SyntaxKind.StaticKeyword),
-				]))
+					classDeclarationSyntax.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword))
+						? [Token(SyntaxKind.PrivateKeyword), Token(SyntaxKind.StaticKeyword)]
+						: [Token(SyntaxKind.PrivateKeyword)]
+				)
+			)
 			.WithParameterList(
 				ParameterList(
 					SeparatedList<ParameterSyntax>(
 						new SyntaxNodeOrToken[]
 						{
-							Parameter(
-									Identifier(
-										TriviaList(),
-										SyntaxKind.UnderscoreToken,
-										"_",
-										"_",
-										TriviaList()))
+							Parameter(Identifier(requestType?.Identifier.Text.ToCamelCase() ?? "_"))
 								.WithType(
-									IdentifierName(requestType?.Identifier.Text ?? "object")),
+									requestType is { }
+										? IdentifierName(requestType.Identifier.Text)
+										: PredefinedType(Token(SyntaxKind.ObjectKeyword))
+								),
+
 							Token(SyntaxKind.CommaToken),
-							Parameter(
-									Identifier("token"))
+
+							Parameter(Identifier("token"))
 								.WithType(
-									IdentifierName("CancellationToken")),
-						})))
+									IdentifierName("CancellationToken")
+								),
+						}
+					)
+				)
+			)
 			.WithBody(
 				Block(
 					SingletonList<StatementSyntax>(
 						ReturnStatement(
-							LiteralExpression(
-								SyntaxKind.DefaultLiteralExpression)))))
+							LiteralExpression(SyntaxKind.DefaultLiteralExpression)
+						)
+					)
+				)
+			)
 			.WithAdditionalAnnotations(Formatter.Annotation);
 
 		var newClassDecl = classDeclarationSyntax.AddMembers(methodDeclaration);
 
 		return Task.FromResult(document.WithSyntaxRoot(root.ReplaceNode(classDeclarationSyntax, newClassDecl)));
 	}
+}
+
+file static class Extensions
+{
+	public static string ToCamelCase(this string s) =>
+		char.ToLowerInvariant(s[0]) + s[1..];
 }
