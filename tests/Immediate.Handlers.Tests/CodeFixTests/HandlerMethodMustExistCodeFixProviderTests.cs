@@ -8,7 +8,7 @@ namespace Immediate.Handlers.Tests.CodeFixTests;
 public sealed partial class HandlerMethodMustExistCodeFixProviderTests
 {
 	[Fact]
-	public async Task HandleMethodDoesNotExist() =>
+	public async Task HandleMethodDoesNotExistOnStaticClass() =>
 		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerMethodMustExistCodeFixProvider>(
 			"""
 			using System;
@@ -41,7 +41,50 @@ public sealed partial class HandlerMethodMustExistCodeFixProviderTests
 			{
 				public record Query;
 
-				private static ValueTask<int> {|IHR0019:HandleAsync|}(Query _, CancellationToken token)
+				private static ValueTask<int> HandleAsync(Query query, CancellationToken token)
+				{
+					return default;
+				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync(TestContext.Current.CancellationToken);
+
+	[Fact]
+	public async Task HandleMethodDoesNotExistOnSealedClass() =>
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerMethodMustExistCodeFixProvider>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public sealed class {|IHR0001:GetUsersQuery|}
+			{
+				public record Response;
+			}
+			""",
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public sealed class GetUsersQuery
+			{
+				public record Response;
+
+				private ValueTask<Response> HandleAsync(object _, CancellationToken token)
 				{
 					return default;
 				}

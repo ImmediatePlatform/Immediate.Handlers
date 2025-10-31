@@ -24,7 +24,7 @@ public partial class Tests
 			{
 				public record Query;
 
-				private static ValueTask<int> {|IHR0019:HandleAsync|}(
+				private static ValueTask<int> HandleAsync(
 					Query _,
 					CancellationToken token)
 				{
