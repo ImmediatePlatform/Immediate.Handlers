@@ -240,8 +240,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		AnalyzeReturnType(context, method);
 		AnalyzeCancellationToken(context, method);
 
-		if (method.Parameters.Length == 0
-			|| (method.Parameters.Length == 1 && method.Parameters[0].Type.IsCancellationToken()))
+		if (method.Parameters is [] or [{ Type.IsCancellationToken: true }])
 		{
 			context.ReportDiagnostic(
 				Diagnostic.Create(
@@ -252,7 +251,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			);
 		}
 		else if (method.Parameters.Length > 2
-			|| (method.Parameters.Length > 1 && !method.Parameters[^1].Type.IsCancellationToken()))
+			|| (method.Parameters.Length > 1 && !method.Parameters[^1].Type.IsCancellationToken))
 		{
 			context.ReportDiagnostic(
 				Diagnostic.Create(
@@ -315,8 +314,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			)
 		);
 
-		if (method.Parameters.Length == 0
-			|| (method.Parameters.Length == 1 && method.Parameters[0].Type.IsCancellationToken()))
+		if (method.Parameters is [] or [{ Type.IsCancellationToken: true }])
 		{
 			context.ReportDiagnostic(
 				Diagnostic.Create(
@@ -363,19 +361,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 					{
 						Arity: 0 or 1,
 						Name: "ValueTask",
-						ContainingNamespace:
-						{
-							Name: "Tasks",
-							ContainingNamespace:
-							{
-								Name: "Threading",
-								ContainingNamespace:
-								{
-									Name: "System",
-									ContainingNamespace.IsGlobalNamespace: true
-								}
-							}
-						}
+						ContainingNamespace.IsSystemThreadingTasks: true,
 					}
 				}
 			}
@@ -396,7 +382,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		if (method.Parameters.Length == 0)
 			return;
 
-		if (!method.Parameters[^1].Type.IsCancellationToken())
+		if (!method.Parameters[^1].Type.IsCancellationToken)
 		{
 			context.ReportDiagnostic(
 				Diagnostic.Create(
