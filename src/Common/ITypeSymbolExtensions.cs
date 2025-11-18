@@ -5,89 +5,51 @@ namespace Immediate.Handlers;
 
 internal static class ITypeSymbolExtensions
 {
-	public static bool IsHandlerAttribute(this ITypeSymbol? typeSymbol) =>
-		typeSymbol is
+	public static bool IsHandlerAttribute([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
+		typeSymbol is INamedTypeSymbol
 		{
+			Arity: 0,
 			Name: "HandlerAttribute",
-			ContainingNamespace:
-			{
-				Name: "Shared",
-				ContainingNamespace:
-				{
-					Name: "Handlers",
-					ContainingNamespace:
-					{
-						Name: "Immediate",
-						ContainingNamespace.IsGlobalNamespace: true,
-					},
-				},
-			},
+			ContainingNamespace.IsImmediateHandlersShared: true,
 		};
 
-	public static bool IsBehavior2(this ITypeSymbol typeSymbol) =>
+	public static bool IsBehavior2([NotNullWhen(true)] this ITypeSymbol typeSymbol) =>
 		typeSymbol is INamedTypeSymbol
 		{
 			Arity: 2,
 			Name: "Behavior",
-			ContainingNamespace:
-			{
-				Name: "Shared",
-				ContainingNamespace:
-				{
-					Name: "Handlers",
-					ContainingNamespace:
-					{
-						Name: "Immediate",
-						ContainingNamespace.IsGlobalNamespace: true,
-					},
-				},
-			},
+			ContainingNamespace.IsImmediateHandlersShared: true,
 		};
 
-	public static bool ImplementsBehavior(this INamedTypeSymbol typeSymbol) =>
+	public static bool IsBehaviorsAttribute([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
+		typeSymbol is INamedTypeSymbol
+		{
+			Arity: 0,
+			Name: "BehaviorsAttribute",
+			ContainingNamespace.IsImmediateHandlersShared: true,
+		};
+
+	public static bool IsIHandler([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
+		typeSymbol is INamedTypeSymbol
+		{
+			Arity: 2,
+			Name: "IHandler",
+			ContainingNamespace.IsImmediateHandlersShared: true,
+		};
+
+	public static bool ImplementsBehavior([NotNullWhen(true)] this INamedTypeSymbol typeSymbol) =>
 		typeSymbol.IsBehavior2()
 		|| (typeSymbol.BaseType is not null && ImplementsBehavior(typeSymbol.BaseType.OriginalDefinition));
 
-	public static bool IsValueTask1(this ITypeSymbol typeSymbol) =>
+	public static bool IsValueTask1([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
 		typeSymbol is INamedTypeSymbol
 		{
 			Arity: 1,
 			Name: "ValueTask",
-			ContainingNamespace:
-			{
-				Name: "Tasks",
-				ContainingNamespace:
-				{
-					Name: "Threading",
-					ContainingNamespace:
-					{
-						Name: "System",
-						ContainingNamespace.IsGlobalNamespace: true
-					}
-				}
-			}
+			ContainingNamespace.IsSystemThreadingTasks: true,
 		};
 
-	public static bool IsValueTask(this ITypeSymbol typeSymbol) =>
-		typeSymbol is INamedTypeSymbol
-		{
-			Name: "ValueTask",
-			ContainingNamespace:
-			{
-				Name: "Tasks",
-				ContainingNamespace:
-				{
-					Name: "Threading",
-					ContainingNamespace:
-					{
-						Name: "System",
-						ContainingNamespace.IsGlobalNamespace: true
-					}
-				}
-			}
-		};
-
-	public static bool IsIEquatable1(this ITypeSymbol typeSymbol) =>
+	public static bool IsIEquatable1([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
 		typeSymbol is INamedTypeSymbol
 		{
 			Arity: 1,
@@ -99,26 +61,43 @@ internal static class ITypeSymbolExtensions
 			},
 		};
 
-	public static bool IsCancellationToken(this ITypeSymbol? typeSymbol) =>
-		typeSymbol is INamedTypeSymbol
-		{
-			Name: "CancellationToken",
-			ContainingNamespace:
+	extension(ITypeSymbol? typeSymbol)
+	{
+		public bool IsCancellationToken =>
+			typeSymbol is INamedTypeSymbol
 			{
-				Name: "Threading",
+				Name: "CancellationToken",
 				ContainingNamespace:
 				{
-					Name: "System",
-					ContainingNamespace.IsGlobalNamespace: true
+					Name: "Threading",
+					ContainingNamespace:
+					{
+						Name: "System",
+						ContainingNamespace.IsGlobalNamespace: true
+					}
 				}
-			}
-		};
+			};
+	}
 
-	public static bool IsBehaviorsAttribute(this ITypeSymbol? typeSymbol) =>
-		typeSymbol is
-		{
-			Name: "BehaviorsAttribute",
-			ContainingNamespace:
+	extension(INamespaceSymbol namespaceSymbol)
+	{
+		public bool IsSystemThreadingTasks =>
+			namespaceSymbol is
+			{
+				Name: "Tasks",
+				ContainingNamespace:
+				{
+					Name: "Threading",
+					ContainingNamespace:
+					{
+						Name: "System",
+						ContainingNamespace.IsGlobalNamespace: true
+					}
+				},
+			};
+
+		public bool IsImmediateHandlersShared =>
+			namespaceSymbol is
 			{
 				Name: "Shared",
 				ContainingNamespace:
@@ -130,26 +109,6 @@ internal static class ITypeSymbolExtensions
 						ContainingNamespace.IsGlobalNamespace: true,
 					},
 				},
-			},
-		};
-
-	public static bool IsIHandler([NotNullWhen(true)] this ITypeSymbol? typeSymbol) =>
-		typeSymbol is INamedTypeSymbol
-		{
-			Arity: 2,
-			Name: "IHandler",
-			ContainingNamespace:
-			{
-				Name: "Shared",
-				ContainingNamespace:
-				{
-					Name: "Handlers",
-					ContainingNamespace:
-					{
-						Name: "Immediate",
-						ContainingNamespace.IsGlobalNamespace: true,
-					},
-				},
-			},
-		};
+			};
+	}
 }

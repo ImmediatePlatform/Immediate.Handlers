@@ -39,19 +39,7 @@ internal static class TransformHandler
 						{
 							Arity: 0 or 1,
 							Name: "ValueTask",
-							ContainingNamespace:
-							{
-								Name: "Tasks",
-								ContainingNamespace:
-								{
-									Name: "Threading",
-									ContainingNamespace:
-									{
-										Name: "System",
-										ContainingNamespace.IsGlobalNamespace: true
-									}
-								}
-							}
+							ContainingNamespace.IsSystemThreadingTasks: true,
 						}
 					}
 				}
@@ -66,7 +54,7 @@ internal static class TransformHandler
 		var requestType = BuildGenericType(handleMethod.Parameters[0].Type);
 		var isStatic = handleMethod.IsStatic;
 		var useToken = handleMethod.Parameters[^1]
-			.Type.IsCancellationToken();
+			.Type.IsCancellationToken;
 
 		var isParameterCountValid =
 			(isStatic, useToken) switch
