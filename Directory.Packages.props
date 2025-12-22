@@ -22,8 +22,8 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing" Version="1.1.2" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
     <PackageVersion Include="MinVer" Version="6.0.0" />
     <PackageVersion Include="Scriban" Version="6.5.2" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="8.1.1" />
