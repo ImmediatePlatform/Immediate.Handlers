@@ -263,7 +263,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.GetExecutingAssembly()
 			.GetManifestResourceStream(
 				$"Immediate.Handlers.Generators.Templates.{name}.sbntxt"
-			)!;
+			);
 
 		using var reader = new StreamReader(stream);
 		return Template.Parse(reader.ReadToEnd());
