@@ -51,8 +51,8 @@ public sealed class MTimingBehavior<TRequest, TResponse>
 
 	async ValueTask<TResponse> Mediator.IPipelineBehavior<TRequest, TResponse>.Handle(
 		TRequest message,
-		CancellationToken cancellationToken,
-		Mediator.MessageHandlerDelegate<TRequest, TResponse> next)
+		Mediator.MessageHandlerDelegate<TRequest, TResponse> next,
+		CancellationToken cancellationToken)
 	{
 		var sw = Stopwatch.StartNew();
 		var response = await next(message, cancellationToken);
@@ -217,42 +217,42 @@ public class RequestBenchmarks
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_ImmediateStaticHandler()
 	{
-		return _immediateStaticHandler!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateStaticHandler.HandleAsync(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_ImmediateSealedHandler()
 	{
-		return _immediateSealedHandler!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateSealedHandler.HandleAsync(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_ImmediateHandler_Abstraction()
 	{
-		return _immediateHandlerAbstraction!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateHandlerAbstraction.HandleAsync(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public Task<SomeResponse> SendRequest_MediatR()
 	{
-		return _mediatr!.Send(_request!, CancellationToken.None);
+		return _mediatr.Send(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_IMediator()
 	{
-		return _mediator!.Send(_request!, CancellationToken.None);
+		return _mediator.Send(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_Mediator()
 	{
-		return _concreteMediator!.Send(_request!, CancellationToken.None);
+		return _concreteMediator.Send(_request, CancellationToken.None);
 	}
 
 	[Benchmark(Baseline = true)]
 	public ValueTask<SomeResponse> SendRequest_Baseline()
 	{
-		return _handler!.HandleAsync(_request!, CancellationToken.None);
+		return _handler.HandleAsync(_request, CancellationToken.None);
 	}
 }

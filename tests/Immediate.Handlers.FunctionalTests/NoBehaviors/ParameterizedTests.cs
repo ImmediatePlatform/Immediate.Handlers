@@ -17,7 +17,7 @@ public static partial class NoBehaviorParameterizedOneAdder
 	}
 }
 
-public record AddendProvider(int Addend);
+public sealed record AddendProvider(int Addend);
 
 public sealed class ParameterizedTests
 {

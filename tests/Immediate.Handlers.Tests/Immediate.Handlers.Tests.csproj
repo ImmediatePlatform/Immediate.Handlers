@@ -14,7 +14,6 @@
 	<PackageReference Include="Basic.Reference.Assemblies.Net80" />
 	<PackageReference Include="coverlet.collector" PrivateAssets="All" />
 	<PackageReference Include="coverlet.msbuild" PrivateAssets="All" />
-	<PackageReference Include="GitHubActionsTestLogger" PrivateAssets="All" />
 	<PackageReference Include="Microsoft.CodeAnalysis.Common" VersionOverride="4.9.2" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="4.9.2" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" />
@@ -24,7 +23,6 @@
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" VersionOverride="8.0.1" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" VersionOverride="8.0.2" />
 	<PackageReference Include="Scriban" />
-	<PackageReference Include="System.Formats.Asn1" />
 	<PackageReference Include="Verify.SourceGenerators" />
 	<PackageReference Include="Verify.XunitV3" />
 	<PackageReference Include="xunit.v3" />

@@ -5,13 +5,12 @@
   
   <ItemGroup>
     <PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.6.0" />
-    <PackageVersion Include="BenchmarkDotNet" Version="0.15.2" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
     <PackageVersion Include="DotNet.ReproducibleBuilds" Version="1.2.39" />
-    <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
-    <PackageVersion Include="Mediator.Abstractions" Version="2.1.7" />
-    <PackageVersion Include="Mediator.SourceGenerator" Version="2.1.7" />
+    <PackageVersion Include="Mediator.Abstractions" Version="3.0.1" />
+    <PackageVersion Include="Mediator.SourceGenerator" Version="3.0.1" />
     <PackageVersion Include="MediatR" Version="12.5.0" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
@@ -26,17 +25,16 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.7" />
     <PackageVersion Include="MinVer" Version="6.0.0" />
-    <PackageVersion Include="Scriban" Version="6.5.0" />
+    <PackageVersion Include="Scriban" Version="6.5.2" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="8.1.1" />
-    <PackageVersion Include="System.Formats.Asn1" Version="9.0.7" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-	<PackageVersion Include="Verify.XunitV3" Version="30.7.3" />
-    <PackageVersion Include="xunit.v3" Version="3.0.1" />
+	<PackageVersion Include="Verify.XunitV3" Version="31.9.0" />
+    <PackageVersion Include="xunit.v3" Version="3.2.1" />
   </ItemGroup>
   
   <ItemGroup>
 	<GlobalPackageReference Include="PolySharp" Version="1.15.0" />
-	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.212" />
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.264" />
   </ItemGroup>
 </Project>
