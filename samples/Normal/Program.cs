@@ -21,7 +21,6 @@ app.MapGet(
 		"/weatherforecast",
 		async (GetWeatherForecast.Handler handler, [AsParameters] GetWeatherForecast.Query query) => await handler.HandleAsync(query)
 	)
-	.WithName("GetWeatherForecast")
-	.WithOpenApi();
+	.WithName("GetWeatherForecast");
 
 app.Run();

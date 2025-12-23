@@ -42,6 +42,26 @@ public sealed class IhTimingBehavior<TRequest, TResponse>
 	}
 }
 
+[Foundatio.Mediator.Middleware]
+public sealed class FTimingMiddleware
+{
+	public TimeSpan Elapsed { get; private set; }
+
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
+	public Stopwatch Before(SomeRequest request)
+	{
+		return Stopwatch.StartNew();
+	}
+
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+	[SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Handled by Mediator")]
+	public void Finally(SomeRequest request, Stopwatch stopwatch)
+	{
+		Elapsed = stopwatch.Elapsed;
+	}
+}
+
 public sealed class MTimingBehavior<TRequest, TResponse>
 	: Mediator.IPipelineBehavior<TRequest, TResponse>,
 	  MediatR.IPipelineBehavior<TRequest, TResponse>
@@ -110,6 +130,16 @@ public sealed partial class TraditionalExample(SomeService service)
 	) => await service.ServiceHandler(request, cancellationToken);
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class FoundatioHandler(SomeService service)
+{
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+	public async ValueTask<SomeResponse> Handle(
+		SomeRequest request,
+		CancellationToken cancellationToken
+	) => await service.ServiceHandler(request, cancellationToken);
+}
+
 [Handler]
 [Behaviors(
 	typeof(IhTimingBehavior<,>)
@@ -135,6 +165,7 @@ public sealed partial class SealedIhExample(SomeService service)
 	) => await service.ServiceHandler(request, cancellationToken);
 }
 
+[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net80)]
 [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net90)]
 [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net10_0)]
 [MemoryDiagnoser]
@@ -150,6 +181,7 @@ public class RequestBenchmarks
 	private readonly Mediator.IMediator _mediator;
 	private readonly Mediator.Mediator _concreteMediator;
 	private readonly MediatR.IMediator _mediatr;
+	private readonly Foundatio.Mediator.IMediator _foundatioMediator;
 	private readonly StaticIhExample.Handler _immediateStaticHandler;
 	private readonly SealedIhExample.Handler _immediateSealedHandler;
 	private readonly IHandler<SomeRequest, SomeResponse> _immediateHandlerAbstraction;
@@ -182,6 +214,8 @@ public class RequestBenchmarks
 		_ = services.AddScoped<DirectTimingBehavior>();
 		_ = services.AddScoped<TraditionalExample>();
 
+		_ = Foundatio.Mediator.MediatorExtensions.AddMediator(services);
+
 		_serviceProvider = services.BuildServiceProvider();
 
 		_serviceScope = _serviceProvider.CreateScope();
@@ -190,6 +224,7 @@ public class RequestBenchmarks
 		_mediator = _serviceProvider.GetRequiredService<Mediator.IMediator>();
 		_concreteMediator = _serviceProvider.GetRequiredService<Mediator.Mediator>();
 		_mediatr = _serviceProvider.GetRequiredService<MediatR.IMediator>();
+		_foundatioMediator = _serviceProvider.GetRequiredService<Foundatio.Mediator.IMediator>();
 		_immediateStaticHandler = _serviceProvider.GetRequiredService<StaticIhExample.Handler>();
 		_immediateSealedHandler = _serviceProvider.GetRequiredService<SealedIhExample.Handler>();
 		_handler = _serviceProvider.GetRequiredService<DirectTimingBehavior>();
@@ -248,6 +283,12 @@ public class RequestBenchmarks
 	public ValueTask<SomeResponse> SendRequest_Mediator()
 	{
 		return _concreteMediator.Send(_request, CancellationToken.None);
+	}
+
+	[Benchmark]
+	public ValueTask<SomeResponse> SendRequest_Foundatio()
+	{
+		return _foundatioMediator.InvokeAsync<SomeResponse>(_request, CancellationToken.None);
 	}
 
 	[Benchmark(Baseline = true)]
