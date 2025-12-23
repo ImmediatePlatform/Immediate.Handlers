@@ -215,80 +215,193 @@ builder.Services.AddSwaggerGen( options =>
 
 ## Performance Comparisons
 
-All performance benchmarks reported use the following environment:
-```
-// * Summary *
+#### Offerings:
 
-BenchmarkDotNet v0.15.2, Windows 11 (10.0.26100.4946/24H2/2024Update/HudsonValley)
-12th Gen Intel Core i7-12700H 2.30GHz, 1 CPU, 20 logical and 14 physical cores
-.NET SDK 10.0.100-preview.6.25358.103
-  [Host]    : .NET 9.0.8 (9.0.825.36511), X64 RyuJIT AVX2
-  .NET 10.0 : .NET 10.0.0 (10.0.25.35903), X64 RyuJIT AVX2
-  .NET 9.0  : .NET 9.0.8 (9.0.825.36511), X64 RyuJIT AVX2
-```
+This performance comparison covers the following popular mediator/command-dispatch libraries:
+* Immediate.Handlers (`SendRequest_ImmediateStaticHandler`, `SendRequest_ImmediateHandler_Abstraction`, `SendRequest_ImmediateSealedHandler`)
+* [martinothamar/Mediator v3.0.1](https://github.com/martinothamar/Mediator) (`SendRequest_IMediator`, `SendRequest_Mediator`)
+* [MediatR v12.5.0](https://github.com/LuckyPennySoftware/MediatR) (`SendRequest_MediatR`)
+* [Foundatio.Mediator](https://github.com/FoundatioFx/Foundatio.Mediator) (`SendRequest_Foundatio`)
 
 #### [Benchmarks.Simple](./benchmarks/Benchmark.Simple)
 
 This benchmark tests the various mediator implementations with a single request/response handler.
 
-| Method                                   | Runtime   | Mean       | Error     | Ratio | Rank | Allocated |
-|----------------------------------------- |---------- |-----------:|----------:|------:|-----:|----------:|
-| SendRequest_Baseline                     | .NET 10.0 |  0.6939 ns | 0.0156 ns |  1.00 |    1 |         - |
-| SendRequest_ImmediateStaticHandler       | .NET 10.0 | 10.7934 ns | 0.1006 ns | 15.56 |    2 |         - |
-| SendRequest_ImmediateHandler_Abstraction | .NET 10.0 | 11.1127 ns | 0.2450 ns | 16.02 |    2 |         - |
-| SendRequest_ImmediateSealedHandler       | .NET 10.0 | 11.7686 ns | 0.0473 ns | 16.97 |    2 |         - |
-| SendRequest_Mediator                     | .NET 10.0 | 22.7844 ns | 0.0959 ns | 32.85 |    3 |         - |
-| SendRequest_IMediator                    | .NET 10.0 | 25.8943 ns | 0.0659 ns | 37.33 |    4 |         - |
-| SendRequest_MediatR                      | .NET 10.0 | 42.2888 ns | 0.8504 ns | 60.97 |    5 |     200 B |
-|                                          |           |            |           |       |      |           |
-| SendRequest_Baseline                     | .NET 9.0  |  0.7045 ns | 0.0546 ns |  1.01 |    1 |         - |
-| SendRequest_ImmediateStaticHandler       | .NET 9.0  | 11.1561 ns | 0.0695 ns | 15.94 |    2 |         - |
-| SendRequest_ImmediateSealedHandler       | .NET 9.0  | 11.1793 ns | 0.0624 ns | 15.97 |    2 |         - |
-| SendRequest_ImmediateHandler_Abstraction | .NET 9.0  | 14.2575 ns | 0.0685 ns | 20.37 |    3 |         - |
-| SendRequest_Mediator                     | .NET 9.0  | 22.5723 ns | 0.1380 ns | 32.25 |    4 |         - |
-| SendRequest_IMediator                    | .NET 9.0  | 29.5758 ns | 0.6365 ns | 42.26 |    5 |         - |
-| SendRequest_MediatR                      | .NET 9.0  | 51.0341 ns | 1.0445 ns | 72.92 |    6 |     264 B |
+| Method                                   | Mean        | Error     | Ratio  | Rank | Allocated |
+|----------------------------------------- |------------:|----------:|-------:|-----:|----------:|
+| SendRequest_Baseline                     |   0.6851 ns | 0.0225 ns |   1.00 |    1 |         - |
+| SendRequest_ImmediateStaticHandler       |  10.8676 ns | 0.0828 ns |  15.88 |    2 |         - |
+| SendRequest_ImmediateHandler_Abstraction |  11.6256 ns | 0.0559 ns |  16.98 |    3 |         - |
+| SendRequest_ImmediateSealedHandler       |  11.6731 ns | 0.1154 ns |  17.05 |    3 |         - |
+| SendRequest_IMediator                    |  37.3484 ns | 0.1002 ns |  54.56 |    4 |      64 B |
+| SendRequest_Mediator                     |  38.6042 ns | 0.1169 ns |  56.39 |    5 |      64 B |
+| SendRequest_MediatR                      |  39.8987 ns | 0.1002 ns |  58.28 |    6 |     200 B |
+| SendRequest_Foundatio                    |  86.5151 ns | 0.4276 ns | 126.38 |    7 |     352 B |
+
+<details>
+<summary>Full Details</summary>
+
+```
+// * Summary *
+
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7462/25H2/2025Update/HudsonValley2)
+12th Gen Intel Core i7-12700H 2.30GHz, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 10.0.101
+  [Host]    : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  .NET 10.0 : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  .NET 8.0  : .NET 8.0.22 (8.0.22, 8.0.2225.52707), X64 RyuJIT x86-64-v3
+  .NET 9.0  : .NET 9.0.11 (9.0.11, 9.0.1125.51716), X64 RyuJIT x86-64-v3
+
+```
+| Method                                   | Job       | Runtime   | Mean        | Error     | StdDev    | Ratio  | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
+|----------------------------------------- |---------- |---------- |------------:|----------:|----------:|-------:|--------:|-----:|-------:|----------:|------------:|
+| SendRequest_Baseline                     | .NET 10.0 | .NET 10.0 |   0.6851 ns | 0.0225 ns | 0.0199 ns |   1.00 |    0.04 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateStaticHandler       | .NET 10.0 | .NET 10.0 |  10.8676 ns | 0.0828 ns | 0.0775 ns |  15.88 |    0.46 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateHandler_Abstraction | .NET 10.0 | .NET 10.0 |  11.6256 ns | 0.0559 ns | 0.0495 ns |  16.98 |    0.48 |    3 |      - |         - |          NA |
+| SendRequest_ImmediateSealedHandler       | .NET 10.0 | .NET 10.0 |  11.6731 ns | 0.1154 ns | 0.1023 ns |  17.05 |    0.50 |    3 |      - |         - |          NA |
+| SendRequest_IMediator                    | .NET 10.0 | .NET 10.0 |  37.3484 ns | 0.1002 ns | 0.0888 ns |  54.56 |    1.55 |    4 | 0.0051 |      64 B |          NA |
+| SendRequest_Mediator                     | .NET 10.0 | .NET 10.0 |  38.6042 ns | 0.1169 ns | 0.1036 ns |  56.39 |    1.60 |    5 | 0.0051 |      64 B |          NA |
+| SendRequest_MediatR                      | .NET 10.0 | .NET 10.0 |  39.8987 ns | 0.1002 ns | 0.0888 ns |  58.28 |    1.65 |    6 | 0.0159 |     200 B |          NA |
+| SendRequest_Foundatio                    | .NET 10.0 | .NET 10.0 |  86.5151 ns | 0.4276 ns | 0.3791 ns | 126.38 |    3.61 |    7 | 0.0280 |     352 B |          NA |
+|                                          |           |           |             |           |           |        |         |      |        |           |             |
+| SendRequest_Baseline                     | .NET 8.0  | .NET 8.0  |   0.6502 ns | 0.0426 ns | 0.0377 ns |   1.00 |    0.08 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateHandler_Abstraction | .NET 8.0  | .NET 8.0  |  14.3593 ns | 0.0907 ns | 0.0848 ns |  22.16 |    1.30 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateSealedHandler       | .NET 8.0  | .NET 8.0  |  14.8397 ns | 0.0965 ns | 0.0903 ns |  22.90 |    1.35 |    3 |      - |         - |          NA |
+| SendRequest_ImmediateStaticHandler       | .NET 8.0  | .NET 8.0  |  15.5450 ns | 0.0900 ns | 0.0798 ns |  23.99 |    1.41 |    4 |      - |         - |          NA |
+| SendRequest_Mediator                     | .NET 8.0  | .NET 8.0  |  48.1535 ns | 0.4128 ns | 0.3659 ns |  74.30 |    4.38 |    5 | 0.0051 |      64 B |          NA |
+| SendRequest_IMediator                    | .NET 8.0  | .NET 8.0  |  55.4503 ns | 0.2320 ns | 0.2170 ns |  85.56 |    5.01 |    6 | 0.0051 |      64 B |          NA |
+| SendRequest_MediatR                      | .NET 8.0  | .NET 8.0  |  71.3230 ns | 0.6574 ns | 0.6149 ns | 110.06 |    6.50 |    7 | 0.0248 |     312 B |          NA |
+| SendRequest_Foundatio                    | .NET 8.0  | .NET 8.0  | 104.8854 ns | 0.4166 ns | 0.3897 ns | 161.84 |    9.48 |    8 | 0.0280 |     352 B |          NA |
+|                                          |           |           |             |           |           |        |         |      |        |           |             |
+| SendRequest_Baseline                     | .NET 9.0  | .NET 9.0  |   0.6732 ns | 0.0256 ns | 0.0239 ns |   1.00 |    0.05 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateSealedHandler       | .NET 9.0  | .NET 9.0  |  11.4933 ns | 0.0323 ns | 0.0270 ns |  17.09 |    0.61 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateStaticHandler       | .NET 9.0  | .NET 9.0  |  11.5968 ns | 0.0403 ns | 0.0377 ns |  17.25 |    0.62 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateHandler_Abstraction | .NET 9.0  | .NET 9.0  |  14.3908 ns | 0.0522 ns | 0.0488 ns |  21.40 |    0.77 |    3 |      - |         - |          NA |
+| SendRequest_Mediator                     | .NET 9.0  | .NET 9.0  |  47.1833 ns | 0.2891 ns | 0.2705 ns |  70.17 |    2.54 |    4 | 0.0051 |      64 B |          NA |
+| SendRequest_MediatR                      | .NET 9.0  | .NET 9.0  |  50.8848 ns | 0.7355 ns | 0.6141 ns |  75.68 |    2.84 |    5 | 0.0210 |     264 B |          NA |
+| SendRequest_IMediator                    | .NET 9.0  | .NET 9.0  |  51.0589 ns | 0.1456 ns | 0.1291 ns |  75.94 |    2.72 |    5 | 0.0051 |      64 B |          NA |
+| SendRequest_Foundatio                    | .NET 9.0  | .NET 9.0  |  94.4583 ns | 0.4820 ns | 0.4509 ns | 140.48 |    5.06 |    6 | 0.0280 |     352 B |          NA |
+
+</details>
 
 #### [Benchmarks.Large](./benchmarks/Benchmark.Large)
 
 This benchmark tests the various mediator implementations in the face of 999 request/response handlers.
 
-| Method                                   | Runtime   | Mean        | Error     | Ratio  | Rank | Allocated |
-|----------------------------------------- |---------- |------------:|----------:|-------:|-----:|----------:|
-| SendRequest_Baseline                     | .NET 10.0 |   0.5540 ns | 0.0175 ns |   1.00 |    1 |         - |
-| SendRequest_ImmediateSealedHandler       | .NET 10.0 |  11.1447 ns | 0.0632 ns |  20.13 |    2 |         - |
-| SendRequest_ImmediateHandler_Abstraction | .NET 10.0 |  11.8685 ns | 0.0499 ns |  21.44 |    3 |         - |
-| SendRequest_ImmediateStaticHandler       | .NET 10.0 |  12.7938 ns | 0.0772 ns |  23.11 |    4 |         - |
-| SendRequest_Mediator                     | .NET 10.0 |  22.6308 ns | 0.0894 ns |  40.89 |    5 |         - |
-| SendRequest_MediatR                      | .NET 10.0 |  42.3911 ns | 0.3226 ns |  76.59 |    6 |     200 B |
-| SendRequest_IMediator                    | .NET 10.0 | 423.9941 ns | 2.0621 ns | 766.00 |    7 |         - |
-|                                          |           |             |           |        |      |           |
-| SendRequest_Baseline                     | .NET 9.0  |   0.9383 ns | 0.0184 ns |   1.00 |    1 |         - |
-| SendRequest_ImmediateSealedHandler       | .NET 9.0  |  11.1246 ns | 0.0463 ns |  11.86 |    2 |         - |
-| SendRequest_ImmediateStaticHandler       | .NET 9.0  |  11.1377 ns | 0.0969 ns |  11.87 |    2 |         - |
-| SendRequest_ImmediateHandler_Abstraction | .NET 9.0  |  14.0591 ns | 0.0555 ns |  14.99 |    3 |         - |
-| SendRequest_Mediator                     | .NET 9.0  |  22.3005 ns | 0.0420 ns |  23.77 |    4 |         - |
-| SendRequest_MediatR                      | .NET 9.0  |  49.7489 ns | 0.3809 ns |  53.03 |    5 |     264 B |
-| SendRequest_IMediator                    | .NET 9.0  | 442.8573 ns | 4.3888 ns | 472.08 |    6 |         - |
+| Method                                   | Mean        | Error     | Ratio  | Rank | Allocated |
+|----------------------------------------- |------------:|----------:|-------:|-----:|----------:|
+| SendRequest_Baseline                     |   0.7078 ns | 0.0308 ns |   1.00 |    1 |         - |
+| SendRequest_ImmediateStaticHandler       |   9.9652 ns | 0.1403 ns |  14.10 |    2 |         - |
+| SendRequest_ImmediateHandler_Abstraction |  10.2138 ns | 0.0522 ns |  14.45 |    2 |         - |
+| SendRequest_ImmediateSealedHandler       |  11.1913 ns | 0.0541 ns |  15.84 |    3 |         - |
+| SendRequest_MediatR                      |  46.1988 ns | 0.4149 ns |  65.38 |    4 |     200 B |
+| SendRequest_IMediator                    |  48.4692 ns | 0.2277 ns |  68.59 |    5 |      64 B |
+| SendRequest_Mediator                     |  53.6276 ns | 0.1591 ns |  75.89 |    6 |      64 B |
+| SendRequest_Foundatio                    |  82.4081 ns | 0.4686 ns | 116.62 |    7 |     352 B |
+
+<details>
+<summary>Full Details</summary>
+
+```
+// * Summary *
+
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7462/25H2/2025Update/HudsonValley2)
+12th Gen Intel Core i7-12700H 2.30GHz, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 10.0.101
+  [Host]    : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  .NET 10.0 : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  .NET 8.0  : .NET 8.0.22 (8.0.22, 8.0.2225.52707), X64 RyuJIT x86-64-v3
+  .NET 9.0  : .NET 9.0.11 (9.0.11, 9.0.1125.51716), X64 RyuJIT x86-64-v3
+
+```
+| Method                                   | Job       | Runtime   | Mean        | Error     | StdDev    | Ratio  | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
+|----------------------------------------- |---------- |---------- |------------:|----------:|----------:|-------:|--------:|-----:|-------:|----------:|------------:|
+| SendRequest_Baseline                     | .NET 10.0 | .NET 10.0 |   0.7078 ns | 0.0308 ns | 0.0288 ns |   1.00 |    0.06 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateStaticHandler       | .NET 10.0 | .NET 10.0 |   9.9652 ns | 0.1403 ns | 0.1313 ns |  14.10 |    0.59 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateHandler_Abstraction | .NET 10.0 | .NET 10.0 |  10.2138 ns | 0.0522 ns | 0.0488 ns |  14.45 |    0.58 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateSealedHandler       | .NET 10.0 | .NET 10.0 |  11.1913 ns | 0.0541 ns | 0.0506 ns |  15.84 |    0.63 |    3 |      - |         - |          NA |
+| SendRequest_MediatR                      | .NET 10.0 | .NET 10.0 |  46.1988 ns | 0.4149 ns | 0.3881 ns |  65.38 |    2.64 |    4 | 0.0159 |     200 B |          NA |
+| SendRequest_IMediator                    | .NET 10.0 | .NET 10.0 |  48.4692 ns | 0.2277 ns | 0.2130 ns |  68.59 |    2.73 |    5 | 0.0051 |      64 B |          NA |
+| SendRequest_Mediator                     | .NET 10.0 | .NET 10.0 |  53.6276 ns | 0.1591 ns | 0.1328 ns |  75.89 |    3.01 |    6 | 0.0051 |      64 B |          NA |
+| SendRequest_Foundatio                    | .NET 10.0 | .NET 10.0 |  82.4081 ns | 0.4686 ns | 0.3913 ns | 116.62 |    4.65 |    7 | 0.0280 |     352 B |          NA |
+|                                          |           |           |             |           |           |        |         |      |        |           |             |
+| SendRequest_Baseline                     | .NET 8.0  | .NET 8.0  |   0.6788 ns | 0.0189 ns | 0.0167 ns |   1.00 |    0.03 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateStaticHandler       | .NET 8.0  | .NET 8.0  |  14.1657 ns | 0.2175 ns | 0.2035 ns |  20.88 |    0.59 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateHandler_Abstraction | .NET 8.0  | .NET 8.0  |  14.9028 ns | 0.1023 ns | 0.0906 ns |  21.97 |    0.56 |    3 |      - |         - |          NA |
+| SendRequest_ImmediateSealedHandler       | .NET 8.0  | .NET 8.0  |  14.9546 ns | 0.0720 ns | 0.0638 ns |  22.04 |    0.55 |    3 |      - |         - |          NA |
+| SendRequest_Mediator                     | .NET 8.0  | .NET 8.0  |  52.4831 ns | 0.1520 ns | 0.1422 ns |  77.36 |    1.92 |    4 | 0.0051 |      64 B |          NA |
+| SendRequest_IMediator                    | .NET 8.0  | .NET 8.0  |  64.1979 ns | 0.3041 ns | 0.2695 ns |  94.63 |    2.37 |    5 | 0.0050 |      64 B |          NA |
+| SendRequest_MediatR                      | .NET 8.0  | .NET 8.0  |  82.0569 ns | 0.3886 ns | 0.3635 ns | 120.95 |    3.04 |    6 | 0.0248 |     312 B |          NA |
+| SendRequest_Foundatio                    | .NET 8.0  | .NET 8.0  | 103.0772 ns | 0.6224 ns | 0.5822 ns | 151.94 |    3.85 |    7 | 0.0280 |     352 B |          NA |
+|                                          |           |           |             |           |           |        |         |      |        |           |             |
+| SendRequest_Baseline                     | .NET 9.0  | .NET 9.0  |   0.6120 ns | 0.0237 ns | 0.0198 ns |   1.00 |    0.04 |    1 |      - |         - |          NA |
+| SendRequest_ImmediateStaticHandler       | .NET 9.0  | .NET 9.0  |  11.4128 ns | 0.0259 ns | 0.0242 ns |  18.67 |    0.59 |    2 |      - |         - |          NA |
+| SendRequest_ImmediateSealedHandler       | .NET 9.0  | .NET 9.0  |  12.1069 ns | 0.0319 ns | 0.0282 ns |  19.80 |    0.63 |    3 |      - |         - |          NA |
+| SendRequest_ImmediateHandler_Abstraction | .NET 9.0  | .NET 9.0  |  14.8606 ns | 0.0694 ns | 0.0615 ns |  24.31 |    0.77 |    4 |      - |         - |          NA |
+| SendRequest_Mediator                     | .NET 9.0  | .NET 9.0  |  50.4445 ns | 0.1966 ns | 0.1839 ns |  82.51 |    2.62 |    5 | 0.0051 |      64 B |          NA |
+| SendRequest_MediatR                      | .NET 9.0  | .NET 9.0  |  56.9114 ns | 0.2937 ns | 0.2603 ns |  93.09 |    2.96 |    6 | 0.0210 |     264 B |          NA |
+| SendRequest_IMediator                    | .NET 9.0  | .NET 9.0  |  58.6013 ns | 0.5051 ns | 0.4724 ns |  95.85 |    3.11 |    6 | 0.0050 |      64 B |          NA |
+| SendRequest_Foundatio                    | .NET 9.0  | .NET 9.0  |  94.7206 ns | 0.3739 ns | 0.3497 ns | 154.93 |    4.91 |    7 | 0.0280 |     352 B |          NA |
+
+</details>
 
 #### [Benchmarks.Behaviors](./benchmarks/Benchmark.Behaviors)
 
 This benchmark tests a more realistic scenario of using 1 behavior and 1 service.
 
-| Method                                   | Runtime   | Mean      | Error    | Ratio | Rank | Allocated |
-|----------------------------------------- |---------- |----------:|---------:|------:|-----:|----------:|
-| SendRequest_Baseline                     | .NET 10.0 |  45.77 ns | 0.696 ns |  1.00 |    1 |      40 B |
-| SendRequest_ImmediateSealedHandler       | .NET 10.0 |  58.53 ns | 0.369 ns |  1.28 |    2 |      40 B |
-| SendRequest_ImmediateHandler_Abstraction | .NET 10.0 |  58.55 ns | 0.322 ns |  1.28 |    2 |      40 B |
-| SendRequest_ImmediateStaticHandler       | .NET 10.0 |  59.56 ns | 1.148 ns |  1.30 |    2 |      40 B |
-| SendRequest_Mediator                     | .NET 10.0 |  89.50 ns | 0.430 ns |  1.96 |    3 |      40 B |
-| SendRequest_IMediator                    | .NET 10.0 |  92.54 ns | 0.493 ns |  2.02 |    4 |      40 B |
-| SendRequest_MediatR                      | .NET 10.0 | 186.40 ns | 1.175 ns |  4.07 |    5 |     496 B |
-|                                          |           |           |          |       |      |           |
-| SendRequest_Baseline                     | .NET 9.0  |  48.00 ns | 0.352 ns |  1.00 |    1 |      40 B |
-| SendRequest_ImmediateStaticHandler       | .NET 9.0  |  61.62 ns | 0.536 ns |  1.28 |    2 |      40 B |
-| SendRequest_ImmediateSealedHandler       | .NET 9.0  |  62.75 ns | 0.533 ns |  1.31 |    2 |      40 B |
-| SendRequest_ImmediateHandler_Abstraction | .NET 9.0  |  64.75 ns | 0.608 ns |  1.35 |    2 |      40 B |
-| SendRequest_Mediator                     | .NET 9.0  |  91.79 ns | 0.455 ns |  1.91 |    3 |      40 B |
-| SendRequest_IMediator                    | .NET 9.0  | 101.97 ns | 0.291 ns |  2.12 |    4 |      40 B |
-| SendRequest_MediatR                      | .NET 9.0  | 195.75 ns | 3.187 ns |  4.08 |    5 |     560 B |
+| Method                                   | Mean      | Error    | Ratio | Rank | Allocated |
+|----------------------------------------- |----------:|---------:|------:|-----:|----------:|
+| SendRequest_Baseline                     |  44.02 ns | 0.153 ns |  1.00 |    1 |      40 B |
+| SendRequest_ImmediateSealedHandler       |  56.40 ns | 0.100 ns |  1.28 |    2 |      40 B |
+| SendRequest_ImmediateHandler_Abstraction |  56.55 ns | 0.386 ns |  1.28 |    2 |      40 B |
+| SendRequest_ImmediateStaticHandler       |  57.51 ns | 0.972 ns |  1.31 |    2 |      40 B |
+| SendRequest_IMediator                    | 117.29 ns | 0.315 ns |  2.66 |    3 |     200 B |
+| SendRequest_Mediator                     | 124.45 ns | 0.458 ns |  2.83 |    4 |     200 B |
+| SendRequest_Foundatio                    | 134.99 ns | 0.799 ns |  3.07 |    5 |     416 B |
+| SendRequest_MediatR                      | 166.89 ns | 1.092 ns |  3.79 |    6 |     496 B |
+
+<details>
+<summary>Full Details</summary>
+
+```
+// * Summary *
+
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7462/25H2/2025Update/HudsonValley2)
+12th Gen Intel Core i7-12700H 2.30GHz, 1 CPU, 20 logical and 14 physical cores
+.NET SDK 10.0.101
+  [Host]    : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  .NET 10.0 : .NET 10.0.1 (10.0.1, 10.0.125.57005), X64 RyuJIT x86-64-v3
+  .NET 8.0  : .NET 8.0.22 (8.0.22, 8.0.2225.52707), X64 RyuJIT x86-64-v3
+  .NET 9.0  : .NET 9.0.11 (9.0.11, 9.0.1125.51716), X64 RyuJIT x86-64-v3
+
+```
+| Method                                   | Job       | Runtime   | Mean      | Error    | StdDev   | Ratio | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
+|----------------------------------------- |---------- |---------- |----------:|---------:|---------:|------:|--------:|-----:|-------:|----------:|------------:|
+| SendRequest_Baseline                     | .NET 10.0 | .NET 10.0 |  44.02 ns | 0.153 ns | 0.127 ns |  1.00 |    0.00 |    1 | 0.0032 |      40 B |        1.00 |
+| SendRequest_ImmediateSealedHandler       | .NET 10.0 | .NET 10.0 |  56.40 ns | 0.100 ns | 0.088 ns |  1.28 |    0.00 |    2 | 0.0032 |      40 B |        1.00 |
+| SendRequest_ImmediateHandler_Abstraction | .NET 10.0 | .NET 10.0 |  56.55 ns | 0.386 ns | 0.361 ns |  1.28 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_ImmediateStaticHandler       | .NET 10.0 | .NET 10.0 |  57.51 ns | 0.972 ns | 0.862 ns |  1.31 |    0.02 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_IMediator                    | .NET 10.0 | .NET 10.0 | 117.29 ns | 0.315 ns | 0.280 ns |  2.66 |    0.01 |    3 | 0.0157 |     200 B |        5.00 |
+| SendRequest_Mediator                     | .NET 10.0 | .NET 10.0 | 124.45 ns | 0.458 ns | 0.383 ns |  2.83 |    0.01 |    4 | 0.0157 |     200 B |        5.00 |
+| SendRequest_Foundatio                    | .NET 10.0 | .NET 10.0 | 134.99 ns | 0.799 ns | 0.748 ns |  3.07 |    0.02 |    5 | 0.0331 |     416 B |       10.40 |
+| SendRequest_MediatR                      | .NET 10.0 | .NET 10.0 | 166.89 ns | 1.092 ns | 0.968 ns |  3.79 |    0.02 |    6 | 0.0393 |     496 B |       12.40 |
+|                                          |           |           |           |          |          |       |         |      |        |           |             |
+| SendRequest_Baseline                     | .NET 8.0  | .NET 8.0  |  53.47 ns | 0.285 ns | 0.266 ns |  1.00 |    0.01 |    1 | 0.0032 |      40 B |        1.00 |
+| SendRequest_ImmediateStaticHandler       | .NET 8.0  | .NET 8.0  |  73.74 ns | 0.214 ns | 0.200 ns |  1.38 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_ImmediateSealedHandler       | .NET 8.0  | .NET 8.0  |  74.02 ns | 0.399 ns | 0.373 ns |  1.38 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_ImmediateHandler_Abstraction | .NET 8.0  | .NET 8.0  |  75.86 ns | 0.255 ns | 0.239 ns |  1.42 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_Mediator                     | .NET 8.0  | .NET 8.0  | 141.30 ns | 0.561 ns | 0.525 ns |  2.64 |    0.02 |    3 | 0.0157 |     200 B |        5.00 |
+| SendRequest_IMediator                    | .NET 8.0  | .NET 8.0  | 143.51 ns | 0.764 ns | 0.677 ns |  2.68 |    0.02 |    3 | 0.0157 |     200 B |        5.00 |
+| SendRequest_Foundatio                    | .NET 8.0  | .NET 8.0  | 152.76 ns | 1.721 ns | 1.343 ns |  2.86 |    0.03 |    4 | 0.0331 |     416 B |       10.40 |
+| SendRequest_MediatR                      | .NET 8.0  | .NET 8.0  | 199.56 ns | 0.828 ns | 0.774 ns |  3.73 |    0.02 |    5 | 0.0446 |     560 B |       14.00 |
+|                                          |           |           |           |          |          |       |         |      |        |           |             |
+| SendRequest_Baseline                     | .NET 9.0  | .NET 9.0  |  48.12 ns | 0.457 ns | 0.382 ns |  1.00 |    0.01 |    1 | 0.0032 |      40 B |        1.00 |
+| SendRequest_ImmediateStaticHandler       | .NET 9.0  | .NET 9.0  |  59.84 ns | 0.318 ns | 0.297 ns |  1.24 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_ImmediateSealedHandler       | .NET 9.0  | .NET 9.0  |  60.53 ns | 0.204 ns | 0.171 ns |  1.26 |    0.01 |    2 | 0.0031 |      40 B |        1.00 |
+| SendRequest_ImmediateHandler_Abstraction | .NET 9.0  | .NET 9.0  |  62.21 ns | 0.186 ns | 0.156 ns |  1.29 |    0.01 |    3 | 0.0031 |      40 B |        1.00 |
+| SendRequest_Mediator                     | .NET 9.0  | .NET 9.0  | 137.21 ns | 0.859 ns | 0.761 ns |  2.85 |    0.03 |    4 | 0.0157 |     200 B |        5.00 |
+| SendRequest_IMediator                    | .NET 9.0  | .NET 9.0  | 141.80 ns | 0.714 ns | 0.668 ns |  2.95 |    0.03 |    5 | 0.0157 |     200 B |        5.00 |
+| SendRequest_Foundatio                    | .NET 9.0  | .NET 9.0  | 147.28 ns | 0.717 ns | 0.636 ns |  3.06 |    0.03 |    6 | 0.0331 |     416 B |       10.40 |
+| SendRequest_MediatR                      | .NET 9.0  | .NET 9.0  | 188.56 ns | 1.369 ns | 1.213 ns |  3.92 |    0.04 |    7 | 0.0446 |     560 B |       14.00 |
+
+</details>

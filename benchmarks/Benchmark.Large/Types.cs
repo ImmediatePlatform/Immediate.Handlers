@@ -25,6 +25,15 @@ public sealed partial class Request0TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request0FoundatioHandler
+{
+	public ValueTask<Response0> Handle(
+		Request0 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request0StaticHandler
 {
@@ -60,6 +69,15 @@ public sealed partial class Request1TraditionalHandler
 		Request1 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request1FoundatioHandler
+{
+	public ValueTask<Response1> Handle(
+		Request1 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -99,6 +117,15 @@ public sealed partial class Request2TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request2FoundatioHandler
+{
+	public ValueTask<Response2> Handle(
+		Request2 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request2StaticHandler
 {
@@ -134,6 +161,15 @@ public sealed partial class Request3TraditionalHandler
 		Request3 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request3FoundatioHandler
+{
+	public ValueTask<Response3> Handle(
+		Request3 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -173,6 +209,15 @@ public sealed partial class Request4TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request4FoundatioHandler
+{
+	public ValueTask<Response4> Handle(
+		Request4 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request4StaticHandler
 {
@@ -208,6 +253,15 @@ public sealed partial class Request5TraditionalHandler
 		Request5 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request5FoundatioHandler
+{
+	public ValueTask<Response5> Handle(
+		Request5 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -247,6 +301,15 @@ public sealed partial class Request6TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request6FoundatioHandler
+{
+	public ValueTask<Response6> Handle(
+		Request6 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request6StaticHandler
 {
@@ -282,6 +345,15 @@ public sealed partial class Request7TraditionalHandler
 		Request7 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request7FoundatioHandler
+{
+	public ValueTask<Response7> Handle(
+		Request7 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -321,6 +393,15 @@ public sealed partial class Request8TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request8FoundatioHandler
+{
+	public ValueTask<Response8> Handle(
+		Request8 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request8StaticHandler
 {
@@ -356,6 +437,15 @@ public sealed partial class Request9TraditionalHandler
 		Request9 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request9FoundatioHandler
+{
+	public ValueTask<Response9> Handle(
+		Request9 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -395,6 +485,15 @@ public sealed partial class Request10TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request10FoundatioHandler
+{
+	public ValueTask<Response10> Handle(
+		Request10 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request10StaticHandler
 {
@@ -430,6 +529,15 @@ public sealed partial class Request11TraditionalHandler
 		Request11 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request11FoundatioHandler
+{
+	public ValueTask<Response11> Handle(
+		Request11 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -469,6 +577,15 @@ public sealed partial class Request12TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request12FoundatioHandler
+{
+	public ValueTask<Response12> Handle(
+		Request12 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request12StaticHandler
 {
@@ -504,6 +621,15 @@ public sealed partial class Request13TraditionalHandler
 		Request13 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request13FoundatioHandler
+{
+	public ValueTask<Response13> Handle(
+		Request13 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -543,6 +669,15 @@ public sealed partial class Request14TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request14FoundatioHandler
+{
+	public ValueTask<Response14> Handle(
+		Request14 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request14StaticHandler
 {
@@ -578,6 +713,15 @@ public sealed partial class Request15TraditionalHandler
 		Request15 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request15FoundatioHandler
+{
+	public ValueTask<Response15> Handle(
+		Request15 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -617,6 +761,15 @@ public sealed partial class Request16TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request16FoundatioHandler
+{
+	public ValueTask<Response16> Handle(
+		Request16 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request16StaticHandler
 {
@@ -652,6 +805,15 @@ public sealed partial class Request17TraditionalHandler
 		Request17 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request17FoundatioHandler
+{
+	public ValueTask<Response17> Handle(
+		Request17 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -691,6 +853,15 @@ public sealed partial class Request18TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request18FoundatioHandler
+{
+	public ValueTask<Response18> Handle(
+		Request18 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request18StaticHandler
 {
@@ -726,6 +897,15 @@ public sealed partial class Request19TraditionalHandler
 		Request19 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request19FoundatioHandler
+{
+	public ValueTask<Response19> Handle(
+		Request19 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -765,6 +945,15 @@ public sealed partial class Request20TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request20FoundatioHandler
+{
+	public ValueTask<Response20> Handle(
+		Request20 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request20StaticHandler
 {
@@ -800,6 +989,15 @@ public sealed partial class Request21TraditionalHandler
 		Request21 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request21FoundatioHandler
+{
+	public ValueTask<Response21> Handle(
+		Request21 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -839,6 +1037,15 @@ public sealed partial class Request22TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request22FoundatioHandler
+{
+	public ValueTask<Response22> Handle(
+		Request22 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request22StaticHandler
 {
@@ -874,6 +1081,15 @@ public sealed partial class Request23TraditionalHandler
 		Request23 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request23FoundatioHandler
+{
+	public ValueTask<Response23> Handle(
+		Request23 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -913,6 +1129,15 @@ public sealed partial class Request24TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request24FoundatioHandler
+{
+	public ValueTask<Response24> Handle(
+		Request24 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request24StaticHandler
 {
@@ -948,6 +1173,15 @@ public sealed partial class Request25TraditionalHandler
 		Request25 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request25FoundatioHandler
+{
+	public ValueTask<Response25> Handle(
+		Request25 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -987,6 +1221,15 @@ public sealed partial class Request26TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request26FoundatioHandler
+{
+	public ValueTask<Response26> Handle(
+		Request26 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request26StaticHandler
 {
@@ -1022,6 +1265,15 @@ public sealed partial class Request27TraditionalHandler
 		Request27 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request27FoundatioHandler
+{
+	public ValueTask<Response27> Handle(
+		Request27 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1061,6 +1313,15 @@ public sealed partial class Request28TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request28FoundatioHandler
+{
+	public ValueTask<Response28> Handle(
+		Request28 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request28StaticHandler
 {
@@ -1096,6 +1357,15 @@ public sealed partial class Request29TraditionalHandler
 		Request29 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request29FoundatioHandler
+{
+	public ValueTask<Response29> Handle(
+		Request29 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1135,6 +1405,15 @@ public sealed partial class Request30TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request30FoundatioHandler
+{
+	public ValueTask<Response30> Handle(
+		Request30 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request30StaticHandler
 {
@@ -1170,6 +1449,15 @@ public sealed partial class Request31TraditionalHandler
 		Request31 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request31FoundatioHandler
+{
+	public ValueTask<Response31> Handle(
+		Request31 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1209,6 +1497,15 @@ public sealed partial class Request32TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request32FoundatioHandler
+{
+	public ValueTask<Response32> Handle(
+		Request32 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request32StaticHandler
 {
@@ -1244,6 +1541,15 @@ public sealed partial class Request33TraditionalHandler
 		Request33 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request33FoundatioHandler
+{
+	public ValueTask<Response33> Handle(
+		Request33 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1283,6 +1589,15 @@ public sealed partial class Request34TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request34FoundatioHandler
+{
+	public ValueTask<Response34> Handle(
+		Request34 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request34StaticHandler
 {
@@ -1318,6 +1633,15 @@ public sealed partial class Request35TraditionalHandler
 		Request35 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request35FoundatioHandler
+{
+	public ValueTask<Response35> Handle(
+		Request35 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1357,6 +1681,15 @@ public sealed partial class Request36TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request36FoundatioHandler
+{
+	public ValueTask<Response36> Handle(
+		Request36 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request36StaticHandler
 {
@@ -1392,6 +1725,15 @@ public sealed partial class Request37TraditionalHandler
 		Request37 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request37FoundatioHandler
+{
+	public ValueTask<Response37> Handle(
+		Request37 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1431,6 +1773,15 @@ public sealed partial class Request38TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request38FoundatioHandler
+{
+	public ValueTask<Response38> Handle(
+		Request38 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request38StaticHandler
 {
@@ -1466,6 +1817,15 @@ public sealed partial class Request39TraditionalHandler
 		Request39 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request39FoundatioHandler
+{
+	public ValueTask<Response39> Handle(
+		Request39 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1505,6 +1865,15 @@ public sealed partial class Request40TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request40FoundatioHandler
+{
+	public ValueTask<Response40> Handle(
+		Request40 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request40StaticHandler
 {
@@ -1540,6 +1909,15 @@ public sealed partial class Request41TraditionalHandler
 		Request41 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request41FoundatioHandler
+{
+	public ValueTask<Response41> Handle(
+		Request41 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1579,6 +1957,15 @@ public sealed partial class Request42TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request42FoundatioHandler
+{
+	public ValueTask<Response42> Handle(
+		Request42 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request42StaticHandler
 {
@@ -1614,6 +2001,15 @@ public sealed partial class Request43TraditionalHandler
 		Request43 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request43FoundatioHandler
+{
+	public ValueTask<Response43> Handle(
+		Request43 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1653,6 +2049,15 @@ public sealed partial class Request44TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request44FoundatioHandler
+{
+	public ValueTask<Response44> Handle(
+		Request44 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request44StaticHandler
 {
@@ -1688,6 +2093,15 @@ public sealed partial class Request45TraditionalHandler
 		Request45 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request45FoundatioHandler
+{
+	public ValueTask<Response45> Handle(
+		Request45 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1727,6 +2141,15 @@ public sealed partial class Request46TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request46FoundatioHandler
+{
+	public ValueTask<Response46> Handle(
+		Request46 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request46StaticHandler
 {
@@ -1762,6 +2185,15 @@ public sealed partial class Request47TraditionalHandler
 		Request47 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request47FoundatioHandler
+{
+	public ValueTask<Response47> Handle(
+		Request47 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1801,6 +2233,15 @@ public sealed partial class Request48TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request48FoundatioHandler
+{
+	public ValueTask<Response48> Handle(
+		Request48 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request48StaticHandler
 {
@@ -1836,6 +2277,15 @@ public sealed partial class Request49TraditionalHandler
 		Request49 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request49FoundatioHandler
+{
+	public ValueTask<Response49> Handle(
+		Request49 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1875,6 +2325,15 @@ public sealed partial class Request50TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request50FoundatioHandler
+{
+	public ValueTask<Response50> Handle(
+		Request50 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request50StaticHandler
 {
@@ -1910,6 +2369,15 @@ public sealed partial class Request51TraditionalHandler
 		Request51 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request51FoundatioHandler
+{
+	public ValueTask<Response51> Handle(
+		Request51 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -1949,6 +2417,15 @@ public sealed partial class Request52TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request52FoundatioHandler
+{
+	public ValueTask<Response52> Handle(
+		Request52 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request52StaticHandler
 {
@@ -1984,6 +2461,15 @@ public sealed partial class Request53TraditionalHandler
 		Request53 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request53FoundatioHandler
+{
+	public ValueTask<Response53> Handle(
+		Request53 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2023,6 +2509,15 @@ public sealed partial class Request54TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request54FoundatioHandler
+{
+	public ValueTask<Response54> Handle(
+		Request54 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request54StaticHandler
 {
@@ -2058,6 +2553,15 @@ public sealed partial class Request55TraditionalHandler
 		Request55 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request55FoundatioHandler
+{
+	public ValueTask<Response55> Handle(
+		Request55 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2097,6 +2601,15 @@ public sealed partial class Request56TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request56FoundatioHandler
+{
+	public ValueTask<Response56> Handle(
+		Request56 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request56StaticHandler
 {
@@ -2132,6 +2645,15 @@ public sealed partial class Request57TraditionalHandler
 		Request57 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request57FoundatioHandler
+{
+	public ValueTask<Response57> Handle(
+		Request57 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2171,6 +2693,15 @@ public sealed partial class Request58TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request58FoundatioHandler
+{
+	public ValueTask<Response58> Handle(
+		Request58 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request58StaticHandler
 {
@@ -2206,6 +2737,15 @@ public sealed partial class Request59TraditionalHandler
 		Request59 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request59FoundatioHandler
+{
+	public ValueTask<Response59> Handle(
+		Request59 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2245,6 +2785,15 @@ public sealed partial class Request60TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request60FoundatioHandler
+{
+	public ValueTask<Response60> Handle(
+		Request60 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request60StaticHandler
 {
@@ -2280,6 +2829,15 @@ public sealed partial class Request61TraditionalHandler
 		Request61 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request61FoundatioHandler
+{
+	public ValueTask<Response61> Handle(
+		Request61 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2319,6 +2877,15 @@ public sealed partial class Request62TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request62FoundatioHandler
+{
+	public ValueTask<Response62> Handle(
+		Request62 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request62StaticHandler
 {
@@ -2354,6 +2921,15 @@ public sealed partial class Request63TraditionalHandler
 		Request63 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request63FoundatioHandler
+{
+	public ValueTask<Response63> Handle(
+		Request63 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2393,6 +2969,15 @@ public sealed partial class Request64TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request64FoundatioHandler
+{
+	public ValueTask<Response64> Handle(
+		Request64 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request64StaticHandler
 {
@@ -2428,6 +3013,15 @@ public sealed partial class Request65TraditionalHandler
 		Request65 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request65FoundatioHandler
+{
+	public ValueTask<Response65> Handle(
+		Request65 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2467,6 +3061,15 @@ public sealed partial class Request66TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request66FoundatioHandler
+{
+	public ValueTask<Response66> Handle(
+		Request66 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request66StaticHandler
 {
@@ -2502,6 +3105,15 @@ public sealed partial class Request67TraditionalHandler
 		Request67 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request67FoundatioHandler
+{
+	public ValueTask<Response67> Handle(
+		Request67 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2541,6 +3153,15 @@ public sealed partial class Request68TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request68FoundatioHandler
+{
+	public ValueTask<Response68> Handle(
+		Request68 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request68StaticHandler
 {
@@ -2576,6 +3197,15 @@ public sealed partial class Request69TraditionalHandler
 		Request69 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request69FoundatioHandler
+{
+	public ValueTask<Response69> Handle(
+		Request69 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2615,6 +3245,15 @@ public sealed partial class Request70TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request70FoundatioHandler
+{
+	public ValueTask<Response70> Handle(
+		Request70 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request70StaticHandler
 {
@@ -2650,6 +3289,15 @@ public sealed partial class Request71TraditionalHandler
 		Request71 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request71FoundatioHandler
+{
+	public ValueTask<Response71> Handle(
+		Request71 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2689,6 +3337,15 @@ public sealed partial class Request72TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request72FoundatioHandler
+{
+	public ValueTask<Response72> Handle(
+		Request72 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request72StaticHandler
 {
@@ -2724,6 +3381,15 @@ public sealed partial class Request73TraditionalHandler
 		Request73 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request73FoundatioHandler
+{
+	public ValueTask<Response73> Handle(
+		Request73 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2763,6 +3429,15 @@ public sealed partial class Request74TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request74FoundatioHandler
+{
+	public ValueTask<Response74> Handle(
+		Request74 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request74StaticHandler
 {
@@ -2798,6 +3473,15 @@ public sealed partial class Request75TraditionalHandler
 		Request75 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request75FoundatioHandler
+{
+	public ValueTask<Response75> Handle(
+		Request75 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2837,6 +3521,15 @@ public sealed partial class Request76TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request76FoundatioHandler
+{
+	public ValueTask<Response76> Handle(
+		Request76 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request76StaticHandler
 {
@@ -2872,6 +3565,15 @@ public sealed partial class Request77TraditionalHandler
 		Request77 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request77FoundatioHandler
+{
+	public ValueTask<Response77> Handle(
+		Request77 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2911,6 +3613,15 @@ public sealed partial class Request78TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request78FoundatioHandler
+{
+	public ValueTask<Response78> Handle(
+		Request78 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request78StaticHandler
 {
@@ -2946,6 +3657,15 @@ public sealed partial class Request79TraditionalHandler
 		Request79 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request79FoundatioHandler
+{
+	public ValueTask<Response79> Handle(
+		Request79 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -2985,6 +3705,15 @@ public sealed partial class Request80TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request80FoundatioHandler
+{
+	public ValueTask<Response80> Handle(
+		Request80 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request80StaticHandler
 {
@@ -3020,6 +3749,15 @@ public sealed partial class Request81TraditionalHandler
 		Request81 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request81FoundatioHandler
+{
+	public ValueTask<Response81> Handle(
+		Request81 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3059,6 +3797,15 @@ public sealed partial class Request82TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request82FoundatioHandler
+{
+	public ValueTask<Response82> Handle(
+		Request82 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request82StaticHandler
 {
@@ -3094,6 +3841,15 @@ public sealed partial class Request83TraditionalHandler
 		Request83 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request83FoundatioHandler
+{
+	public ValueTask<Response83> Handle(
+		Request83 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3133,6 +3889,15 @@ public sealed partial class Request84TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request84FoundatioHandler
+{
+	public ValueTask<Response84> Handle(
+		Request84 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request84StaticHandler
 {
@@ -3168,6 +3933,15 @@ public sealed partial class Request85TraditionalHandler
 		Request85 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request85FoundatioHandler
+{
+	public ValueTask<Response85> Handle(
+		Request85 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3207,6 +3981,15 @@ public sealed partial class Request86TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request86FoundatioHandler
+{
+	public ValueTask<Response86> Handle(
+		Request86 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request86StaticHandler
 {
@@ -3242,6 +4025,15 @@ public sealed partial class Request87TraditionalHandler
 		Request87 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request87FoundatioHandler
+{
+	public ValueTask<Response87> Handle(
+		Request87 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3281,6 +4073,15 @@ public sealed partial class Request88TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request88FoundatioHandler
+{
+	public ValueTask<Response88> Handle(
+		Request88 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request88StaticHandler
 {
@@ -3316,6 +4117,15 @@ public sealed partial class Request89TraditionalHandler
 		Request89 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request89FoundatioHandler
+{
+	public ValueTask<Response89> Handle(
+		Request89 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3355,6 +4165,15 @@ public sealed partial class Request90TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request90FoundatioHandler
+{
+	public ValueTask<Response90> Handle(
+		Request90 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request90StaticHandler
 {
@@ -3390,6 +4209,15 @@ public sealed partial class Request91TraditionalHandler
 		Request91 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request91FoundatioHandler
+{
+	public ValueTask<Response91> Handle(
+		Request91 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3429,6 +4257,15 @@ public sealed partial class Request92TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request92FoundatioHandler
+{
+	public ValueTask<Response92> Handle(
+		Request92 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request92StaticHandler
 {
@@ -3464,6 +4301,15 @@ public sealed partial class Request93TraditionalHandler
 		Request93 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request93FoundatioHandler
+{
+	public ValueTask<Response93> Handle(
+		Request93 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3503,6 +4349,15 @@ public sealed partial class Request94TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request94FoundatioHandler
+{
+	public ValueTask<Response94> Handle(
+		Request94 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request94StaticHandler
 {
@@ -3538,6 +4393,15 @@ public sealed partial class Request95TraditionalHandler
 		Request95 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request95FoundatioHandler
+{
+	public ValueTask<Response95> Handle(
+		Request95 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3577,6 +4441,15 @@ public sealed partial class Request96TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request96FoundatioHandler
+{
+	public ValueTask<Response96> Handle(
+		Request96 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request96StaticHandler
 {
@@ -3612,6 +4485,15 @@ public sealed partial class Request97TraditionalHandler
 		Request97 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request97FoundatioHandler
+{
+	public ValueTask<Response97> Handle(
+		Request97 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3651,6 +4533,15 @@ public sealed partial class Request98TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request98FoundatioHandler
+{
+	public ValueTask<Response98> Handle(
+		Request98 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request98StaticHandler
 {
@@ -3686,6 +4577,15 @@ public sealed partial class Request99TraditionalHandler
 		Request99 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request99FoundatioHandler
+{
+	public ValueTask<Response99> Handle(
+		Request99 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3725,6 +4625,15 @@ public sealed partial class Request100TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request100FoundatioHandler
+{
+	public ValueTask<Response100> Handle(
+		Request100 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request100StaticHandler
 {
@@ -3760,6 +4669,15 @@ public sealed partial class Request101TraditionalHandler
 		Request101 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request101FoundatioHandler
+{
+	public ValueTask<Response101> Handle(
+		Request101 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3799,6 +4717,15 @@ public sealed partial class Request102TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request102FoundatioHandler
+{
+	public ValueTask<Response102> Handle(
+		Request102 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request102StaticHandler
 {
@@ -3834,6 +4761,15 @@ public sealed partial class Request103TraditionalHandler
 		Request103 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request103FoundatioHandler
+{
+	public ValueTask<Response103> Handle(
+		Request103 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3873,6 +4809,15 @@ public sealed partial class Request104TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request104FoundatioHandler
+{
+	public ValueTask<Response104> Handle(
+		Request104 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request104StaticHandler
 {
@@ -3908,6 +4853,15 @@ public sealed partial class Request105TraditionalHandler
 		Request105 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request105FoundatioHandler
+{
+	public ValueTask<Response105> Handle(
+		Request105 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -3947,6 +4901,15 @@ public sealed partial class Request106TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request106FoundatioHandler
+{
+	public ValueTask<Response106> Handle(
+		Request106 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request106StaticHandler
 {
@@ -3982,6 +4945,15 @@ public sealed partial class Request107TraditionalHandler
 		Request107 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request107FoundatioHandler
+{
+	public ValueTask<Response107> Handle(
+		Request107 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4021,6 +4993,15 @@ public sealed partial class Request108TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request108FoundatioHandler
+{
+	public ValueTask<Response108> Handle(
+		Request108 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request108StaticHandler
 {
@@ -4056,6 +5037,15 @@ public sealed partial class Request109TraditionalHandler
 		Request109 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request109FoundatioHandler
+{
+	public ValueTask<Response109> Handle(
+		Request109 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4095,6 +5085,15 @@ public sealed partial class Request110TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request110FoundatioHandler
+{
+	public ValueTask<Response110> Handle(
+		Request110 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request110StaticHandler
 {
@@ -4130,6 +5129,15 @@ public sealed partial class Request111TraditionalHandler
 		Request111 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request111FoundatioHandler
+{
+	public ValueTask<Response111> Handle(
+		Request111 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4169,6 +5177,15 @@ public sealed partial class Request112TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request112FoundatioHandler
+{
+	public ValueTask<Response112> Handle(
+		Request112 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request112StaticHandler
 {
@@ -4204,6 +5221,15 @@ public sealed partial class Request113TraditionalHandler
 		Request113 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request113FoundatioHandler
+{
+	public ValueTask<Response113> Handle(
+		Request113 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4243,6 +5269,15 @@ public sealed partial class Request114TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request114FoundatioHandler
+{
+	public ValueTask<Response114> Handle(
+		Request114 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request114StaticHandler
 {
@@ -4278,6 +5313,15 @@ public sealed partial class Request115TraditionalHandler
 		Request115 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request115FoundatioHandler
+{
+	public ValueTask<Response115> Handle(
+		Request115 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4317,6 +5361,15 @@ public sealed partial class Request116TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request116FoundatioHandler
+{
+	public ValueTask<Response116> Handle(
+		Request116 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request116StaticHandler
 {
@@ -4352,6 +5405,15 @@ public sealed partial class Request117TraditionalHandler
 		Request117 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request117FoundatioHandler
+{
+	public ValueTask<Response117> Handle(
+		Request117 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4391,6 +5453,15 @@ public sealed partial class Request118TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request118FoundatioHandler
+{
+	public ValueTask<Response118> Handle(
+		Request118 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request118StaticHandler
 {
@@ -4426,6 +5497,15 @@ public sealed partial class Request119TraditionalHandler
 		Request119 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request119FoundatioHandler
+{
+	public ValueTask<Response119> Handle(
+		Request119 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4465,6 +5545,15 @@ public sealed partial class Request120TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request120FoundatioHandler
+{
+	public ValueTask<Response120> Handle(
+		Request120 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request120StaticHandler
 {
@@ -4500,6 +5589,15 @@ public sealed partial class Request121TraditionalHandler
 		Request121 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request121FoundatioHandler
+{
+	public ValueTask<Response121> Handle(
+		Request121 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4539,6 +5637,15 @@ public sealed partial class Request122TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request122FoundatioHandler
+{
+	public ValueTask<Response122> Handle(
+		Request122 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request122StaticHandler
 {
@@ -4574,6 +5681,15 @@ public sealed partial class Request123TraditionalHandler
 		Request123 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request123FoundatioHandler
+{
+	public ValueTask<Response123> Handle(
+		Request123 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4613,6 +5729,15 @@ public sealed partial class Request124TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request124FoundatioHandler
+{
+	public ValueTask<Response124> Handle(
+		Request124 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request124StaticHandler
 {
@@ -4648,6 +5773,15 @@ public sealed partial class Request125TraditionalHandler
 		Request125 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request125FoundatioHandler
+{
+	public ValueTask<Response125> Handle(
+		Request125 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4687,6 +5821,15 @@ public sealed partial class Request126TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request126FoundatioHandler
+{
+	public ValueTask<Response126> Handle(
+		Request126 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request126StaticHandler
 {
@@ -4722,6 +5865,15 @@ public sealed partial class Request127TraditionalHandler
 		Request127 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request127FoundatioHandler
+{
+	public ValueTask<Response127> Handle(
+		Request127 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4761,6 +5913,15 @@ public sealed partial class Request128TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request128FoundatioHandler
+{
+	public ValueTask<Response128> Handle(
+		Request128 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request128StaticHandler
 {
@@ -4796,6 +5957,15 @@ public sealed partial class Request129TraditionalHandler
 		Request129 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request129FoundatioHandler
+{
+	public ValueTask<Response129> Handle(
+		Request129 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4835,6 +6005,15 @@ public sealed partial class Request130TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request130FoundatioHandler
+{
+	public ValueTask<Response130> Handle(
+		Request130 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request130StaticHandler
 {
@@ -4870,6 +6049,15 @@ public sealed partial class Request131TraditionalHandler
 		Request131 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request131FoundatioHandler
+{
+	public ValueTask<Response131> Handle(
+		Request131 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4909,6 +6097,15 @@ public sealed partial class Request132TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request132FoundatioHandler
+{
+	public ValueTask<Response132> Handle(
+		Request132 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request132StaticHandler
 {
@@ -4944,6 +6141,15 @@ public sealed partial class Request133TraditionalHandler
 		Request133 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request133FoundatioHandler
+{
+	public ValueTask<Response133> Handle(
+		Request133 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -4983,6 +6189,15 @@ public sealed partial class Request134TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request134FoundatioHandler
+{
+	public ValueTask<Response134> Handle(
+		Request134 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request134StaticHandler
 {
@@ -5018,6 +6233,15 @@ public sealed partial class Request135TraditionalHandler
 		Request135 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request135FoundatioHandler
+{
+	public ValueTask<Response135> Handle(
+		Request135 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5057,6 +6281,15 @@ public sealed partial class Request136TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request136FoundatioHandler
+{
+	public ValueTask<Response136> Handle(
+		Request136 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request136StaticHandler
 {
@@ -5092,6 +6325,15 @@ public sealed partial class Request137TraditionalHandler
 		Request137 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request137FoundatioHandler
+{
+	public ValueTask<Response137> Handle(
+		Request137 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5131,6 +6373,15 @@ public sealed partial class Request138TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request138FoundatioHandler
+{
+	public ValueTask<Response138> Handle(
+		Request138 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request138StaticHandler
 {
@@ -5166,6 +6417,15 @@ public sealed partial class Request139TraditionalHandler
 		Request139 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request139FoundatioHandler
+{
+	public ValueTask<Response139> Handle(
+		Request139 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5205,6 +6465,15 @@ public sealed partial class Request140TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request140FoundatioHandler
+{
+	public ValueTask<Response140> Handle(
+		Request140 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request140StaticHandler
 {
@@ -5240,6 +6509,15 @@ public sealed partial class Request141TraditionalHandler
 		Request141 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request141FoundatioHandler
+{
+	public ValueTask<Response141> Handle(
+		Request141 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5279,6 +6557,15 @@ public sealed partial class Request142TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request142FoundatioHandler
+{
+	public ValueTask<Response142> Handle(
+		Request142 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request142StaticHandler
 {
@@ -5314,6 +6601,15 @@ public sealed partial class Request143TraditionalHandler
 		Request143 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request143FoundatioHandler
+{
+	public ValueTask<Response143> Handle(
+		Request143 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5353,6 +6649,15 @@ public sealed partial class Request144TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request144FoundatioHandler
+{
+	public ValueTask<Response144> Handle(
+		Request144 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request144StaticHandler
 {
@@ -5388,6 +6693,15 @@ public sealed partial class Request145TraditionalHandler
 		Request145 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request145FoundatioHandler
+{
+	public ValueTask<Response145> Handle(
+		Request145 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5427,6 +6741,15 @@ public sealed partial class Request146TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request146FoundatioHandler
+{
+	public ValueTask<Response146> Handle(
+		Request146 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request146StaticHandler
 {
@@ -5462,6 +6785,15 @@ public sealed partial class Request147TraditionalHandler
 		Request147 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request147FoundatioHandler
+{
+	public ValueTask<Response147> Handle(
+		Request147 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5501,6 +6833,15 @@ public sealed partial class Request148TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request148FoundatioHandler
+{
+	public ValueTask<Response148> Handle(
+		Request148 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request148StaticHandler
 {
@@ -5536,6 +6877,15 @@ public sealed partial class Request149TraditionalHandler
 		Request149 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request149FoundatioHandler
+{
+	public ValueTask<Response149> Handle(
+		Request149 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5575,6 +6925,15 @@ public sealed partial class Request150TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request150FoundatioHandler
+{
+	public ValueTask<Response150> Handle(
+		Request150 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request150StaticHandler
 {
@@ -5610,6 +6969,15 @@ public sealed partial class Request151TraditionalHandler
 		Request151 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request151FoundatioHandler
+{
+	public ValueTask<Response151> Handle(
+		Request151 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5649,6 +7017,15 @@ public sealed partial class Request152TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request152FoundatioHandler
+{
+	public ValueTask<Response152> Handle(
+		Request152 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request152StaticHandler
 {
@@ -5684,6 +7061,15 @@ public sealed partial class Request153TraditionalHandler
 		Request153 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request153FoundatioHandler
+{
+	public ValueTask<Response153> Handle(
+		Request153 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5723,6 +7109,15 @@ public sealed partial class Request154TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request154FoundatioHandler
+{
+	public ValueTask<Response154> Handle(
+		Request154 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request154StaticHandler
 {
@@ -5758,6 +7153,15 @@ public sealed partial class Request155TraditionalHandler
 		Request155 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request155FoundatioHandler
+{
+	public ValueTask<Response155> Handle(
+		Request155 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5797,6 +7201,15 @@ public sealed partial class Request156TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request156FoundatioHandler
+{
+	public ValueTask<Response156> Handle(
+		Request156 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request156StaticHandler
 {
@@ -5832,6 +7245,15 @@ public sealed partial class Request157TraditionalHandler
 		Request157 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request157FoundatioHandler
+{
+	public ValueTask<Response157> Handle(
+		Request157 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5871,6 +7293,15 @@ public sealed partial class Request158TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request158FoundatioHandler
+{
+	public ValueTask<Response158> Handle(
+		Request158 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request158StaticHandler
 {
@@ -5906,6 +7337,15 @@ public sealed partial class Request159TraditionalHandler
 		Request159 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request159FoundatioHandler
+{
+	public ValueTask<Response159> Handle(
+		Request159 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -5945,6 +7385,15 @@ public sealed partial class Request160TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request160FoundatioHandler
+{
+	public ValueTask<Response160> Handle(
+		Request160 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request160StaticHandler
 {
@@ -5980,6 +7429,15 @@ public sealed partial class Request161TraditionalHandler
 		Request161 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request161FoundatioHandler
+{
+	public ValueTask<Response161> Handle(
+		Request161 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6019,6 +7477,15 @@ public sealed partial class Request162TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request162FoundatioHandler
+{
+	public ValueTask<Response162> Handle(
+		Request162 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request162StaticHandler
 {
@@ -6054,6 +7521,15 @@ public sealed partial class Request163TraditionalHandler
 		Request163 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request163FoundatioHandler
+{
+	public ValueTask<Response163> Handle(
+		Request163 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6093,6 +7569,15 @@ public sealed partial class Request164TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request164FoundatioHandler
+{
+	public ValueTask<Response164> Handle(
+		Request164 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request164StaticHandler
 {
@@ -6128,6 +7613,15 @@ public sealed partial class Request165TraditionalHandler
 		Request165 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request165FoundatioHandler
+{
+	public ValueTask<Response165> Handle(
+		Request165 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6167,6 +7661,15 @@ public sealed partial class Request166TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request166FoundatioHandler
+{
+	public ValueTask<Response166> Handle(
+		Request166 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request166StaticHandler
 {
@@ -6202,6 +7705,15 @@ public sealed partial class Request167TraditionalHandler
 		Request167 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request167FoundatioHandler
+{
+	public ValueTask<Response167> Handle(
+		Request167 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6241,6 +7753,15 @@ public sealed partial class Request168TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request168FoundatioHandler
+{
+	public ValueTask<Response168> Handle(
+		Request168 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request168StaticHandler
 {
@@ -6276,6 +7797,15 @@ public sealed partial class Request169TraditionalHandler
 		Request169 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request169FoundatioHandler
+{
+	public ValueTask<Response169> Handle(
+		Request169 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6315,6 +7845,15 @@ public sealed partial class Request170TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request170FoundatioHandler
+{
+	public ValueTask<Response170> Handle(
+		Request170 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request170StaticHandler
 {
@@ -6350,6 +7889,15 @@ public sealed partial class Request171TraditionalHandler
 		Request171 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request171FoundatioHandler
+{
+	public ValueTask<Response171> Handle(
+		Request171 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6389,6 +7937,15 @@ public sealed partial class Request172TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request172FoundatioHandler
+{
+	public ValueTask<Response172> Handle(
+		Request172 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request172StaticHandler
 {
@@ -6424,6 +7981,15 @@ public sealed partial class Request173TraditionalHandler
 		Request173 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request173FoundatioHandler
+{
+	public ValueTask<Response173> Handle(
+		Request173 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6463,6 +8029,15 @@ public sealed partial class Request174TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request174FoundatioHandler
+{
+	public ValueTask<Response174> Handle(
+		Request174 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request174StaticHandler
 {
@@ -6498,6 +8073,15 @@ public sealed partial class Request175TraditionalHandler
 		Request175 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request175FoundatioHandler
+{
+	public ValueTask<Response175> Handle(
+		Request175 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6537,6 +8121,15 @@ public sealed partial class Request176TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request176FoundatioHandler
+{
+	public ValueTask<Response176> Handle(
+		Request176 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request176StaticHandler
 {
@@ -6572,6 +8165,15 @@ public sealed partial class Request177TraditionalHandler
 		Request177 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request177FoundatioHandler
+{
+	public ValueTask<Response177> Handle(
+		Request177 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6611,6 +8213,15 @@ public sealed partial class Request178TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request178FoundatioHandler
+{
+	public ValueTask<Response178> Handle(
+		Request178 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request178StaticHandler
 {
@@ -6646,6 +8257,15 @@ public sealed partial class Request179TraditionalHandler
 		Request179 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request179FoundatioHandler
+{
+	public ValueTask<Response179> Handle(
+		Request179 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6685,6 +8305,15 @@ public sealed partial class Request180TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request180FoundatioHandler
+{
+	public ValueTask<Response180> Handle(
+		Request180 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request180StaticHandler
 {
@@ -6720,6 +8349,15 @@ public sealed partial class Request181TraditionalHandler
 		Request181 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request181FoundatioHandler
+{
+	public ValueTask<Response181> Handle(
+		Request181 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6759,6 +8397,15 @@ public sealed partial class Request182TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request182FoundatioHandler
+{
+	public ValueTask<Response182> Handle(
+		Request182 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request182StaticHandler
 {
@@ -6794,6 +8441,15 @@ public sealed partial class Request183TraditionalHandler
 		Request183 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request183FoundatioHandler
+{
+	public ValueTask<Response183> Handle(
+		Request183 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6833,6 +8489,15 @@ public sealed partial class Request184TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request184FoundatioHandler
+{
+	public ValueTask<Response184> Handle(
+		Request184 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request184StaticHandler
 {
@@ -6868,6 +8533,15 @@ public sealed partial class Request185TraditionalHandler
 		Request185 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request185FoundatioHandler
+{
+	public ValueTask<Response185> Handle(
+		Request185 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6907,6 +8581,15 @@ public sealed partial class Request186TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request186FoundatioHandler
+{
+	public ValueTask<Response186> Handle(
+		Request186 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request186StaticHandler
 {
@@ -6942,6 +8625,15 @@ public sealed partial class Request187TraditionalHandler
 		Request187 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request187FoundatioHandler
+{
+	public ValueTask<Response187> Handle(
+		Request187 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -6981,6 +8673,15 @@ public sealed partial class Request188TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request188FoundatioHandler
+{
+	public ValueTask<Response188> Handle(
+		Request188 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request188StaticHandler
 {
@@ -7016,6 +8717,15 @@ public sealed partial class Request189TraditionalHandler
 		Request189 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request189FoundatioHandler
+{
+	public ValueTask<Response189> Handle(
+		Request189 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7055,6 +8765,15 @@ public sealed partial class Request190TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request190FoundatioHandler
+{
+	public ValueTask<Response190> Handle(
+		Request190 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request190StaticHandler
 {
@@ -7090,6 +8809,15 @@ public sealed partial class Request191TraditionalHandler
 		Request191 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request191FoundatioHandler
+{
+	public ValueTask<Response191> Handle(
+		Request191 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7129,6 +8857,15 @@ public sealed partial class Request192TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request192FoundatioHandler
+{
+	public ValueTask<Response192> Handle(
+		Request192 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request192StaticHandler
 {
@@ -7164,6 +8901,15 @@ public sealed partial class Request193TraditionalHandler
 		Request193 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request193FoundatioHandler
+{
+	public ValueTask<Response193> Handle(
+		Request193 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7203,6 +8949,15 @@ public sealed partial class Request194TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request194FoundatioHandler
+{
+	public ValueTask<Response194> Handle(
+		Request194 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request194StaticHandler
 {
@@ -7238,6 +8993,15 @@ public sealed partial class Request195TraditionalHandler
 		Request195 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request195FoundatioHandler
+{
+	public ValueTask<Response195> Handle(
+		Request195 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7277,6 +9041,15 @@ public sealed partial class Request196TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request196FoundatioHandler
+{
+	public ValueTask<Response196> Handle(
+		Request196 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request196StaticHandler
 {
@@ -7312,6 +9085,15 @@ public sealed partial class Request197TraditionalHandler
 		Request197 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request197FoundatioHandler
+{
+	public ValueTask<Response197> Handle(
+		Request197 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7351,6 +9133,15 @@ public sealed partial class Request198TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request198FoundatioHandler
+{
+	public ValueTask<Response198> Handle(
+		Request198 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request198StaticHandler
 {
@@ -7386,6 +9177,15 @@ public sealed partial class Request199TraditionalHandler
 		Request199 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request199FoundatioHandler
+{
+	public ValueTask<Response199> Handle(
+		Request199 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7425,6 +9225,15 @@ public sealed partial class Request200TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request200FoundatioHandler
+{
+	public ValueTask<Response200> Handle(
+		Request200 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request200StaticHandler
 {
@@ -7460,6 +9269,15 @@ public sealed partial class Request201TraditionalHandler
 		Request201 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request201FoundatioHandler
+{
+	public ValueTask<Response201> Handle(
+		Request201 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7499,6 +9317,15 @@ public sealed partial class Request202TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request202FoundatioHandler
+{
+	public ValueTask<Response202> Handle(
+		Request202 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request202StaticHandler
 {
@@ -7534,6 +9361,15 @@ public sealed partial class Request203TraditionalHandler
 		Request203 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request203FoundatioHandler
+{
+	public ValueTask<Response203> Handle(
+		Request203 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7573,6 +9409,15 @@ public sealed partial class Request204TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request204FoundatioHandler
+{
+	public ValueTask<Response204> Handle(
+		Request204 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request204StaticHandler
 {
@@ -7608,6 +9453,15 @@ public sealed partial class Request205TraditionalHandler
 		Request205 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request205FoundatioHandler
+{
+	public ValueTask<Response205> Handle(
+		Request205 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7647,6 +9501,15 @@ public sealed partial class Request206TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request206FoundatioHandler
+{
+	public ValueTask<Response206> Handle(
+		Request206 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request206StaticHandler
 {
@@ -7682,6 +9545,15 @@ public sealed partial class Request207TraditionalHandler
 		Request207 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request207FoundatioHandler
+{
+	public ValueTask<Response207> Handle(
+		Request207 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7721,6 +9593,15 @@ public sealed partial class Request208TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request208FoundatioHandler
+{
+	public ValueTask<Response208> Handle(
+		Request208 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request208StaticHandler
 {
@@ -7756,6 +9637,15 @@ public sealed partial class Request209TraditionalHandler
 		Request209 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request209FoundatioHandler
+{
+	public ValueTask<Response209> Handle(
+		Request209 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7795,6 +9685,15 @@ public sealed partial class Request210TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request210FoundatioHandler
+{
+	public ValueTask<Response210> Handle(
+		Request210 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request210StaticHandler
 {
@@ -7830,6 +9729,15 @@ public sealed partial class Request211TraditionalHandler
 		Request211 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request211FoundatioHandler
+{
+	public ValueTask<Response211> Handle(
+		Request211 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7869,6 +9777,15 @@ public sealed partial class Request212TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request212FoundatioHandler
+{
+	public ValueTask<Response212> Handle(
+		Request212 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request212StaticHandler
 {
@@ -7904,6 +9821,15 @@ public sealed partial class Request213TraditionalHandler
 		Request213 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request213FoundatioHandler
+{
+	public ValueTask<Response213> Handle(
+		Request213 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -7943,6 +9869,15 @@ public sealed partial class Request214TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request214FoundatioHandler
+{
+	public ValueTask<Response214> Handle(
+		Request214 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request214StaticHandler
 {
@@ -7978,6 +9913,15 @@ public sealed partial class Request215TraditionalHandler
 		Request215 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request215FoundatioHandler
+{
+	public ValueTask<Response215> Handle(
+		Request215 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8017,6 +9961,15 @@ public sealed partial class Request216TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request216FoundatioHandler
+{
+	public ValueTask<Response216> Handle(
+		Request216 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request216StaticHandler
 {
@@ -8052,6 +10005,15 @@ public sealed partial class Request217TraditionalHandler
 		Request217 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request217FoundatioHandler
+{
+	public ValueTask<Response217> Handle(
+		Request217 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8091,6 +10053,15 @@ public sealed partial class Request218TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request218FoundatioHandler
+{
+	public ValueTask<Response218> Handle(
+		Request218 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request218StaticHandler
 {
@@ -8126,6 +10097,15 @@ public sealed partial class Request219TraditionalHandler
 		Request219 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request219FoundatioHandler
+{
+	public ValueTask<Response219> Handle(
+		Request219 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8165,6 +10145,15 @@ public sealed partial class Request220TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request220FoundatioHandler
+{
+	public ValueTask<Response220> Handle(
+		Request220 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request220StaticHandler
 {
@@ -8200,6 +10189,15 @@ public sealed partial class Request221TraditionalHandler
 		Request221 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request221FoundatioHandler
+{
+	public ValueTask<Response221> Handle(
+		Request221 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8239,6 +10237,15 @@ public sealed partial class Request222TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request222FoundatioHandler
+{
+	public ValueTask<Response222> Handle(
+		Request222 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request222StaticHandler
 {
@@ -8274,6 +10281,15 @@ public sealed partial class Request223TraditionalHandler
 		Request223 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request223FoundatioHandler
+{
+	public ValueTask<Response223> Handle(
+		Request223 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8313,6 +10329,15 @@ public sealed partial class Request224TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request224FoundatioHandler
+{
+	public ValueTask<Response224> Handle(
+		Request224 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request224StaticHandler
 {
@@ -8348,6 +10373,15 @@ public sealed partial class Request225TraditionalHandler
 		Request225 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request225FoundatioHandler
+{
+	public ValueTask<Response225> Handle(
+		Request225 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8387,6 +10421,15 @@ public sealed partial class Request226TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request226FoundatioHandler
+{
+	public ValueTask<Response226> Handle(
+		Request226 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request226StaticHandler
 {
@@ -8422,6 +10465,15 @@ public sealed partial class Request227TraditionalHandler
 		Request227 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request227FoundatioHandler
+{
+	public ValueTask<Response227> Handle(
+		Request227 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8461,6 +10513,15 @@ public sealed partial class Request228TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request228FoundatioHandler
+{
+	public ValueTask<Response228> Handle(
+		Request228 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request228StaticHandler
 {
@@ -8496,6 +10557,15 @@ public sealed partial class Request229TraditionalHandler
 		Request229 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request229FoundatioHandler
+{
+	public ValueTask<Response229> Handle(
+		Request229 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8535,6 +10605,15 @@ public sealed partial class Request230TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request230FoundatioHandler
+{
+	public ValueTask<Response230> Handle(
+		Request230 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request230StaticHandler
 {
@@ -8570,6 +10649,15 @@ public sealed partial class Request231TraditionalHandler
 		Request231 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request231FoundatioHandler
+{
+	public ValueTask<Response231> Handle(
+		Request231 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8609,6 +10697,15 @@ public sealed partial class Request232TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request232FoundatioHandler
+{
+	public ValueTask<Response232> Handle(
+		Request232 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request232StaticHandler
 {
@@ -8644,6 +10741,15 @@ public sealed partial class Request233TraditionalHandler
 		Request233 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request233FoundatioHandler
+{
+	public ValueTask<Response233> Handle(
+		Request233 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8683,6 +10789,15 @@ public sealed partial class Request234TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request234FoundatioHandler
+{
+	public ValueTask<Response234> Handle(
+		Request234 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request234StaticHandler
 {
@@ -8718,6 +10833,15 @@ public sealed partial class Request235TraditionalHandler
 		Request235 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request235FoundatioHandler
+{
+	public ValueTask<Response235> Handle(
+		Request235 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8757,6 +10881,15 @@ public sealed partial class Request236TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request236FoundatioHandler
+{
+	public ValueTask<Response236> Handle(
+		Request236 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request236StaticHandler
 {
@@ -8792,6 +10925,15 @@ public sealed partial class Request237TraditionalHandler
 		Request237 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request237FoundatioHandler
+{
+	public ValueTask<Response237> Handle(
+		Request237 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8831,6 +10973,15 @@ public sealed partial class Request238TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request238FoundatioHandler
+{
+	public ValueTask<Response238> Handle(
+		Request238 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request238StaticHandler
 {
@@ -8866,6 +11017,15 @@ public sealed partial class Request239TraditionalHandler
 		Request239 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request239FoundatioHandler
+{
+	public ValueTask<Response239> Handle(
+		Request239 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8905,6 +11065,15 @@ public sealed partial class Request240TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request240FoundatioHandler
+{
+	public ValueTask<Response240> Handle(
+		Request240 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request240StaticHandler
 {
@@ -8940,6 +11109,15 @@ public sealed partial class Request241TraditionalHandler
 		Request241 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request241FoundatioHandler
+{
+	public ValueTask<Response241> Handle(
+		Request241 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -8979,6 +11157,15 @@ public sealed partial class Request242TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request242FoundatioHandler
+{
+	public ValueTask<Response242> Handle(
+		Request242 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request242StaticHandler
 {
@@ -9014,6 +11201,15 @@ public sealed partial class Request243TraditionalHandler
 		Request243 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request243FoundatioHandler
+{
+	public ValueTask<Response243> Handle(
+		Request243 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9053,6 +11249,15 @@ public sealed partial class Request244TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request244FoundatioHandler
+{
+	public ValueTask<Response244> Handle(
+		Request244 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request244StaticHandler
 {
@@ -9088,6 +11293,15 @@ public sealed partial class Request245TraditionalHandler
 		Request245 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request245FoundatioHandler
+{
+	public ValueTask<Response245> Handle(
+		Request245 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9127,6 +11341,15 @@ public sealed partial class Request246TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request246FoundatioHandler
+{
+	public ValueTask<Response246> Handle(
+		Request246 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request246StaticHandler
 {
@@ -9162,6 +11385,15 @@ public sealed partial class Request247TraditionalHandler
 		Request247 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request247FoundatioHandler
+{
+	public ValueTask<Response247> Handle(
+		Request247 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9201,6 +11433,15 @@ public sealed partial class Request248TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request248FoundatioHandler
+{
+	public ValueTask<Response248> Handle(
+		Request248 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request248StaticHandler
 {
@@ -9236,6 +11477,15 @@ public sealed partial class Request249TraditionalHandler
 		Request249 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request249FoundatioHandler
+{
+	public ValueTask<Response249> Handle(
+		Request249 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9275,6 +11525,15 @@ public sealed partial class Request250TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request250FoundatioHandler
+{
+	public ValueTask<Response250> Handle(
+		Request250 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request250StaticHandler
 {
@@ -9310,6 +11569,15 @@ public sealed partial class Request251TraditionalHandler
 		Request251 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request251FoundatioHandler
+{
+	public ValueTask<Response251> Handle(
+		Request251 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9349,6 +11617,15 @@ public sealed partial class Request252TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request252FoundatioHandler
+{
+	public ValueTask<Response252> Handle(
+		Request252 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request252StaticHandler
 {
@@ -9384,6 +11661,15 @@ public sealed partial class Request253TraditionalHandler
 		Request253 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request253FoundatioHandler
+{
+	public ValueTask<Response253> Handle(
+		Request253 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9423,6 +11709,15 @@ public sealed partial class Request254TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request254FoundatioHandler
+{
+	public ValueTask<Response254> Handle(
+		Request254 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request254StaticHandler
 {
@@ -9458,6 +11753,15 @@ public sealed partial class Request255TraditionalHandler
 		Request255 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request255FoundatioHandler
+{
+	public ValueTask<Response255> Handle(
+		Request255 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9497,6 +11801,15 @@ public sealed partial class Request256TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request256FoundatioHandler
+{
+	public ValueTask<Response256> Handle(
+		Request256 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request256StaticHandler
 {
@@ -9532,6 +11845,15 @@ public sealed partial class Request257TraditionalHandler
 		Request257 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request257FoundatioHandler
+{
+	public ValueTask<Response257> Handle(
+		Request257 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9571,6 +11893,15 @@ public sealed partial class Request258TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request258FoundatioHandler
+{
+	public ValueTask<Response258> Handle(
+		Request258 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request258StaticHandler
 {
@@ -9606,6 +11937,15 @@ public sealed partial class Request259TraditionalHandler
 		Request259 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request259FoundatioHandler
+{
+	public ValueTask<Response259> Handle(
+		Request259 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9645,6 +11985,15 @@ public sealed partial class Request260TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request260FoundatioHandler
+{
+	public ValueTask<Response260> Handle(
+		Request260 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request260StaticHandler
 {
@@ -9680,6 +12029,15 @@ public sealed partial class Request261TraditionalHandler
 		Request261 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request261FoundatioHandler
+{
+	public ValueTask<Response261> Handle(
+		Request261 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9719,6 +12077,15 @@ public sealed partial class Request262TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request262FoundatioHandler
+{
+	public ValueTask<Response262> Handle(
+		Request262 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request262StaticHandler
 {
@@ -9754,6 +12121,15 @@ public sealed partial class Request263TraditionalHandler
 		Request263 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request263FoundatioHandler
+{
+	public ValueTask<Response263> Handle(
+		Request263 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9793,6 +12169,15 @@ public sealed partial class Request264TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request264FoundatioHandler
+{
+	public ValueTask<Response264> Handle(
+		Request264 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request264StaticHandler
 {
@@ -9828,6 +12213,15 @@ public sealed partial class Request265TraditionalHandler
 		Request265 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request265FoundatioHandler
+{
+	public ValueTask<Response265> Handle(
+		Request265 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9867,6 +12261,15 @@ public sealed partial class Request266TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request266FoundatioHandler
+{
+	public ValueTask<Response266> Handle(
+		Request266 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request266StaticHandler
 {
@@ -9902,6 +12305,15 @@ public sealed partial class Request267TraditionalHandler
 		Request267 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request267FoundatioHandler
+{
+	public ValueTask<Response267> Handle(
+		Request267 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -9941,6 +12353,15 @@ public sealed partial class Request268TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request268FoundatioHandler
+{
+	public ValueTask<Response268> Handle(
+		Request268 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request268StaticHandler
 {
@@ -9976,6 +12397,15 @@ public sealed partial class Request269TraditionalHandler
 		Request269 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request269FoundatioHandler
+{
+	public ValueTask<Response269> Handle(
+		Request269 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10015,6 +12445,15 @@ public sealed partial class Request270TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request270FoundatioHandler
+{
+	public ValueTask<Response270> Handle(
+		Request270 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request270StaticHandler
 {
@@ -10050,6 +12489,15 @@ public sealed partial class Request271TraditionalHandler
 		Request271 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request271FoundatioHandler
+{
+	public ValueTask<Response271> Handle(
+		Request271 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10089,6 +12537,15 @@ public sealed partial class Request272TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request272FoundatioHandler
+{
+	public ValueTask<Response272> Handle(
+		Request272 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request272StaticHandler
 {
@@ -10124,6 +12581,15 @@ public sealed partial class Request273TraditionalHandler
 		Request273 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request273FoundatioHandler
+{
+	public ValueTask<Response273> Handle(
+		Request273 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10163,6 +12629,15 @@ public sealed partial class Request274TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request274FoundatioHandler
+{
+	public ValueTask<Response274> Handle(
+		Request274 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request274StaticHandler
 {
@@ -10198,6 +12673,15 @@ public sealed partial class Request275TraditionalHandler
 		Request275 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request275FoundatioHandler
+{
+	public ValueTask<Response275> Handle(
+		Request275 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10237,6 +12721,15 @@ public sealed partial class Request276TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request276FoundatioHandler
+{
+	public ValueTask<Response276> Handle(
+		Request276 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request276StaticHandler
 {
@@ -10272,6 +12765,15 @@ public sealed partial class Request277TraditionalHandler
 		Request277 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request277FoundatioHandler
+{
+	public ValueTask<Response277> Handle(
+		Request277 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10311,6 +12813,15 @@ public sealed partial class Request278TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request278FoundatioHandler
+{
+	public ValueTask<Response278> Handle(
+		Request278 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request278StaticHandler
 {
@@ -10346,6 +12857,15 @@ public sealed partial class Request279TraditionalHandler
 		Request279 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request279FoundatioHandler
+{
+	public ValueTask<Response279> Handle(
+		Request279 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10385,6 +12905,15 @@ public sealed partial class Request280TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request280FoundatioHandler
+{
+	public ValueTask<Response280> Handle(
+		Request280 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request280StaticHandler
 {
@@ -10420,6 +12949,15 @@ public sealed partial class Request281TraditionalHandler
 		Request281 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request281FoundatioHandler
+{
+	public ValueTask<Response281> Handle(
+		Request281 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10459,6 +12997,15 @@ public sealed partial class Request282TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request282FoundatioHandler
+{
+	public ValueTask<Response282> Handle(
+		Request282 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request282StaticHandler
 {
@@ -10494,6 +13041,15 @@ public sealed partial class Request283TraditionalHandler
 		Request283 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request283FoundatioHandler
+{
+	public ValueTask<Response283> Handle(
+		Request283 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10533,6 +13089,15 @@ public sealed partial class Request284TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request284FoundatioHandler
+{
+	public ValueTask<Response284> Handle(
+		Request284 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request284StaticHandler
 {
@@ -10568,6 +13133,15 @@ public sealed partial class Request285TraditionalHandler
 		Request285 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request285FoundatioHandler
+{
+	public ValueTask<Response285> Handle(
+		Request285 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10607,6 +13181,15 @@ public sealed partial class Request286TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request286FoundatioHandler
+{
+	public ValueTask<Response286> Handle(
+		Request286 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request286StaticHandler
 {
@@ -10642,6 +13225,15 @@ public sealed partial class Request287TraditionalHandler
 		Request287 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request287FoundatioHandler
+{
+	public ValueTask<Response287> Handle(
+		Request287 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10681,6 +13273,15 @@ public sealed partial class Request288TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request288FoundatioHandler
+{
+	public ValueTask<Response288> Handle(
+		Request288 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request288StaticHandler
 {
@@ -10716,6 +13317,15 @@ public sealed partial class Request289TraditionalHandler
 		Request289 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request289FoundatioHandler
+{
+	public ValueTask<Response289> Handle(
+		Request289 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10755,6 +13365,15 @@ public sealed partial class Request290TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request290FoundatioHandler
+{
+	public ValueTask<Response290> Handle(
+		Request290 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request290StaticHandler
 {
@@ -10790,6 +13409,15 @@ public sealed partial class Request291TraditionalHandler
 		Request291 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request291FoundatioHandler
+{
+	public ValueTask<Response291> Handle(
+		Request291 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10829,6 +13457,15 @@ public sealed partial class Request292TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request292FoundatioHandler
+{
+	public ValueTask<Response292> Handle(
+		Request292 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request292StaticHandler
 {
@@ -10864,6 +13501,15 @@ public sealed partial class Request293TraditionalHandler
 		Request293 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request293FoundatioHandler
+{
+	public ValueTask<Response293> Handle(
+		Request293 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10903,6 +13549,15 @@ public sealed partial class Request294TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request294FoundatioHandler
+{
+	public ValueTask<Response294> Handle(
+		Request294 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request294StaticHandler
 {
@@ -10938,6 +13593,15 @@ public sealed partial class Request295TraditionalHandler
 		Request295 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request295FoundatioHandler
+{
+	public ValueTask<Response295> Handle(
+		Request295 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -10977,6 +13641,15 @@ public sealed partial class Request296TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request296FoundatioHandler
+{
+	public ValueTask<Response296> Handle(
+		Request296 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request296StaticHandler
 {
@@ -11012,6 +13685,15 @@ public sealed partial class Request297TraditionalHandler
 		Request297 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request297FoundatioHandler
+{
+	public ValueTask<Response297> Handle(
+		Request297 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11051,6 +13733,15 @@ public sealed partial class Request298TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request298FoundatioHandler
+{
+	public ValueTask<Response298> Handle(
+		Request298 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request298StaticHandler
 {
@@ -11086,6 +13777,15 @@ public sealed partial class Request299TraditionalHandler
 		Request299 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request299FoundatioHandler
+{
+	public ValueTask<Response299> Handle(
+		Request299 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11125,6 +13825,15 @@ public sealed partial class Request300TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request300FoundatioHandler
+{
+	public ValueTask<Response300> Handle(
+		Request300 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request300StaticHandler
 {
@@ -11160,6 +13869,15 @@ public sealed partial class Request301TraditionalHandler
 		Request301 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request301FoundatioHandler
+{
+	public ValueTask<Response301> Handle(
+		Request301 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11199,6 +13917,15 @@ public sealed partial class Request302TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request302FoundatioHandler
+{
+	public ValueTask<Response302> Handle(
+		Request302 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request302StaticHandler
 {
@@ -11234,6 +13961,15 @@ public sealed partial class Request303TraditionalHandler
 		Request303 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request303FoundatioHandler
+{
+	public ValueTask<Response303> Handle(
+		Request303 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11273,6 +14009,15 @@ public sealed partial class Request304TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request304FoundatioHandler
+{
+	public ValueTask<Response304> Handle(
+		Request304 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request304StaticHandler
 {
@@ -11308,6 +14053,15 @@ public sealed partial class Request305TraditionalHandler
 		Request305 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request305FoundatioHandler
+{
+	public ValueTask<Response305> Handle(
+		Request305 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11347,6 +14101,15 @@ public sealed partial class Request306TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request306FoundatioHandler
+{
+	public ValueTask<Response306> Handle(
+		Request306 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request306StaticHandler
 {
@@ -11382,6 +14145,15 @@ public sealed partial class Request307TraditionalHandler
 		Request307 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request307FoundatioHandler
+{
+	public ValueTask<Response307> Handle(
+		Request307 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11421,6 +14193,15 @@ public sealed partial class Request308TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request308FoundatioHandler
+{
+	public ValueTask<Response308> Handle(
+		Request308 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request308StaticHandler
 {
@@ -11456,6 +14237,15 @@ public sealed partial class Request309TraditionalHandler
 		Request309 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request309FoundatioHandler
+{
+	public ValueTask<Response309> Handle(
+		Request309 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11495,6 +14285,15 @@ public sealed partial class Request310TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request310FoundatioHandler
+{
+	public ValueTask<Response310> Handle(
+		Request310 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request310StaticHandler
 {
@@ -11530,6 +14329,15 @@ public sealed partial class Request311TraditionalHandler
 		Request311 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request311FoundatioHandler
+{
+	public ValueTask<Response311> Handle(
+		Request311 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11569,6 +14377,15 @@ public sealed partial class Request312TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request312FoundatioHandler
+{
+	public ValueTask<Response312> Handle(
+		Request312 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request312StaticHandler
 {
@@ -11604,6 +14421,15 @@ public sealed partial class Request313TraditionalHandler
 		Request313 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request313FoundatioHandler
+{
+	public ValueTask<Response313> Handle(
+		Request313 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11643,6 +14469,15 @@ public sealed partial class Request314TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request314FoundatioHandler
+{
+	public ValueTask<Response314> Handle(
+		Request314 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request314StaticHandler
 {
@@ -11678,6 +14513,15 @@ public sealed partial class Request315TraditionalHandler
 		Request315 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request315FoundatioHandler
+{
+	public ValueTask<Response315> Handle(
+		Request315 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11717,6 +14561,15 @@ public sealed partial class Request316TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request316FoundatioHandler
+{
+	public ValueTask<Response316> Handle(
+		Request316 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request316StaticHandler
 {
@@ -11752,6 +14605,15 @@ public sealed partial class Request317TraditionalHandler
 		Request317 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request317FoundatioHandler
+{
+	public ValueTask<Response317> Handle(
+		Request317 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11791,6 +14653,15 @@ public sealed partial class Request318TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request318FoundatioHandler
+{
+	public ValueTask<Response318> Handle(
+		Request318 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request318StaticHandler
 {
@@ -11826,6 +14697,15 @@ public sealed partial class Request319TraditionalHandler
 		Request319 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request319FoundatioHandler
+{
+	public ValueTask<Response319> Handle(
+		Request319 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11865,6 +14745,15 @@ public sealed partial class Request320TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request320FoundatioHandler
+{
+	public ValueTask<Response320> Handle(
+		Request320 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request320StaticHandler
 {
@@ -11900,6 +14789,15 @@ public sealed partial class Request321TraditionalHandler
 		Request321 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request321FoundatioHandler
+{
+	public ValueTask<Response321> Handle(
+		Request321 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -11939,6 +14837,15 @@ public sealed partial class Request322TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request322FoundatioHandler
+{
+	public ValueTask<Response322> Handle(
+		Request322 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request322StaticHandler
 {
@@ -11974,6 +14881,15 @@ public sealed partial class Request323TraditionalHandler
 		Request323 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request323FoundatioHandler
+{
+	public ValueTask<Response323> Handle(
+		Request323 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12013,6 +14929,15 @@ public sealed partial class Request324TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request324FoundatioHandler
+{
+	public ValueTask<Response324> Handle(
+		Request324 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request324StaticHandler
 {
@@ -12048,6 +14973,15 @@ public sealed partial class Request325TraditionalHandler
 		Request325 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request325FoundatioHandler
+{
+	public ValueTask<Response325> Handle(
+		Request325 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12087,6 +15021,15 @@ public sealed partial class Request326TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request326FoundatioHandler
+{
+	public ValueTask<Response326> Handle(
+		Request326 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request326StaticHandler
 {
@@ -12122,6 +15065,15 @@ public sealed partial class Request327TraditionalHandler
 		Request327 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request327FoundatioHandler
+{
+	public ValueTask<Response327> Handle(
+		Request327 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12161,6 +15113,15 @@ public sealed partial class Request328TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request328FoundatioHandler
+{
+	public ValueTask<Response328> Handle(
+		Request328 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request328StaticHandler
 {
@@ -12196,6 +15157,15 @@ public sealed partial class Request329TraditionalHandler
 		Request329 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request329FoundatioHandler
+{
+	public ValueTask<Response329> Handle(
+		Request329 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12235,6 +15205,15 @@ public sealed partial class Request330TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request330FoundatioHandler
+{
+	public ValueTask<Response330> Handle(
+		Request330 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request330StaticHandler
 {
@@ -12270,6 +15249,15 @@ public sealed partial class Request331TraditionalHandler
 		Request331 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request331FoundatioHandler
+{
+	public ValueTask<Response331> Handle(
+		Request331 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12309,6 +15297,15 @@ public sealed partial class Request332TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request332FoundatioHandler
+{
+	public ValueTask<Response332> Handle(
+		Request332 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request332StaticHandler
 {
@@ -12344,6 +15341,15 @@ public sealed partial class Request333TraditionalHandler
 		Request333 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request333FoundatioHandler
+{
+	public ValueTask<Response333> Handle(
+		Request333 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12383,6 +15389,15 @@ public sealed partial class Request334TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request334FoundatioHandler
+{
+	public ValueTask<Response334> Handle(
+		Request334 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request334StaticHandler
 {
@@ -12418,6 +15433,15 @@ public sealed partial class Request335TraditionalHandler
 		Request335 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request335FoundatioHandler
+{
+	public ValueTask<Response335> Handle(
+		Request335 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12457,6 +15481,15 @@ public sealed partial class Request336TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request336FoundatioHandler
+{
+	public ValueTask<Response336> Handle(
+		Request336 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request336StaticHandler
 {
@@ -12492,6 +15525,15 @@ public sealed partial class Request337TraditionalHandler
 		Request337 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request337FoundatioHandler
+{
+	public ValueTask<Response337> Handle(
+		Request337 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12531,6 +15573,15 @@ public sealed partial class Request338TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request338FoundatioHandler
+{
+	public ValueTask<Response338> Handle(
+		Request338 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request338StaticHandler
 {
@@ -12566,6 +15617,15 @@ public sealed partial class Request339TraditionalHandler
 		Request339 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request339FoundatioHandler
+{
+	public ValueTask<Response339> Handle(
+		Request339 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12605,6 +15665,15 @@ public sealed partial class Request340TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request340FoundatioHandler
+{
+	public ValueTask<Response340> Handle(
+		Request340 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request340StaticHandler
 {
@@ -12640,6 +15709,15 @@ public sealed partial class Request341TraditionalHandler
 		Request341 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request341FoundatioHandler
+{
+	public ValueTask<Response341> Handle(
+		Request341 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12679,6 +15757,15 @@ public sealed partial class Request342TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request342FoundatioHandler
+{
+	public ValueTask<Response342> Handle(
+		Request342 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request342StaticHandler
 {
@@ -12714,6 +15801,15 @@ public sealed partial class Request343TraditionalHandler
 		Request343 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request343FoundatioHandler
+{
+	public ValueTask<Response343> Handle(
+		Request343 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12753,6 +15849,15 @@ public sealed partial class Request344TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request344FoundatioHandler
+{
+	public ValueTask<Response344> Handle(
+		Request344 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request344StaticHandler
 {
@@ -12788,6 +15893,15 @@ public sealed partial class Request345TraditionalHandler
 		Request345 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request345FoundatioHandler
+{
+	public ValueTask<Response345> Handle(
+		Request345 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12827,6 +15941,15 @@ public sealed partial class Request346TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request346FoundatioHandler
+{
+	public ValueTask<Response346> Handle(
+		Request346 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request346StaticHandler
 {
@@ -12862,6 +15985,15 @@ public sealed partial class Request347TraditionalHandler
 		Request347 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request347FoundatioHandler
+{
+	public ValueTask<Response347> Handle(
+		Request347 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12901,6 +16033,15 @@ public sealed partial class Request348TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request348FoundatioHandler
+{
+	public ValueTask<Response348> Handle(
+		Request348 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request348StaticHandler
 {
@@ -12936,6 +16077,15 @@ public sealed partial class Request349TraditionalHandler
 		Request349 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request349FoundatioHandler
+{
+	public ValueTask<Response349> Handle(
+		Request349 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -12975,6 +16125,15 @@ public sealed partial class Request350TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request350FoundatioHandler
+{
+	public ValueTask<Response350> Handle(
+		Request350 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request350StaticHandler
 {
@@ -13010,6 +16169,15 @@ public sealed partial class Request351TraditionalHandler
 		Request351 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request351FoundatioHandler
+{
+	public ValueTask<Response351> Handle(
+		Request351 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13049,6 +16217,15 @@ public sealed partial class Request352TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request352FoundatioHandler
+{
+	public ValueTask<Response352> Handle(
+		Request352 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request352StaticHandler
 {
@@ -13084,6 +16261,15 @@ public sealed partial class Request353TraditionalHandler
 		Request353 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request353FoundatioHandler
+{
+	public ValueTask<Response353> Handle(
+		Request353 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13123,6 +16309,15 @@ public sealed partial class Request354TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request354FoundatioHandler
+{
+	public ValueTask<Response354> Handle(
+		Request354 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request354StaticHandler
 {
@@ -13158,6 +16353,15 @@ public sealed partial class Request355TraditionalHandler
 		Request355 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request355FoundatioHandler
+{
+	public ValueTask<Response355> Handle(
+		Request355 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13197,6 +16401,15 @@ public sealed partial class Request356TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request356FoundatioHandler
+{
+	public ValueTask<Response356> Handle(
+		Request356 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request356StaticHandler
 {
@@ -13232,6 +16445,15 @@ public sealed partial class Request357TraditionalHandler
 		Request357 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request357FoundatioHandler
+{
+	public ValueTask<Response357> Handle(
+		Request357 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13271,6 +16493,15 @@ public sealed partial class Request358TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request358FoundatioHandler
+{
+	public ValueTask<Response358> Handle(
+		Request358 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request358StaticHandler
 {
@@ -13306,6 +16537,15 @@ public sealed partial class Request359TraditionalHandler
 		Request359 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request359FoundatioHandler
+{
+	public ValueTask<Response359> Handle(
+		Request359 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13345,6 +16585,15 @@ public sealed partial class Request360TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request360FoundatioHandler
+{
+	public ValueTask<Response360> Handle(
+		Request360 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request360StaticHandler
 {
@@ -13380,6 +16629,15 @@ public sealed partial class Request361TraditionalHandler
 		Request361 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request361FoundatioHandler
+{
+	public ValueTask<Response361> Handle(
+		Request361 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13419,6 +16677,15 @@ public sealed partial class Request362TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request362FoundatioHandler
+{
+	public ValueTask<Response362> Handle(
+		Request362 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request362StaticHandler
 {
@@ -13454,6 +16721,15 @@ public sealed partial class Request363TraditionalHandler
 		Request363 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request363FoundatioHandler
+{
+	public ValueTask<Response363> Handle(
+		Request363 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13493,6 +16769,15 @@ public sealed partial class Request364TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request364FoundatioHandler
+{
+	public ValueTask<Response364> Handle(
+		Request364 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request364StaticHandler
 {
@@ -13528,6 +16813,15 @@ public sealed partial class Request365TraditionalHandler
 		Request365 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request365FoundatioHandler
+{
+	public ValueTask<Response365> Handle(
+		Request365 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13567,6 +16861,15 @@ public sealed partial class Request366TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request366FoundatioHandler
+{
+	public ValueTask<Response366> Handle(
+		Request366 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request366StaticHandler
 {
@@ -13602,6 +16905,15 @@ public sealed partial class Request367TraditionalHandler
 		Request367 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request367FoundatioHandler
+{
+	public ValueTask<Response367> Handle(
+		Request367 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13641,6 +16953,15 @@ public sealed partial class Request368TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request368FoundatioHandler
+{
+	public ValueTask<Response368> Handle(
+		Request368 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request368StaticHandler
 {
@@ -13676,6 +16997,15 @@ public sealed partial class Request369TraditionalHandler
 		Request369 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request369FoundatioHandler
+{
+	public ValueTask<Response369> Handle(
+		Request369 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13715,6 +17045,15 @@ public sealed partial class Request370TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request370FoundatioHandler
+{
+	public ValueTask<Response370> Handle(
+		Request370 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request370StaticHandler
 {
@@ -13750,6 +17089,15 @@ public sealed partial class Request371TraditionalHandler
 		Request371 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request371FoundatioHandler
+{
+	public ValueTask<Response371> Handle(
+		Request371 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13789,6 +17137,15 @@ public sealed partial class Request372TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request372FoundatioHandler
+{
+	public ValueTask<Response372> Handle(
+		Request372 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request372StaticHandler
 {
@@ -13824,6 +17181,15 @@ public sealed partial class Request373TraditionalHandler
 		Request373 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request373FoundatioHandler
+{
+	public ValueTask<Response373> Handle(
+		Request373 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13863,6 +17229,15 @@ public sealed partial class Request374TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request374FoundatioHandler
+{
+	public ValueTask<Response374> Handle(
+		Request374 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request374StaticHandler
 {
@@ -13898,6 +17273,15 @@ public sealed partial class Request375TraditionalHandler
 		Request375 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request375FoundatioHandler
+{
+	public ValueTask<Response375> Handle(
+		Request375 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -13937,6 +17321,15 @@ public sealed partial class Request376TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request376FoundatioHandler
+{
+	public ValueTask<Response376> Handle(
+		Request376 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request376StaticHandler
 {
@@ -13972,6 +17365,15 @@ public sealed partial class Request377TraditionalHandler
 		Request377 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request377FoundatioHandler
+{
+	public ValueTask<Response377> Handle(
+		Request377 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14011,6 +17413,15 @@ public sealed partial class Request378TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request378FoundatioHandler
+{
+	public ValueTask<Response378> Handle(
+		Request378 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request378StaticHandler
 {
@@ -14046,6 +17457,15 @@ public sealed partial class Request379TraditionalHandler
 		Request379 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request379FoundatioHandler
+{
+	public ValueTask<Response379> Handle(
+		Request379 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14085,6 +17505,15 @@ public sealed partial class Request380TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request380FoundatioHandler
+{
+	public ValueTask<Response380> Handle(
+		Request380 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request380StaticHandler
 {
@@ -14120,6 +17549,15 @@ public sealed partial class Request381TraditionalHandler
 		Request381 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request381FoundatioHandler
+{
+	public ValueTask<Response381> Handle(
+		Request381 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14159,6 +17597,15 @@ public sealed partial class Request382TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request382FoundatioHandler
+{
+	public ValueTask<Response382> Handle(
+		Request382 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request382StaticHandler
 {
@@ -14194,6 +17641,15 @@ public sealed partial class Request383TraditionalHandler
 		Request383 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request383FoundatioHandler
+{
+	public ValueTask<Response383> Handle(
+		Request383 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14233,6 +17689,15 @@ public sealed partial class Request384TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request384FoundatioHandler
+{
+	public ValueTask<Response384> Handle(
+		Request384 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request384StaticHandler
 {
@@ -14268,6 +17733,15 @@ public sealed partial class Request385TraditionalHandler
 		Request385 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request385FoundatioHandler
+{
+	public ValueTask<Response385> Handle(
+		Request385 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14307,6 +17781,15 @@ public sealed partial class Request386TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request386FoundatioHandler
+{
+	public ValueTask<Response386> Handle(
+		Request386 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request386StaticHandler
 {
@@ -14342,6 +17825,15 @@ public sealed partial class Request387TraditionalHandler
 		Request387 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request387FoundatioHandler
+{
+	public ValueTask<Response387> Handle(
+		Request387 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14381,6 +17873,15 @@ public sealed partial class Request388TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request388FoundatioHandler
+{
+	public ValueTask<Response388> Handle(
+		Request388 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request388StaticHandler
 {
@@ -14416,6 +17917,15 @@ public sealed partial class Request389TraditionalHandler
 		Request389 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request389FoundatioHandler
+{
+	public ValueTask<Response389> Handle(
+		Request389 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14455,6 +17965,15 @@ public sealed partial class Request390TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request390FoundatioHandler
+{
+	public ValueTask<Response390> Handle(
+		Request390 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request390StaticHandler
 {
@@ -14490,6 +18009,15 @@ public sealed partial class Request391TraditionalHandler
 		Request391 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request391FoundatioHandler
+{
+	public ValueTask<Response391> Handle(
+		Request391 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14529,6 +18057,15 @@ public sealed partial class Request392TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request392FoundatioHandler
+{
+	public ValueTask<Response392> Handle(
+		Request392 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request392StaticHandler
 {
@@ -14564,6 +18101,15 @@ public sealed partial class Request393TraditionalHandler
 		Request393 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request393FoundatioHandler
+{
+	public ValueTask<Response393> Handle(
+		Request393 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14603,6 +18149,15 @@ public sealed partial class Request394TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request394FoundatioHandler
+{
+	public ValueTask<Response394> Handle(
+		Request394 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request394StaticHandler
 {
@@ -14638,6 +18193,15 @@ public sealed partial class Request395TraditionalHandler
 		Request395 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request395FoundatioHandler
+{
+	public ValueTask<Response395> Handle(
+		Request395 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14677,6 +18241,15 @@ public sealed partial class Request396TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request396FoundatioHandler
+{
+	public ValueTask<Response396> Handle(
+		Request396 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request396StaticHandler
 {
@@ -14712,6 +18285,15 @@ public sealed partial class Request397TraditionalHandler
 		Request397 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request397FoundatioHandler
+{
+	public ValueTask<Response397> Handle(
+		Request397 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14751,6 +18333,15 @@ public sealed partial class Request398TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request398FoundatioHandler
+{
+	public ValueTask<Response398> Handle(
+		Request398 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request398StaticHandler
 {
@@ -14786,6 +18377,15 @@ public sealed partial class Request399TraditionalHandler
 		Request399 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request399FoundatioHandler
+{
+	public ValueTask<Response399> Handle(
+		Request399 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14825,6 +18425,15 @@ public sealed partial class Request400TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request400FoundatioHandler
+{
+	public ValueTask<Response400> Handle(
+		Request400 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request400StaticHandler
 {
@@ -14860,6 +18469,15 @@ public sealed partial class Request401TraditionalHandler
 		Request401 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request401FoundatioHandler
+{
+	public ValueTask<Response401> Handle(
+		Request401 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14899,6 +18517,15 @@ public sealed partial class Request402TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request402FoundatioHandler
+{
+	public ValueTask<Response402> Handle(
+		Request402 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request402StaticHandler
 {
@@ -14934,6 +18561,15 @@ public sealed partial class Request403TraditionalHandler
 		Request403 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request403FoundatioHandler
+{
+	public ValueTask<Response403> Handle(
+		Request403 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -14973,6 +18609,15 @@ public sealed partial class Request404TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request404FoundatioHandler
+{
+	public ValueTask<Response404> Handle(
+		Request404 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request404StaticHandler
 {
@@ -15008,6 +18653,15 @@ public sealed partial class Request405TraditionalHandler
 		Request405 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request405FoundatioHandler
+{
+	public ValueTask<Response405> Handle(
+		Request405 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15047,6 +18701,15 @@ public sealed partial class Request406TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request406FoundatioHandler
+{
+	public ValueTask<Response406> Handle(
+		Request406 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request406StaticHandler
 {
@@ -15082,6 +18745,15 @@ public sealed partial class Request407TraditionalHandler
 		Request407 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request407FoundatioHandler
+{
+	public ValueTask<Response407> Handle(
+		Request407 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15121,6 +18793,15 @@ public sealed partial class Request408TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request408FoundatioHandler
+{
+	public ValueTask<Response408> Handle(
+		Request408 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request408StaticHandler
 {
@@ -15156,6 +18837,15 @@ public sealed partial class Request409TraditionalHandler
 		Request409 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request409FoundatioHandler
+{
+	public ValueTask<Response409> Handle(
+		Request409 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15195,6 +18885,15 @@ public sealed partial class Request410TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request410FoundatioHandler
+{
+	public ValueTask<Response410> Handle(
+		Request410 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request410StaticHandler
 {
@@ -15230,6 +18929,15 @@ public sealed partial class Request411TraditionalHandler
 		Request411 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request411FoundatioHandler
+{
+	public ValueTask<Response411> Handle(
+		Request411 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15269,6 +18977,15 @@ public sealed partial class Request412TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request412FoundatioHandler
+{
+	public ValueTask<Response412> Handle(
+		Request412 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request412StaticHandler
 {
@@ -15304,6 +19021,15 @@ public sealed partial class Request413TraditionalHandler
 		Request413 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request413FoundatioHandler
+{
+	public ValueTask<Response413> Handle(
+		Request413 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15343,6 +19069,15 @@ public sealed partial class Request414TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request414FoundatioHandler
+{
+	public ValueTask<Response414> Handle(
+		Request414 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request414StaticHandler
 {
@@ -15378,6 +19113,15 @@ public sealed partial class Request415TraditionalHandler
 		Request415 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request415FoundatioHandler
+{
+	public ValueTask<Response415> Handle(
+		Request415 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15417,6 +19161,15 @@ public sealed partial class Request416TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request416FoundatioHandler
+{
+	public ValueTask<Response416> Handle(
+		Request416 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request416StaticHandler
 {
@@ -15452,6 +19205,15 @@ public sealed partial class Request417TraditionalHandler
 		Request417 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request417FoundatioHandler
+{
+	public ValueTask<Response417> Handle(
+		Request417 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15491,6 +19253,15 @@ public sealed partial class Request418TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request418FoundatioHandler
+{
+	public ValueTask<Response418> Handle(
+		Request418 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request418StaticHandler
 {
@@ -15526,6 +19297,15 @@ public sealed partial class Request419TraditionalHandler
 		Request419 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request419FoundatioHandler
+{
+	public ValueTask<Response419> Handle(
+		Request419 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15565,6 +19345,15 @@ public sealed partial class Request420TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request420FoundatioHandler
+{
+	public ValueTask<Response420> Handle(
+		Request420 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request420StaticHandler
 {
@@ -15600,6 +19389,15 @@ public sealed partial class Request421TraditionalHandler
 		Request421 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request421FoundatioHandler
+{
+	public ValueTask<Response421> Handle(
+		Request421 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15639,6 +19437,15 @@ public sealed partial class Request422TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request422FoundatioHandler
+{
+	public ValueTask<Response422> Handle(
+		Request422 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request422StaticHandler
 {
@@ -15674,6 +19481,15 @@ public sealed partial class Request423TraditionalHandler
 		Request423 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request423FoundatioHandler
+{
+	public ValueTask<Response423> Handle(
+		Request423 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15713,6 +19529,15 @@ public sealed partial class Request424TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request424FoundatioHandler
+{
+	public ValueTask<Response424> Handle(
+		Request424 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request424StaticHandler
 {
@@ -15748,6 +19573,15 @@ public sealed partial class Request425TraditionalHandler
 		Request425 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request425FoundatioHandler
+{
+	public ValueTask<Response425> Handle(
+		Request425 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15787,6 +19621,15 @@ public sealed partial class Request426TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request426FoundatioHandler
+{
+	public ValueTask<Response426> Handle(
+		Request426 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request426StaticHandler
 {
@@ -15822,6 +19665,15 @@ public sealed partial class Request427TraditionalHandler
 		Request427 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request427FoundatioHandler
+{
+	public ValueTask<Response427> Handle(
+		Request427 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15861,6 +19713,15 @@ public sealed partial class Request428TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request428FoundatioHandler
+{
+	public ValueTask<Response428> Handle(
+		Request428 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request428StaticHandler
 {
@@ -15896,6 +19757,15 @@ public sealed partial class Request429TraditionalHandler
 		Request429 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request429FoundatioHandler
+{
+	public ValueTask<Response429> Handle(
+		Request429 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -15935,6 +19805,15 @@ public sealed partial class Request430TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request430FoundatioHandler
+{
+	public ValueTask<Response430> Handle(
+		Request430 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request430StaticHandler
 {
@@ -15970,6 +19849,15 @@ public sealed partial class Request431TraditionalHandler
 		Request431 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request431FoundatioHandler
+{
+	public ValueTask<Response431> Handle(
+		Request431 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16009,6 +19897,15 @@ public sealed partial class Request432TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request432FoundatioHandler
+{
+	public ValueTask<Response432> Handle(
+		Request432 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request432StaticHandler
 {
@@ -16044,6 +19941,15 @@ public sealed partial class Request433TraditionalHandler
 		Request433 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request433FoundatioHandler
+{
+	public ValueTask<Response433> Handle(
+		Request433 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16083,6 +19989,15 @@ public sealed partial class Request434TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request434FoundatioHandler
+{
+	public ValueTask<Response434> Handle(
+		Request434 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request434StaticHandler
 {
@@ -16118,6 +20033,15 @@ public sealed partial class Request435TraditionalHandler
 		Request435 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request435FoundatioHandler
+{
+	public ValueTask<Response435> Handle(
+		Request435 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16157,6 +20081,15 @@ public sealed partial class Request436TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request436FoundatioHandler
+{
+	public ValueTask<Response436> Handle(
+		Request436 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request436StaticHandler
 {
@@ -16192,6 +20125,15 @@ public sealed partial class Request437TraditionalHandler
 		Request437 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request437FoundatioHandler
+{
+	public ValueTask<Response437> Handle(
+		Request437 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16231,6 +20173,15 @@ public sealed partial class Request438TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request438FoundatioHandler
+{
+	public ValueTask<Response438> Handle(
+		Request438 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request438StaticHandler
 {
@@ -16266,6 +20217,15 @@ public sealed partial class Request439TraditionalHandler
 		Request439 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request439FoundatioHandler
+{
+	public ValueTask<Response439> Handle(
+		Request439 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16305,6 +20265,15 @@ public sealed partial class Request440TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request440FoundatioHandler
+{
+	public ValueTask<Response440> Handle(
+		Request440 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request440StaticHandler
 {
@@ -16340,6 +20309,15 @@ public sealed partial class Request441TraditionalHandler
 		Request441 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request441FoundatioHandler
+{
+	public ValueTask<Response441> Handle(
+		Request441 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16379,6 +20357,15 @@ public sealed partial class Request442TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request442FoundatioHandler
+{
+	public ValueTask<Response442> Handle(
+		Request442 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request442StaticHandler
 {
@@ -16414,6 +20401,15 @@ public sealed partial class Request443TraditionalHandler
 		Request443 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request443FoundatioHandler
+{
+	public ValueTask<Response443> Handle(
+		Request443 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16453,6 +20449,15 @@ public sealed partial class Request444TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request444FoundatioHandler
+{
+	public ValueTask<Response444> Handle(
+		Request444 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request444StaticHandler
 {
@@ -16488,6 +20493,15 @@ public sealed partial class Request445TraditionalHandler
 		Request445 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request445FoundatioHandler
+{
+	public ValueTask<Response445> Handle(
+		Request445 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16527,6 +20541,15 @@ public sealed partial class Request446TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request446FoundatioHandler
+{
+	public ValueTask<Response446> Handle(
+		Request446 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request446StaticHandler
 {
@@ -16562,6 +20585,15 @@ public sealed partial class Request447TraditionalHandler
 		Request447 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request447FoundatioHandler
+{
+	public ValueTask<Response447> Handle(
+		Request447 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16601,6 +20633,15 @@ public sealed partial class Request448TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request448FoundatioHandler
+{
+	public ValueTask<Response448> Handle(
+		Request448 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request448StaticHandler
 {
@@ -16636,6 +20677,15 @@ public sealed partial class Request449TraditionalHandler
 		Request449 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request449FoundatioHandler
+{
+	public ValueTask<Response449> Handle(
+		Request449 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16675,6 +20725,15 @@ public sealed partial class Request450TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request450FoundatioHandler
+{
+	public ValueTask<Response450> Handle(
+		Request450 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request450StaticHandler
 {
@@ -16710,6 +20769,15 @@ public sealed partial class Request451TraditionalHandler
 		Request451 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request451FoundatioHandler
+{
+	public ValueTask<Response451> Handle(
+		Request451 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16749,6 +20817,15 @@ public sealed partial class Request452TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request452FoundatioHandler
+{
+	public ValueTask<Response452> Handle(
+		Request452 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request452StaticHandler
 {
@@ -16784,6 +20861,15 @@ public sealed partial class Request453TraditionalHandler
 		Request453 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request453FoundatioHandler
+{
+	public ValueTask<Response453> Handle(
+		Request453 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16823,6 +20909,15 @@ public sealed partial class Request454TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request454FoundatioHandler
+{
+	public ValueTask<Response454> Handle(
+		Request454 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request454StaticHandler
 {
@@ -16858,6 +20953,15 @@ public sealed partial class Request455TraditionalHandler
 		Request455 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request455FoundatioHandler
+{
+	public ValueTask<Response455> Handle(
+		Request455 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16897,6 +21001,15 @@ public sealed partial class Request456TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request456FoundatioHandler
+{
+	public ValueTask<Response456> Handle(
+		Request456 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request456StaticHandler
 {
@@ -16932,6 +21045,15 @@ public sealed partial class Request457TraditionalHandler
 		Request457 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request457FoundatioHandler
+{
+	public ValueTask<Response457> Handle(
+		Request457 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -16971,6 +21093,15 @@ public sealed partial class Request458TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request458FoundatioHandler
+{
+	public ValueTask<Response458> Handle(
+		Request458 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request458StaticHandler
 {
@@ -17006,6 +21137,15 @@ public sealed partial class Request459TraditionalHandler
 		Request459 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request459FoundatioHandler
+{
+	public ValueTask<Response459> Handle(
+		Request459 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17045,6 +21185,15 @@ public sealed partial class Request460TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request460FoundatioHandler
+{
+	public ValueTask<Response460> Handle(
+		Request460 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request460StaticHandler
 {
@@ -17080,6 +21229,15 @@ public sealed partial class Request461TraditionalHandler
 		Request461 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request461FoundatioHandler
+{
+	public ValueTask<Response461> Handle(
+		Request461 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17119,6 +21277,15 @@ public sealed partial class Request462TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request462FoundatioHandler
+{
+	public ValueTask<Response462> Handle(
+		Request462 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request462StaticHandler
 {
@@ -17154,6 +21321,15 @@ public sealed partial class Request463TraditionalHandler
 		Request463 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request463FoundatioHandler
+{
+	public ValueTask<Response463> Handle(
+		Request463 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17193,6 +21369,15 @@ public sealed partial class Request464TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request464FoundatioHandler
+{
+	public ValueTask<Response464> Handle(
+		Request464 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request464StaticHandler
 {
@@ -17228,6 +21413,15 @@ public sealed partial class Request465TraditionalHandler
 		Request465 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request465FoundatioHandler
+{
+	public ValueTask<Response465> Handle(
+		Request465 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17267,6 +21461,15 @@ public sealed partial class Request466TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request466FoundatioHandler
+{
+	public ValueTask<Response466> Handle(
+		Request466 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request466StaticHandler
 {
@@ -17302,6 +21505,15 @@ public sealed partial class Request467TraditionalHandler
 		Request467 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request467FoundatioHandler
+{
+	public ValueTask<Response467> Handle(
+		Request467 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17341,6 +21553,15 @@ public sealed partial class Request468TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request468FoundatioHandler
+{
+	public ValueTask<Response468> Handle(
+		Request468 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request468StaticHandler
 {
@@ -17376,6 +21597,15 @@ public sealed partial class Request469TraditionalHandler
 		Request469 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request469FoundatioHandler
+{
+	public ValueTask<Response469> Handle(
+		Request469 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17415,6 +21645,15 @@ public sealed partial class Request470TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request470FoundatioHandler
+{
+	public ValueTask<Response470> Handle(
+		Request470 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request470StaticHandler
 {
@@ -17450,6 +21689,15 @@ public sealed partial class Request471TraditionalHandler
 		Request471 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request471FoundatioHandler
+{
+	public ValueTask<Response471> Handle(
+		Request471 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17489,6 +21737,15 @@ public sealed partial class Request472TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request472FoundatioHandler
+{
+	public ValueTask<Response472> Handle(
+		Request472 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request472StaticHandler
 {
@@ -17524,6 +21781,15 @@ public sealed partial class Request473TraditionalHandler
 		Request473 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request473FoundatioHandler
+{
+	public ValueTask<Response473> Handle(
+		Request473 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17563,6 +21829,15 @@ public sealed partial class Request474TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request474FoundatioHandler
+{
+	public ValueTask<Response474> Handle(
+		Request474 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request474StaticHandler
 {
@@ -17598,6 +21873,15 @@ public sealed partial class Request475TraditionalHandler
 		Request475 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request475FoundatioHandler
+{
+	public ValueTask<Response475> Handle(
+		Request475 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17637,6 +21921,15 @@ public sealed partial class Request476TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request476FoundatioHandler
+{
+	public ValueTask<Response476> Handle(
+		Request476 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request476StaticHandler
 {
@@ -17672,6 +21965,15 @@ public sealed partial class Request477TraditionalHandler
 		Request477 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request477FoundatioHandler
+{
+	public ValueTask<Response477> Handle(
+		Request477 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17711,6 +22013,15 @@ public sealed partial class Request478TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request478FoundatioHandler
+{
+	public ValueTask<Response478> Handle(
+		Request478 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request478StaticHandler
 {
@@ -17746,6 +22057,15 @@ public sealed partial class Request479TraditionalHandler
 		Request479 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request479FoundatioHandler
+{
+	public ValueTask<Response479> Handle(
+		Request479 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17785,6 +22105,15 @@ public sealed partial class Request480TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request480FoundatioHandler
+{
+	public ValueTask<Response480> Handle(
+		Request480 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request480StaticHandler
 {
@@ -17820,6 +22149,15 @@ public sealed partial class Request481TraditionalHandler
 		Request481 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request481FoundatioHandler
+{
+	public ValueTask<Response481> Handle(
+		Request481 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17859,6 +22197,15 @@ public sealed partial class Request482TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request482FoundatioHandler
+{
+	public ValueTask<Response482> Handle(
+		Request482 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request482StaticHandler
 {
@@ -17894,6 +22241,15 @@ public sealed partial class Request483TraditionalHandler
 		Request483 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request483FoundatioHandler
+{
+	public ValueTask<Response483> Handle(
+		Request483 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -17933,6 +22289,15 @@ public sealed partial class Request484TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request484FoundatioHandler
+{
+	public ValueTask<Response484> Handle(
+		Request484 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request484StaticHandler
 {
@@ -17968,6 +22333,15 @@ public sealed partial class Request485TraditionalHandler
 		Request485 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request485FoundatioHandler
+{
+	public ValueTask<Response485> Handle(
+		Request485 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18007,6 +22381,15 @@ public sealed partial class Request486TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request486FoundatioHandler
+{
+	public ValueTask<Response486> Handle(
+		Request486 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request486StaticHandler
 {
@@ -18042,6 +22425,15 @@ public sealed partial class Request487TraditionalHandler
 		Request487 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request487FoundatioHandler
+{
+	public ValueTask<Response487> Handle(
+		Request487 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18081,6 +22473,15 @@ public sealed partial class Request488TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request488FoundatioHandler
+{
+	public ValueTask<Response488> Handle(
+		Request488 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request488StaticHandler
 {
@@ -18116,6 +22517,15 @@ public sealed partial class Request489TraditionalHandler
 		Request489 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request489FoundatioHandler
+{
+	public ValueTask<Response489> Handle(
+		Request489 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18155,6 +22565,15 @@ public sealed partial class Request490TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request490FoundatioHandler
+{
+	public ValueTask<Response490> Handle(
+		Request490 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request490StaticHandler
 {
@@ -18190,6 +22609,15 @@ public sealed partial class Request491TraditionalHandler
 		Request491 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request491FoundatioHandler
+{
+	public ValueTask<Response491> Handle(
+		Request491 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18229,6 +22657,15 @@ public sealed partial class Request492TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request492FoundatioHandler
+{
+	public ValueTask<Response492> Handle(
+		Request492 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request492StaticHandler
 {
@@ -18264,6 +22701,15 @@ public sealed partial class Request493TraditionalHandler
 		Request493 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request493FoundatioHandler
+{
+	public ValueTask<Response493> Handle(
+		Request493 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18303,6 +22749,15 @@ public sealed partial class Request494TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request494FoundatioHandler
+{
+	public ValueTask<Response494> Handle(
+		Request494 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request494StaticHandler
 {
@@ -18338,6 +22793,15 @@ public sealed partial class Request495TraditionalHandler
 		Request495 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request495FoundatioHandler
+{
+	public ValueTask<Response495> Handle(
+		Request495 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18377,6 +22841,15 @@ public sealed partial class Request496TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request496FoundatioHandler
+{
+	public ValueTask<Response496> Handle(
+		Request496 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request496StaticHandler
 {
@@ -18412,6 +22885,15 @@ public sealed partial class Request497TraditionalHandler
 		Request497 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request497FoundatioHandler
+{
+	public ValueTask<Response497> Handle(
+		Request497 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18451,6 +22933,15 @@ public sealed partial class Request498TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request498FoundatioHandler
+{
+	public ValueTask<Response498> Handle(
+		Request498 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request498StaticHandler
 {
@@ -18486,6 +22977,15 @@ public sealed partial class Request499TraditionalHandler
 		Request499 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request499FoundatioHandler
+{
+	public ValueTask<Response499> Handle(
+		Request499 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18525,6 +23025,15 @@ public sealed partial class Request500TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request500FoundatioHandler
+{
+	public ValueTask<Response500> Handle(
+		Request500 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request500StaticHandler
 {
@@ -18560,6 +23069,15 @@ public sealed partial class Request501TraditionalHandler
 		Request501 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request501FoundatioHandler
+{
+	public ValueTask<Response501> Handle(
+		Request501 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18599,6 +23117,15 @@ public sealed partial class Request502TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request502FoundatioHandler
+{
+	public ValueTask<Response502> Handle(
+		Request502 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request502StaticHandler
 {
@@ -18634,6 +23161,15 @@ public sealed partial class Request503TraditionalHandler
 		Request503 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request503FoundatioHandler
+{
+	public ValueTask<Response503> Handle(
+		Request503 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18673,6 +23209,15 @@ public sealed partial class Request504TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request504FoundatioHandler
+{
+	public ValueTask<Response504> Handle(
+		Request504 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request504StaticHandler
 {
@@ -18708,6 +23253,15 @@ public sealed partial class Request505TraditionalHandler
 		Request505 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request505FoundatioHandler
+{
+	public ValueTask<Response505> Handle(
+		Request505 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18747,6 +23301,15 @@ public sealed partial class Request506TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request506FoundatioHandler
+{
+	public ValueTask<Response506> Handle(
+		Request506 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request506StaticHandler
 {
@@ -18782,6 +23345,15 @@ public sealed partial class Request507TraditionalHandler
 		Request507 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request507FoundatioHandler
+{
+	public ValueTask<Response507> Handle(
+		Request507 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18821,6 +23393,15 @@ public sealed partial class Request508TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request508FoundatioHandler
+{
+	public ValueTask<Response508> Handle(
+		Request508 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request508StaticHandler
 {
@@ -18856,6 +23437,15 @@ public sealed partial class Request509TraditionalHandler
 		Request509 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request509FoundatioHandler
+{
+	public ValueTask<Response509> Handle(
+		Request509 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18895,6 +23485,15 @@ public sealed partial class Request510TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request510FoundatioHandler
+{
+	public ValueTask<Response510> Handle(
+		Request510 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request510StaticHandler
 {
@@ -18930,6 +23529,15 @@ public sealed partial class Request511TraditionalHandler
 		Request511 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request511FoundatioHandler
+{
+	public ValueTask<Response511> Handle(
+		Request511 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -18969,6 +23577,15 @@ public sealed partial class Request512TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request512FoundatioHandler
+{
+	public ValueTask<Response512> Handle(
+		Request512 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request512StaticHandler
 {
@@ -19004,6 +23621,15 @@ public sealed partial class Request513TraditionalHandler
 		Request513 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request513FoundatioHandler
+{
+	public ValueTask<Response513> Handle(
+		Request513 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19043,6 +23669,15 @@ public sealed partial class Request514TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request514FoundatioHandler
+{
+	public ValueTask<Response514> Handle(
+		Request514 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request514StaticHandler
 {
@@ -19078,6 +23713,15 @@ public sealed partial class Request515TraditionalHandler
 		Request515 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request515FoundatioHandler
+{
+	public ValueTask<Response515> Handle(
+		Request515 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19117,6 +23761,15 @@ public sealed partial class Request516TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request516FoundatioHandler
+{
+	public ValueTask<Response516> Handle(
+		Request516 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request516StaticHandler
 {
@@ -19152,6 +23805,15 @@ public sealed partial class Request517TraditionalHandler
 		Request517 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request517FoundatioHandler
+{
+	public ValueTask<Response517> Handle(
+		Request517 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19191,6 +23853,15 @@ public sealed partial class Request518TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request518FoundatioHandler
+{
+	public ValueTask<Response518> Handle(
+		Request518 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request518StaticHandler
 {
@@ -19226,6 +23897,15 @@ public sealed partial class Request519TraditionalHandler
 		Request519 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request519FoundatioHandler
+{
+	public ValueTask<Response519> Handle(
+		Request519 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19265,6 +23945,15 @@ public sealed partial class Request520TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request520FoundatioHandler
+{
+	public ValueTask<Response520> Handle(
+		Request520 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request520StaticHandler
 {
@@ -19300,6 +23989,15 @@ public sealed partial class Request521TraditionalHandler
 		Request521 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request521FoundatioHandler
+{
+	public ValueTask<Response521> Handle(
+		Request521 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19339,6 +24037,15 @@ public sealed partial class Request522TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request522FoundatioHandler
+{
+	public ValueTask<Response522> Handle(
+		Request522 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request522StaticHandler
 {
@@ -19374,6 +24081,15 @@ public sealed partial class Request523TraditionalHandler
 		Request523 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request523FoundatioHandler
+{
+	public ValueTask<Response523> Handle(
+		Request523 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19413,6 +24129,15 @@ public sealed partial class Request524TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request524FoundatioHandler
+{
+	public ValueTask<Response524> Handle(
+		Request524 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request524StaticHandler
 {
@@ -19448,6 +24173,15 @@ public sealed partial class Request525TraditionalHandler
 		Request525 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request525FoundatioHandler
+{
+	public ValueTask<Response525> Handle(
+		Request525 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19487,6 +24221,15 @@ public sealed partial class Request526TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request526FoundatioHandler
+{
+	public ValueTask<Response526> Handle(
+		Request526 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request526StaticHandler
 {
@@ -19522,6 +24265,15 @@ public sealed partial class Request527TraditionalHandler
 		Request527 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request527FoundatioHandler
+{
+	public ValueTask<Response527> Handle(
+		Request527 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19561,6 +24313,15 @@ public sealed partial class Request528TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request528FoundatioHandler
+{
+	public ValueTask<Response528> Handle(
+		Request528 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request528StaticHandler
 {
@@ -19596,6 +24357,15 @@ public sealed partial class Request529TraditionalHandler
 		Request529 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request529FoundatioHandler
+{
+	public ValueTask<Response529> Handle(
+		Request529 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19635,6 +24405,15 @@ public sealed partial class Request530TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request530FoundatioHandler
+{
+	public ValueTask<Response530> Handle(
+		Request530 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request530StaticHandler
 {
@@ -19670,6 +24449,15 @@ public sealed partial class Request531TraditionalHandler
 		Request531 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request531FoundatioHandler
+{
+	public ValueTask<Response531> Handle(
+		Request531 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19709,6 +24497,15 @@ public sealed partial class Request532TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request532FoundatioHandler
+{
+	public ValueTask<Response532> Handle(
+		Request532 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request532StaticHandler
 {
@@ -19744,6 +24541,15 @@ public sealed partial class Request533TraditionalHandler
 		Request533 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request533FoundatioHandler
+{
+	public ValueTask<Response533> Handle(
+		Request533 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19783,6 +24589,15 @@ public sealed partial class Request534TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request534FoundatioHandler
+{
+	public ValueTask<Response534> Handle(
+		Request534 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request534StaticHandler
 {
@@ -19818,6 +24633,15 @@ public sealed partial class Request535TraditionalHandler
 		Request535 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request535FoundatioHandler
+{
+	public ValueTask<Response535> Handle(
+		Request535 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19857,6 +24681,15 @@ public sealed partial class Request536TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request536FoundatioHandler
+{
+	public ValueTask<Response536> Handle(
+		Request536 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request536StaticHandler
 {
@@ -19892,6 +24725,15 @@ public sealed partial class Request537TraditionalHandler
 		Request537 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request537FoundatioHandler
+{
+	public ValueTask<Response537> Handle(
+		Request537 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -19931,6 +24773,15 @@ public sealed partial class Request538TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request538FoundatioHandler
+{
+	public ValueTask<Response538> Handle(
+		Request538 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request538StaticHandler
 {
@@ -19966,6 +24817,15 @@ public sealed partial class Request539TraditionalHandler
 		Request539 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request539FoundatioHandler
+{
+	public ValueTask<Response539> Handle(
+		Request539 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20005,6 +24865,15 @@ public sealed partial class Request540TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request540FoundatioHandler
+{
+	public ValueTask<Response540> Handle(
+		Request540 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request540StaticHandler
 {
@@ -20040,6 +24909,15 @@ public sealed partial class Request541TraditionalHandler
 		Request541 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request541FoundatioHandler
+{
+	public ValueTask<Response541> Handle(
+		Request541 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20079,6 +24957,15 @@ public sealed partial class Request542TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request542FoundatioHandler
+{
+	public ValueTask<Response542> Handle(
+		Request542 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request542StaticHandler
 {
@@ -20114,6 +25001,15 @@ public sealed partial class Request543TraditionalHandler
 		Request543 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request543FoundatioHandler
+{
+	public ValueTask<Response543> Handle(
+		Request543 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20153,6 +25049,15 @@ public sealed partial class Request544TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request544FoundatioHandler
+{
+	public ValueTask<Response544> Handle(
+		Request544 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request544StaticHandler
 {
@@ -20188,6 +25093,15 @@ public sealed partial class Request545TraditionalHandler
 		Request545 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request545FoundatioHandler
+{
+	public ValueTask<Response545> Handle(
+		Request545 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20227,6 +25141,15 @@ public sealed partial class Request546TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request546FoundatioHandler
+{
+	public ValueTask<Response546> Handle(
+		Request546 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request546StaticHandler
 {
@@ -20262,6 +25185,15 @@ public sealed partial class Request547TraditionalHandler
 		Request547 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request547FoundatioHandler
+{
+	public ValueTask<Response547> Handle(
+		Request547 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20301,6 +25233,15 @@ public sealed partial class Request548TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request548FoundatioHandler
+{
+	public ValueTask<Response548> Handle(
+		Request548 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request548StaticHandler
 {
@@ -20336,6 +25277,15 @@ public sealed partial class Request549TraditionalHandler
 		Request549 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request549FoundatioHandler
+{
+	public ValueTask<Response549> Handle(
+		Request549 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20375,6 +25325,15 @@ public sealed partial class Request550TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request550FoundatioHandler
+{
+	public ValueTask<Response550> Handle(
+		Request550 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request550StaticHandler
 {
@@ -20410,6 +25369,15 @@ public sealed partial class Request551TraditionalHandler
 		Request551 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request551FoundatioHandler
+{
+	public ValueTask<Response551> Handle(
+		Request551 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20449,6 +25417,15 @@ public sealed partial class Request552TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request552FoundatioHandler
+{
+	public ValueTask<Response552> Handle(
+		Request552 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request552StaticHandler
 {
@@ -20484,6 +25461,15 @@ public sealed partial class Request553TraditionalHandler
 		Request553 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request553FoundatioHandler
+{
+	public ValueTask<Response553> Handle(
+		Request553 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20523,6 +25509,15 @@ public sealed partial class Request554TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request554FoundatioHandler
+{
+	public ValueTask<Response554> Handle(
+		Request554 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request554StaticHandler
 {
@@ -20558,6 +25553,15 @@ public sealed partial class Request555TraditionalHandler
 		Request555 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request555FoundatioHandler
+{
+	public ValueTask<Response555> Handle(
+		Request555 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20597,6 +25601,15 @@ public sealed partial class Request556TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request556FoundatioHandler
+{
+	public ValueTask<Response556> Handle(
+		Request556 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request556StaticHandler
 {
@@ -20632,6 +25645,15 @@ public sealed partial class Request557TraditionalHandler
 		Request557 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request557FoundatioHandler
+{
+	public ValueTask<Response557> Handle(
+		Request557 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20671,6 +25693,15 @@ public sealed partial class Request558TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request558FoundatioHandler
+{
+	public ValueTask<Response558> Handle(
+		Request558 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request558StaticHandler
 {
@@ -20706,6 +25737,15 @@ public sealed partial class Request559TraditionalHandler
 		Request559 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request559FoundatioHandler
+{
+	public ValueTask<Response559> Handle(
+		Request559 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20745,6 +25785,15 @@ public sealed partial class Request560TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request560FoundatioHandler
+{
+	public ValueTask<Response560> Handle(
+		Request560 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request560StaticHandler
 {
@@ -20780,6 +25829,15 @@ public sealed partial class Request561TraditionalHandler
 		Request561 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request561FoundatioHandler
+{
+	public ValueTask<Response561> Handle(
+		Request561 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20819,6 +25877,15 @@ public sealed partial class Request562TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request562FoundatioHandler
+{
+	public ValueTask<Response562> Handle(
+		Request562 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request562StaticHandler
 {
@@ -20854,6 +25921,15 @@ public sealed partial class Request563TraditionalHandler
 		Request563 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request563FoundatioHandler
+{
+	public ValueTask<Response563> Handle(
+		Request563 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20893,6 +25969,15 @@ public sealed partial class Request564TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request564FoundatioHandler
+{
+	public ValueTask<Response564> Handle(
+		Request564 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request564StaticHandler
 {
@@ -20928,6 +26013,15 @@ public sealed partial class Request565TraditionalHandler
 		Request565 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request565FoundatioHandler
+{
+	public ValueTask<Response565> Handle(
+		Request565 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -20967,6 +26061,15 @@ public sealed partial class Request566TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request566FoundatioHandler
+{
+	public ValueTask<Response566> Handle(
+		Request566 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request566StaticHandler
 {
@@ -21002,6 +26105,15 @@ public sealed partial class Request567TraditionalHandler
 		Request567 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request567FoundatioHandler
+{
+	public ValueTask<Response567> Handle(
+		Request567 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21041,6 +26153,15 @@ public sealed partial class Request568TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request568FoundatioHandler
+{
+	public ValueTask<Response568> Handle(
+		Request568 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request568StaticHandler
 {
@@ -21076,6 +26197,15 @@ public sealed partial class Request569TraditionalHandler
 		Request569 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request569FoundatioHandler
+{
+	public ValueTask<Response569> Handle(
+		Request569 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21115,6 +26245,15 @@ public sealed partial class Request570TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request570FoundatioHandler
+{
+	public ValueTask<Response570> Handle(
+		Request570 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request570StaticHandler
 {
@@ -21150,6 +26289,15 @@ public sealed partial class Request571TraditionalHandler
 		Request571 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request571FoundatioHandler
+{
+	public ValueTask<Response571> Handle(
+		Request571 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21189,6 +26337,15 @@ public sealed partial class Request572TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request572FoundatioHandler
+{
+	public ValueTask<Response572> Handle(
+		Request572 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request572StaticHandler
 {
@@ -21224,6 +26381,15 @@ public sealed partial class Request573TraditionalHandler
 		Request573 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request573FoundatioHandler
+{
+	public ValueTask<Response573> Handle(
+		Request573 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21263,6 +26429,15 @@ public sealed partial class Request574TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request574FoundatioHandler
+{
+	public ValueTask<Response574> Handle(
+		Request574 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request574StaticHandler
 {
@@ -21298,6 +26473,15 @@ public sealed partial class Request575TraditionalHandler
 		Request575 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request575FoundatioHandler
+{
+	public ValueTask<Response575> Handle(
+		Request575 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21337,6 +26521,15 @@ public sealed partial class Request576TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request576FoundatioHandler
+{
+	public ValueTask<Response576> Handle(
+		Request576 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request576StaticHandler
 {
@@ -21372,6 +26565,15 @@ public sealed partial class Request577TraditionalHandler
 		Request577 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request577FoundatioHandler
+{
+	public ValueTask<Response577> Handle(
+		Request577 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21411,6 +26613,15 @@ public sealed partial class Request578TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request578FoundatioHandler
+{
+	public ValueTask<Response578> Handle(
+		Request578 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request578StaticHandler
 {
@@ -21446,6 +26657,15 @@ public sealed partial class Request579TraditionalHandler
 		Request579 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request579FoundatioHandler
+{
+	public ValueTask<Response579> Handle(
+		Request579 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21485,6 +26705,15 @@ public sealed partial class Request580TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request580FoundatioHandler
+{
+	public ValueTask<Response580> Handle(
+		Request580 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request580StaticHandler
 {
@@ -21520,6 +26749,15 @@ public sealed partial class Request581TraditionalHandler
 		Request581 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request581FoundatioHandler
+{
+	public ValueTask<Response581> Handle(
+		Request581 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21559,6 +26797,15 @@ public sealed partial class Request582TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request582FoundatioHandler
+{
+	public ValueTask<Response582> Handle(
+		Request582 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request582StaticHandler
 {
@@ -21594,6 +26841,15 @@ public sealed partial class Request583TraditionalHandler
 		Request583 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request583FoundatioHandler
+{
+	public ValueTask<Response583> Handle(
+		Request583 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21633,6 +26889,15 @@ public sealed partial class Request584TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request584FoundatioHandler
+{
+	public ValueTask<Response584> Handle(
+		Request584 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request584StaticHandler
 {
@@ -21668,6 +26933,15 @@ public sealed partial class Request585TraditionalHandler
 		Request585 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request585FoundatioHandler
+{
+	public ValueTask<Response585> Handle(
+		Request585 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21707,6 +26981,15 @@ public sealed partial class Request586TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request586FoundatioHandler
+{
+	public ValueTask<Response586> Handle(
+		Request586 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request586StaticHandler
 {
@@ -21742,6 +27025,15 @@ public sealed partial class Request587TraditionalHandler
 		Request587 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request587FoundatioHandler
+{
+	public ValueTask<Response587> Handle(
+		Request587 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21781,6 +27073,15 @@ public sealed partial class Request588TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request588FoundatioHandler
+{
+	public ValueTask<Response588> Handle(
+		Request588 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request588StaticHandler
 {
@@ -21816,6 +27117,15 @@ public sealed partial class Request589TraditionalHandler
 		Request589 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request589FoundatioHandler
+{
+	public ValueTask<Response589> Handle(
+		Request589 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21855,6 +27165,15 @@ public sealed partial class Request590TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request590FoundatioHandler
+{
+	public ValueTask<Response590> Handle(
+		Request590 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request590StaticHandler
 {
@@ -21890,6 +27209,15 @@ public sealed partial class Request591TraditionalHandler
 		Request591 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request591FoundatioHandler
+{
+	public ValueTask<Response591> Handle(
+		Request591 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -21929,6 +27257,15 @@ public sealed partial class Request592TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request592FoundatioHandler
+{
+	public ValueTask<Response592> Handle(
+		Request592 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request592StaticHandler
 {
@@ -21964,6 +27301,15 @@ public sealed partial class Request593TraditionalHandler
 		Request593 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request593FoundatioHandler
+{
+	public ValueTask<Response593> Handle(
+		Request593 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22003,6 +27349,15 @@ public sealed partial class Request594TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request594FoundatioHandler
+{
+	public ValueTask<Response594> Handle(
+		Request594 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request594StaticHandler
 {
@@ -22038,6 +27393,15 @@ public sealed partial class Request595TraditionalHandler
 		Request595 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request595FoundatioHandler
+{
+	public ValueTask<Response595> Handle(
+		Request595 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22077,6 +27441,15 @@ public sealed partial class Request596TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request596FoundatioHandler
+{
+	public ValueTask<Response596> Handle(
+		Request596 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request596StaticHandler
 {
@@ -22112,6 +27485,15 @@ public sealed partial class Request597TraditionalHandler
 		Request597 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request597FoundatioHandler
+{
+	public ValueTask<Response597> Handle(
+		Request597 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22151,6 +27533,15 @@ public sealed partial class Request598TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request598FoundatioHandler
+{
+	public ValueTask<Response598> Handle(
+		Request598 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request598StaticHandler
 {
@@ -22186,6 +27577,15 @@ public sealed partial class Request599TraditionalHandler
 		Request599 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request599FoundatioHandler
+{
+	public ValueTask<Response599> Handle(
+		Request599 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22225,6 +27625,15 @@ public sealed partial class Request600TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request600FoundatioHandler
+{
+	public ValueTask<Response600> Handle(
+		Request600 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request600StaticHandler
 {
@@ -22260,6 +27669,15 @@ public sealed partial class Request601TraditionalHandler
 		Request601 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request601FoundatioHandler
+{
+	public ValueTask<Response601> Handle(
+		Request601 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22299,6 +27717,15 @@ public sealed partial class Request602TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request602FoundatioHandler
+{
+	public ValueTask<Response602> Handle(
+		Request602 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request602StaticHandler
 {
@@ -22334,6 +27761,15 @@ public sealed partial class Request603TraditionalHandler
 		Request603 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request603FoundatioHandler
+{
+	public ValueTask<Response603> Handle(
+		Request603 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22373,6 +27809,15 @@ public sealed partial class Request604TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request604FoundatioHandler
+{
+	public ValueTask<Response604> Handle(
+		Request604 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request604StaticHandler
 {
@@ -22408,6 +27853,15 @@ public sealed partial class Request605TraditionalHandler
 		Request605 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request605FoundatioHandler
+{
+	public ValueTask<Response605> Handle(
+		Request605 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22447,6 +27901,15 @@ public sealed partial class Request606TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request606FoundatioHandler
+{
+	public ValueTask<Response606> Handle(
+		Request606 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request606StaticHandler
 {
@@ -22482,6 +27945,15 @@ public sealed partial class Request607TraditionalHandler
 		Request607 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request607FoundatioHandler
+{
+	public ValueTask<Response607> Handle(
+		Request607 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22521,6 +27993,15 @@ public sealed partial class Request608TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request608FoundatioHandler
+{
+	public ValueTask<Response608> Handle(
+		Request608 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request608StaticHandler
 {
@@ -22556,6 +28037,15 @@ public sealed partial class Request609TraditionalHandler
 		Request609 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request609FoundatioHandler
+{
+	public ValueTask<Response609> Handle(
+		Request609 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22595,6 +28085,15 @@ public sealed partial class Request610TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request610FoundatioHandler
+{
+	public ValueTask<Response610> Handle(
+		Request610 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request610StaticHandler
 {
@@ -22630,6 +28129,15 @@ public sealed partial class Request611TraditionalHandler
 		Request611 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request611FoundatioHandler
+{
+	public ValueTask<Response611> Handle(
+		Request611 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22669,6 +28177,15 @@ public sealed partial class Request612TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request612FoundatioHandler
+{
+	public ValueTask<Response612> Handle(
+		Request612 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request612StaticHandler
 {
@@ -22704,6 +28221,15 @@ public sealed partial class Request613TraditionalHandler
 		Request613 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request613FoundatioHandler
+{
+	public ValueTask<Response613> Handle(
+		Request613 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22743,6 +28269,15 @@ public sealed partial class Request614TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request614FoundatioHandler
+{
+	public ValueTask<Response614> Handle(
+		Request614 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request614StaticHandler
 {
@@ -22778,6 +28313,15 @@ public sealed partial class Request615TraditionalHandler
 		Request615 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request615FoundatioHandler
+{
+	public ValueTask<Response615> Handle(
+		Request615 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22817,6 +28361,15 @@ public sealed partial class Request616TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request616FoundatioHandler
+{
+	public ValueTask<Response616> Handle(
+		Request616 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request616StaticHandler
 {
@@ -22852,6 +28405,15 @@ public sealed partial class Request617TraditionalHandler
 		Request617 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request617FoundatioHandler
+{
+	public ValueTask<Response617> Handle(
+		Request617 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22891,6 +28453,15 @@ public sealed partial class Request618TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request618FoundatioHandler
+{
+	public ValueTask<Response618> Handle(
+		Request618 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request618StaticHandler
 {
@@ -22926,6 +28497,15 @@ public sealed partial class Request619TraditionalHandler
 		Request619 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request619FoundatioHandler
+{
+	public ValueTask<Response619> Handle(
+		Request619 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -22965,6 +28545,15 @@ public sealed partial class Request620TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request620FoundatioHandler
+{
+	public ValueTask<Response620> Handle(
+		Request620 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request620StaticHandler
 {
@@ -23000,6 +28589,15 @@ public sealed partial class Request621TraditionalHandler
 		Request621 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request621FoundatioHandler
+{
+	public ValueTask<Response621> Handle(
+		Request621 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23039,6 +28637,15 @@ public sealed partial class Request622TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request622FoundatioHandler
+{
+	public ValueTask<Response622> Handle(
+		Request622 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request622StaticHandler
 {
@@ -23074,6 +28681,15 @@ public sealed partial class Request623TraditionalHandler
 		Request623 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request623FoundatioHandler
+{
+	public ValueTask<Response623> Handle(
+		Request623 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23113,6 +28729,15 @@ public sealed partial class Request624TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request624FoundatioHandler
+{
+	public ValueTask<Response624> Handle(
+		Request624 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request624StaticHandler
 {
@@ -23148,6 +28773,15 @@ public sealed partial class Request625TraditionalHandler
 		Request625 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request625FoundatioHandler
+{
+	public ValueTask<Response625> Handle(
+		Request625 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23187,6 +28821,15 @@ public sealed partial class Request626TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request626FoundatioHandler
+{
+	public ValueTask<Response626> Handle(
+		Request626 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request626StaticHandler
 {
@@ -23222,6 +28865,15 @@ public sealed partial class Request627TraditionalHandler
 		Request627 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request627FoundatioHandler
+{
+	public ValueTask<Response627> Handle(
+		Request627 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23261,6 +28913,15 @@ public sealed partial class Request628TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request628FoundatioHandler
+{
+	public ValueTask<Response628> Handle(
+		Request628 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request628StaticHandler
 {
@@ -23296,6 +28957,15 @@ public sealed partial class Request629TraditionalHandler
 		Request629 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request629FoundatioHandler
+{
+	public ValueTask<Response629> Handle(
+		Request629 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23335,6 +29005,15 @@ public sealed partial class Request630TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request630FoundatioHandler
+{
+	public ValueTask<Response630> Handle(
+		Request630 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request630StaticHandler
 {
@@ -23370,6 +29049,15 @@ public sealed partial class Request631TraditionalHandler
 		Request631 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request631FoundatioHandler
+{
+	public ValueTask<Response631> Handle(
+		Request631 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23409,6 +29097,15 @@ public sealed partial class Request632TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request632FoundatioHandler
+{
+	public ValueTask<Response632> Handle(
+		Request632 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request632StaticHandler
 {
@@ -23444,6 +29141,15 @@ public sealed partial class Request633TraditionalHandler
 		Request633 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request633FoundatioHandler
+{
+	public ValueTask<Response633> Handle(
+		Request633 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23483,6 +29189,15 @@ public sealed partial class Request634TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request634FoundatioHandler
+{
+	public ValueTask<Response634> Handle(
+		Request634 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request634StaticHandler
 {
@@ -23518,6 +29233,15 @@ public sealed partial class Request635TraditionalHandler
 		Request635 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request635FoundatioHandler
+{
+	public ValueTask<Response635> Handle(
+		Request635 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23557,6 +29281,15 @@ public sealed partial class Request636TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request636FoundatioHandler
+{
+	public ValueTask<Response636> Handle(
+		Request636 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request636StaticHandler
 {
@@ -23592,6 +29325,15 @@ public sealed partial class Request637TraditionalHandler
 		Request637 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request637FoundatioHandler
+{
+	public ValueTask<Response637> Handle(
+		Request637 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23631,6 +29373,15 @@ public sealed partial class Request638TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request638FoundatioHandler
+{
+	public ValueTask<Response638> Handle(
+		Request638 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request638StaticHandler
 {
@@ -23666,6 +29417,15 @@ public sealed partial class Request639TraditionalHandler
 		Request639 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request639FoundatioHandler
+{
+	public ValueTask<Response639> Handle(
+		Request639 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23705,6 +29465,15 @@ public sealed partial class Request640TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request640FoundatioHandler
+{
+	public ValueTask<Response640> Handle(
+		Request640 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request640StaticHandler
 {
@@ -23740,6 +29509,15 @@ public sealed partial class Request641TraditionalHandler
 		Request641 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request641FoundatioHandler
+{
+	public ValueTask<Response641> Handle(
+		Request641 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23779,6 +29557,15 @@ public sealed partial class Request642TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request642FoundatioHandler
+{
+	public ValueTask<Response642> Handle(
+		Request642 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request642StaticHandler
 {
@@ -23814,6 +29601,15 @@ public sealed partial class Request643TraditionalHandler
 		Request643 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request643FoundatioHandler
+{
+	public ValueTask<Response643> Handle(
+		Request643 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23853,6 +29649,15 @@ public sealed partial class Request644TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request644FoundatioHandler
+{
+	public ValueTask<Response644> Handle(
+		Request644 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request644StaticHandler
 {
@@ -23888,6 +29693,15 @@ public sealed partial class Request645TraditionalHandler
 		Request645 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request645FoundatioHandler
+{
+	public ValueTask<Response645> Handle(
+		Request645 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -23927,6 +29741,15 @@ public sealed partial class Request646TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request646FoundatioHandler
+{
+	public ValueTask<Response646> Handle(
+		Request646 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request646StaticHandler
 {
@@ -23962,6 +29785,15 @@ public sealed partial class Request647TraditionalHandler
 		Request647 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request647FoundatioHandler
+{
+	public ValueTask<Response647> Handle(
+		Request647 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24001,6 +29833,15 @@ public sealed partial class Request648TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request648FoundatioHandler
+{
+	public ValueTask<Response648> Handle(
+		Request648 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request648StaticHandler
 {
@@ -24036,6 +29877,15 @@ public sealed partial class Request649TraditionalHandler
 		Request649 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request649FoundatioHandler
+{
+	public ValueTask<Response649> Handle(
+		Request649 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24075,6 +29925,15 @@ public sealed partial class Request650TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request650FoundatioHandler
+{
+	public ValueTask<Response650> Handle(
+		Request650 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request650StaticHandler
 {
@@ -24110,6 +29969,15 @@ public sealed partial class Request651TraditionalHandler
 		Request651 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request651FoundatioHandler
+{
+	public ValueTask<Response651> Handle(
+		Request651 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24149,6 +30017,15 @@ public sealed partial class Request652TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request652FoundatioHandler
+{
+	public ValueTask<Response652> Handle(
+		Request652 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request652StaticHandler
 {
@@ -24184,6 +30061,15 @@ public sealed partial class Request653TraditionalHandler
 		Request653 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request653FoundatioHandler
+{
+	public ValueTask<Response653> Handle(
+		Request653 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24223,6 +30109,15 @@ public sealed partial class Request654TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request654FoundatioHandler
+{
+	public ValueTask<Response654> Handle(
+		Request654 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request654StaticHandler
 {
@@ -24258,6 +30153,15 @@ public sealed partial class Request655TraditionalHandler
 		Request655 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request655FoundatioHandler
+{
+	public ValueTask<Response655> Handle(
+		Request655 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24297,6 +30201,15 @@ public sealed partial class Request656TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request656FoundatioHandler
+{
+	public ValueTask<Response656> Handle(
+		Request656 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request656StaticHandler
 {
@@ -24332,6 +30245,15 @@ public sealed partial class Request657TraditionalHandler
 		Request657 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request657FoundatioHandler
+{
+	public ValueTask<Response657> Handle(
+		Request657 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24371,6 +30293,15 @@ public sealed partial class Request658TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request658FoundatioHandler
+{
+	public ValueTask<Response658> Handle(
+		Request658 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request658StaticHandler
 {
@@ -24406,6 +30337,15 @@ public sealed partial class Request659TraditionalHandler
 		Request659 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request659FoundatioHandler
+{
+	public ValueTask<Response659> Handle(
+		Request659 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24445,6 +30385,15 @@ public sealed partial class Request660TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request660FoundatioHandler
+{
+	public ValueTask<Response660> Handle(
+		Request660 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request660StaticHandler
 {
@@ -24480,6 +30429,15 @@ public sealed partial class Request661TraditionalHandler
 		Request661 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request661FoundatioHandler
+{
+	public ValueTask<Response661> Handle(
+		Request661 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24519,6 +30477,15 @@ public sealed partial class Request662TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request662FoundatioHandler
+{
+	public ValueTask<Response662> Handle(
+		Request662 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request662StaticHandler
 {
@@ -24554,6 +30521,15 @@ public sealed partial class Request663TraditionalHandler
 		Request663 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request663FoundatioHandler
+{
+	public ValueTask<Response663> Handle(
+		Request663 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24593,6 +30569,15 @@ public sealed partial class Request664TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request664FoundatioHandler
+{
+	public ValueTask<Response664> Handle(
+		Request664 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request664StaticHandler
 {
@@ -24628,6 +30613,15 @@ public sealed partial class Request665TraditionalHandler
 		Request665 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request665FoundatioHandler
+{
+	public ValueTask<Response665> Handle(
+		Request665 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24667,6 +30661,15 @@ public sealed partial class Request666TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request666FoundatioHandler
+{
+	public ValueTask<Response666> Handle(
+		Request666 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request666StaticHandler
 {
@@ -24702,6 +30705,15 @@ public sealed partial class Request667TraditionalHandler
 		Request667 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request667FoundatioHandler
+{
+	public ValueTask<Response667> Handle(
+		Request667 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24741,6 +30753,15 @@ public sealed partial class Request668TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request668FoundatioHandler
+{
+	public ValueTask<Response668> Handle(
+		Request668 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request668StaticHandler
 {
@@ -24776,6 +30797,15 @@ public sealed partial class Request669TraditionalHandler
 		Request669 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request669FoundatioHandler
+{
+	public ValueTask<Response669> Handle(
+		Request669 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24815,6 +30845,15 @@ public sealed partial class Request670TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request670FoundatioHandler
+{
+	public ValueTask<Response670> Handle(
+		Request670 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request670StaticHandler
 {
@@ -24850,6 +30889,15 @@ public sealed partial class Request671TraditionalHandler
 		Request671 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request671FoundatioHandler
+{
+	public ValueTask<Response671> Handle(
+		Request671 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24889,6 +30937,15 @@ public sealed partial class Request672TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request672FoundatioHandler
+{
+	public ValueTask<Response672> Handle(
+		Request672 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request672StaticHandler
 {
@@ -24924,6 +30981,15 @@ public sealed partial class Request673TraditionalHandler
 		Request673 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request673FoundatioHandler
+{
+	public ValueTask<Response673> Handle(
+		Request673 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -24963,6 +31029,15 @@ public sealed partial class Request674TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request674FoundatioHandler
+{
+	public ValueTask<Response674> Handle(
+		Request674 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request674StaticHandler
 {
@@ -24998,6 +31073,15 @@ public sealed partial class Request675TraditionalHandler
 		Request675 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request675FoundatioHandler
+{
+	public ValueTask<Response675> Handle(
+		Request675 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25037,6 +31121,15 @@ public sealed partial class Request676TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request676FoundatioHandler
+{
+	public ValueTask<Response676> Handle(
+		Request676 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request676StaticHandler
 {
@@ -25072,6 +31165,15 @@ public sealed partial class Request677TraditionalHandler
 		Request677 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request677FoundatioHandler
+{
+	public ValueTask<Response677> Handle(
+		Request677 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25111,6 +31213,15 @@ public sealed partial class Request678TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request678FoundatioHandler
+{
+	public ValueTask<Response678> Handle(
+		Request678 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request678StaticHandler
 {
@@ -25146,6 +31257,15 @@ public sealed partial class Request679TraditionalHandler
 		Request679 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request679FoundatioHandler
+{
+	public ValueTask<Response679> Handle(
+		Request679 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25185,6 +31305,15 @@ public sealed partial class Request680TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request680FoundatioHandler
+{
+	public ValueTask<Response680> Handle(
+		Request680 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request680StaticHandler
 {
@@ -25220,6 +31349,15 @@ public sealed partial class Request681TraditionalHandler
 		Request681 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request681FoundatioHandler
+{
+	public ValueTask<Response681> Handle(
+		Request681 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25259,6 +31397,15 @@ public sealed partial class Request682TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request682FoundatioHandler
+{
+	public ValueTask<Response682> Handle(
+		Request682 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request682StaticHandler
 {
@@ -25294,6 +31441,15 @@ public sealed partial class Request683TraditionalHandler
 		Request683 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request683FoundatioHandler
+{
+	public ValueTask<Response683> Handle(
+		Request683 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25333,6 +31489,15 @@ public sealed partial class Request684TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request684FoundatioHandler
+{
+	public ValueTask<Response684> Handle(
+		Request684 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request684StaticHandler
 {
@@ -25368,6 +31533,15 @@ public sealed partial class Request685TraditionalHandler
 		Request685 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request685FoundatioHandler
+{
+	public ValueTask<Response685> Handle(
+		Request685 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25407,6 +31581,15 @@ public sealed partial class Request686TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request686FoundatioHandler
+{
+	public ValueTask<Response686> Handle(
+		Request686 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request686StaticHandler
 {
@@ -25442,6 +31625,15 @@ public sealed partial class Request687TraditionalHandler
 		Request687 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request687FoundatioHandler
+{
+	public ValueTask<Response687> Handle(
+		Request687 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25481,6 +31673,15 @@ public sealed partial class Request688TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request688FoundatioHandler
+{
+	public ValueTask<Response688> Handle(
+		Request688 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request688StaticHandler
 {
@@ -25516,6 +31717,15 @@ public sealed partial class Request689TraditionalHandler
 		Request689 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request689FoundatioHandler
+{
+	public ValueTask<Response689> Handle(
+		Request689 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25555,6 +31765,15 @@ public sealed partial class Request690TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request690FoundatioHandler
+{
+	public ValueTask<Response690> Handle(
+		Request690 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request690StaticHandler
 {
@@ -25590,6 +31809,15 @@ public sealed partial class Request691TraditionalHandler
 		Request691 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request691FoundatioHandler
+{
+	public ValueTask<Response691> Handle(
+		Request691 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25629,6 +31857,15 @@ public sealed partial class Request692TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request692FoundatioHandler
+{
+	public ValueTask<Response692> Handle(
+		Request692 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request692StaticHandler
 {
@@ -25664,6 +31901,15 @@ public sealed partial class Request693TraditionalHandler
 		Request693 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request693FoundatioHandler
+{
+	public ValueTask<Response693> Handle(
+		Request693 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25703,6 +31949,15 @@ public sealed partial class Request694TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request694FoundatioHandler
+{
+	public ValueTask<Response694> Handle(
+		Request694 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request694StaticHandler
 {
@@ -25738,6 +31993,15 @@ public sealed partial class Request695TraditionalHandler
 		Request695 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request695FoundatioHandler
+{
+	public ValueTask<Response695> Handle(
+		Request695 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25777,6 +32041,15 @@ public sealed partial class Request696TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request696FoundatioHandler
+{
+	public ValueTask<Response696> Handle(
+		Request696 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request696StaticHandler
 {
@@ -25812,6 +32085,15 @@ public sealed partial class Request697TraditionalHandler
 		Request697 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request697FoundatioHandler
+{
+	public ValueTask<Response697> Handle(
+		Request697 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25851,6 +32133,15 @@ public sealed partial class Request698TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request698FoundatioHandler
+{
+	public ValueTask<Response698> Handle(
+		Request698 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request698StaticHandler
 {
@@ -25886,6 +32177,15 @@ public sealed partial class Request699TraditionalHandler
 		Request699 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request699FoundatioHandler
+{
+	public ValueTask<Response699> Handle(
+		Request699 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25925,6 +32225,15 @@ public sealed partial class Request700TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request700FoundatioHandler
+{
+	public ValueTask<Response700> Handle(
+		Request700 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request700StaticHandler
 {
@@ -25960,6 +32269,15 @@ public sealed partial class Request701TraditionalHandler
 		Request701 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request701FoundatioHandler
+{
+	public ValueTask<Response701> Handle(
+		Request701 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -25999,6 +32317,15 @@ public sealed partial class Request702TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request702FoundatioHandler
+{
+	public ValueTask<Response702> Handle(
+		Request702 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request702StaticHandler
 {
@@ -26034,6 +32361,15 @@ public sealed partial class Request703TraditionalHandler
 		Request703 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request703FoundatioHandler
+{
+	public ValueTask<Response703> Handle(
+		Request703 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26073,6 +32409,15 @@ public sealed partial class Request704TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request704FoundatioHandler
+{
+	public ValueTask<Response704> Handle(
+		Request704 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request704StaticHandler
 {
@@ -26108,6 +32453,15 @@ public sealed partial class Request705TraditionalHandler
 		Request705 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request705FoundatioHandler
+{
+	public ValueTask<Response705> Handle(
+		Request705 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26147,6 +32501,15 @@ public sealed partial class Request706TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request706FoundatioHandler
+{
+	public ValueTask<Response706> Handle(
+		Request706 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request706StaticHandler
 {
@@ -26182,6 +32545,15 @@ public sealed partial class Request707TraditionalHandler
 		Request707 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request707FoundatioHandler
+{
+	public ValueTask<Response707> Handle(
+		Request707 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26221,6 +32593,15 @@ public sealed partial class Request708TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request708FoundatioHandler
+{
+	public ValueTask<Response708> Handle(
+		Request708 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request708StaticHandler
 {
@@ -26256,6 +32637,15 @@ public sealed partial class Request709TraditionalHandler
 		Request709 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request709FoundatioHandler
+{
+	public ValueTask<Response709> Handle(
+		Request709 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26295,6 +32685,15 @@ public sealed partial class Request710TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request710FoundatioHandler
+{
+	public ValueTask<Response710> Handle(
+		Request710 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request710StaticHandler
 {
@@ -26330,6 +32729,15 @@ public sealed partial class Request711TraditionalHandler
 		Request711 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request711FoundatioHandler
+{
+	public ValueTask<Response711> Handle(
+		Request711 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26369,6 +32777,15 @@ public sealed partial class Request712TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request712FoundatioHandler
+{
+	public ValueTask<Response712> Handle(
+		Request712 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request712StaticHandler
 {
@@ -26404,6 +32821,15 @@ public sealed partial class Request713TraditionalHandler
 		Request713 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request713FoundatioHandler
+{
+	public ValueTask<Response713> Handle(
+		Request713 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26443,6 +32869,15 @@ public sealed partial class Request714TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request714FoundatioHandler
+{
+	public ValueTask<Response714> Handle(
+		Request714 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request714StaticHandler
 {
@@ -26478,6 +32913,15 @@ public sealed partial class Request715TraditionalHandler
 		Request715 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request715FoundatioHandler
+{
+	public ValueTask<Response715> Handle(
+		Request715 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26517,6 +32961,15 @@ public sealed partial class Request716TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request716FoundatioHandler
+{
+	public ValueTask<Response716> Handle(
+		Request716 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request716StaticHandler
 {
@@ -26552,6 +33005,15 @@ public sealed partial class Request717TraditionalHandler
 		Request717 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request717FoundatioHandler
+{
+	public ValueTask<Response717> Handle(
+		Request717 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26591,6 +33053,15 @@ public sealed partial class Request718TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request718FoundatioHandler
+{
+	public ValueTask<Response718> Handle(
+		Request718 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request718StaticHandler
 {
@@ -26626,6 +33097,15 @@ public sealed partial class Request719TraditionalHandler
 		Request719 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request719FoundatioHandler
+{
+	public ValueTask<Response719> Handle(
+		Request719 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26665,6 +33145,15 @@ public sealed partial class Request720TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request720FoundatioHandler
+{
+	public ValueTask<Response720> Handle(
+		Request720 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request720StaticHandler
 {
@@ -26700,6 +33189,15 @@ public sealed partial class Request721TraditionalHandler
 		Request721 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request721FoundatioHandler
+{
+	public ValueTask<Response721> Handle(
+		Request721 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26739,6 +33237,15 @@ public sealed partial class Request722TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request722FoundatioHandler
+{
+	public ValueTask<Response722> Handle(
+		Request722 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request722StaticHandler
 {
@@ -26774,6 +33281,15 @@ public sealed partial class Request723TraditionalHandler
 		Request723 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request723FoundatioHandler
+{
+	public ValueTask<Response723> Handle(
+		Request723 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26813,6 +33329,15 @@ public sealed partial class Request724TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request724FoundatioHandler
+{
+	public ValueTask<Response724> Handle(
+		Request724 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request724StaticHandler
 {
@@ -26848,6 +33373,15 @@ public sealed partial class Request725TraditionalHandler
 		Request725 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request725FoundatioHandler
+{
+	public ValueTask<Response725> Handle(
+		Request725 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26887,6 +33421,15 @@ public sealed partial class Request726TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request726FoundatioHandler
+{
+	public ValueTask<Response726> Handle(
+		Request726 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request726StaticHandler
 {
@@ -26922,6 +33465,15 @@ public sealed partial class Request727TraditionalHandler
 		Request727 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request727FoundatioHandler
+{
+	public ValueTask<Response727> Handle(
+		Request727 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -26961,6 +33513,15 @@ public sealed partial class Request728TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request728FoundatioHandler
+{
+	public ValueTask<Response728> Handle(
+		Request728 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request728StaticHandler
 {
@@ -26996,6 +33557,15 @@ public sealed partial class Request729TraditionalHandler
 		Request729 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request729FoundatioHandler
+{
+	public ValueTask<Response729> Handle(
+		Request729 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27035,6 +33605,15 @@ public sealed partial class Request730TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request730FoundatioHandler
+{
+	public ValueTask<Response730> Handle(
+		Request730 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request730StaticHandler
 {
@@ -27070,6 +33649,15 @@ public sealed partial class Request731TraditionalHandler
 		Request731 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request731FoundatioHandler
+{
+	public ValueTask<Response731> Handle(
+		Request731 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27109,6 +33697,15 @@ public sealed partial class Request732TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request732FoundatioHandler
+{
+	public ValueTask<Response732> Handle(
+		Request732 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request732StaticHandler
 {
@@ -27144,6 +33741,15 @@ public sealed partial class Request733TraditionalHandler
 		Request733 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request733FoundatioHandler
+{
+	public ValueTask<Response733> Handle(
+		Request733 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27183,6 +33789,15 @@ public sealed partial class Request734TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request734FoundatioHandler
+{
+	public ValueTask<Response734> Handle(
+		Request734 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request734StaticHandler
 {
@@ -27218,6 +33833,15 @@ public sealed partial class Request735TraditionalHandler
 		Request735 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request735FoundatioHandler
+{
+	public ValueTask<Response735> Handle(
+		Request735 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27257,6 +33881,15 @@ public sealed partial class Request736TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request736FoundatioHandler
+{
+	public ValueTask<Response736> Handle(
+		Request736 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request736StaticHandler
 {
@@ -27292,6 +33925,15 @@ public sealed partial class Request737TraditionalHandler
 		Request737 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request737FoundatioHandler
+{
+	public ValueTask<Response737> Handle(
+		Request737 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27331,6 +33973,15 @@ public sealed partial class Request738TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request738FoundatioHandler
+{
+	public ValueTask<Response738> Handle(
+		Request738 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request738StaticHandler
 {
@@ -27366,6 +34017,15 @@ public sealed partial class Request739TraditionalHandler
 		Request739 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request739FoundatioHandler
+{
+	public ValueTask<Response739> Handle(
+		Request739 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27405,6 +34065,15 @@ public sealed partial class Request740TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request740FoundatioHandler
+{
+	public ValueTask<Response740> Handle(
+		Request740 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request740StaticHandler
 {
@@ -27440,6 +34109,15 @@ public sealed partial class Request741TraditionalHandler
 		Request741 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request741FoundatioHandler
+{
+	public ValueTask<Response741> Handle(
+		Request741 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27479,6 +34157,15 @@ public sealed partial class Request742TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request742FoundatioHandler
+{
+	public ValueTask<Response742> Handle(
+		Request742 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request742StaticHandler
 {
@@ -27514,6 +34201,15 @@ public sealed partial class Request743TraditionalHandler
 		Request743 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request743FoundatioHandler
+{
+	public ValueTask<Response743> Handle(
+		Request743 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27553,6 +34249,15 @@ public sealed partial class Request744TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request744FoundatioHandler
+{
+	public ValueTask<Response744> Handle(
+		Request744 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request744StaticHandler
 {
@@ -27588,6 +34293,15 @@ public sealed partial class Request745TraditionalHandler
 		Request745 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request745FoundatioHandler
+{
+	public ValueTask<Response745> Handle(
+		Request745 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27627,6 +34341,15 @@ public sealed partial class Request746TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request746FoundatioHandler
+{
+	public ValueTask<Response746> Handle(
+		Request746 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request746StaticHandler
 {
@@ -27662,6 +34385,15 @@ public sealed partial class Request747TraditionalHandler
 		Request747 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request747FoundatioHandler
+{
+	public ValueTask<Response747> Handle(
+		Request747 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27701,6 +34433,15 @@ public sealed partial class Request748TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request748FoundatioHandler
+{
+	public ValueTask<Response748> Handle(
+		Request748 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request748StaticHandler
 {
@@ -27736,6 +34477,15 @@ public sealed partial class Request749TraditionalHandler
 		Request749 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request749FoundatioHandler
+{
+	public ValueTask<Response749> Handle(
+		Request749 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27775,6 +34525,15 @@ public sealed partial class Request750TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request750FoundatioHandler
+{
+	public ValueTask<Response750> Handle(
+		Request750 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request750StaticHandler
 {
@@ -27810,6 +34569,15 @@ public sealed partial class Request751TraditionalHandler
 		Request751 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request751FoundatioHandler
+{
+	public ValueTask<Response751> Handle(
+		Request751 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27849,6 +34617,15 @@ public sealed partial class Request752TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request752FoundatioHandler
+{
+	public ValueTask<Response752> Handle(
+		Request752 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request752StaticHandler
 {
@@ -27884,6 +34661,15 @@ public sealed partial class Request753TraditionalHandler
 		Request753 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request753FoundatioHandler
+{
+	public ValueTask<Response753> Handle(
+		Request753 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27923,6 +34709,15 @@ public sealed partial class Request754TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request754FoundatioHandler
+{
+	public ValueTask<Response754> Handle(
+		Request754 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request754StaticHandler
 {
@@ -27958,6 +34753,15 @@ public sealed partial class Request755TraditionalHandler
 		Request755 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request755FoundatioHandler
+{
+	public ValueTask<Response755> Handle(
+		Request755 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -27997,6 +34801,15 @@ public sealed partial class Request756TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request756FoundatioHandler
+{
+	public ValueTask<Response756> Handle(
+		Request756 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request756StaticHandler
 {
@@ -28032,6 +34845,15 @@ public sealed partial class Request757TraditionalHandler
 		Request757 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request757FoundatioHandler
+{
+	public ValueTask<Response757> Handle(
+		Request757 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28071,6 +34893,15 @@ public sealed partial class Request758TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request758FoundatioHandler
+{
+	public ValueTask<Response758> Handle(
+		Request758 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request758StaticHandler
 {
@@ -28106,6 +34937,15 @@ public sealed partial class Request759TraditionalHandler
 		Request759 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request759FoundatioHandler
+{
+	public ValueTask<Response759> Handle(
+		Request759 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28145,6 +34985,15 @@ public sealed partial class Request760TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request760FoundatioHandler
+{
+	public ValueTask<Response760> Handle(
+		Request760 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request760StaticHandler
 {
@@ -28180,6 +35029,15 @@ public sealed partial class Request761TraditionalHandler
 		Request761 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request761FoundatioHandler
+{
+	public ValueTask<Response761> Handle(
+		Request761 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28219,6 +35077,15 @@ public sealed partial class Request762TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request762FoundatioHandler
+{
+	public ValueTask<Response762> Handle(
+		Request762 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request762StaticHandler
 {
@@ -28254,6 +35121,15 @@ public sealed partial class Request763TraditionalHandler
 		Request763 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request763FoundatioHandler
+{
+	public ValueTask<Response763> Handle(
+		Request763 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28293,6 +35169,15 @@ public sealed partial class Request764TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request764FoundatioHandler
+{
+	public ValueTask<Response764> Handle(
+		Request764 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request764StaticHandler
 {
@@ -28328,6 +35213,15 @@ public sealed partial class Request765TraditionalHandler
 		Request765 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request765FoundatioHandler
+{
+	public ValueTask<Response765> Handle(
+		Request765 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28367,6 +35261,15 @@ public sealed partial class Request766TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request766FoundatioHandler
+{
+	public ValueTask<Response766> Handle(
+		Request766 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request766StaticHandler
 {
@@ -28402,6 +35305,15 @@ public sealed partial class Request767TraditionalHandler
 		Request767 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request767FoundatioHandler
+{
+	public ValueTask<Response767> Handle(
+		Request767 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28441,6 +35353,15 @@ public sealed partial class Request768TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request768FoundatioHandler
+{
+	public ValueTask<Response768> Handle(
+		Request768 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request768StaticHandler
 {
@@ -28476,6 +35397,15 @@ public sealed partial class Request769TraditionalHandler
 		Request769 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request769FoundatioHandler
+{
+	public ValueTask<Response769> Handle(
+		Request769 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28515,6 +35445,15 @@ public sealed partial class Request770TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request770FoundatioHandler
+{
+	public ValueTask<Response770> Handle(
+		Request770 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request770StaticHandler
 {
@@ -28550,6 +35489,15 @@ public sealed partial class Request771TraditionalHandler
 		Request771 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request771FoundatioHandler
+{
+	public ValueTask<Response771> Handle(
+		Request771 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28589,6 +35537,15 @@ public sealed partial class Request772TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request772FoundatioHandler
+{
+	public ValueTask<Response772> Handle(
+		Request772 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request772StaticHandler
 {
@@ -28624,6 +35581,15 @@ public sealed partial class Request773TraditionalHandler
 		Request773 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request773FoundatioHandler
+{
+	public ValueTask<Response773> Handle(
+		Request773 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28663,6 +35629,15 @@ public sealed partial class Request774TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request774FoundatioHandler
+{
+	public ValueTask<Response774> Handle(
+		Request774 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request774StaticHandler
 {
@@ -28698,6 +35673,15 @@ public sealed partial class Request775TraditionalHandler
 		Request775 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request775FoundatioHandler
+{
+	public ValueTask<Response775> Handle(
+		Request775 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28737,6 +35721,15 @@ public sealed partial class Request776TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request776FoundatioHandler
+{
+	public ValueTask<Response776> Handle(
+		Request776 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request776StaticHandler
 {
@@ -28772,6 +35765,15 @@ public sealed partial class Request777TraditionalHandler
 		Request777 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request777FoundatioHandler
+{
+	public ValueTask<Response777> Handle(
+		Request777 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28811,6 +35813,15 @@ public sealed partial class Request778TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request778FoundatioHandler
+{
+	public ValueTask<Response778> Handle(
+		Request778 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request778StaticHandler
 {
@@ -28846,6 +35857,15 @@ public sealed partial class Request779TraditionalHandler
 		Request779 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request779FoundatioHandler
+{
+	public ValueTask<Response779> Handle(
+		Request779 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28885,6 +35905,15 @@ public sealed partial class Request780TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request780FoundatioHandler
+{
+	public ValueTask<Response780> Handle(
+		Request780 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request780StaticHandler
 {
@@ -28920,6 +35949,15 @@ public sealed partial class Request781TraditionalHandler
 		Request781 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request781FoundatioHandler
+{
+	public ValueTask<Response781> Handle(
+		Request781 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -28959,6 +35997,15 @@ public sealed partial class Request782TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request782FoundatioHandler
+{
+	public ValueTask<Response782> Handle(
+		Request782 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request782StaticHandler
 {
@@ -28994,6 +36041,15 @@ public sealed partial class Request783TraditionalHandler
 		Request783 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request783FoundatioHandler
+{
+	public ValueTask<Response783> Handle(
+		Request783 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29033,6 +36089,15 @@ public sealed partial class Request784TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request784FoundatioHandler
+{
+	public ValueTask<Response784> Handle(
+		Request784 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request784StaticHandler
 {
@@ -29068,6 +36133,15 @@ public sealed partial class Request785TraditionalHandler
 		Request785 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request785FoundatioHandler
+{
+	public ValueTask<Response785> Handle(
+		Request785 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29107,6 +36181,15 @@ public sealed partial class Request786TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request786FoundatioHandler
+{
+	public ValueTask<Response786> Handle(
+		Request786 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request786StaticHandler
 {
@@ -29142,6 +36225,15 @@ public sealed partial class Request787TraditionalHandler
 		Request787 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request787FoundatioHandler
+{
+	public ValueTask<Response787> Handle(
+		Request787 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29181,6 +36273,15 @@ public sealed partial class Request788TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request788FoundatioHandler
+{
+	public ValueTask<Response788> Handle(
+		Request788 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request788StaticHandler
 {
@@ -29216,6 +36317,15 @@ public sealed partial class Request789TraditionalHandler
 		Request789 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request789FoundatioHandler
+{
+	public ValueTask<Response789> Handle(
+		Request789 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29255,6 +36365,15 @@ public sealed partial class Request790TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request790FoundatioHandler
+{
+	public ValueTask<Response790> Handle(
+		Request790 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request790StaticHandler
 {
@@ -29290,6 +36409,15 @@ public sealed partial class Request791TraditionalHandler
 		Request791 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request791FoundatioHandler
+{
+	public ValueTask<Response791> Handle(
+		Request791 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29329,6 +36457,15 @@ public sealed partial class Request792TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request792FoundatioHandler
+{
+	public ValueTask<Response792> Handle(
+		Request792 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request792StaticHandler
 {
@@ -29364,6 +36501,15 @@ public sealed partial class Request793TraditionalHandler
 		Request793 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request793FoundatioHandler
+{
+	public ValueTask<Response793> Handle(
+		Request793 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29403,6 +36549,15 @@ public sealed partial class Request794TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request794FoundatioHandler
+{
+	public ValueTask<Response794> Handle(
+		Request794 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request794StaticHandler
 {
@@ -29438,6 +36593,15 @@ public sealed partial class Request795TraditionalHandler
 		Request795 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request795FoundatioHandler
+{
+	public ValueTask<Response795> Handle(
+		Request795 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29477,6 +36641,15 @@ public sealed partial class Request796TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request796FoundatioHandler
+{
+	public ValueTask<Response796> Handle(
+		Request796 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request796StaticHandler
 {
@@ -29512,6 +36685,15 @@ public sealed partial class Request797TraditionalHandler
 		Request797 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request797FoundatioHandler
+{
+	public ValueTask<Response797> Handle(
+		Request797 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29551,6 +36733,15 @@ public sealed partial class Request798TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request798FoundatioHandler
+{
+	public ValueTask<Response798> Handle(
+		Request798 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request798StaticHandler
 {
@@ -29586,6 +36777,15 @@ public sealed partial class Request799TraditionalHandler
 		Request799 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request799FoundatioHandler
+{
+	public ValueTask<Response799> Handle(
+		Request799 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29625,6 +36825,15 @@ public sealed partial class Request800TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request800FoundatioHandler
+{
+	public ValueTask<Response800> Handle(
+		Request800 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request800StaticHandler
 {
@@ -29660,6 +36869,15 @@ public sealed partial class Request801TraditionalHandler
 		Request801 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request801FoundatioHandler
+{
+	public ValueTask<Response801> Handle(
+		Request801 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29699,6 +36917,15 @@ public sealed partial class Request802TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request802FoundatioHandler
+{
+	public ValueTask<Response802> Handle(
+		Request802 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request802StaticHandler
 {
@@ -29734,6 +36961,15 @@ public sealed partial class Request803TraditionalHandler
 		Request803 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request803FoundatioHandler
+{
+	public ValueTask<Response803> Handle(
+		Request803 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29773,6 +37009,15 @@ public sealed partial class Request804TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request804FoundatioHandler
+{
+	public ValueTask<Response804> Handle(
+		Request804 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request804StaticHandler
 {
@@ -29808,6 +37053,15 @@ public sealed partial class Request805TraditionalHandler
 		Request805 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request805FoundatioHandler
+{
+	public ValueTask<Response805> Handle(
+		Request805 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29847,6 +37101,15 @@ public sealed partial class Request806TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request806FoundatioHandler
+{
+	public ValueTask<Response806> Handle(
+		Request806 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request806StaticHandler
 {
@@ -29882,6 +37145,15 @@ public sealed partial class Request807TraditionalHandler
 		Request807 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request807FoundatioHandler
+{
+	public ValueTask<Response807> Handle(
+		Request807 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29921,6 +37193,15 @@ public sealed partial class Request808TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request808FoundatioHandler
+{
+	public ValueTask<Response808> Handle(
+		Request808 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request808StaticHandler
 {
@@ -29956,6 +37237,15 @@ public sealed partial class Request809TraditionalHandler
 		Request809 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request809FoundatioHandler
+{
+	public ValueTask<Response809> Handle(
+		Request809 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -29995,6 +37285,15 @@ public sealed partial class Request810TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request810FoundatioHandler
+{
+	public ValueTask<Response810> Handle(
+		Request810 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request810StaticHandler
 {
@@ -30030,6 +37329,15 @@ public sealed partial class Request811TraditionalHandler
 		Request811 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request811FoundatioHandler
+{
+	public ValueTask<Response811> Handle(
+		Request811 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30069,6 +37377,15 @@ public sealed partial class Request812TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request812FoundatioHandler
+{
+	public ValueTask<Response812> Handle(
+		Request812 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request812StaticHandler
 {
@@ -30104,6 +37421,15 @@ public sealed partial class Request813TraditionalHandler
 		Request813 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request813FoundatioHandler
+{
+	public ValueTask<Response813> Handle(
+		Request813 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30143,6 +37469,15 @@ public sealed partial class Request814TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request814FoundatioHandler
+{
+	public ValueTask<Response814> Handle(
+		Request814 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request814StaticHandler
 {
@@ -30178,6 +37513,15 @@ public sealed partial class Request815TraditionalHandler
 		Request815 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request815FoundatioHandler
+{
+	public ValueTask<Response815> Handle(
+		Request815 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30217,6 +37561,15 @@ public sealed partial class Request816TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request816FoundatioHandler
+{
+	public ValueTask<Response816> Handle(
+		Request816 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request816StaticHandler
 {
@@ -30252,6 +37605,15 @@ public sealed partial class Request817TraditionalHandler
 		Request817 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request817FoundatioHandler
+{
+	public ValueTask<Response817> Handle(
+		Request817 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30291,6 +37653,15 @@ public sealed partial class Request818TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request818FoundatioHandler
+{
+	public ValueTask<Response818> Handle(
+		Request818 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request818StaticHandler
 {
@@ -30326,6 +37697,15 @@ public sealed partial class Request819TraditionalHandler
 		Request819 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request819FoundatioHandler
+{
+	public ValueTask<Response819> Handle(
+		Request819 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30365,6 +37745,15 @@ public sealed partial class Request820TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request820FoundatioHandler
+{
+	public ValueTask<Response820> Handle(
+		Request820 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request820StaticHandler
 {
@@ -30400,6 +37789,15 @@ public sealed partial class Request821TraditionalHandler
 		Request821 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request821FoundatioHandler
+{
+	public ValueTask<Response821> Handle(
+		Request821 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30439,6 +37837,15 @@ public sealed partial class Request822TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request822FoundatioHandler
+{
+	public ValueTask<Response822> Handle(
+		Request822 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request822StaticHandler
 {
@@ -30474,6 +37881,15 @@ public sealed partial class Request823TraditionalHandler
 		Request823 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request823FoundatioHandler
+{
+	public ValueTask<Response823> Handle(
+		Request823 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30513,6 +37929,15 @@ public sealed partial class Request824TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request824FoundatioHandler
+{
+	public ValueTask<Response824> Handle(
+		Request824 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request824StaticHandler
 {
@@ -30548,6 +37973,15 @@ public sealed partial class Request825TraditionalHandler
 		Request825 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request825FoundatioHandler
+{
+	public ValueTask<Response825> Handle(
+		Request825 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30587,6 +38021,15 @@ public sealed partial class Request826TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request826FoundatioHandler
+{
+	public ValueTask<Response826> Handle(
+		Request826 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request826StaticHandler
 {
@@ -30622,6 +38065,15 @@ public sealed partial class Request827TraditionalHandler
 		Request827 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request827FoundatioHandler
+{
+	public ValueTask<Response827> Handle(
+		Request827 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30661,6 +38113,15 @@ public sealed partial class Request828TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request828FoundatioHandler
+{
+	public ValueTask<Response828> Handle(
+		Request828 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request828StaticHandler
 {
@@ -30696,6 +38157,15 @@ public sealed partial class Request829TraditionalHandler
 		Request829 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request829FoundatioHandler
+{
+	public ValueTask<Response829> Handle(
+		Request829 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30735,6 +38205,15 @@ public sealed partial class Request830TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request830FoundatioHandler
+{
+	public ValueTask<Response830> Handle(
+		Request830 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request830StaticHandler
 {
@@ -30770,6 +38249,15 @@ public sealed partial class Request831TraditionalHandler
 		Request831 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request831FoundatioHandler
+{
+	public ValueTask<Response831> Handle(
+		Request831 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30809,6 +38297,15 @@ public sealed partial class Request832TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request832FoundatioHandler
+{
+	public ValueTask<Response832> Handle(
+		Request832 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request832StaticHandler
 {
@@ -30844,6 +38341,15 @@ public sealed partial class Request833TraditionalHandler
 		Request833 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request833FoundatioHandler
+{
+	public ValueTask<Response833> Handle(
+		Request833 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30883,6 +38389,15 @@ public sealed partial class Request834TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request834FoundatioHandler
+{
+	public ValueTask<Response834> Handle(
+		Request834 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request834StaticHandler
 {
@@ -30918,6 +38433,15 @@ public sealed partial class Request835TraditionalHandler
 		Request835 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request835FoundatioHandler
+{
+	public ValueTask<Response835> Handle(
+		Request835 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -30957,6 +38481,15 @@ public sealed partial class Request836TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request836FoundatioHandler
+{
+	public ValueTask<Response836> Handle(
+		Request836 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request836StaticHandler
 {
@@ -30992,6 +38525,15 @@ public sealed partial class Request837TraditionalHandler
 		Request837 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request837FoundatioHandler
+{
+	public ValueTask<Response837> Handle(
+		Request837 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31031,6 +38573,15 @@ public sealed partial class Request838TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request838FoundatioHandler
+{
+	public ValueTask<Response838> Handle(
+		Request838 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request838StaticHandler
 {
@@ -31066,6 +38617,15 @@ public sealed partial class Request839TraditionalHandler
 		Request839 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request839FoundatioHandler
+{
+	public ValueTask<Response839> Handle(
+		Request839 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31105,6 +38665,15 @@ public sealed partial class Request840TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request840FoundatioHandler
+{
+	public ValueTask<Response840> Handle(
+		Request840 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request840StaticHandler
 {
@@ -31140,6 +38709,15 @@ public sealed partial class Request841TraditionalHandler
 		Request841 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request841FoundatioHandler
+{
+	public ValueTask<Response841> Handle(
+		Request841 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31179,6 +38757,15 @@ public sealed partial class Request842TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request842FoundatioHandler
+{
+	public ValueTask<Response842> Handle(
+		Request842 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request842StaticHandler
 {
@@ -31214,6 +38801,15 @@ public sealed partial class Request843TraditionalHandler
 		Request843 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request843FoundatioHandler
+{
+	public ValueTask<Response843> Handle(
+		Request843 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31253,6 +38849,15 @@ public sealed partial class Request844TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request844FoundatioHandler
+{
+	public ValueTask<Response844> Handle(
+		Request844 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request844StaticHandler
 {
@@ -31288,6 +38893,15 @@ public sealed partial class Request845TraditionalHandler
 		Request845 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request845FoundatioHandler
+{
+	public ValueTask<Response845> Handle(
+		Request845 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31327,6 +38941,15 @@ public sealed partial class Request846TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request846FoundatioHandler
+{
+	public ValueTask<Response846> Handle(
+		Request846 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request846StaticHandler
 {
@@ -31362,6 +38985,15 @@ public sealed partial class Request847TraditionalHandler
 		Request847 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request847FoundatioHandler
+{
+	public ValueTask<Response847> Handle(
+		Request847 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31401,6 +39033,15 @@ public sealed partial class Request848TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request848FoundatioHandler
+{
+	public ValueTask<Response848> Handle(
+		Request848 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request848StaticHandler
 {
@@ -31436,6 +39077,15 @@ public sealed partial class Request849TraditionalHandler
 		Request849 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request849FoundatioHandler
+{
+	public ValueTask<Response849> Handle(
+		Request849 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31475,6 +39125,15 @@ public sealed partial class Request850TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request850FoundatioHandler
+{
+	public ValueTask<Response850> Handle(
+		Request850 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request850StaticHandler
 {
@@ -31510,6 +39169,15 @@ public sealed partial class Request851TraditionalHandler
 		Request851 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request851FoundatioHandler
+{
+	public ValueTask<Response851> Handle(
+		Request851 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31549,6 +39217,15 @@ public sealed partial class Request852TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request852FoundatioHandler
+{
+	public ValueTask<Response852> Handle(
+		Request852 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request852StaticHandler
 {
@@ -31584,6 +39261,15 @@ public sealed partial class Request853TraditionalHandler
 		Request853 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request853FoundatioHandler
+{
+	public ValueTask<Response853> Handle(
+		Request853 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31623,6 +39309,15 @@ public sealed partial class Request854TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request854FoundatioHandler
+{
+	public ValueTask<Response854> Handle(
+		Request854 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request854StaticHandler
 {
@@ -31658,6 +39353,15 @@ public sealed partial class Request855TraditionalHandler
 		Request855 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request855FoundatioHandler
+{
+	public ValueTask<Response855> Handle(
+		Request855 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31697,6 +39401,15 @@ public sealed partial class Request856TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request856FoundatioHandler
+{
+	public ValueTask<Response856> Handle(
+		Request856 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request856StaticHandler
 {
@@ -31732,6 +39445,15 @@ public sealed partial class Request857TraditionalHandler
 		Request857 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request857FoundatioHandler
+{
+	public ValueTask<Response857> Handle(
+		Request857 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31771,6 +39493,15 @@ public sealed partial class Request858TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request858FoundatioHandler
+{
+	public ValueTask<Response858> Handle(
+		Request858 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request858StaticHandler
 {
@@ -31806,6 +39537,15 @@ public sealed partial class Request859TraditionalHandler
 		Request859 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request859FoundatioHandler
+{
+	public ValueTask<Response859> Handle(
+		Request859 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31845,6 +39585,15 @@ public sealed partial class Request860TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request860FoundatioHandler
+{
+	public ValueTask<Response860> Handle(
+		Request860 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request860StaticHandler
 {
@@ -31880,6 +39629,15 @@ public sealed partial class Request861TraditionalHandler
 		Request861 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request861FoundatioHandler
+{
+	public ValueTask<Response861> Handle(
+		Request861 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31919,6 +39677,15 @@ public sealed partial class Request862TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request862FoundatioHandler
+{
+	public ValueTask<Response862> Handle(
+		Request862 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request862StaticHandler
 {
@@ -31954,6 +39721,15 @@ public sealed partial class Request863TraditionalHandler
 		Request863 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request863FoundatioHandler
+{
+	public ValueTask<Response863> Handle(
+		Request863 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -31993,6 +39769,15 @@ public sealed partial class Request864TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request864FoundatioHandler
+{
+	public ValueTask<Response864> Handle(
+		Request864 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request864StaticHandler
 {
@@ -32028,6 +39813,15 @@ public sealed partial class Request865TraditionalHandler
 		Request865 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request865FoundatioHandler
+{
+	public ValueTask<Response865> Handle(
+		Request865 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32067,6 +39861,15 @@ public sealed partial class Request866TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request866FoundatioHandler
+{
+	public ValueTask<Response866> Handle(
+		Request866 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request866StaticHandler
 {
@@ -32102,6 +39905,15 @@ public sealed partial class Request867TraditionalHandler
 		Request867 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request867FoundatioHandler
+{
+	public ValueTask<Response867> Handle(
+		Request867 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32141,6 +39953,15 @@ public sealed partial class Request868TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request868FoundatioHandler
+{
+	public ValueTask<Response868> Handle(
+		Request868 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request868StaticHandler
 {
@@ -32176,6 +39997,15 @@ public sealed partial class Request869TraditionalHandler
 		Request869 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request869FoundatioHandler
+{
+	public ValueTask<Response869> Handle(
+		Request869 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32215,6 +40045,15 @@ public sealed partial class Request870TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request870FoundatioHandler
+{
+	public ValueTask<Response870> Handle(
+		Request870 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request870StaticHandler
 {
@@ -32250,6 +40089,15 @@ public sealed partial class Request871TraditionalHandler
 		Request871 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request871FoundatioHandler
+{
+	public ValueTask<Response871> Handle(
+		Request871 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32289,6 +40137,15 @@ public sealed partial class Request872TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request872FoundatioHandler
+{
+	public ValueTask<Response872> Handle(
+		Request872 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request872StaticHandler
 {
@@ -32324,6 +40181,15 @@ public sealed partial class Request873TraditionalHandler
 		Request873 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request873FoundatioHandler
+{
+	public ValueTask<Response873> Handle(
+		Request873 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32363,6 +40229,15 @@ public sealed partial class Request874TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request874FoundatioHandler
+{
+	public ValueTask<Response874> Handle(
+		Request874 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request874StaticHandler
 {
@@ -32398,6 +40273,15 @@ public sealed partial class Request875TraditionalHandler
 		Request875 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request875FoundatioHandler
+{
+	public ValueTask<Response875> Handle(
+		Request875 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32437,6 +40321,15 @@ public sealed partial class Request876TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request876FoundatioHandler
+{
+	public ValueTask<Response876> Handle(
+		Request876 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request876StaticHandler
 {
@@ -32472,6 +40365,15 @@ public sealed partial class Request877TraditionalHandler
 		Request877 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request877FoundatioHandler
+{
+	public ValueTask<Response877> Handle(
+		Request877 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32511,6 +40413,15 @@ public sealed partial class Request878TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request878FoundatioHandler
+{
+	public ValueTask<Response878> Handle(
+		Request878 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request878StaticHandler
 {
@@ -32546,6 +40457,15 @@ public sealed partial class Request879TraditionalHandler
 		Request879 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request879FoundatioHandler
+{
+	public ValueTask<Response879> Handle(
+		Request879 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32585,6 +40505,15 @@ public sealed partial class Request880TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request880FoundatioHandler
+{
+	public ValueTask<Response880> Handle(
+		Request880 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request880StaticHandler
 {
@@ -32620,6 +40549,15 @@ public sealed partial class Request881TraditionalHandler
 		Request881 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request881FoundatioHandler
+{
+	public ValueTask<Response881> Handle(
+		Request881 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32659,6 +40597,15 @@ public sealed partial class Request882TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request882FoundatioHandler
+{
+	public ValueTask<Response882> Handle(
+		Request882 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request882StaticHandler
 {
@@ -32694,6 +40641,15 @@ public sealed partial class Request883TraditionalHandler
 		Request883 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request883FoundatioHandler
+{
+	public ValueTask<Response883> Handle(
+		Request883 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32733,6 +40689,15 @@ public sealed partial class Request884TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request884FoundatioHandler
+{
+	public ValueTask<Response884> Handle(
+		Request884 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request884StaticHandler
 {
@@ -32768,6 +40733,15 @@ public sealed partial class Request885TraditionalHandler
 		Request885 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request885FoundatioHandler
+{
+	public ValueTask<Response885> Handle(
+		Request885 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32807,6 +40781,15 @@ public sealed partial class Request886TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request886FoundatioHandler
+{
+	public ValueTask<Response886> Handle(
+		Request886 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request886StaticHandler
 {
@@ -32842,6 +40825,15 @@ public sealed partial class Request887TraditionalHandler
 		Request887 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request887FoundatioHandler
+{
+	public ValueTask<Response887> Handle(
+		Request887 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32881,6 +40873,15 @@ public sealed partial class Request888TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request888FoundatioHandler
+{
+	public ValueTask<Response888> Handle(
+		Request888 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request888StaticHandler
 {
@@ -32916,6 +40917,15 @@ public sealed partial class Request889TraditionalHandler
 		Request889 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request889FoundatioHandler
+{
+	public ValueTask<Response889> Handle(
+		Request889 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -32955,6 +40965,15 @@ public sealed partial class Request890TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request890FoundatioHandler
+{
+	public ValueTask<Response890> Handle(
+		Request890 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request890StaticHandler
 {
@@ -32990,6 +41009,15 @@ public sealed partial class Request891TraditionalHandler
 		Request891 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request891FoundatioHandler
+{
+	public ValueTask<Response891> Handle(
+		Request891 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33029,6 +41057,15 @@ public sealed partial class Request892TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request892FoundatioHandler
+{
+	public ValueTask<Response892> Handle(
+		Request892 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request892StaticHandler
 {
@@ -33064,6 +41101,15 @@ public sealed partial class Request893TraditionalHandler
 		Request893 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request893FoundatioHandler
+{
+	public ValueTask<Response893> Handle(
+		Request893 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33103,6 +41149,15 @@ public sealed partial class Request894TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request894FoundatioHandler
+{
+	public ValueTask<Response894> Handle(
+		Request894 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request894StaticHandler
 {
@@ -33138,6 +41193,15 @@ public sealed partial class Request895TraditionalHandler
 		Request895 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request895FoundatioHandler
+{
+	public ValueTask<Response895> Handle(
+		Request895 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33177,6 +41241,15 @@ public sealed partial class Request896TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request896FoundatioHandler
+{
+	public ValueTask<Response896> Handle(
+		Request896 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request896StaticHandler
 {
@@ -33212,6 +41285,15 @@ public sealed partial class Request897TraditionalHandler
 		Request897 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request897FoundatioHandler
+{
+	public ValueTask<Response897> Handle(
+		Request897 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33251,6 +41333,15 @@ public sealed partial class Request898TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request898FoundatioHandler
+{
+	public ValueTask<Response898> Handle(
+		Request898 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request898StaticHandler
 {
@@ -33286,6 +41377,15 @@ public sealed partial class Request899TraditionalHandler
 		Request899 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request899FoundatioHandler
+{
+	public ValueTask<Response899> Handle(
+		Request899 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33325,6 +41425,15 @@ public sealed partial class Request900TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request900FoundatioHandler
+{
+	public ValueTask<Response900> Handle(
+		Request900 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request900StaticHandler
 {
@@ -33360,6 +41469,15 @@ public sealed partial class Request901TraditionalHandler
 		Request901 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request901FoundatioHandler
+{
+	public ValueTask<Response901> Handle(
+		Request901 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33399,6 +41517,15 @@ public sealed partial class Request902TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request902FoundatioHandler
+{
+	public ValueTask<Response902> Handle(
+		Request902 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request902StaticHandler
 {
@@ -33434,6 +41561,15 @@ public sealed partial class Request903TraditionalHandler
 		Request903 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request903FoundatioHandler
+{
+	public ValueTask<Response903> Handle(
+		Request903 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33473,6 +41609,15 @@ public sealed partial class Request904TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request904FoundatioHandler
+{
+	public ValueTask<Response904> Handle(
+		Request904 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request904StaticHandler
 {
@@ -33508,6 +41653,15 @@ public sealed partial class Request905TraditionalHandler
 		Request905 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request905FoundatioHandler
+{
+	public ValueTask<Response905> Handle(
+		Request905 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33547,6 +41701,15 @@ public sealed partial class Request906TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request906FoundatioHandler
+{
+	public ValueTask<Response906> Handle(
+		Request906 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request906StaticHandler
 {
@@ -33582,6 +41745,15 @@ public sealed partial class Request907TraditionalHandler
 		Request907 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request907FoundatioHandler
+{
+	public ValueTask<Response907> Handle(
+		Request907 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33621,6 +41793,15 @@ public sealed partial class Request908TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request908FoundatioHandler
+{
+	public ValueTask<Response908> Handle(
+		Request908 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request908StaticHandler
 {
@@ -33656,6 +41837,15 @@ public sealed partial class Request909TraditionalHandler
 		Request909 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request909FoundatioHandler
+{
+	public ValueTask<Response909> Handle(
+		Request909 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33695,6 +41885,15 @@ public sealed partial class Request910TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request910FoundatioHandler
+{
+	public ValueTask<Response910> Handle(
+		Request910 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request910StaticHandler
 {
@@ -33730,6 +41929,15 @@ public sealed partial class Request911TraditionalHandler
 		Request911 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request911FoundatioHandler
+{
+	public ValueTask<Response911> Handle(
+		Request911 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33769,6 +41977,15 @@ public sealed partial class Request912TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request912FoundatioHandler
+{
+	public ValueTask<Response912> Handle(
+		Request912 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request912StaticHandler
 {
@@ -33804,6 +42021,15 @@ public sealed partial class Request913TraditionalHandler
 		Request913 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request913FoundatioHandler
+{
+	public ValueTask<Response913> Handle(
+		Request913 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33843,6 +42069,15 @@ public sealed partial class Request914TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request914FoundatioHandler
+{
+	public ValueTask<Response914> Handle(
+		Request914 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request914StaticHandler
 {
@@ -33878,6 +42113,15 @@ public sealed partial class Request915TraditionalHandler
 		Request915 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request915FoundatioHandler
+{
+	public ValueTask<Response915> Handle(
+		Request915 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33917,6 +42161,15 @@ public sealed partial class Request916TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request916FoundatioHandler
+{
+	public ValueTask<Response916> Handle(
+		Request916 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request916StaticHandler
 {
@@ -33952,6 +42205,15 @@ public sealed partial class Request917TraditionalHandler
 		Request917 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request917FoundatioHandler
+{
+	public ValueTask<Response917> Handle(
+		Request917 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -33991,6 +42253,15 @@ public sealed partial class Request918TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request918FoundatioHandler
+{
+	public ValueTask<Response918> Handle(
+		Request918 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request918StaticHandler
 {
@@ -34026,6 +42297,15 @@ public sealed partial class Request919TraditionalHandler
 		Request919 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request919FoundatioHandler
+{
+	public ValueTask<Response919> Handle(
+		Request919 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34065,6 +42345,15 @@ public sealed partial class Request920TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request920FoundatioHandler
+{
+	public ValueTask<Response920> Handle(
+		Request920 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request920StaticHandler
 {
@@ -34100,6 +42389,15 @@ public sealed partial class Request921TraditionalHandler
 		Request921 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request921FoundatioHandler
+{
+	public ValueTask<Response921> Handle(
+		Request921 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34139,6 +42437,15 @@ public sealed partial class Request922TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request922FoundatioHandler
+{
+	public ValueTask<Response922> Handle(
+		Request922 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request922StaticHandler
 {
@@ -34174,6 +42481,15 @@ public sealed partial class Request923TraditionalHandler
 		Request923 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request923FoundatioHandler
+{
+	public ValueTask<Response923> Handle(
+		Request923 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34213,6 +42529,15 @@ public sealed partial class Request924TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request924FoundatioHandler
+{
+	public ValueTask<Response924> Handle(
+		Request924 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request924StaticHandler
 {
@@ -34248,6 +42573,15 @@ public sealed partial class Request925TraditionalHandler
 		Request925 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request925FoundatioHandler
+{
+	public ValueTask<Response925> Handle(
+		Request925 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34287,6 +42621,15 @@ public sealed partial class Request926TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request926FoundatioHandler
+{
+	public ValueTask<Response926> Handle(
+		Request926 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request926StaticHandler
 {
@@ -34322,6 +42665,15 @@ public sealed partial class Request927TraditionalHandler
 		Request927 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request927FoundatioHandler
+{
+	public ValueTask<Response927> Handle(
+		Request927 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34361,6 +42713,15 @@ public sealed partial class Request928TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request928FoundatioHandler
+{
+	public ValueTask<Response928> Handle(
+		Request928 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request928StaticHandler
 {
@@ -34396,6 +42757,15 @@ public sealed partial class Request929TraditionalHandler
 		Request929 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request929FoundatioHandler
+{
+	public ValueTask<Response929> Handle(
+		Request929 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34435,6 +42805,15 @@ public sealed partial class Request930TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request930FoundatioHandler
+{
+	public ValueTask<Response930> Handle(
+		Request930 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request930StaticHandler
 {
@@ -34470,6 +42849,15 @@ public sealed partial class Request931TraditionalHandler
 		Request931 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request931FoundatioHandler
+{
+	public ValueTask<Response931> Handle(
+		Request931 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34509,6 +42897,15 @@ public sealed partial class Request932TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request932FoundatioHandler
+{
+	public ValueTask<Response932> Handle(
+		Request932 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request932StaticHandler
 {
@@ -34544,6 +42941,15 @@ public sealed partial class Request933TraditionalHandler
 		Request933 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request933FoundatioHandler
+{
+	public ValueTask<Response933> Handle(
+		Request933 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34583,6 +42989,15 @@ public sealed partial class Request934TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request934FoundatioHandler
+{
+	public ValueTask<Response934> Handle(
+		Request934 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request934StaticHandler
 {
@@ -34618,6 +43033,15 @@ public sealed partial class Request935TraditionalHandler
 		Request935 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request935FoundatioHandler
+{
+	public ValueTask<Response935> Handle(
+		Request935 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34657,6 +43081,15 @@ public sealed partial class Request936TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request936FoundatioHandler
+{
+	public ValueTask<Response936> Handle(
+		Request936 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request936StaticHandler
 {
@@ -34692,6 +43125,15 @@ public sealed partial class Request937TraditionalHandler
 		Request937 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request937FoundatioHandler
+{
+	public ValueTask<Response937> Handle(
+		Request937 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34731,6 +43173,15 @@ public sealed partial class Request938TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request938FoundatioHandler
+{
+	public ValueTask<Response938> Handle(
+		Request938 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request938StaticHandler
 {
@@ -34766,6 +43217,15 @@ public sealed partial class Request939TraditionalHandler
 		Request939 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request939FoundatioHandler
+{
+	public ValueTask<Response939> Handle(
+		Request939 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34805,6 +43265,15 @@ public sealed partial class Request940TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request940FoundatioHandler
+{
+	public ValueTask<Response940> Handle(
+		Request940 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request940StaticHandler
 {
@@ -34840,6 +43309,15 @@ public sealed partial class Request941TraditionalHandler
 		Request941 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request941FoundatioHandler
+{
+	public ValueTask<Response941> Handle(
+		Request941 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34879,6 +43357,15 @@ public sealed partial class Request942TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request942FoundatioHandler
+{
+	public ValueTask<Response942> Handle(
+		Request942 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request942StaticHandler
 {
@@ -34914,6 +43401,15 @@ public sealed partial class Request943TraditionalHandler
 		Request943 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request943FoundatioHandler
+{
+	public ValueTask<Response943> Handle(
+		Request943 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -34953,6 +43449,15 @@ public sealed partial class Request944TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request944FoundatioHandler
+{
+	public ValueTask<Response944> Handle(
+		Request944 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request944StaticHandler
 {
@@ -34988,6 +43493,15 @@ public sealed partial class Request945TraditionalHandler
 		Request945 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request945FoundatioHandler
+{
+	public ValueTask<Response945> Handle(
+		Request945 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35027,6 +43541,15 @@ public sealed partial class Request946TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request946FoundatioHandler
+{
+	public ValueTask<Response946> Handle(
+		Request946 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request946StaticHandler
 {
@@ -35062,6 +43585,15 @@ public sealed partial class Request947TraditionalHandler
 		Request947 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request947FoundatioHandler
+{
+	public ValueTask<Response947> Handle(
+		Request947 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35101,6 +43633,15 @@ public sealed partial class Request948TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request948FoundatioHandler
+{
+	public ValueTask<Response948> Handle(
+		Request948 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request948StaticHandler
 {
@@ -35136,6 +43677,15 @@ public sealed partial class Request949TraditionalHandler
 		Request949 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request949FoundatioHandler
+{
+	public ValueTask<Response949> Handle(
+		Request949 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35175,6 +43725,15 @@ public sealed partial class Request950TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request950FoundatioHandler
+{
+	public ValueTask<Response950> Handle(
+		Request950 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request950StaticHandler
 {
@@ -35210,6 +43769,15 @@ public sealed partial class Request951TraditionalHandler
 		Request951 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request951FoundatioHandler
+{
+	public ValueTask<Response951> Handle(
+		Request951 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35249,6 +43817,15 @@ public sealed partial class Request952TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request952FoundatioHandler
+{
+	public ValueTask<Response952> Handle(
+		Request952 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request952StaticHandler
 {
@@ -35284,6 +43861,15 @@ public sealed partial class Request953TraditionalHandler
 		Request953 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request953FoundatioHandler
+{
+	public ValueTask<Response953> Handle(
+		Request953 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35323,6 +43909,15 @@ public sealed partial class Request954TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request954FoundatioHandler
+{
+	public ValueTask<Response954> Handle(
+		Request954 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request954StaticHandler
 {
@@ -35358,6 +43953,15 @@ public sealed partial class Request955TraditionalHandler
 		Request955 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request955FoundatioHandler
+{
+	public ValueTask<Response955> Handle(
+		Request955 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35397,6 +44001,15 @@ public sealed partial class Request956TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request956FoundatioHandler
+{
+	public ValueTask<Response956> Handle(
+		Request956 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request956StaticHandler
 {
@@ -35432,6 +44045,15 @@ public sealed partial class Request957TraditionalHandler
 		Request957 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request957FoundatioHandler
+{
+	public ValueTask<Response957> Handle(
+		Request957 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35471,6 +44093,15 @@ public sealed partial class Request958TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request958FoundatioHandler
+{
+	public ValueTask<Response958> Handle(
+		Request958 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request958StaticHandler
 {
@@ -35506,6 +44137,15 @@ public sealed partial class Request959TraditionalHandler
 		Request959 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request959FoundatioHandler
+{
+	public ValueTask<Response959> Handle(
+		Request959 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35545,6 +44185,15 @@ public sealed partial class Request960TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request960FoundatioHandler
+{
+	public ValueTask<Response960> Handle(
+		Request960 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request960StaticHandler
 {
@@ -35580,6 +44229,15 @@ public sealed partial class Request961TraditionalHandler
 		Request961 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request961FoundatioHandler
+{
+	public ValueTask<Response961> Handle(
+		Request961 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35619,6 +44277,15 @@ public sealed partial class Request962TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request962FoundatioHandler
+{
+	public ValueTask<Response962> Handle(
+		Request962 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request962StaticHandler
 {
@@ -35654,6 +44321,15 @@ public sealed partial class Request963TraditionalHandler
 		Request963 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request963FoundatioHandler
+{
+	public ValueTask<Response963> Handle(
+		Request963 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35693,6 +44369,15 @@ public sealed partial class Request964TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request964FoundatioHandler
+{
+	public ValueTask<Response964> Handle(
+		Request964 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request964StaticHandler
 {
@@ -35728,6 +44413,15 @@ public sealed partial class Request965TraditionalHandler
 		Request965 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request965FoundatioHandler
+{
+	public ValueTask<Response965> Handle(
+		Request965 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35767,6 +44461,15 @@ public sealed partial class Request966TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request966FoundatioHandler
+{
+	public ValueTask<Response966> Handle(
+		Request966 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request966StaticHandler
 {
@@ -35802,6 +44505,15 @@ public sealed partial class Request967TraditionalHandler
 		Request967 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request967FoundatioHandler
+{
+	public ValueTask<Response967> Handle(
+		Request967 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35841,6 +44553,15 @@ public sealed partial class Request968TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request968FoundatioHandler
+{
+	public ValueTask<Response968> Handle(
+		Request968 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request968StaticHandler
 {
@@ -35876,6 +44597,15 @@ public sealed partial class Request969TraditionalHandler
 		Request969 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request969FoundatioHandler
+{
+	public ValueTask<Response969> Handle(
+		Request969 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35915,6 +44645,15 @@ public sealed partial class Request970TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request970FoundatioHandler
+{
+	public ValueTask<Response970> Handle(
+		Request970 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request970StaticHandler
 {
@@ -35950,6 +44689,15 @@ public sealed partial class Request971TraditionalHandler
 		Request971 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request971FoundatioHandler
+{
+	public ValueTask<Response971> Handle(
+		Request971 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -35989,6 +44737,15 @@ public sealed partial class Request972TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request972FoundatioHandler
+{
+	public ValueTask<Response972> Handle(
+		Request972 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request972StaticHandler
 {
@@ -36024,6 +44781,15 @@ public sealed partial class Request973TraditionalHandler
 		Request973 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request973FoundatioHandler
+{
+	public ValueTask<Response973> Handle(
+		Request973 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36063,6 +44829,15 @@ public sealed partial class Request974TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request974FoundatioHandler
+{
+	public ValueTask<Response974> Handle(
+		Request974 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request974StaticHandler
 {
@@ -36098,6 +44873,15 @@ public sealed partial class Request975TraditionalHandler
 		Request975 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request975FoundatioHandler
+{
+	public ValueTask<Response975> Handle(
+		Request975 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36137,6 +44921,15 @@ public sealed partial class Request976TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request976FoundatioHandler
+{
+	public ValueTask<Response976> Handle(
+		Request976 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request976StaticHandler
 {
@@ -36172,6 +44965,15 @@ public sealed partial class Request977TraditionalHandler
 		Request977 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request977FoundatioHandler
+{
+	public ValueTask<Response977> Handle(
+		Request977 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36211,6 +45013,15 @@ public sealed partial class Request978TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request978FoundatioHandler
+{
+	public ValueTask<Response978> Handle(
+		Request978 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request978StaticHandler
 {
@@ -36246,6 +45057,15 @@ public sealed partial class Request979TraditionalHandler
 		Request979 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request979FoundatioHandler
+{
+	public ValueTask<Response979> Handle(
+		Request979 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36285,6 +45105,15 @@ public sealed partial class Request980TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request980FoundatioHandler
+{
+	public ValueTask<Response980> Handle(
+		Request980 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request980StaticHandler
 {
@@ -36320,6 +45149,15 @@ public sealed partial class Request981TraditionalHandler
 		Request981 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request981FoundatioHandler
+{
+	public ValueTask<Response981> Handle(
+		Request981 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36359,6 +45197,15 @@ public sealed partial class Request982TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request982FoundatioHandler
+{
+	public ValueTask<Response982> Handle(
+		Request982 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request982StaticHandler
 {
@@ -36394,6 +45241,15 @@ public sealed partial class Request983TraditionalHandler
 		Request983 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request983FoundatioHandler
+{
+	public ValueTask<Response983> Handle(
+		Request983 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36433,6 +45289,15 @@ public sealed partial class Request984TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request984FoundatioHandler
+{
+	public ValueTask<Response984> Handle(
+		Request984 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request984StaticHandler
 {
@@ -36468,6 +45333,15 @@ public sealed partial class Request985TraditionalHandler
 		Request985 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request985FoundatioHandler
+{
+	public ValueTask<Response985> Handle(
+		Request985 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36507,6 +45381,15 @@ public sealed partial class Request986TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request986FoundatioHandler
+{
+	public ValueTask<Response986> Handle(
+		Request986 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request986StaticHandler
 {
@@ -36542,6 +45425,15 @@ public sealed partial class Request987TraditionalHandler
 		Request987 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request987FoundatioHandler
+{
+	public ValueTask<Response987> Handle(
+		Request987 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36581,6 +45473,15 @@ public sealed partial class Request988TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request988FoundatioHandler
+{
+	public ValueTask<Response988> Handle(
+		Request988 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request988StaticHandler
 {
@@ -36616,6 +45517,15 @@ public sealed partial class Request989TraditionalHandler
 		Request989 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request989FoundatioHandler
+{
+	public ValueTask<Response989> Handle(
+		Request989 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36655,6 +45565,15 @@ public sealed partial class Request990TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request990FoundatioHandler
+{
+	public ValueTask<Response990> Handle(
+		Request990 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request990StaticHandler
 {
@@ -36690,6 +45609,15 @@ public sealed partial class Request991TraditionalHandler
 		Request991 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request991FoundatioHandler
+{
+	public ValueTask<Response991> Handle(
+		Request991 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36729,6 +45657,15 @@ public sealed partial class Request992TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request992FoundatioHandler
+{
+	public ValueTask<Response992> Handle(
+		Request992 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request992StaticHandler
 {
@@ -36764,6 +45701,15 @@ public sealed partial class Request993TraditionalHandler
 		Request993 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request993FoundatioHandler
+{
+	public ValueTask<Response993> Handle(
+		Request993 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36803,6 +45749,15 @@ public sealed partial class Request994TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request994FoundatioHandler
+{
+	public ValueTask<Response994> Handle(
+		Request994 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request994StaticHandler
 {
@@ -36838,6 +45793,15 @@ public sealed partial class Request995TraditionalHandler
 		Request995 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request995FoundatioHandler
+{
+	public ValueTask<Response995> Handle(
+		Request995 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36877,6 +45841,15 @@ public sealed partial class Request996TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request996FoundatioHandler
+{
+	public ValueTask<Response996> Handle(
+		Request996 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request996StaticHandler
 {
@@ -36912,6 +45885,15 @@ public sealed partial class Request997TraditionalHandler
 		Request997 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request997FoundatioHandler
+{
+	public ValueTask<Response997> Handle(
+		Request997 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]
@@ -36951,6 +45933,15 @@ public sealed partial class Request998TraditionalHandler
 	) => default!;
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class Request998FoundatioHandler
+{
+	public ValueTask<Response998> Handle(
+		Request998 request,
+		CancellationToken cancellationToken
+	) => default;
+}
+
 [Handler]
 public static partial class Request998StaticHandler
 {
@@ -36986,6 +45977,15 @@ public sealed partial class Request999TraditionalHandler
 		Request999 request,
 		CancellationToken cancellationToken
 	) => default!;
+}
+
+[Foundatio.Mediator.Handler]
+public sealed partial class Request999FoundatioHandler
+{
+	public ValueTask<Response999> Handle(
+		Request999 request,
+		CancellationToken cancellationToken
+	) => default;
 }
 
 [Handler]

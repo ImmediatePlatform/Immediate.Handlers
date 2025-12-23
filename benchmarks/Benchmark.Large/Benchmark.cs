@@ -36,6 +36,19 @@ public sealed partial class SomeHandlerClass
 	) => Task.FromResult(s_response);
 }
 
+[Foundatio.Mediator.Handler]
+public sealed partial class FoundatioHandler
+{
+	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+
+	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
+	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
+	public ValueTask<SomeResponse> Handle(
+		SomeRequest request,
+		CancellationToken cancellationToken
+	) => ValueTask.FromResult(s_response);
+}
+
 [Handler]
 public static partial class StaticIhExample
 {
@@ -61,6 +74,7 @@ public sealed partial class SealedIhExample
 	) => ValueTask.FromResult(s_response);
 }
 
+[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net80)]
 [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net90)]
 [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net10_0)]
 [MemoryDiagnoser]
@@ -69,21 +83,21 @@ public sealed partial class SealedIhExample
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 public class RequestBenchmarks
 {
-	private IServiceProvider? _serviceProvider;
-	private IServiceProvider? _abstractionServiceProvider;
-	private IServiceScope? _serviceScope;
-	private IServiceScope? _abstractionServiceScope;
-	private Mediator.IMediator? _mediator;
-	private Mediator.Mediator? _concreteMediator;
-	private MediatR.IMediator? _mediatr;
-	private StaticIhExample.Handler? _immediateStaticHandler;
-	private SealedIhExample.Handler? _immediateSealedHandler;
-	private IHandler<SomeRequest, SomeResponse>? _immediateHandlerAbstraction;
-	private SomeHandlerClass? _handler;
-	private SomeRequest? _request;
+	private readonly IServiceProvider _serviceProvider;
+	private readonly IServiceProvider _abstractionServiceProvider;
+	private readonly IServiceScope _serviceScope;
+	private readonly IServiceScope _abstractionServiceScope;
+	private readonly Mediator.IMediator _mediator;
+	private readonly Mediator.Mediator _concreteMediator;
+	private readonly MediatR.IMediator _mediatr;
+	private readonly Foundatio.Mediator.IMediator _foundatioMediator;
+	private readonly StaticIhExample.Handler _immediateStaticHandler;
+	private readonly SealedIhExample.Handler _immediateSealedHandler;
+	private readonly IHandler<SomeRequest, SomeResponse> _immediateHandlerAbstraction;
+	private readonly SomeHandlerClass _handler;
+	private readonly SomeRequest _request;
 
-	[GlobalSetup]
-	public void Setup()
+	public RequestBenchmarks()
 	{
 		var services = new ServiceCollection();
 
@@ -94,6 +108,8 @@ public class RequestBenchmarks
 			cfg => cfg.RegisterServicesFromAssemblyContaining<SomeRequest>()
 		);
 
+		_ = Foundatio.Mediator.MediatorExtensions.AddMediator(services);
+
 		_serviceProvider = services.BuildServiceProvider();
 
 		_serviceScope = _serviceProvider.CreateScope();
@@ -102,6 +118,7 @@ public class RequestBenchmarks
 		_mediator = _serviceProvider.GetRequiredService<Mediator.IMediator>();
 		_concreteMediator = _serviceProvider.GetRequiredService<Mediator.Mediator>();
 		_mediatr = _serviceProvider.GetRequiredService<MediatR.IMediator>();
+		_foundatioMediator = _serviceProvider.GetRequiredService<Foundatio.Mediator.IMediator>();
 		_immediateStaticHandler = _serviceProvider.GetRequiredService<StaticIhExample.Handler>();
 		_immediateSealedHandler = _serviceProvider.GetRequiredService<SealedIhExample.Handler>();
 		_handler = _serviceProvider.GetRequiredService<SomeHandlerClass>();
@@ -124,42 +141,48 @@ public class RequestBenchmarks
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_ImmediateStaticHandler()
 	{
-		return _immediateStaticHandler!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateStaticHandler.HandleAsync(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_ImmediateSealedHandler()
 	{
-		return _immediateSealedHandler!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateSealedHandler.HandleAsync(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_ImmediateHandler_Abstraction()
 	{
-		return _immediateHandlerAbstraction!.HandleAsync(_request!, CancellationToken.None);
+		return _immediateHandlerAbstraction.HandleAsync(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public Task<SomeResponse> SendRequest_MediatR()
 	{
-		return _mediatr!.Send(_request!, CancellationToken.None);
+		return _mediatr.Send(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_IMediator()
 	{
-		return _mediator!.Send(_request!, CancellationToken.None);
+		return _mediator.Send(_request, CancellationToken.None);
 	}
 
 	[Benchmark]
 	public ValueTask<SomeResponse> SendRequest_Mediator()
 	{
-		return _concreteMediator!.Send(_request!, CancellationToken.None);
+		return _concreteMediator.Send(_request, CancellationToken.None);
+	}
+
+	[Benchmark]
+	public ValueTask<SomeResponse> SendRequest_Foundatio()
+	{
+		return _foundatioMediator.InvokeAsync<SomeResponse>(_request, CancellationToken.None);
 	}
 
 	[Benchmark(Baseline = true)]
 	public ValueTask<SomeResponse> SendRequest_Baseline()
 	{
-		return _handler!.Handle(_request!, CancellationToken.None);
+		return _handler.Handle(_request, CancellationToken.None);
 	}
 }
