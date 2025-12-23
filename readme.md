@@ -349,6 +349,17 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7462/25H2/2025Update/HudsonValle
 
 This benchmark tests a more realistic scenario of using 1 behavior and 1 service.
 
+| Method                                   | Mean      | Error    | Ratio | Rank | Allocated |
+|----------------------------------------- |----------:|---------:|------:|-----:|----------:|
+| SendRequest_Baseline                     |  44.02 ns | 0.153 ns |  1.00 |    1 |      40 B |
+| SendRequest_ImmediateSealedHandler       |  56.40 ns | 0.100 ns |  1.28 |    2 |      40 B |
+| SendRequest_ImmediateHandler_Abstraction |  56.55 ns | 0.386 ns |  1.28 |    2 |      40 B |
+| SendRequest_ImmediateStaticHandler       |  57.51 ns | 0.972 ns |  1.31 |    2 |      40 B |
+| SendRequest_IMediator                    | 117.29 ns | 0.315 ns |  2.66 |    3 |     200 B |
+| SendRequest_Mediator                     | 124.45 ns | 0.458 ns |  2.83 |    4 |     200 B |
+| SendRequest_Foundatio                    | 134.99 ns | 0.799 ns |  3.07 |    5 |     416 B |
+| SendRequest_MediatR                      | 166.89 ns | 1.092 ns |  3.79 |    6 |     496 B |
+
 <details>
 <summary>Full Details</summary>
 
@@ -364,17 +375,6 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.7462/25H2/2025Update/HudsonValle
   .NET 9.0  : .NET 9.0.11 (9.0.11, 9.0.1125.51716), X64 RyuJIT x86-64-v3
 
 ```
-| Method                                   | Mean      | Error    | Ratio | Rank | Allocated |
-|----------------------------------------- |----------:|---------:|------:|-----:|----------:|
-| SendRequest_Baseline                     |  44.02 ns | 0.153 ns |  1.00 |    1 |      40 B |
-| SendRequest_ImmediateSealedHandler       |  56.40 ns | 0.100 ns |  1.28 |    2 |      40 B |
-| SendRequest_ImmediateHandler_Abstraction |  56.55 ns | 0.386 ns |  1.28 |    2 |      40 B |
-| SendRequest_ImmediateStaticHandler       |  57.51 ns | 0.972 ns |  1.31 |    2 |      40 B |
-| SendRequest_IMediator                    | 117.29 ns | 0.315 ns |  2.66 |    3 |     200 B |
-| SendRequest_Mediator                     | 124.45 ns | 0.458 ns |  2.83 |    4 |     200 B |
-| SendRequest_Foundatio                    | 134.99 ns | 0.799 ns |  3.07 |    5 |     416 B |
-| SendRequest_MediatR                      | 166.89 ns | 1.092 ns |  3.79 |    6 |     496 B |
-
 | Method                                   | Job       | Runtime   | Mean      | Error    | StdDev   | Ratio | RatioSD | Rank | Gen0   | Allocated | Alloc Ratio |
 |----------------------------------------- |---------- |---------- |----------:|---------:|---------:|------:|--------:|-----:|-------:|----------:|------------:|
 | SendRequest_Baseline                     | .NET 10.0 | .NET 10.0 |  44.02 ns | 0.153 ns | 0.127 ns |  1.00 |    0.00 |    1 | 0.0032 |      40 B |        1.00 |
