@@ -175,10 +175,9 @@ public class RequestBenchmarks
 	}
 
 	[Benchmark]
-	public async ValueTask<SomeResponse> SendRequest_Foundatio()
+	public ValueTask<SomeResponse> SendRequest_Foundatio()
 	{
-		_ = await _foundatioMediator.InvokeAsync<Response999>(new Request999(123), CancellationToken.None);
-		return await _foundatioMediator.InvokeAsync<SomeResponse>(_request, CancellationToken.None);
+		return _foundatioMediator.InvokeAsync<SomeResponse>(_request, CancellationToken.None);
 	}
 
 	[Benchmark(Baseline = true)]
