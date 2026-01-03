@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	<TargetFramework>net8.0</TargetFramework>
-	<NoWarn>$(NoWarn);NU1903</NoWarn>
 	<OutputType>Exe</OutputType>
   </PropertyGroup>
 
@@ -25,7 +24,7 @@
 	<PackageReference Include="Scriban" />
 	<PackageReference Include="Verify.SourceGenerators" />
 	<PackageReference Include="Verify.XunitV3" />
-	<PackageReference Include="xunit.v3" />
+	<PackageReference Include="xunit.v3.mtp-v2" />
   </ItemGroup>
 
   <ItemGroup>

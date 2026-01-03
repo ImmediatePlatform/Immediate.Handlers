@@ -23,6 +23,7 @@
 	<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" PrivateAssets="All" VersionOverride="4.14.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+	<PackageReference Include="RhoMicro.BdnLogging" />
   </ItemGroup>
 
   <ItemGroup>

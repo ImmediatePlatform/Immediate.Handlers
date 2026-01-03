@@ -11,13 +11,27 @@
 	<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
 	<IsPackable>false</IsPackable>
 	<WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
   </PropertyGroup>
 
+  <PropertyGroup Label="Enabled Polyfills">
+	<!--https://github.com/meziantou/Meziantou.Polyfill?tab=readme-ov-file#supported-polyfills-->
+	<Polyfill></Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Index</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Range</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.IsExternalInit</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.RequiredMemberAttribute</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.SkipLocalsInitAttribute</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.Diagnostics.CodeAnalysis</Polyfill>
+	<MeziantouPolyfill_IncludedPolyfills>$(Polyfill)</MeziantouPolyfill_IncludedPolyfills>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	<CollectCoverage>true</CollectCoverage>
