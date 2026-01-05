@@ -25,7 +25,7 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
-	<PackageVersion Include="MinVer" Version="6.1.0" />
+	<PackageVersion Include="MinVer" Version="7.0.0" />
 	<PackageVersion Include="RhoMicro.BdnLogging" Version="1.0.3" />
 	<PackageVersion Include="Scriban" Version="6.5.2" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.0" />
