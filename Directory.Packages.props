@@ -9,7 +9,7 @@
 	<PackageVersion Include="coverlet.collector" Version="6.0.4" />
 	<PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
 	<PackageVersion Include="DotNet.ReproducibleBuilds" Version="1.2.39" />
-	<PackageVersion Include="Foundatio.Mediator" Version="1.0.0-rc.4" />
+	<PackageVersion Include="Foundatio.Mediator" Version="1.0.0-rc.5" />
 	<PackageVersion Include="Mediator.Abstractions" Version="3.0.1" />
 	<PackageVersion Include="Mediator.SourceGenerator" Version="3.0.1" />
 	<PackageVersion Include="MediatR" Version="12.5.0" />
@@ -25,7 +25,7 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
-	<PackageVersion Include="MinVer" Version="6.1.0" />
+	<PackageVersion Include="MinVer" Version="7.0.0" />
 	<PackageVersion Include="RhoMicro.BdnLogging" Version="1.0.3" />
 	<PackageVersion Include="Scriban" Version="6.5.2" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.0" />
@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.267" />
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.272" />
 	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.83" />
   </ItemGroup>
 </Project>
