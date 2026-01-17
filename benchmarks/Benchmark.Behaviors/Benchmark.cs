@@ -100,14 +100,14 @@ public sealed record SomeResponse(Guid Id);
 
 public sealed class SomeService
 {
-	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+	private static readonly SomeResponse Response = new(Guid.NewGuid());
 
 	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
 	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	public ValueTask<SomeResponse> ServiceHandler(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => ValueTask.FromResult(s_response);
+	) => ValueTask.FromResult(Response);
 }
 
 public sealed partial class TraditionalExample(SomeService service)

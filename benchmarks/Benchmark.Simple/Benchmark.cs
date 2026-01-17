@@ -16,62 +16,62 @@ public sealed partial class TraditionalExample
 	: Mediator.IRequestHandler<SomeRequest, SomeResponse>,
 	  MediatR.IRequestHandler<SomeRequest, SomeResponse>
 {
-	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+	private static readonly SomeResponse Response = new(Guid.NewGuid());
 
 	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
 	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	public ValueTask<SomeResponse> Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => ValueTask.FromResult(s_response);
+	) => ValueTask.FromResult(Response);
 
 	ValueTask<SomeResponse> Mediator.IRequestHandler<SomeRequest, SomeResponse>.Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => ValueTask.FromResult(s_response);
+	) => ValueTask.FromResult(Response);
 
 	Task<SomeResponse> MediatR.IRequestHandler<SomeRequest, SomeResponse>.Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => Task.FromResult(s_response);
+	) => Task.FromResult(Response);
 }
 
 [Foundatio.Mediator.Handler]
 public sealed partial class FoundatioHandler
 {
-	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+	private static readonly SomeResponse Response = new(Guid.NewGuid());
 
 	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
 	public ValueTask<SomeResponse> Handle(
 		SomeRequest request,
 		CancellationToken cancellationToken
-	) => ValueTask.FromResult(s_response);
+	) => ValueTask.FromResult(Response);
 }
 
 [Handler]
 public static partial class StaticIhExample
 {
-	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+	private static readonly SomeResponse Response = new(Guid.NewGuid());
 
 	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	private static ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
 		CancellationToken token
-	) => ValueTask.FromResult(s_response);
+	) => ValueTask.FromResult(Response);
 }
 
 [Handler]
 public sealed partial class SealedIhExample
 {
-	private static readonly SomeResponse s_response = new(Guid.NewGuid());
+	private static readonly SomeResponse Response = new(Guid.NewGuid());
 
 	[SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Not Being Tested")]
 	[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Bench instance method")]
 	private ValueTask<SomeResponse> HandleAsync(
 		SomeRequest request,
 		CancellationToken token
-	) => ValueTask.FromResult(s_response);
+	) => ValueTask.FromResult(Response);
 }
 
 [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net80)]

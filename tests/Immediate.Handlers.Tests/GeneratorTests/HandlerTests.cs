@@ -276,7 +276,8 @@ public sealed class HandlerTests
 
 			public sealed class Test;
 			""",
-			assemblies
+			assemblies,
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Empty(
