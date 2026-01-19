@@ -37,6 +37,6 @@
 
   <ItemGroup>
 	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.272" />
-	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.83" />
+	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.99" />
   </ItemGroup>
 </Project>
