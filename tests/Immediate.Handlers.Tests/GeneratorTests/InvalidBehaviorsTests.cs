@@ -140,7 +140,7 @@ public sealed class InvalidBehaviorsTests
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task NonGenericBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	public async Task NonGenericBehaviorShouldWork(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -159,7 +159,7 @@ public sealed class InvalidBehaviorsTests
 			[Behaviors(
 				typeof(LoggingBehavior)
 			)]
-			public static class GetUsersQuery
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 
@@ -195,10 +195,9 @@ public sealed class InvalidBehaviorsTests
 			assemblies
 		);
 
-		Assert.Equal(
-			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
-		);
+		// Non-generic behaviors should now work and generate code
+		Assert.NotEmpty(result.GeneratedTrees);
+		Assert.Empty(result.Diagnostics);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join('_', assemblies));
