@@ -10,21 +10,21 @@ partial class GetUsersQuery
 	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>>
 	{
 		private readonly global::Dummy.GetUsersQuery.HandleBehavior _handleBehavior;
-		private readonly global::Dummy.LoggingBehavior _loggingBehavior;
+		private readonly global::Dummy.ValidationBehavior<global::Dummy.GetUsersQuery.Query> _validationBehavior;
 
 		public Handler(
 			global::Dummy.GetUsersQuery.HandleBehavior handleBehavior,
-			global::Dummy.LoggingBehavior loggingBehavior
+			global::Dummy.ValidationBehavior<global::Dummy.GetUsersQuery.Query> validationBehavior
 		)
 		{
 			var handlerType = typeof(GetUsersQuery);
 
 			_handleBehavior = handleBehavior;
 
-			_loggingBehavior = loggingBehavior;
-			_loggingBehavior.HandlerType = handlerType;
+			_validationBehavior = validationBehavior;
+			_validationBehavior.HandlerType = handlerType;
 
-			_loggingBehavior.SetInnerHandler(_handleBehavior);
+			_validationBehavior.SetInnerHandler(_handleBehavior);
 		}
 
 		public async global::System.Threading.Tasks.ValueTask<global::System.Collections.Generic.IEnumerable<global::Dummy.User>> HandleAsync(
@@ -32,7 +32,7 @@ partial class GetUsersQuery
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
 		{
-			return await _loggingBehavior
+			return await _validationBehavior
 				.HandleAsync(request, cancellationToken)
 				.ConfigureAwait(false);
 		}
@@ -41,13 +41,13 @@ partial class GetUsersQuery
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
 	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>>
 	{
-		private readonly global::Dummy.UsersService _usersService;
+		private readonly global::Dummy.GetUsersQuery _container;
 
 		public HandleBehavior(
-			global::Dummy.UsersService usersService
+			global::Dummy.GetUsersQuery container
 		)
 		{
-			_usersService = usersService;
+			_container = container;
 		}
 
 		public override async global::System.Threading.Tasks.ValueTask<global::System.Collections.Generic.IEnumerable<global::Dummy.User>> HandleAsync(
@@ -55,10 +55,9 @@ partial class GetUsersQuery
 			global::System.Threading.CancellationToken cancellationToken
 		)
 		{
-			return await global::Dummy.GetUsersQuery
+			return await _container
 				.HandleAsync(
 					request
-					, _usersService
 					, cancellationToken
 				)
 				.ConfigureAwait(false);
@@ -74,6 +73,7 @@ partial class GetUsersQuery
 		services.Add(new(typeof(global::Dummy.GetUsersQuery.Handler), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
 		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::System.Collections.Generic.IEnumerable<global::Dummy.User>>), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
 		services.Add(new(typeof(global::Dummy.GetUsersQuery.HandleBehavior), typeof(global::Dummy.GetUsersQuery.HandleBehavior), lifetime));
+		services.Add(new(typeof(global::Dummy.GetUsersQuery), typeof(global::Dummy.GetUsersQuery), lifetime));
 		return services;
 	}
 }

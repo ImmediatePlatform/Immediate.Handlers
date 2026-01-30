@@ -9,7 +9,7 @@ public static class HandlerServiceCollectionExtensions
 	public static IServiceCollection AddTestsBehaviors(
 		this IServiceCollection services)
 	{
-		services.TryAddTransient(typeof(global::Dummy.LoggingBehavior));
+		services.TryAddTransient(typeof(global::Dummy.ValidationBehavior<>));
 		
 		return services;
 	}

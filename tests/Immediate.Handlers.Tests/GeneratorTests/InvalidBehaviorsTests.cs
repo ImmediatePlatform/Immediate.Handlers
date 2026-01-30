@@ -140,7 +140,7 @@ public sealed class InvalidBehaviorsTests
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task NonGenericBehaviorShouldWork(DriverReferenceAssemblies assemblies)
+	public async Task ThreeGenericParameterBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -157,9 +157,9 @@ public sealed class InvalidBehaviorsTests
 
 			[Handler]
 			[Behaviors(
-				typeof(LoggingBehavior)
+				typeof(LoggingBehavior<,,>)
 			)]
-			public static partial class GetUsersQuery
+			public static class GetUsersQuery
 			{
 				public record Query;
 
@@ -172,10 +172,10 @@ public sealed class InvalidBehaviorsTests
 				}
 			}
 
-			public class LoggingBehavior(ILogger<LoggingBehavior> logger)
-				: Behavior<GetUsersQuery.Query, IEnumerable<User>>
+			public class LoggingBehavior<TRequest, TResponse, TExtra>(ILogger<LoggingBehavior<TRequest, TResponse, TExtra>> logger)
+				: Behavior<TRequest, TResponse>
 			{
-				public override async ValueTask<IEnumerable<User>> HandleAsync(GetUsersQuery.Query request, CancellationToken cancellationToken)
+				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
 				{
 					var response = await Next(request, cancellationToken);
 
@@ -195,9 +195,11 @@ public sealed class InvalidBehaviorsTests
 			assemblies
 		);
 
-		// Non-generic behaviors should now work and generate code
-		Assert.NotEmpty(result.GeneratedTrees);
-		Assert.Empty(result.Diagnostics);
+		// Behaviors with 3+ generic parameters should produce no code
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
 
 		_ = await Verify(result)
 			.UseParameters(string.Join('_', assemblies));
