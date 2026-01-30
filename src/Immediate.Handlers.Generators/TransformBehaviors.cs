@@ -44,11 +44,15 @@ internal static class TransformBehaviors
 				if (v.Value is not INamedTypeSymbol symbol)
 					return null;
 
-				if (!symbol.IsUnboundGenericType)
+				var originalDefinition = symbol.OriginalDefinition;
+
+				// Accept behaviors with 0, 1, or 2 type parameters
+				var typeParamCount = originalDefinition.TypeParameters.Length;
+				if (typeParamCount > 2)
 					return null;
 
-				var originalDefinition = symbol.OriginalDefinition;
-				if (originalDefinition.TypeParameters.Length != 2)
+				// For generic types, must be unbound. For non-generic types, this check doesn't apply
+				if (originalDefinition.IsGenericType && !symbol.IsUnboundGenericType)
 					return null;
 
 				if (originalDefinition.IsAbstract)
@@ -59,7 +63,7 @@ internal static class TransformBehaviors
 
 				cancellationToken.ThrowIfCancellationRequested();
 
-				// global::Dummy.LoggingBehavior<,>
+				// global::Dummy.LoggingBehavior<,> or global::Dummy.LoggingBehavior<> or global::Dummy.LoggingBehavior
 				// for: `services.AddScoped(typeof(..));`
 				var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
@@ -81,6 +85,7 @@ internal static class TransformBehaviors
 					RequestType = constraint.RequestType,
 					ResponseType = constraint.ResponseType,
 					Name = originalDefinition.Name,
+					TypeParameterCount = typeParamCount,
 				};
 			})
 			.ToEquatableReadOnlyList();
@@ -91,7 +96,36 @@ internal static class TransformBehaviors
 		cancellationToken.ThrowIfCancellationRequested();
 
 		var originalDefinition = symbol.OriginalDefinition;
+		var typeParamCount = originalDefinition.TypeParameters.Length;
 
+		// Handle different numbers of generic parameters
+		if (typeParamCount == 0)
+		{
+			// Non-generic behavior - no constraints
+			return new()
+			{
+				RequestType = null,
+				ResponseType = null,
+			};
+		}
+
+		if (typeParamCount == 1)
+		{
+			// Single generic parameter - could be request or response constraint
+			if (GetConstraintType(originalDefinition.TypeParameters[0]) is not (true, var paramType))
+				return null;
+
+			cancellationToken.ThrowIfCancellationRequested();
+
+			return new()
+			{
+				RequestType = paramType,
+				ResponseType = null,
+			};
+		}
+
+		// typeParamCount == 2
+		// Two generic parameters - request and response
 		if (GetConstraintType(originalDefinition.TypeParameters[0]) is not (true, var requestType))
 			return null;
 

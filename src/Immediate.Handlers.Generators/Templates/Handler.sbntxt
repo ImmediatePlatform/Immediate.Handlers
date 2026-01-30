@@ -14,13 +14,25 @@ partial class {{ class_name }}
 	{
 		private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
 		{{~ for behavior in (behaviors | array.reverse) ~}}
+		{{~ if behavior.type_parameter_count == 0 ~}}
+		private readonly {{ behavior.non_generic_type_name }} _{{ behavior.variable_name }};
+		{{~ else if behavior.type_parameter_count == 1 ~}}
+		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}> _{{ behavior.variable_name }};
+		{{~ else ~}}
 		private readonly {{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> _{{ behavior.variable_name }};
+		{{~ end ~}}
 		{{~ end ~}}
 
 		public Handler(
 			{{ class_fully_qualified_name }}.HandleBehavior handleBehavior{{ if behaviors.size > 0 }},{{ end }}
 			{{~ for behavior in (behaviors | array.reverse) ~}}
+			{{~ if behavior.type_parameter_count == 0 ~}}
+			{{ behavior.non_generic_type_name }} {{ behavior.variable_name }}{{ if !for.last }},{{end }}
+			{{~ else if behavior.type_parameter_count == 1 ~}}
+			{{ behavior.non_generic_type_name }}<{{ request_type }}> {{ behavior.variable_name }}{{ if !for.last }},{{end }}
+			{{~ else ~}}
 			{{ behavior.non_generic_type_name }}<{{ request_type }}, {{ response_type }}> {{ behavior.variable_name }}{{ if !for.last }},{{end }}
+			{{~ end ~}}
 			{{~ end ~}}
 		)
 		{

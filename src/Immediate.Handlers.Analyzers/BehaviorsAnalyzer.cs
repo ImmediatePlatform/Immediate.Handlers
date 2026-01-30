@@ -23,12 +23,12 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor BehaviorsMustHaveTwoGenericParameters =
 		new(
 			id: DiagnosticIds.IHR0007BehaviorsMustHaveTwoGenericParameters,
-			title: "Behaviors must have two generic parameters",
-			messageFormat: "Behavior type '{0}' must have two generic parameters",
+			title: "Behaviors must not have more than two generic parameters",
+			messageFormat: "Behavior type '{0}' must have zero, one, or two generic parameters",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must have two generic parameters, correctly referencing `TRequest` and `TResponse`."
+			description: "All Behaviors must have zero, one, or two generic parameters."
 		);
 
 	public static readonly DiagnosticDescriptor BehaviorsMustUseUnboundGenerics =
@@ -134,8 +134,9 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 				);
 			}
 
-			if (!originalDefinition.IsGenericType
-				|| originalDefinition.TypeParameters.Length != 2)
+			// Allow 0, 1, or 2 generic parameters. Warn on 3+
+			if (originalDefinition.IsGenericType
+				&& originalDefinition.TypeParameters.Length > 2)
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(
@@ -144,7 +145,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 						originalDefinition.Name)
 				);
 			}
-			else if (!behaviorType.IsUnboundGenericType)
+			else if (originalDefinition.IsGenericType && !behaviorType.IsUnboundGenericType)
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(

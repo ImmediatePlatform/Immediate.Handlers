@@ -12,6 +12,7 @@ public sealed record Behavior
 	public required string Name { get; init; }
 	public required string? RequestType { get; init; }
 	public required string? ResponseType { get; init; }
+	public required int TypeParameterCount { get; init; }
 }
 
 [ExcludeFromCodeCoverage]
