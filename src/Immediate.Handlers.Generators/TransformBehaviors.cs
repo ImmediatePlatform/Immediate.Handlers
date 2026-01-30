@@ -111,7 +111,7 @@ internal static class TransformBehaviors
 
 		if (typeParamCount == 1)
 		{
-			// Single generic parameter - could be request or response constraint
+			// Single generic parameter - represents the request type
 			if (GetConstraintType(originalDefinition.TypeParameters[0]) is not (true, var paramType))
 				return null;
 
