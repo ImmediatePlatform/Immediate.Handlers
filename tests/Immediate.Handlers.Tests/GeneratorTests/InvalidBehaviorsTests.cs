@@ -159,7 +159,7 @@ public sealed class InvalidBehaviorsTests
 			[Behaviors(
 				typeof(LoggingBehavior<,,>)
 			)]
-			public static class GetUsersQuery
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 
