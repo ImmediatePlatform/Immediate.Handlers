@@ -484,7 +484,94 @@ public sealed class BehaviorTests
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task OneTypeParameterBehavior(DriverReferenceAssemblies assemblies)
+	public async Task RequestTypeParameterBehavior(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System.Collections.Generic;
+			using System.Linq;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Dummy;
+			using Immediate.Handlers.Shared;
+
+			#pragma warning disable CS9113
+
+			[assembly: Behaviors(
+				typeof(ValidationBehavior<>)
+			)]
+
+			namespace Dummy;
+
+			public class GetUsersEndpoint(GetUsersQuery.Handler handler)
+			{
+				public ValueTask<IEnumerable<User>> GetUsers() =>
+					handler.HandleAsync(new GetUsersQuery.Query());
+			}
+
+			[Handler]
+			public partial class GetUsersQuery(UsersService usersService)
+			{
+				public record Query;
+
+				private ValueTask<IEnumerable<User>> HandleAsync(
+					Query _,
+					CancellationToken token)
+				{
+					return usersService.GetUsers();
+				}
+			}
+
+			public class ValidationBehavior<TResponse>(IValidator validator)
+				: Behavior<GetUsersQuery.Query, TResponse>
+			{
+				public override async ValueTask<TResponse> HandleAsync(GetUsersQuery.Query request, CancellationToken cancellationToken)
+				{
+					validator.Validate(request);
+					var response = await Next(request, cancellationToken);
+					return response;
+				}
+			}
+
+			public class User { }
+
+			public class UsersService
+			{
+				public ValueTask<IEnumerable<User>> GetUsers() =>
+					ValueTask.FromResult(Enumerable.Empty<User>());
+			}
+
+			public interface IValidator
+			{
+				void Validate(object request);
+			}
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				.. assemblies switch
+				{
+					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
+					DriverReferenceAssemblies.Msdi =>
+						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
+
+					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
+				},
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join('_', assemblies));
+	}
+
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task ResponseTypeParameterBehavior(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""

@@ -140,74 +140,6 @@ public sealed class InvalidBehaviorsTests
 	[Theory]
 	[InlineData(DriverReferenceAssemblies.Normal)]
 	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task ThreeGenericParameterBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
-	{
-		var result = GeneratorTestHelper.RunGenerator(
-			"""
-			using System.Collections.Generic;
-			using System.Linq;
-			using System.Threading;
-			using System.Threading.Tasks;
-			using Dummy;
-			using Immediate.Handlers.Shared;
-
-			#pragma warning disable CS9113
-
-			namespace Dummy;
-
-			[Handler]
-			[Behaviors(
-				typeof(LoggingBehavior<,,>)
-			)]
-			public static partial class GetUsersQuery
-			{
-				public record Query;
-
-				private static ValueTask<IEnumerable<User>> HandleAsync(
-					Query _,
-					UsersService usersService,
-					CancellationToken token)
-				{
-					return usersService.GetUsers();
-				}
-			}
-
-			public class LoggingBehavior<TRequest, TResponse, TExtra>(ILogger<LoggingBehavior<TRequest, TResponse, TExtra>> logger)
-				: Behavior<TRequest, TResponse>
-			{
-				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
-				{
-					var response = await Next(request, cancellationToken);
-
-					return response;
-				}
-			}
-
-			public class User { }
-			public class UsersService
-			{
-				public ValueTask<IEnumerable<User>> GetUsers() =>
-					ValueTask.FromResult(Enumerable.Empty<User>());
-			}
-
-			public interface ILogger<T>;
-			""",
-			assemblies
-		);
-
-		// Behaviors with 3+ generic parameters should produce no code
-		Assert.Equal(
-			[],
-			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
-		);
-
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
-	}
-
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
 	public async Task AbstractBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
@@ -441,6 +373,144 @@ public sealed class InvalidBehaviorsTests
 				: Behavior<TRequest, TResponse>
 			{
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+				{
+					var response = await Next(request, cancellationToken);
+
+					return response;
+				}
+			}
+
+			public class User { }
+			public class UsersService
+			{
+				public ValueTask<IEnumerable<User>> GetUsers() =>
+					ValueTask.FromResult(Enumerable.Empty<User>());
+			}
+
+			public interface ILogger<T>;
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join('_', assemblies));
+	}
+
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task BehaviorWithIncorrectRequestArgumentShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System;
+			using System.Collections;
+			using System.Collections.Generic;
+			using System.Linq;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Dummy;
+			using Immediate.Handlers.Shared;
+
+			#pragma warning disable CS9113
+
+			namespace Dummy;
+
+			[Handler]
+			[Behaviors(
+				typeof(LoggingBehavior<>)
+			)]
+			public static partial class GetUsersQuery
+			{
+				public record Query;
+
+				private static ValueTask<IEnumerable<User>> HandleAsync(
+					Query _,
+					UsersService usersService,
+					CancellationToken token)
+				{
+					return usersService.GetUsers();
+				}
+			}
+
+			public class LoggingBehavior<TResponse>(ILogger<LoggingBehavior<TResponse>> logger)
+				: Behavior<int, TResponse>
+			{
+				public override async ValueTask<TResponse> HandleAsync(int request, CancellationToken cancellationToken)
+				{
+					var response = await Next(request, cancellationToken);
+
+					return response;
+				}
+			}
+
+			public class User { }
+			public class UsersService
+			{
+				public ValueTask<IEnumerable<User>> GetUsers() =>
+					ValueTask.FromResult(Enumerable.Empty<User>());
+			}
+
+			public interface ILogger<T>;
+			""",
+			assemblies
+		);
+
+		Assert.Equal(
+			[],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(string.Join('_', assemblies));
+	}
+
+	[Theory]
+	[InlineData(DriverReferenceAssemblies.Normal)]
+	[InlineData(DriverReferenceAssemblies.Msdi)]
+	public async Task BehaviorWithIncorrectResponseArgumentShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			using System;
+			using System.Collections;
+			using System.Collections.Generic;
+			using System.Linq;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Dummy;
+			using Immediate.Handlers.Shared;
+
+			#pragma warning disable CS9113
+
+			namespace Dummy;
+
+			[Handler]
+			[Behaviors(
+				typeof(LoggingBehavior<>)
+			)]
+			public static partial class GetUsersQuery
+			{
+				public record Query;
+
+				private static ValueTask<IEnumerable<User>> HandleAsync(
+					Query _,
+					UsersService usersService,
+					CancellationToken token)
+				{
+					return usersService.GetUsers();
+				}
+			}
+
+			public class LoggingBehavior<TRequest>(ILogger<LoggingBehavior<TRequest>> logger)
+				: Behavior<TRequest, int>
+			{
+				public override async ValueTask<int> HandleAsync(TRequest request, CancellationToken cancellationToken)
 				{
 					var response = await Next(request, cancellationToken);
 
