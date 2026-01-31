@@ -111,17 +111,50 @@ internal static class TransformBehaviors
 
 		if (typeParamCount == 1)
 		{
-			// Single generic parameter - represents the request type
-			if (GetConstraintType(originalDefinition.TypeParameters[0]) is not (true, var paramType))
+			// Single generic parameter - need to determine if it's request or response
+			// by looking at which position of Behavior<TRequest, TResponse> it maps to
+			var behaviorBaseType = FindBehaviorBaseType(originalDefinition);
+			if (behaviorBaseType is null || behaviorBaseType.TypeArguments.Length != 2)
 				return null;
+
+			var typeParam = originalDefinition.TypeParameters[0];
+			var requestTypeArg = behaviorBaseType.TypeArguments[0];
+			var responseTypeArg = behaviorBaseType.TypeArguments[1];
 
 			cancellationToken.ThrowIfCancellationRequested();
 
-			return new()
+			// Check if the type parameter is used in the request position
+			if (requestTypeArg is ITypeParameterSymbol reqParam &&
+				SymbolEqualityComparer.Default.Equals(reqParam.OriginalDefinition, typeParam))
 			{
-				RequestType = paramType,
-				ResponseType = null,
-			};
+				// Type parameter is in request position
+				if (GetConstraintType(typeParam) is not (true, var paramType))
+					return null;
+
+				return new()
+				{
+					RequestType = paramType,
+					ResponseType = GetFixedType(responseTypeArg),
+				};
+			}
+
+			// Check if the type parameter is used in the response position
+			if (responseTypeArg is ITypeParameterSymbol respParam &&
+				SymbolEqualityComparer.Default.Equals(respParam.OriginalDefinition, typeParam))
+			{
+				// Type parameter is in response position
+				if (GetConstraintType(typeParam) is not (true, var paramType))
+					return null;
+
+				return new()
+				{
+					RequestType = GetFixedType(requestTypeArg),
+					ResponseType = paramType,
+				};
+			}
+
+			// Type parameter is not used in either position - invalid
+			return null;
 		}
 
 		// typeParamCount == 2
@@ -141,6 +174,29 @@ internal static class TransformBehaviors
 			RequestType = requestType,
 			ResponseType = responseType,
 		};
+	}
+
+	private static INamedTypeSymbol? FindBehaviorBaseType(INamedTypeSymbol symbol)
+	{
+		var current = symbol.BaseType;
+		while (current is not null)
+		{
+			if (current.IsBehavior2())
+				return current;
+			current = current.BaseType;
+		}
+
+		return null;
+	}
+
+	private static string? GetFixedType(ITypeSymbol typeArg)
+	{
+		// If it's a type parameter, return null (no constraint)
+		if (typeArg is ITypeParameterSymbol)
+			return null;
+
+		// It's a fixed type, return its fully qualified name
+		return typeArg.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 	}
 
 	private static (bool Valid, string? Constraint) GetConstraintType(ITypeParameterSymbol parameter)

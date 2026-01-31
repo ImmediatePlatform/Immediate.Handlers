@@ -42,12 +42,24 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			description: "All behaviors must use a generic type without type arguments."
 		);
 
+	public static readonly DiagnosticDescriptor BehaviorHasIncorrectTypeArgument =
+		new(
+			id: DiagnosticIds.IHR0020BehaviorHasIncorrectTypeArgument,
+			title: "Behavior has incorrect type argument",
+			messageFormat: "Behavior type '{0}' has type arguments that don't match the handler's request or response types",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Behavior type arguments must be compatible with the handler's request and response types."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
 			BehaviorsMustInheritFromBehavior,
 			BehaviorsMustHaveTwoGenericParameters,
 			BehaviorsMustUseUnboundGenerics,
+			BehaviorHasIncorrectTypeArgument,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -59,6 +71,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		context.EnableConcurrentExecution();
 
 		context.RegisterOperationAction(AnalyzeOperation, OperationKind.Attribute);
+		context.RegisterSymbolAction(AnalyzeHandlerBehaviors, SymbolKind.NamedType);
 	}
 
 	private void AnalyzeOperation(OperationAnalysisContext context)
@@ -156,4 +169,138 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			}
 		}
 	}
+
+	private void AnalyzeHandlerBehaviors(SymbolAnalysisContext context)
+	{
+		var token = context.CancellationToken;
+		token.ThrowIfCancellationRequested();
+
+		var typeSymbol = (INamedTypeSymbol)context.Symbol;
+
+		// Check if this type has a [Handler] attribute
+		var hasHandlerAttribute = typeSymbol.GetAttributes()
+			.Any(a => a.AttributeClass?.IsHandlerAttribute() == true);
+
+		if (!hasHandlerAttribute)
+			return;
+
+		// Check for [Behaviors] attribute on the type
+		var behaviorsAttribute = typeSymbol.GetAttributes()
+			.FirstOrDefault(a => a.AttributeClass?.IsBehaviorsAttribute() == true);
+
+		if (behaviorsAttribute is null || behaviorsAttribute.ConstructorArguments.Length != 1)
+			return;
+
+		token.ThrowIfCancellationRequested();
+
+		// Get the behaviors array
+		var behaviorsArray = behaviorsAttribute.ConstructorArguments[0];
+		if (behaviorsArray.Kind != TypedConstantKind.Array)
+			return;
+
+		// Find the HandleAsync method to get request/response types
+		var handleMethod = typeSymbol.GetMembers("HandleAsync")
+			.OfType<IMethodSymbol>()
+			.FirstOrDefault(m => m.Parameters.Length >= 1);
+
+		if (handleMethod is null)
+			return;
+
+		// Get handler request and response types
+		var requestType = handleMethod.Parameters[0].Type;
+		var responseType = handleMethod.ReturnType is INamedTypeSymbol { Arity: 1 } namedReturnType
+			? namedReturnType.TypeArguments[0]
+			: null;
+
+		if (requestType is null || responseType is null)
+			return;
+
+		token.ThrowIfCancellationRequested();
+
+		// Validate each behavior
+		foreach (var behaviorConstant in behaviorsArray.Values)
+		{
+			if (behaviorConstant.Value is not INamedTypeSymbol behaviorType)
+				continue;
+
+			token.ThrowIfCancellationRequested();
+
+			var originalDefinition = behaviorType.OriginalDefinition;
+			if (!originalDefinition.ImplementsBehavior())
+				continue;
+
+			// Find the Behavior<TRequest, TResponse> base type
+			var behaviorBaseType = FindBehaviorBaseType(originalDefinition);
+			if (behaviorBaseType is null || behaviorBaseType.TypeArguments.Length != 2)
+				continue;
+
+			var behaviorRequestType = behaviorBaseType.TypeArguments[0];
+			var behaviorResponseType = behaviorBaseType.TypeArguments[1];
+
+			// Check if behavior has fixed types that don't match handler types
+			var typeParamCount = originalDefinition.TypeParameters.Length;
+
+			if (typeParamCount == 0)
+			{
+				// Non-generic behavior - both types must match exactly
+				if (!SymbolEqualityComparer.Default.Equals(behaviorRequestType, requestType) ||
+					!SymbolEqualityComparer.Default.Equals(behaviorResponseType, responseType))
+				{
+					ReportBehaviorTypeArgumentMismatch(context, behaviorsAttribute, originalDefinition.Name);
+				}
+			}
+			else if (typeParamCount == 1)
+			{
+				// Single parameter behavior - check which position has the fixed type
+				var typeParam = originalDefinition.TypeParameters[0];
+
+				if (behaviorRequestType is ITypeParameterSymbol reqParam &&
+					SymbolEqualityComparer.Default.Equals(reqParam.OriginalDefinition, typeParam))
+				{
+					// Request is parameterized, response is fixed
+					if (!SymbolEqualityComparer.Default.Equals(behaviorResponseType, responseType))
+					{
+						ReportBehaviorTypeArgumentMismatch(context, behaviorsAttribute, originalDefinition.Name);
+					}
+				}
+				else if (behaviorResponseType is ITypeParameterSymbol respParam &&
+						 SymbolEqualityComparer.Default.Equals(respParam.OriginalDefinition, typeParam))
+				{
+					// Response is parameterized, request is fixed
+					if (!SymbolEqualityComparer.Default.Equals(behaviorRequestType, requestType))
+					{
+						ReportBehaviorTypeArgumentMismatch(context, behaviorsAttribute, originalDefinition.Name);
+					}
+				}
+			}
+			// For typeParamCount == 2, both are parameterized, so no fixed type to check
+		}
+	}
+
+	private static INamedTypeSymbol? FindBehaviorBaseType(INamedTypeSymbol symbol)
+	{
+		var current = symbol.BaseType;
+		while (current is not null)
+		{
+			if (current.IsBehavior2())
+				return current;
+			current = current.BaseType;
+		}
+
+		return null;
+	}
+
+	private static void ReportBehaviorTypeArgumentMismatch(SymbolAnalysisContext context, AttributeData attribute, string behaviorName)
+	{
+		var location = attribute.ApplicationSyntaxReference?.GetSyntax(context.CancellationToken).GetLocation()
+			?? Location.None;
+
+		context.ReportDiagnostic(
+			Diagnostic.Create(
+				BehaviorHasIncorrectTypeArgument,
+				location,
+				behaviorName)
+		);
+	}
 }
+
