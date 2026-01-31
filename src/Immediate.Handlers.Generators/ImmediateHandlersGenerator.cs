@@ -220,6 +220,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 	{
 		public required string NonGenericTypeName { get; init; }
 		public required string VariableName { get; init; }
+		public required int TypeParameterCount { get; init; }
 	}
 
 	private static List<RenderBehavior> BuildRenderBehaviors(List<Behavior?> pipelineBehaviors)
@@ -246,6 +247,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				VariableName = b.Name[0..1].ToLowerInvariant()
 					+ b.Name[1..]
 					+ GetVariableNameSuffix(b.Name),
+				TypeParameterCount = b.TypeParameterCount,
 			})
 			.ToList();
 #pragma warning restore CA1308 // Normalize strings to uppercase

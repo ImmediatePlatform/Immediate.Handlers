@@ -1,0 +1,3 @@
+is_global = true
+dotnet_diagnostic.RS2000.severity = none
+dotnet_diagnostic.RS2007.severity = none
