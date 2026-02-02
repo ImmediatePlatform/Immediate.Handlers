@@ -177,7 +177,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		if (!containerSymbol
 				.GetAttributes()
-				.Any(x => x.AttributeClass.IsHandlerAttribute())
+				.Any(a => a is { AttributeClass.IsHandlerAttribute: true })
 		)
 		{
 			return;

@@ -1,11 +1,11 @@
 using Microsoft.CodeAnalysis;
 
-namespace Immediate.Handlers.Generators;
+namespace Immediate.Handlers;
 
 internal static class Utility
 {
 	public static ITypeSymbol? GetTaskReturnType(this IMethodSymbol method) =>
-		method.ReturnType.IsValueTask1()
+		method.ReturnType.IsValueTask1
 			? ((INamedTypeSymbol)method.ReturnType).TypeArguments.FirstOrDefault()
 			: null;
 

@@ -181,7 +181,7 @@ internal static class TransformBehaviors
 		var current = symbol.BaseType;
 		while (current is not null)
 		{
-			if (current.IsBehavior2())
+			if (current.IsBehavior2)
 				return current;
 			current = current.BaseType;
 		}

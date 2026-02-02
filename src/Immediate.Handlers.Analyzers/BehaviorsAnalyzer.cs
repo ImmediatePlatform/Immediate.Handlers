@@ -82,17 +82,10 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		if (context.Operation is not IAttributeOperation { Operation: IObjectCreationOperation attribute })
 			return;
 
-		if (!attribute.Type.IsBehaviorsAttribute())
+		if (attribute is not { Type.IsBehaviorsAttribute: true, Arguments: [{ } array] })
 			return;
-
-		if (attribute.Arguments.Length != 1)
-		{
-			// note: this will already be a compiler error anyway
-			return;
-		}
 
 		token.ThrowIfCancellationRequested();
-		var array = attribute.Arguments[0].Value;
 
 		if (array is not
 			{
@@ -179,14 +172,14 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 
 		// Check if this type has a [Handler] attribute
 		var hasHandlerAttribute = typeSymbol.GetAttributes()
-			.Any(a => a.AttributeClass?.IsHandlerAttribute() == true);
+			.Any(a => a is { AttributeClass.IsHandlerAttribute: true });
 
 		if (!hasHandlerAttribute)
 			return;
 
 		// Check for [Behaviors] attribute on the type
 		var behaviorsAttribute = typeSymbol.GetAttributes()
-			.FirstOrDefault(a => a.AttributeClass?.IsBehaviorsAttribute() == true);
+			.FirstOrDefault(a => a is { AttributeClass.IsBehaviorsAttribute: true });
 
 		if (behaviorsAttribute is null || behaviorsAttribute.ConstructorArguments.Length != 1)
 			return;
@@ -282,7 +275,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		var current = symbol.BaseType;
 		while (current is not null)
 		{
-			if (current.IsBehavior2())
+			if (current.IsBehavior2)
 				return current;
 			current = current.BaseType;
 		}
