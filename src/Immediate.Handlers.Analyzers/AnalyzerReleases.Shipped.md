@@ -50,3 +50,12 @@ IHR0019 | ImmediateHandler | Hidden | HandlerClassAnalyzer
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
 IHR0009 | ImmediateHandler | Error | HandlerClassAnalyzer
+
+
+## Release 3.2
+
+### New Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|--------------------
+IHR0021 | ImmediateHandler | Error | BehaviorsClassAnalyzer
