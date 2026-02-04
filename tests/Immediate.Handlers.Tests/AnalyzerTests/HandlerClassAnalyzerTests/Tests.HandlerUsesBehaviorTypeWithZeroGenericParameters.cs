@@ -1,14 +1,14 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
+namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public sealed partial class Tests
 {
 	[Fact]
-	public async Task BehaviorTypeWithCorrectTRequest_DoesNotAlert() =>
-		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
+	public async Task BehaviorTypeWithValidZeroGenericParameters_DoesNotAlert() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
 			using System.Collections.Generic;
@@ -20,20 +20,16 @@ public sealed partial class Tests
 			using Immediate.Handlers.Shared;
 			using Normal;
 
-			[assembly: Behaviors(
-				typeof(RequestLoggingBehavior<>)
-			)]
-
 			namespace Normal;
 
 			public class User { }
 			public interface ILogger<T>;
 
-			// Single type parameter behavior
-			public sealed class RequestLoggingBehavior<TResponse>(ILogger<RequestLoggingBehavior<TResponse>> logger)
-				: Immediate.Handlers.Shared.Behavior<int, TResponse>
+			// Non-generic behavior with fixed types
+			public sealed class SimpleLoggingBehavior(ILogger<SimpleLoggingBehavior> logger)
+				: Immediate.Handlers.Shared.Behavior<int, string>
 			{
-				public override async ValueTask<TResponse> HandleAsync(int request, CancellationToken cancellationToken)
+				public override async ValueTask<string> HandleAsync(int request, CancellationToken cancellationToken)
 				{
 					_ = logger.ToString();
 					var response = await Next(request, cancellationToken);
@@ -53,13 +49,12 @@ public sealed partial class Tests
 
 			[Handler]
 			[Behaviors(
-				typeof(RequestLoggingBehavior<>)
+				typeof(SimpleLoggingBehavior)
 			)]
-			public static partial class GetUsersQuery
+			public sealed partial class GetUsersQuery(UsersService usersService)
 			{
-				private static ValueTask<string> HandleAsync(
+				private ValueTask<string> HandleAsync(
 					int request,
-					UsersService usersService,
 					CancellationToken token)
 				{
 					token.ThrowIfCancellationRequested();
@@ -71,8 +66,8 @@ public sealed partial class Tests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task BehaviorTypeWithCorrectTResponse_DoesNotAlert() =>
-		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
+	public async Task BehaviorTypeWithInvalidZeroGenericParameters_Alerts() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
 			using System.Collections.Generic;
@@ -84,20 +79,16 @@ public sealed partial class Tests
 			using Immediate.Handlers.Shared;
 			using Normal;
 
-			[assembly: Behaviors(
-				typeof(RequestLoggingBehavior<>)
-			)]
-
 			namespace Normal;
 
 			public class User { }
 			public interface ILogger<T>;
 
-			// Single type parameter behavior
-			public sealed class RequestLoggingBehavior<TRequest>(ILogger<RequestLoggingBehavior<TRequest>> logger)
-				: Immediate.Handlers.Shared.Behavior<TRequest, string>
+			// Non-generic behavior with fixed types
+			public sealed class SimpleLoggingBehavior(ILogger<SimpleLoggingBehavior> logger)
+				: Immediate.Handlers.Shared.Behavior<int, string>
 			{
-				public override async ValueTask<string> HandleAsync(TRequest request, CancellationToken cancellationToken)
+				public override async ValueTask<string> HandleAsync(int request, CancellationToken cancellationToken)
 				{
 					_ = logger.ToString();
 					var response = await Next(request, cancellationToken);
@@ -117,13 +108,12 @@ public sealed partial class Tests
 
 			[Handler]
 			[Behaviors(
-				typeof(RequestLoggingBehavior<>)
+				typeof(SimpleLoggingBehavior)
 			)]
-			public static partial class GetUsersQuery
+			public sealed partial class GetUsersQuery(UsersService usersService)
 			{
-				private static ValueTask<string> HandleAsync(
+				private ValueTask<string> HandleAsync(
 					int request,
-					UsersService usersService,
 					CancellationToken token)
 				{
 					token.ThrowIfCancellationRequested();

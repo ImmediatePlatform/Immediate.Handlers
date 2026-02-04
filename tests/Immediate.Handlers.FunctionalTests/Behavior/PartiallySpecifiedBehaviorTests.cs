@@ -1,3 +1,8 @@
+using System.Globalization;
+using Immediate.Handlers.Shared;
+using Microsoft.Extensions.Logging;
+using FakeLogger = Microsoft.Extensions.Logging.Testing.FakeLogger;
+
 namespace Immediate.Handlers.FunctionalTests.Behavior;
 
 /// <summary>
@@ -6,98 +11,108 @@ namespace Immediate.Handlers.FunctionalTests.Behavior;
 /// </summary>
 public sealed class PartiallySpecifiedBehaviorTests
 {
-	// Non-generic behavior with fixed types
-	private sealed class NonGenericTestBehavior : Shared.Behavior<int, string>
-	{
-		public bool WasCalled { get; private set; }
-
-		public override async ValueTask<string> HandleAsync(int request, CancellationToken cancellationToken)
-		{
-			WasCalled = true;
-			var response = await Next(request, cancellationToken);
-			return $"NonGeneric:{response}";
-		}
-	}
-
-	// Single type parameter behavior (request type varies, response type is fixed)
-	private sealed class SingleTypeParameterBehavior<TRequest> : Shared.Behavior<TRequest, string>
-	{
-		public bool WasCalled { get; private set; }
-
-		public override async ValueTask<string> HandleAsync(TRequest request, CancellationToken cancellationToken)
-		{
-			WasCalled = true;
-			var response = await Next(request, cancellationToken);
-			return $"SingleParam:{response}";
-		}
-	}
-
-	// Handler behavior for testing
-	private sealed class TestHandlerBehavior : Shared.Behavior<int, string>
-	{
-		public override ValueTask<string> HandleAsync(int request, CancellationToken cancellationToken)
-		{
-			return ValueTask.FromResult($"Result:{request}");
-		}
-	}
-
 	[Fact]
-	public async Task NonGenericBehavior_ExecutesCorrectly()
+	public async Task BehaviorsAreAttachedToHandlerCorrectly()
 	{
-		// Arrange
-		var nonGenericBehavior = new NonGenericTestBehavior();
-		var handlerBehavior = new TestHandlerBehavior();
+		var logger = new FakeLogger();
 
-		nonGenericBehavior.SetInnerHandler(handlerBehavior);
-		nonGenericBehavior.HandlerType = typeof(TestHandlerBehavior);
+		var nonGenericTestBehavior = new NonGenericTestBehavior(logger);
+		var singleTypeRequestParameterBehavior = new SingleTypeRequestParameterBehavior<int>(logger);
+		var singleTypeResponseParameterBehavior = new SingleTypeResponseParameterBehavior<string>(logger);
+		var doubleTypeParameterBehavior = new DoubleTypeParameterBehavior<int, string>(logger);
+		var multipleBehaviorsTestHandler = new MultipleBehaviorsTestHandler();
+		var handleBehavior = new MultipleBehaviorsTestHandler.HandleBehavior(multipleBehaviorsTestHandler);
 
-		// Act
-		var result = await nonGenericBehavior.HandleAsync(42, CancellationToken.None);
+		var handler = new MultipleBehaviorsTestHandler.Handler(
+			handleBehavior,
+			doubleTypeParameterBehavior,
+			singleTypeResponseParameterBehavior,
+			singleTypeRequestParameterBehavior,
+			nonGenericTestBehavior
+		);
 
-		// Assert
-		Assert.True(nonGenericBehavior.WasCalled);
-		Assert.Equal("NonGeneric:Result:42", result);
+		var response = await handler.HandleAsync(42, TestContext.Current.CancellationToken);
+
+		Assert.True(nonGenericTestBehavior.WasCalled);
+		Assert.True(singleTypeRequestParameterBehavior.WasCalled);
+		Assert.True(singleTypeResponseParameterBehavior.WasCalled);
+		Assert.True(doubleTypeParameterBehavior.WasCalled);
 	}
+}
 
-	[Fact]
-	public async Task SingleTypeParameterBehavior_ExecutesCorrectly()
+#pragma warning disable CA1848 // Use the LoggerMessage delegates
+
+// Non-generic behavior with fixed types
+public sealed class NonGenericTestBehavior(ILogger logger)
+	: Behavior<int, string>
+{
+	public bool WasCalled { get; private set; }
+
+	public override async ValueTask<string> HandleAsync(int request, CancellationToken cancellationToken)
 	{
-		// Arrange
-		var singleParamBehavior = new SingleTypeParameterBehavior<int>();
-		var handlerBehavior = new TestHandlerBehavior();
-
-		singleParamBehavior.SetInnerHandler(handlerBehavior);
-		singleParamBehavior.HandlerType = typeof(TestHandlerBehavior);
-
-		// Act
-		var result = await singleParamBehavior.HandleAsync(99, CancellationToken.None);
-
-		// Assert
-		Assert.True(singleParamBehavior.WasCalled);
-		Assert.Equal("SingleParam:Result:99", result);
+		WasCalled = true;
+		var response = await Next(request, cancellationToken);
+		logger.LogInformation("NonGeneric:{Response}", response);
+		return response;
 	}
+}
 
-	[Fact]
-	public async Task NonGenericAndSingleParamBehaviors_CanBeChained()
+// Single type parameter behavior (request type varies, response type is fixed)
+public sealed class SingleTypeRequestParameterBehavior<TRequest>(ILogger logger)
+	: Behavior<TRequest, string>
+{
+	public bool WasCalled { get; private set; }
+
+	public override async ValueTask<string> HandleAsync(TRequest request, CancellationToken cancellationToken)
 	{
-		// Arrange
-		var nonGenericBehavior = new NonGenericTestBehavior();
-		var singleParamBehavior = new SingleTypeParameterBehavior<int>();
-		var handlerBehavior = new TestHandlerBehavior();
+		WasCalled = true;
+		var response = await Next(request, cancellationToken);
+		logger.LogInformation("SingleTypeRequest:{Response}", response);
+		return response;
+	}
+}
 
-		// Chain: nonGenericBehavior -> singleParamBehavior -> handlerBehavior
-		nonGenericBehavior.SetInnerHandler(singleParamBehavior);
-		singleParamBehavior.SetInnerHandler(handlerBehavior);
+// Single type parameter behavior (response type varies, request type is fixed)
+public sealed class SingleTypeResponseParameterBehavior<TResponse>(ILogger logger)
+	: Behavior<int, TResponse>
+{
+	public bool WasCalled { get; private set; }
 
-		nonGenericBehavior.HandlerType = typeof(TestHandlerBehavior);
-		singleParamBehavior.HandlerType = typeof(TestHandlerBehavior);
+	public override async ValueTask<TResponse> HandleAsync(int request, CancellationToken cancellationToken)
+	{
+		WasCalled = true;
+		var response = await Next(request, cancellationToken);
+		logger.LogInformation("SingleTypeResponse:{Response}", response);
+		return response;
+	}
+}
 
-		// Act
-		var result = await nonGenericBehavior.HandleAsync(123, CancellationToken.None);
+// Double type parameter behavior (both types vary)
+public sealed class DoubleTypeParameterBehavior<TRequest, TResponse>(ILogger logger)
+	: Behavior<TRequest, TResponse>
+{
+	public bool WasCalled { get; private set; }
 
-		// Assert
-		Assert.True(nonGenericBehavior.WasCalled);
-		Assert.True(singleParamBehavior.WasCalled);
-		Assert.Equal("NonGeneric:SingleParam:Result:123", result);
+	public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken)
+	{
+		WasCalled = true;
+		var response = await Next(request, cancellationToken);
+		logger.LogInformation("DoubleTypeResponse:{Response}", response);
+		return response;
+	}
+}
+
+[Handler]
+[Behaviors(
+	typeof(NonGenericTestBehavior),
+	typeof(SingleTypeRequestParameterBehavior<>),
+	typeof(SingleTypeResponseParameterBehavior<>),
+	typeof(DoubleTypeParameterBehavior<,>)
+)]
+public sealed partial class MultipleBehaviorsTestHandler
+{
+	private async ValueTask<string> HandleAsync(int request, CancellationToken _)
+	{
+		return string.Create(CultureInfo.InvariantCulture, $"{request}");
 	}
 }

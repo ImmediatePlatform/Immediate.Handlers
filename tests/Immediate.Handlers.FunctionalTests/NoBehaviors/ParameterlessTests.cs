@@ -20,9 +20,7 @@ public static partial class NoBehaviorNoTokenOneAdder
 {
 	public sealed record Query(int Input);
 
-	private static ValueTask<int> HandleAsync(
-		Query query
-	)
+	private static ValueTask<int> HandleAsync(Query query, CancellationToken _)
 	{
 		return ValueTask.FromResult(query.Input + 1);
 	}

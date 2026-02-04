@@ -11,7 +11,7 @@ namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
 public partial class Tests
 {
 	[Fact]
-	public async Task BehaviorTypeDoesNotHaveTwoGenericParameters_Alerts() =>
+	public async Task BehaviorTypeHasThreeGenericParameters_Alerts() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
 			"""
 			using System;

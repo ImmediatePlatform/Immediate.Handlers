@@ -31,18 +31,7 @@ internal static class TransformHandler
 				// no parameters
 				or { Parameters: [] }
 				// not a valuetask return
-				or
-				{
-					ReturnType: not INamedTypeSymbol
-					{
-						OriginalDefinition:
-						{
-							Arity: 0 or 1,
-							Name: "ValueTask",
-							ContainingNamespace.IsSystemThreadingTasks: true,
-						}
-					}
-				}
+				or { ReturnType.IsValidHandlerReturn: false }
 				// only private methods are considered
 				or { DeclaredAccessibility: not Accessibility.Private })
 		{
@@ -70,7 +59,7 @@ internal static class TransformHandler
 
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var responseType = BuildGenericType(handleMethod.GetTaskReturnType());
+		var responseType = BuildGenericType(handleMethod.ReturnType.ValueTaskReturnType);
 
 		cancellationToken.ThrowIfCancellationRequested();
 

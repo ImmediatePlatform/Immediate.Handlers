@@ -1,14 +1,14 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.Tests.Helpers;
 
-namespace Immediate.Handlers.Tests.AnalyzerTests.BehaviorAnalyzerTests;
+namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public sealed partial class Tests
 {
 	[Fact]
-	public async Task BehaviorTypeWithCorrectTRequest_DoesNotAlert() =>
-		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
+	public async Task MultiplyInheritedBehaviorTypeIsValid_DoesNotAlert() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
 			using System.Collections.Generic;
@@ -20,46 +20,46 @@ public sealed partial class Tests
 			using Immediate.Handlers.Shared;
 			using Normal;
 
-			[assembly: Behaviors(
-				typeof(RequestLoggingBehavior<>)
-			)]
-
 			namespace Normal;
 
 			public class User { }
 			public interface ILogger<T>;
 
-			// Single type parameter behavior
-			public sealed class RequestLoggingBehavior<TResponse>(ILogger<RequestLoggingBehavior<TResponse>> logger)
-				: Immediate.Handlers.Shared.Behavior<int, TResponse>
+			public abstract class MidBehavior1<TRequest>
+				: Immediate.Handlers.Shared.Behavior<TRequest, IEnumerable<User>>;
+
+			public abstract class MidBehavior2 : MidBehavior1<User>;
+
+			public sealed class TestBehavior(ILogger<TestBehavior> logger) : MidBehavior2
 			{
-				public override async ValueTask<TResponse> HandleAsync(int request, CancellationToken cancellationToken)
+				public override async ValueTask<IEnumerable<User>> HandleAsync(User request, CancellationToken cancellationToken)
 				{
 					_ = logger.ToString();
 					var response = await Next(request, cancellationToken);
-
+			
 					return response;
 				}
-			}
+						}
 
 			public class UsersService(ILogger<UsersService> logger)
 			{
-				public ValueTask<string> GetUsers()
+				public ValueTask<IEnumerable<User>> GetUsers()
 				{
 					_ = logger.ToString();
-					return ValueTask.FromResult("result");
+					return ValueTask.FromResult(Enumerable.Empty<User>());
 				}
 			}
 
 			[Handler]
 			[Behaviors(
-				typeof(RequestLoggingBehavior<>)
+				typeof(TestBehavior)
 			)]
-			public static partial class GetUsersQuery
+			public sealed partial class GetUsersQuery(UsersService usersService)
 			{
-				private static ValueTask<string> HandleAsync(
-					int request,
-					UsersService usersService,
+				public record Query;
+
+				private ValueTask<IEnumerable<User>> HandleAsync(
+					Query _,
 					CancellationToken token)
 				{
 					token.ThrowIfCancellationRequested();
@@ -71,8 +71,8 @@ public sealed partial class Tests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task BehaviorTypeWithCorrectTResponse_DoesNotAlert() =>
-		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsAnalyzer>(
+	public async Task MultiplyInheritedBehaviorTypeIsInvalid_Alerts() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
 			"""
 			using System;
 			using System.Collections.Generic;
@@ -84,46 +84,46 @@ public sealed partial class Tests
 			using Immediate.Handlers.Shared;
 			using Normal;
 
-			[assembly: Behaviors(
-				typeof(RequestLoggingBehavior<>)
-			)]
-
 			namespace Normal;
 
 			public class User { }
 			public interface ILogger<T>;
 
-			// Single type parameter behavior
-			public sealed class RequestLoggingBehavior<TRequest>(ILogger<RequestLoggingBehavior<TRequest>> logger)
-				: Immediate.Handlers.Shared.Behavior<TRequest, string>
+			public abstract class MidBehavior1<TRequest>
+				: Immediate.Handlers.Shared.Behavior<TRequest, IEnumerable<User>>;
+
+			public abstract class MidBehavior2 : MidBehavior1<int>;
+
+			public sealed class TestBehavior(ILogger<TestBehavior> logger) : MidBehavior2
 			{
-				public override async ValueTask<string> HandleAsync(TRequest request, CancellationToken cancellationToken)
+				public override async ValueTask<IEnumerable<User>> HandleAsync(int request, CancellationToken cancellationToken)
 				{
 					_ = logger.ToString();
 					var response = await Next(request, cancellationToken);
-
+			
 					return response;
 				}
-			}
+						}
 
 			public class UsersService(ILogger<UsersService> logger)
 			{
-				public ValueTask<string> GetUsers()
+				public ValueTask<IEnumerable<User>> GetUsers()
 				{
 					_ = logger.ToString();
-					return ValueTask.FromResult("result");
+					return ValueTask.FromResult(Enumerable.Empty<User>());
 				}
 			}
 
 			[Handler]
 			[Behaviors(
-				typeof(RequestLoggingBehavior<>)
+				{|IHR0020:typeof(TestBehavior)|}
 			)]
-			public static partial class GetUsersQuery
+			public sealed partial class GetUsersQuery(UsersService usersService)
 			{
-				private static ValueTask<string> HandleAsync(
-					int request,
-					UsersService usersService,
+				public record Query;
+			
+				private ValueTask<IEnumerable<User>> HandleAsync(
+					Query _,
 					CancellationToken token)
 				{
 					token.ThrowIfCancellationRequested();
