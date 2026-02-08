@@ -10,9 +10,8 @@ public sealed record Behavior
 	public required string RegistrationType { get; init; }
 	public required string NonGenericTypeName { get; init; }
 	public required string Name { get; init; }
-	public required string? RequestType { get; init; }
-	public required string? ResponseType { get; init; }
-	public required int TypeParameterCount { get; init; }
+	public required ConstraintInfo RequestType { get; init; }
+	public required ConstraintInfo ResponseType { get; init; }
 }
 
 [ExcludeFromCodeCoverage]
@@ -48,9 +47,10 @@ public sealed record Handler
 	public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
 }
 
-[ExcludeFromCodeCoverage]
 public sealed record ConstraintInfo
 {
-	public required string? RequestType { get; init; }
-	public required string? ResponseType { get; init; }
+	public required string? ExactType { get; init; }
+	public required EquatableReadOnlyList<string> TypeConstraints { get; init; }
+
+	public static ConstraintInfo Empty { get; } = new() { ExactType = null, TypeConstraints = [] };
 }

@@ -37,6 +37,10 @@ public sealed class PartiallySpecifiedBehaviorTests
 		Assert.True(singleTypeRequestParameterBehavior.WasCalled);
 		Assert.True(singleTypeResponseParameterBehavior.WasCalled);
 		Assert.True(doubleTypeParameterBehavior.WasCalled);
+
+		Assert.Equal("42", response);
+
+		Assert.Equal(4, logger.Collector.Count);
 	}
 }
 

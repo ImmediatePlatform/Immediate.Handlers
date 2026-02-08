@@ -28,11 +28,11 @@ public sealed partial class Tests
 			public abstract class MidBehavior1<TRequest>
 				: Immediate.Handlers.Shared.Behavior<TRequest, IEnumerable<User>>;
 
-			public abstract class MidBehavior2 : MidBehavior1<User>;
+			public abstract class MidBehavior2 : MidBehavior1<GetUsersQuery.Query>;
 
 			public sealed class TestBehavior(ILogger<TestBehavior> logger) : MidBehavior2
 			{
-				public override async ValueTask<IEnumerable<User>> HandleAsync(User request, CancellationToken cancellationToken)
+				public override async ValueTask<IEnumerable<User>> HandleAsync(GetUsersQuery.Query request, CancellationToken cancellationToken)
 				{
 					_ = logger.ToString();
 					var response = await Next(request, cancellationToken);

@@ -132,7 +132,8 @@ internal static class TransformHandler
 			return;
 		}
 
-		implements.Add(type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+		implements.Add(type.OriginalDefinition.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+
 		if (type.BaseType is not null)
 			AddBaseTypes(type.BaseType, implements);
 
