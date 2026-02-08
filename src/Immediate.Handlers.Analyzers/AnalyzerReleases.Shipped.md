@@ -58,5 +58,5 @@ IHR0009 | ImmediateHandler | Error | HandlerClassAnalyzer
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
-IHR0020 | ImmediateHandler | Error | BehaviorsAnalyzer
+IHR0020 | ImmediateHandler | Error | HandlerClassAnalyzer
 IHR0021 | ImmediateHandler | Error | BehaviorsClassAnalyzer
