@@ -86,9 +86,9 @@ public sealed partial class Tests
 
 			// Non-generic behavior with fixed types
 			public sealed class SimpleLoggingBehavior(ILogger<SimpleLoggingBehavior> logger)
-				: Immediate.Handlers.Shared.Behavior<int, string>
+				: Immediate.Handlers.Shared.Behavior<double, string>
 			{
-				public override async ValueTask<string> HandleAsync(int request, CancellationToken cancellationToken)
+				public override async ValueTask<string> HandleAsync(double request, CancellationToken cancellationToken)
 				{
 					_ = logger.ToString();
 					var response = await Next(request, cancellationToken);
@@ -108,7 +108,7 @@ public sealed partial class Tests
 
 			[Handler]
 			[Behaviors(
-				typeof(SimpleLoggingBehavior)
+				{|IHR0020:typeof(SimpleLoggingBehavior)|}
 			)]
 			public sealed partial class GetUsersQuery(UsersService usersService)
 			{
