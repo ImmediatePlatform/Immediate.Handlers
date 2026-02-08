@@ -3,8 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Immediate.Handlers.FunctionalTests.Behavior.Constraints;
 
+// Proving compiler drops these behaviors from handler pipeline
+#pragma warning disable IHR0020 // Behavior has incorrect type argument
 [Handler]
 [Behaviors(typeof(BehaviorA<,>), typeof(BehaviorB<,>), typeof(BehaviorC<,>), typeof(BehaviorD<,>))]
+#pragma warning restore IHR0020 // Behavior has incorrect type argument
 public static partial class BehaviorShouldConstrainA
 {
 	public sealed record Query(int Input) : A;
