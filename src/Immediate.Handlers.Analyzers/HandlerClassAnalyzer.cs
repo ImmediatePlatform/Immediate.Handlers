@@ -370,7 +370,10 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			return;
 
 		var requestType = method.Parameters[0].Type;
-		var responseType = method.ReturnType.ValueTaskReturnType;
+
+		var responseType =
+			method.ReturnType.ValueTaskReturnType
+			?? context.Compilation.GetTypeByMetadataName("System.ValueTuple")!;
 
 		foreach (var attribute in method.ContainingSymbol.GetAttributes())
 		{
@@ -404,7 +407,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 				if (type.GetBehaviorConstraintInfo() is not { } info)
 				{
-					// incorrect number of type parameters; will get reeported elsewhere
+					// incorrect number of type parameters; will get reported elsewhere
 					continue;
 				}
 

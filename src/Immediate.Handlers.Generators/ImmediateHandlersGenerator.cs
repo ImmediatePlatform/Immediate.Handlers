@@ -298,12 +298,7 @@ file static class Extensions
 		if (constraintInfo.ExactType is { } exactType)
 			return string.Equals(type.Name, exactType, StringComparison.Ordinal);
 
-		foreach (var constraint in constraintInfo.TypeConstraints)
-		{
-			if (!type.Implements.Contains(constraint, StringComparer.Ordinal))
-				return false;
-		}
-
-		return true;
+		return constraintInfo.TypeConstraints
+			.All(c => type.Implements.Contains(c, StringComparer.Ordinal));
 	}
 }

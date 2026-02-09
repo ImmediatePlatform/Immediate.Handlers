@@ -113,6 +113,30 @@ internal static class ITypeSymbolExtensions
 		}
 	}
 
+	extension(ITypeSymbol typeSymbol)
+	{
+
+		public bool Satisfies(ConstraintInfo? constraints, Compilation compilation)
+		{
+			if (constraints is null)
+				return true;
+
+			if (constraints.ExactType is not null)
+				return SymbolEqualityComparer.Default.Equals(constraints.ExactType, typeSymbol);
+
+			foreach (var constraint in constraints.TypeConstraints)
+			{
+				if (compilation.ClassifyConversion(typeSymbol, constraint)
+					is not ({ IsIdentity: true } or { IsImplicit: true, IsReference: true }))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+	}
+
 	extension([NotNullWhen(true)] ITypeSymbol? typeSymbol)
 	{
 		public bool IsHandlerAttribute =>
@@ -194,31 +218,6 @@ internal static class ITypeSymbolExtensions
 					}
 				}
 			};
-
-		public bool Satisfies(ConstraintInfo? constraints, Compilation compilation)
-		{
-			if (constraints is null)
-				return true;
-
-#pragma warning disable CA1508 // Avoid dead conditional code
-			if (typeSymbol is null)
-				return constraints is { ExactType: null, TypeConstraints: [] };
-#pragma warning restore CA1508 // Avoid dead conditional code
-
-			if (constraints.ExactType is not null)
-				return SymbolEqualityComparer.Default.Equals(constraints.ExactType, typeSymbol);
-
-			foreach (var constraint in constraints.TypeConstraints)
-			{
-				if (compilation.ClassifyConversion(typeSymbol, constraint)
-					is not ({ IsIdentity: true } or { IsImplicit: true, IsReference: true }))
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
 	}
 
 	extension(INamespaceSymbol namespaceSymbol)
