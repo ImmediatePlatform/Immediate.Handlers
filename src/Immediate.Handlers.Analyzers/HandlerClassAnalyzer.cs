@@ -380,7 +380,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			if (attribute is not
 				{
 					AttributeClass.IsBehaviorsAttribute: true,
-					ConstructorArguments: [{ Kind: TypedConstantKind.Array } behaviors]
+					ConstructorArguments: [{ Kind: TypedConstantKind.Array } behaviors],
 				})
 			{
 				continue;

@@ -88,7 +88,7 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 						},
 					},
 				},
-				ChildOperations.Count: 2
+				ChildOperations.Count: 2,
 			}
 			|| array.ChildOperations.ElementAt(1) is not IArrayInitializerOperation aio)
 		{
