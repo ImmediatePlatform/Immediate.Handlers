@@ -44,11 +44,14 @@ internal static class TransformBehaviors
 				if (v.Value is not INamedTypeSymbol symbol)
 					return null;
 
-				if (!symbol.IsUnboundGenericType)
+				var originalDefinition = symbol.OriginalDefinition;
+
+				// Accept behaviors with 0, 1, or 2 type parameters
+				if (originalDefinition.TypeParameters.Length > 2)
 					return null;
 
-				var originalDefinition = symbol.OriginalDefinition;
-				if (originalDefinition.TypeParameters.Length != 2)
+				// For generic types, must be unbound. For non-generic types, this check doesn't apply
+				if (originalDefinition.IsGenericType && !symbol.IsUnboundGenericType)
 					return null;
 
 				if (originalDefinition.IsAbstract)
@@ -59,7 +62,7 @@ internal static class TransformBehaviors
 
 				cancellationToken.ThrowIfCancellationRequested();
 
-				// global::Dummy.LoggingBehavior<,>
+				// global::Dummy.LoggingBehavior<,> or global::Dummy.LoggingBehavior<> or global::Dummy.LoggingBehavior
 				// for: `services.AddScoped(typeof(..));`
 				var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 
@@ -69,8 +72,8 @@ internal static class TransformBehaviors
 				// for: private readonly global::Dummy.LoggingBehavior
 				var constructorType = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
 
-				var constraint = GetConstraintInfo(symbol, cancellationToken);
-				if (constraint == null)
+				var constraintInfo = symbol.GetBehaviorConstraintInfo();
+				if (constraintInfo is not { RequestConstraints: { }, ResponseConstraints: { } })
 					return null;
 
 				cancellationToken.ThrowIfCancellationRequested();
@@ -78,61 +81,26 @@ internal static class TransformBehaviors
 				{
 					RegistrationType = typeName,
 					NonGenericTypeName = constructorType,
-					RequestType = constraint.RequestType,
-					ResponseType = constraint.ResponseType,
+					RequestType = constraintInfo.RequestConstraints.ToEquatableConstraint(),
+					ResponseType = constraintInfo.ResponseConstraints.ToEquatableConstraint(),
 					Name = originalDefinition.Name,
 				};
 			})
 			.ToEquatableReadOnlyList();
 	}
+}
 
-	private static ConstraintInfo? GetConstraintInfo(INamedTypeSymbol symbol, CancellationToken cancellationToken)
+file static class Extensions
+{
+	public static ConstraintInfo ToEquatableConstraint(this Handlers.ConstraintInfo constraint)
 	{
-		cancellationToken.ThrowIfCancellationRequested();
-
-		var originalDefinition = symbol.OriginalDefinition;
-
-		if (GetConstraintType(originalDefinition.TypeParameters[0]) is not (true, var requestType))
-			return null;
-
-		cancellationToken.ThrowIfCancellationRequested();
-
-		if (GetConstraintType(originalDefinition.TypeParameters[1]) is not (true, var responseType))
-			return null;
-
-		cancellationToken.ThrowIfCancellationRequested();
-
 		return new()
 		{
-			RequestType = requestType,
-			ResponseType = responseType,
+			ExactType = constraint.ExactType?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+
+			TypeConstraints = constraint.TypeConstraints
+				.Select(tc => tc.OriginalDefinition.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
+				.ToEquatableReadOnlyList(),
 		};
-	}
-
-	private static (bool Valid, string? Constraint) GetConstraintType(ITypeParameterSymbol parameter)
-	{
-		if (parameter.ConstraintTypes is [])
-			return (true, null);
-
-		if (parameter.ConstraintTypes is not [var constraint])
-			return default;
-
-		var displayString = constraint.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-
-		if (constraint is INamedTypeSymbol
-			{
-				IsGenericType: true,
-				TypeArguments:
-				[
-					ITypeParameterSymbol s,
-				]
-			}
-			&& s.Name.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase)
-		)
-		{
-			displayString = displayString.Replace(parameter.Name, "_TRequest_");
-		}
-
-		return (true, displayString);
 	}
 }

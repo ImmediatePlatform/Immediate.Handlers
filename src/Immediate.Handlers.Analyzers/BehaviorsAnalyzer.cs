@@ -23,12 +23,12 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor BehaviorsMustHaveTwoGenericParameters =
 		new(
 			id: DiagnosticIds.IHR0007BehaviorsMustHaveTwoGenericParameters,
-			title: "Behaviors must have two generic parameters",
-			messageFormat: "Behavior type '{0}' must have two generic parameters",
+			title: "Behaviors must not have more than two generic parameters",
+			messageFormat: "Behavior type '{0}' must have zero, one, or two generic parameters",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must have two generic parameters, correctly referencing `TRequest` and `TResponse`."
+			description: "All Behaviors must have zero, one, or two generic parameters."
 		);
 
 	public static readonly DiagnosticDescriptor BehaviorsMustUseUnboundGenerics =
@@ -69,17 +69,10 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		if (context.Operation is not IAttributeOperation { Operation: IObjectCreationOperation attribute })
 			return;
 
-		if (!attribute.Type.IsBehaviorsAttribute())
+		if (attribute is not { Type.IsBehaviorsAttribute: true, Arguments: [{ Value: { } array }] })
 			return;
-
-		if (attribute.Arguments.Length != 1)
-		{
-			// note: this will already be a compiler error anyway
-			return;
-		}
 
 		token.ThrowIfCancellationRequested();
-		var array = attribute.Arguments[0].Value;
 
 		if (array is not
 			{
@@ -104,9 +97,6 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 		}
 
 		token.ThrowIfCancellationRequested();
-		var baseBehaviorSymbol = context.Compilation.GetTypeByMetadataName("Immediate.Handlers.Shared.Behavior`2");
-		if (baseBehaviorSymbol is null)
-			return;
 
 		foreach (var op in aio.ChildOperations)
 		{
@@ -134,8 +124,11 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 				);
 			}
 
-			if (!originalDefinition.IsGenericType
-				|| originalDefinition.TypeParameters.Length != 2)
+			// Allow 0, 1, or 2 generic parameters. Warn on 3+
+			if (!originalDefinition.IsGenericType)
+				continue;
+
+			if (originalDefinition.TypeParameters.Length > 2)
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(
@@ -144,7 +137,8 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 						originalDefinition.Name)
 				);
 			}
-			else if (!behaviorType.IsUnboundGenericType)
+
+			if (!behaviorType.IsUnboundGenericType)
 			{
 				context.ReportDiagnostic(
 					Diagnostic.Create(

@@ -1,8 +1,12 @@
 {
-  "profiles": {
-    "Normal": {
-      "commandName": "DebugRoslynComponent",
-      "targetProject": "..//..//Samples//Normal//Normal.csproj"
-    }
-  }
+	"profiles": {
+		"Immediate.Handlers.FunctionalTests": {
+			"commandName": "DebugRoslynComponent",
+			"targetProject": "../../tests/Immediate.Handlers.FunctionalTests/Immediate.Handlers.FunctionalTests.csproj"
+		},
+		"Normal": {
+			"commandName": "DebugRoslynComponent",
+			"targetProject": "../../Samples/Normal/Normal.csproj"
+		}
+	}
 }

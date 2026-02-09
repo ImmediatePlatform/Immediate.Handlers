@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -133,6 +134,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				Handlers = handlers.Select(x => x.displayName),
 				Behaviors = behaviors
 					.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))
+					.WhereNotNull()
+					.Select(b => new { b.RegistrationType })
 					.Distinct(),
 			}
 		);
@@ -196,7 +199,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			ResponseType = responseType.Name,
 			IsImplicitValueTuple = handler.ResponseType is null,
 
-			Behaviors = BuildRenderBehaviors(pipelineBehaviors),
+			Behaviors = BuildRenderBehaviors(pipelineBehaviors, handler.RequestType.Name, responseType.Name),
 			HasMsDi = hasMsDi,
 		});
 
@@ -209,20 +212,20 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			GenericType responseType,
 			IEnumerable<Behavior?> enumerable) =>
 		[
-			.. enumerable
-				.Where(b =>
-					(b is null || ValidateType(b.RequestType, requestType))
-					&& (b is null || ValidateType(b.ResponseType, responseType))
-				),
+			.. enumerable.Where(b => b.IsValid(requestType, responseType)),
 		];
 
 	private sealed record RenderBehavior
 	{
-		public required string NonGenericTypeName { get; init; }
+		public required string TypeName { get; init; }
 		public required string VariableName { get; init; }
 	}
 
-	private static List<RenderBehavior> BuildRenderBehaviors(List<Behavior?> pipelineBehaviors)
+	private static List<RenderBehavior> BuildRenderBehaviors(
+		List<Behavior?> pipelineBehaviors,
+		string requestName,
+		string responseName
+	)
 	{
 		var typesCount = new Dictionary<string, int>(StringComparer.Ordinal)
 		{
@@ -235,14 +238,22 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				count = 0;
 
 			typesCount[typeName] = count + 1;
-			return count == 0 ? string.Empty : $"{count}";
+			return count == 0 ? string.Empty : count.ToString(CultureInfo.InvariantCulture);
 		}
 
 #pragma warning disable CA1308 // Normalize strings to uppercase
 		var renderBehaviors = pipelineBehaviors
+			.WhereNotNull()
 			.Select(b => new RenderBehavior
 			{
-				NonGenericTypeName = b!.NonGenericTypeName,
+				TypeName = (b.RequestType.ExactType, b.ResponseType.ExactType) switch
+				{
+					(null, null) => $"{b.NonGenericTypeName}<{requestName}, {responseName}>",
+					({ }, null) => $"{b.NonGenericTypeName}<{responseName}>",
+					(null, { }) => $"{b.NonGenericTypeName}<{requestName}>",
+					({ }, { }) => b.NonGenericTypeName,
+				},
+
 				VariableName = b.Name[0..1].ToLowerInvariant()
 					+ b.Name[1..]
 					+ GetVariableNameSuffix(b.Name),
@@ -252,10 +263,6 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		return renderBehaviors;
 	}
-
-	private static bool ValidateType(string? type, GenericType implementedTypes) =>
-		type is null
-		|| implementedTypes.Implements.Contains(type.Replace("_TRequest_", implementedTypes.Name), StringComparer.Ordinal);
 
 	private static Template GetTemplate(string name)
 	{
@@ -267,5 +274,31 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		using var reader = new StreamReader(stream);
 		return Template.Parse(reader.ReadToEnd());
+	}
+}
+
+file static class Extensions
+{
+	public static bool IsValid(
+		this Behavior? behavior,
+		GenericType requestType,
+		GenericType responseType
+	) =>
+		behavior is null
+		|| (
+			IsValid(behavior.RequestType, requestType)
+			&& IsValid(behavior.ResponseType, responseType)
+		);
+
+	private static bool IsValid(
+		ConstraintInfo constraintInfo,
+		GenericType type
+	)
+	{
+		if (constraintInfo.ExactType is { } exactType)
+			return string.Equals(type.Name, exactType, StringComparison.Ordinal);
+
+		return constraintInfo.TypeConstraints
+			.All(c => type.Implements.Contains(c, StringComparer.Ordinal));
 	}
 }

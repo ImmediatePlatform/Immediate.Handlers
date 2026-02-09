@@ -1,5 +1,6 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Immediate.Handlers.Analyzers;
@@ -140,6 +141,17 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
+	public static readonly DiagnosticDescriptor HandlerUsesBehaviorWithIncorrectTypeArguments =
+		new(
+			id: DiagnosticIds.IHR0020HandlerUsesBehaviorWithIncorrectTypeArguments,
+			title: "Behavior has incorrect type argument",
+			messageFormat: "Behavior type '{0}' has type arguments that don't match the handler's request or response types",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "Behavior type arguments must be compatible with the handler's request and response types."
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
@@ -155,6 +167,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			ContainingClassInstanceMembersMustBePrivate,
 			ContainingClassMustBeStatic,
 			StaticHandlerCouldBeSealed,
+			HandlerUsesBehaviorWithIncorrectTypeArguments,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -177,7 +190,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		if (!containerSymbol
 				.GetAttributes()
-				.Any(x => x.AttributeClass.IsHandlerAttribute())
+				.Any(a => a is { AttributeClass.IsHandlerAttribute: true })
 		)
 		{
 			return;
@@ -215,6 +228,11 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		if (methods is [{ } method])
 		{
+			AnalyzeAccessibility(context, method);
+			AnalyzeBehaviors(context, method);
+			AnalyzeReturnType(context, method);
+			AnalyzeCancellationToken(context, method);
+
 			if (method.IsStatic)
 				AnalyzeStaticHandler(context, containerSymbol, method);
 			else
@@ -236,10 +254,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	private static void AnalyzeInstanceMethod(SymbolAnalysisContext context, INamedTypeSymbol containerSymbol, IMethodSymbol method)
 	{
-		AnalyzeAccessibility(context, method);
-		AnalyzeReturnType(context, method);
-		AnalyzeCancellationToken(context, method);
-
 		if (method.Parameters is [] or [{ Type.IsCancellationToken: true }])
 		{
 			context.ReportDiagnostic(
@@ -302,10 +316,6 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	private static void AnalyzeStaticHandler(SymbolAnalysisContext context, INamedTypeSymbol containerSymbol, IMethodSymbol method)
 	{
-		AnalyzeAccessibility(context, method);
-		AnalyzeReturnType(context, method);
-		AnalyzeCancellationToken(context, method);
-
 		context.ReportDiagnostic(
 			Diagnostic.Create(
 				StaticHandlerCouldBeSealed,
@@ -351,21 +361,84 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		}
 	}
 
+	private static void AnalyzeBehaviors(SymbolAnalysisContext context, IMethodSymbol method)
+	{
+		if (method.Parameters.Length == 0)
+			return;
+
+		if (!method.ReturnType.IsValidHandlerReturn)
+			return;
+
+		var requestType = method.Parameters[0].Type;
+
+		var responseType =
+			method.ReturnType.ValueTaskReturnType
+			?? context.Compilation.GetTypeByMetadataName("System.ValueTuple")!;
+
+		foreach (var attribute in method.ContainingSymbol.GetAttributes())
+		{
+			if (attribute is not
+				{
+					AttributeClass.IsBehaviorsAttribute: true,
+					ConstructorArguments: [{ Kind: TypedConstantKind.Array } behaviors]
+				})
+			{
+				continue;
+			}
+
+			if (attribute
+					.ApplicationSyntaxReference
+					?.GetSyntax(context.CancellationToken) is not AttributeSyntax attributeSyntax)
+			{
+				// shouldn't be possible, but...
+				continue;
+			}
+
+			var index = -1;
+			foreach (var behavior in behaviors.Values)
+			{
+				index++;
+
+				if (behavior.Kind != TypedConstantKind.Type)
+					continue;
+
+				if (behavior.Value is not INamedTypeSymbol type)
+					continue;
+
+				if (type.GetBehaviorConstraintInfo() is not { } info)
+				{
+					// incorrect number of type parameters; will get reported elsewhere
+					continue;
+				}
+
+				if (requestType.Satisfies(info.RequestConstraints, context.Compilation)
+					&& responseType.Satisfies(info.ResponseConstraints, context.Compilation))
+				{
+					continue;
+				}
+
+				var location = attributeSyntax switch
+				{
+					{ ArgumentList.Arguments: { } arguments } when arguments.Count > index =>
+						arguments[index].GetLocation(),
+
+					_ => null,
+				};
+
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						HandlerUsesBehaviorWithIncorrectTypeArguments,
+						location,
+						type.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)
+					)
+				);
+			}
+		}
+	}
+
 	private static void AnalyzeReturnType(SymbolAnalysisContext context, IMethodSymbol method)
 	{
-		if (method is not
-			{
-				ReturnType: INamedTypeSymbol
-				{
-					OriginalDefinition:
-					{
-						Arity: 0 or 1,
-						Name: "ValueTask",
-						ContainingNamespace.IsSystemThreadingTasks: true,
-					}
-				}
-			}
-		)
+		if (!method.ReturnType.IsValidHandlerReturn)
 		{
 			context.ReportDiagnostic(
 				Diagnostic.Create(

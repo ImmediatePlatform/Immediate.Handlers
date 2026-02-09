@@ -31,18 +31,7 @@ internal static class TransformHandler
 				// no parameters
 				or { Parameters: [] }
 				// not a valuetask return
-				or
-				{
-					ReturnType: not INamedTypeSymbol
-					{
-						OriginalDefinition:
-						{
-							Arity: 0 or 1,
-							Name: "ValueTask",
-							ContainingNamespace.IsSystemThreadingTasks: true,
-						}
-					}
-				}
+				or { ReturnType.IsValidHandlerReturn: false }
 				// only private methods are considered
 				or { DeclaredAccessibility: not Accessibility.Private })
 		{
@@ -70,7 +59,7 @@ internal static class TransformHandler
 
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var responseType = BuildGenericType(handleMethod.GetTaskReturnType());
+		var responseType = BuildGenericType(handleMethod.ReturnType.ValueTaskReturnType);
 
 		cancellationToken.ThrowIfCancellationRequested();
 
@@ -136,13 +125,15 @@ internal static class TransformHandler
 
 	private static void AddBaseTypes(ITypeSymbol type, List<string> implements)
 	{
-		if (type.SpecialType is SpecialType.System_Object or SpecialType.System_Collections_IEnumerable
-			|| type.IsIEquatable1())
+		if (type
+				is { SpecialType: SpecialType.System_Object or SpecialType.System_Collections_IEnumerable }
+				or { IsIEquatable1: true })
 		{
 			return;
 		}
 
-		implements.Add(type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+		implements.Add(type.OriginalDefinition.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+
 		if (type.BaseType is not null)
 			AddBaseTypes(type.BaseType, implements);
 
@@ -175,12 +166,12 @@ file static class Extensions
 			if (a.AttributeClass is null)
 				continue;
 
-			if (a.AttributeClass.IsBehaviorsAttribute())
+			if (a is { AttributeClass.IsBehaviorsAttribute: true })
 				return a;
 
 			foreach (var aa in a.AttributeClass.GetAttributes())
 			{
-				if (aa.AttributeClass.IsBehaviorsAttribute())
+				if (aa is { AttributeClass.IsBehaviorsAttribute: true })
 					return aa;
 			}
 		}

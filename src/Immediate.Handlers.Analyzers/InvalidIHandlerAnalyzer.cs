@@ -1,6 +1,6 @@
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis;
 using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Immediate.Handlers.Analyzers;
 
@@ -43,7 +43,7 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 		foreach (var parameter in methodSymbol.Parameters)
 		{
 			var type = parameter.Type as INamedTypeSymbol;
-			if (!type.IsIHandler())
+			if (!type.IsIHandler)
 				continue;
 
 			if (type.TypeArguments[0].TypeKind is TypeKind.TypeParameter
