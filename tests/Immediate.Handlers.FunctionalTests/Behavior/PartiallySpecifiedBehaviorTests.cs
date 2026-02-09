@@ -20,8 +20,8 @@ public sealed class PartiallySpecifiedBehaviorTests
 		var singleTypeRequestParameterBehavior = new SingleTypeRequestParameterBehavior<int>(logger);
 		var singleTypeResponseParameterBehavior = new SingleTypeResponseParameterBehavior<string>(logger);
 		var doubleTypeParameterBehavior = new DoubleTypeParameterBehavior<int, string>(logger);
-		var multipleBehaviorsTestHandler = new MultipleBehaviorsTestHandler();
-		var handleBehavior = new MultipleBehaviorsTestHandler.HandleBehavior(multipleBehaviorsTestHandler);
+
+		var handleBehavior = new MultipleBehaviorsTestHandler.HandleBehavior(new MultipleBehaviorsTestHandler());
 
 		var handler = new MultipleBehaviorsTestHandler.Handler(
 			handleBehavior,
