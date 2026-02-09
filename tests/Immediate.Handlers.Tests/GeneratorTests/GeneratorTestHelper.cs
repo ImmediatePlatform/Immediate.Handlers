@@ -94,9 +94,9 @@ public static class GeneratorTestHelper
 				[
 					{
 						TrackedOutputSteps: { } outputSteps,
-						TrackedSteps: { } trackedSteps
+						TrackedSteps: { } trackedSteps,
 					}
-				]
+				],
 			}
 		)
 		{
