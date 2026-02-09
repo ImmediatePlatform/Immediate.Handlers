@@ -5,14 +5,9 @@
 
   <ItemGroup>
 	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.6.0" />
-	<PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
 	<PackageVersion Include="coverlet.collector" Version="6.0.4" />
 	<PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
 	<PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.2" />
-	<PackageVersion Include="Foundatio.Mediator" Version="1.0.0-rc.5" />
-	<PackageVersion Include="Mediator.Abstractions" Version="3.0.1" />
-	<PackageVersion Include="Mediator.SourceGenerator" Version="3.0.1" />
-	<PackageVersion Include="MediatR" Version="12.5.0" />
 	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
 	<PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" />
@@ -27,7 +22,6 @@
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.2.0" />
 	<PackageVersion Include="MinVer" Version="7.0.0" />
-	<PackageVersion Include="RhoMicro.BdnLogging" Version="1.0.3" />
 	<PackageVersion Include="Scriban" Version="6.5.2" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.2" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />

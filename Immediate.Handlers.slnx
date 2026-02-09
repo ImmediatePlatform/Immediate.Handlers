@@ -12,11 +12,6 @@
     <File Path=".github/workflows/build.yml" />
     <File Path=".github/workflows/release.yml" />
   </Folder>
-  <Folder Name="/Benchmarks/">
-    <Project Path="benchmarks/Benchmark.Behaviors/Benchmark.Behaviors.csproj" />
-    <Project Path="benchmarks/Benchmark.Large/Benchmark.Large.csproj" />
-    <Project Path="benchmarks/Benchmark.Simple/Benchmark.Simple.csproj" />
-  </Folder>
   <Folder Name="/Samples/">
     <Project Path="samples/Normal/Normal.csproj" />
   </Folder>
