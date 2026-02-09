@@ -179,7 +179,7 @@ internal static class ITypeSymbolExtensions
 				ContainingNamespace:
 				{
 					Name: "System",
-					ContainingNamespace.IsGlobalNamespace: true
+					ContainingNamespace.IsGlobalNamespace: true,
 				},
 			};
 
@@ -214,9 +214,9 @@ internal static class ITypeSymbolExtensions
 					ContainingNamespace:
 					{
 						Name: "System",
-						ContainingNamespace.IsGlobalNamespace: true
-					}
-				}
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
 			};
 	}
 
@@ -232,8 +232,8 @@ internal static class ITypeSymbolExtensions
 					ContainingNamespace:
 					{
 						Name: "System",
-						ContainingNamespace.IsGlobalNamespace: true
-					}
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
 				},
 			};
 
