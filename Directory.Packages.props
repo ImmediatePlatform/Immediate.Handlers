@@ -6,7 +6,7 @@
   <ItemGroup>
 	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.6.0" />
 	<PackageVersion Include="coverlet.collector" Version="6.0.4" />
-	<PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
+	<PackageVersion Include="coverlet.msbuild" Version="8.0.0" />
 	<PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.2" />
 	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
 	<PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
