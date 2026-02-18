@@ -5,10 +5,10 @@
 
   <ItemGroup>
 	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.6.0" />
-	<PackageVersion Include="coverlet.collector" Version="6.0.4" />
-	<PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
+	<PackageVersion Include="coverlet.collector" Version="8.0.0" />
+	<PackageVersion Include="coverlet.msbuild" Version="8.0.0" />
 	<PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.2" />
-	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
 	<PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
@@ -18,20 +18,21 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing" Version="1.1.3" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
-	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
-	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
-	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.2.0" />
+	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.3" />
+	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.3" />
+	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.3.0" />
 	<PackageVersion Include="MinVer" Version="7.0.0" />
-	<PackageVersion Include="Scriban" Version="6.5.2" />
-	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.2" />
+	<PackageVersion Include="Scriban" Version="6.5.3" />
+	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.4" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-	<PackageVersion Include="Verify.XunitV3" Version="31.12.3" />
+	<PackageVersion Include="Verify.XunitV3" Version="31.13.0" />
 	<PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-	<GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.298" />
-	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.101" />
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.2" PrivateAssets="All" />
+	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.101" PrivateAssets="All" />
+	<GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.103" PrivateAssets="All" />
   </ItemGroup>
 </Project>
