@@ -14,6 +14,8 @@
 
 	<IsPackable>false</IsPackable>
 	<WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
+
+	<EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <PropertyGroup Label="Enabled Polyfills">
@@ -32,8 +34,9 @@
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	
 	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	
 	<CollectCoverage>true</CollectCoverage>
 	<CoverletOutputFormat>opencover</CoverletOutputFormat>
   </PropertyGroup>
