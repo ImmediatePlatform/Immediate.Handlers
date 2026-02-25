@@ -26,12 +26,12 @@
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.4" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-	<PackageVersion Include="Verify.XunitV3" Version="31.13.0" />
+	<PackageVersion Include="Verify.XunitV3" Version="31.13.2" />
 	<PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.2" PrivateAssets="All" />
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.15" PrivateAssets="All" />
 	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.101" PrivateAssets="All" />
 	<GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.103" PrivateAssets="All" />
   </ItemGroup>

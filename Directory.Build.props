@@ -34,10 +34,6 @@
 
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	
 	<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	
-	<CollectCoverage>true</CollectCoverage>
-	<CoverletOutputFormat>opencover</CoverletOutputFormat>
   </PropertyGroup>
 </Project>
