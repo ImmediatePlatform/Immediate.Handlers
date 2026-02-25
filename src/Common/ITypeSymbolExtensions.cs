@@ -126,11 +126,18 @@ internal static class ITypeSymbolExtensions
 
 			foreach (var constraint in constraints.TypeConstraints)
 			{
-				if (compilation.ClassifyConversion(typeSymbol, constraint)
-					is not ({ IsIdentity: true } or { IsImplicit: true, IsReference: true }))
+				if (compilation.ClassifyConversion(typeSymbol, constraint) is { IsIdentity: true } or { IsImplicit: true, IsReference: true })
+					continue;
+
+				if (constraint is INamedTypeSymbol { TypeArguments: [ITypeParameterSymbol] } nts)
 				{
-					return false;
+					var constructed = nts.OriginalDefinition.Construct(typeSymbol);
+
+					if (compilation.ClassifyConversion(typeSymbol, constructed) is { IsIdentity: true } or { IsImplicit: true, IsReference: true })
+						continue;
 				}
+
+				return false;
 			}
 
 			return true;

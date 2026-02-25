@@ -38,7 +38,7 @@ public sealed partial class Tests
 			
 					return response;
 				}
-						}
+			}
 
 			public class UsersService(ILogger<UsersService> logger)
 			{
@@ -102,7 +102,7 @@ public sealed partial class Tests
 			
 					return response;
 				}
-						}
+			}
 
 			public class UsersService(ILogger<UsersService> logger)
 			{
