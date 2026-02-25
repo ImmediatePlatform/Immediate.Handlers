@@ -2,7 +2,6 @@ using Immediate.Handlers.Analyzers;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1724:Type names should not match namespaces", Justification = "Not being consumed by other code")]
 public sealed partial class Tests
 {
 	[Fact]
@@ -38,7 +37,7 @@ public sealed partial class Tests
 			
 					return response;
 				}
-						}
+			}
 
 			public class UsersService(ILogger<UsersService> logger)
 			{
@@ -102,7 +101,7 @@ public sealed partial class Tests
 			
 					return response;
 				}
-						}
+			}
 
 			public class UsersService(ILogger<UsersService> logger)
 			{
