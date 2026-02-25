@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Generators;
-using Immediate.Handlers.Tests.Helpers;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
@@ -20,7 +19,7 @@ public static class AnalyzerTestHelpers
 			TestState =
 			{
 				Sources = { inputSource },
-				ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
+				ReferenceAssemblies = Utility.ReferenceAssemblies,
 			},
 		};
 

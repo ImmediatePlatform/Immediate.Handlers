@@ -1,7 +1,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Generators;
-using Immediate.Handlers.Tests.Helpers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -26,8 +25,8 @@ public static class GeneratorTestHelper
 			syntaxTrees: [syntaxTree],
 			references:
 			[
-				.. Basic.Reference.Assemblies.Net80.References.All,
-				.. assemblies.GetAdditionalReferences(),
+				..Utility.NetCoreAssemblies,
+				..assemblies.GetAdditionalReferences(),
 			],
 			options: new(
 				outputKind: OutputKind.DynamicallyLinkedLibrary

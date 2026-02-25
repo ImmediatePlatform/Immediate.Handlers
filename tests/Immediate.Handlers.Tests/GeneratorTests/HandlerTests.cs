@@ -1,5 +1,3 @@
-using Immediate.Handlers.Tests.Helpers;
-
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class HandlerTests

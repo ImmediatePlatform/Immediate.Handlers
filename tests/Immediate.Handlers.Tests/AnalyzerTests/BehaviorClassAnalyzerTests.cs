@@ -1,5 +1,4 @@
 using Immediate.Handlers.Analyzers;
-using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests;
 
