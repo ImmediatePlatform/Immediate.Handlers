@@ -31,7 +31,7 @@ jobs:
     - name: Build
       run: dotnet build -c Release --no-restore
     - name: Test
-      run: dotnet test -c Release --no-build
+      run: dotnet test -c Release --no-build -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml
 
     - name: Upload coverage reports to Codecov with GitHub Action
       uses: codecov/codecov-action@v5

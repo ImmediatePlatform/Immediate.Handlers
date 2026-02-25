@@ -1,6 +1,5 @@
 using Immediate.Handlers.Analyzers;
 using Immediate.Handlers.CodeFixes;
-using Immediate.Handlers.Tests.Helpers;
 
 namespace Immediate.Handlers.Tests.CodeFixTests;
 

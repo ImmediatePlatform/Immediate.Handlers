@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Immediate.Handlers.Tests.Helpers;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -38,7 +37,7 @@ public static class CodeFixTestHelper
 				{
 					{ ("/.editorconfig", EditorConfig) },
 				},
-				ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
+				ReferenceAssemblies = Utility.ReferenceAssemblies,
 			},
 			FixedState =
 			{

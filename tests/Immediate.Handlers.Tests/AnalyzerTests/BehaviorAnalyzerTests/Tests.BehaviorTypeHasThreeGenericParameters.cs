@@ -1,5 +1,4 @@
 using Immediate.Handlers.Analyzers;
-using Immediate.Handlers.Tests.Helpers;
 
 // using Verifier =
 // 	Microsoft.CodeAnalysis.CSharp.Testing.XUnit.AnalyzerVerifier<

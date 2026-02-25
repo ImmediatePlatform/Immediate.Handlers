@@ -1,4 +1,3 @@
-using Immediate.Handlers.Tests.Helpers;
 using System.Diagnostics;
 
 namespace Immediate.Handlers.Tests.GeneratorTests;
