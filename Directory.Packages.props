@@ -17,7 +17,7 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.5.2" />
 	<PackageVersion Include="MinVer" Version="7.0.0" />
-	<PackageVersion Include="Scriban" Version="7.0.3" />
+	<PackageVersion Include="Scriban" Version="7.0.6" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.7" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
