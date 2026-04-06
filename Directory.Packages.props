@@ -21,7 +21,7 @@
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.7" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-	<PackageVersion Include="Verify.XunitV3" Version="31.13.5" />
+	<PackageVersion Include="Verify.XunitV3" Version="31.15.0" />
 	<PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2" />
   </ItemGroup>
 
