@@ -26,6 +26,13 @@ jobs:
           9.0.x
           10.0.x
 
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-quality: 'preview'
+        dotnet-version: |
+          11.0.x
+
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -34,6 +41,6 @@ jobs:
       run: dotnet test -c Release --no-build -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml
 
     - name: Upload coverage reports to Codecov with GitHub Action
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v6
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
