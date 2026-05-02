@@ -17,7 +17,8 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must inherit from Behavior<,>."
+			description: "All Behaviors must inherit from Behavior<,>.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor BehaviorsMustHaveTwoGenericParameters =
@@ -28,7 +29,8 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must have zero, one, or two generic parameters."
+			description: "All Behaviors must have zero, one, or two generic parameters.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor BehaviorsMustUseUnboundGenerics =
@@ -39,7 +41,8 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All behaviors must use a generic type without type arguments."
+			description: "All behaviors must use a generic type without type arguments.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
