@@ -15,7 +15,8 @@ public sealed class BehaviorsClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "IH only supports type constraints that constraint to a known interface, class, or record."
+			description: "IH only supports type constraints that constrain to a known interface, class, or record.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =

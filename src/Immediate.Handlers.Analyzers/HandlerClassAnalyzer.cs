@@ -11,12 +11,13 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor HandlerMethodMustExist =
 		new(
 			id: DiagnosticIds.IHR0001HandlerMethodMustExist,
-			title: "Handler type should implement a Handle/HandleAsync method",
-			messageFormat: "Handler type '{0}' should implement a Handle/HandleAsync method",
+			title: "Handler type must implement a Handle/HandleAsync method",
+			messageFormat: "Handler type '{0}' must implement a Handle/HandleAsync method",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Classes annotated with a Handler attribute should implement a Handle/HandleAsync method."
+			description: "Classes annotated with a Handler attribute must implement a Handle/HandleAsync method.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
@@ -27,7 +28,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handler methods must return a ValueTask<T>."
+			description: "Handler methods must return a ValueTask or ValueTask<T>.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor HandlerMustNotBeNestedInAnotherClass =
@@ -38,7 +40,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handler class must not be nested in another type."
+			description: "Handler class must not be nested in another type.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor HandlerMethodMustBeUnique =
@@ -49,7 +52,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Static handler method must be static."
+			description: "Handler methods must be unique; IH does not support disambiguation of multiple handler methods.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor HandlerMethodMustBePrivate =
@@ -60,7 +64,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Static handler method must be static."
+			description: "Handler method must be `private`.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor HandlerShouldUseCancellationToken =
@@ -78,55 +83,57 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0014HandlerMethodMissingRequest,
 			title: "Handler method is missing request parameter",
-			messageFormat: "Method '{0}' should receive a request parameter",
+			messageFormat: "Method '{0}' must receive a request parameter",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handlers must have a request parameter."
+			description: "Handlers must have a request parameter.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor HandlerMethodHasTooManyParameters =
 		new(
 			id: DiagnosticIds.IHR0015HandlerMethodHasTooManyParameters,
 			title: "Handler method has too many parameters",
-			messageFormat: "Method '{0}' should have a request parameter and, optionally, a cancellation token parameter only",
+			messageFormat: "Method '{0}' must have a request parameter and, optionally, a cancellation token parameter only",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handlers must have only one or two parameters."
+			description: "Handlers must have only one or two parameters.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public static readonly DiagnosticDescriptor ContainingClassMustBeSealed =
 		new(
 			id: DiagnosticIds.IHR0016ContainingClassMustBeSealed,
-			title: "Handler type must be `sealed`",
-			messageFormat: "Class '{0}' must be `sealed`",
+			title: "Handler type should be `sealed`",
+			messageFormat: "Class '{0}' should be `sealed`",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
+			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
-			description: "Containing classes must be sealed to prevent incorrect usage."
+			description: "Classes containing instance handler methods should be sealed to prevent incorrect usage."
 		);
 
 	public static readonly DiagnosticDescriptor ContainingClassInstanceMembersMustBePrivate =
 		new(
 			id: DiagnosticIds.IHR0017ContainingClassInstanceMembersMustBePrivate,
-			title: "Instances members of handler types must be `private`",
-			messageFormat: "Member '{0}' must be `private`",
+			title: "Instance members of handler types should be `private`",
+			messageFormat: "Member '{0}' should be `private`",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
+			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
-			description: "All members of handler classes must be private to prevent incorrect usage."
+			description: "All members of handler classes should be private to prevent incorrect usage."
 		);
 
 	public static readonly DiagnosticDescriptor ContainingClassMustBeStatic =
 		new(
 			id: DiagnosticIds.IHR0018ContainingClassMustBeStatic,
-			title: "Handler types must be `static`",
-			messageFormat: "Class '{0}' must be `static`",
+			title: "Handler types should be `static`",
+			messageFormat: "Class '{0}' should be `static`, or handler method should not be `static`",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
+			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
-			description: "Containing classes must be static to prevent incorrect usage."
+			description: "Classes with static handler methods should be static to prevent incorrect usage."
 		);
 
 	public static readonly DiagnosticDescriptor StaticHandlerCouldBeSealed =
@@ -137,8 +144,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Hidden,
 			isEnabledByDefault: true,
-			description: "Static handler may be converted to a sealed handler.",
-			customTags: [WellKnownDiagnosticTags.NotConfigurable]
+			description: "Static handler may be converted to a sealed handler."
 		);
 
 	public static readonly DiagnosticDescriptor HandlerUsesBehaviorWithIncorrectTypeArguments =
@@ -147,9 +153,9 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			title: "Behavior has incorrect type argument",
 			messageFormat: "Behavior type '{0}' has type arguments that don't match the handler's request or response types",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
+			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
-			description: "Behavior type arguments must be compatible with the handler's request and response types."
+			description: "Behavior type arguments must be compatible with the handler's request and response types; incompatible behaviors are dropped from the pipeline."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =

@@ -40,9 +40,9 @@ Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
 IHR0014 | ImmediateHandler | Error | HandlerClassAnalyzer
 IHR0015 | ImmediateHandler | Error | HandlerClassAnalyzer
-IHR0016 | ImmediateHandler | Error | HandlerClassAnalyzer
-IHR0017 | ImmediateHandler | Error | HandlerClassAnalyzer
-IHR0018 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0016 | ImmediateHandler | Warning | HandlerClassAnalyzer
+IHR0017 | ImmediateHandler | Warning | HandlerClassAnalyzer
+IHR0018 | ImmediateHandler | Warning | HandlerClassAnalyzer
 IHR0019 | ImmediateHandler | Hidden | HandlerClassAnalyzer
 
 ### Removed Rules
@@ -58,5 +58,5 @@ IHR0009 | ImmediateHandler | Error | HandlerClassAnalyzer
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
-IHR0020 | ImmediateHandler | Error | HandlerClassAnalyzer
+IHR0020 | ImmediateHandler | Warning | HandlerClassAnalyzer
 IHR0021 | ImmediateHandler | Error | BehaviorsClassAnalyzer
