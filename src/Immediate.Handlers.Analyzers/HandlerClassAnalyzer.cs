@@ -83,7 +83,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0014HandlerMethodMissingRequest,
 			title: "Handler method is missing request parameter",
-			messageFormat: "Method '{0}' should receive a request parameter",
+			messageFormat: "Method '{0}' must receive a request parameter",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
