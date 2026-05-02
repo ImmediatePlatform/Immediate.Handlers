@@ -28,7 +28,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handler methods must return a ValueTask<T>.",
+			description: "Handler methods must return a ValueTask or ValueTask<T>.",
 			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
@@ -117,7 +117,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor ContainingClassInstanceMembersMustBePrivate =
 		new(
 			id: DiagnosticIds.IHR0017ContainingClassInstanceMembersMustBePrivate,
-			title: "Instances members of handler types should be `private`",
+			title: "Instance members of handler types should be `private`",
 			messageFormat: "Member '{0}' should be `private`",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Warning,
@@ -129,7 +129,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0018ContainingClassMustBeStatic,
 			title: "Handler types should be `static`",
-			messageFormat: "Class '{0}' should be `static` or handle method should not be `static`",
+			messageFormat: "Class '{0}' should be `static`, or handler method should not be `static`",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
@@ -153,10 +153,9 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			title: "Behavior has incorrect type argument",
 			messageFormat: "Behavior type '{0}' has type arguments that don't match the handler's request or response types",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Error,
+			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
-			description: "Behavior type arguments must be compatible with the handler's request and response types.",
-			customTags: [WellKnownDiagnosticTags.NotConfigurable]
+			description: "Behavior type arguments must be compatible with the handler's request and response types; incompatible behaviors are dropped from the pipeline."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
