@@ -193,6 +193,75 @@ In your `Program.cs`, add a call to `services.AddXxxBehaviors()`, where `Xxx` is
 
 This registers all behaviors referenced in any `[Behaviors]` attribute.
 
+### Streaming Handlers
+
+Immediate.Handlers supports streaming handlers that return `IAsyncEnumerable<TResponse>` for scenarios where
+responses are produced incrementally.
+
+#### Streaming Handler
+
+Create a streaming handler by returning `IAsyncEnumerable<TResponse>` from the `HandleAsync` method:
+
+```cs
+[Handler]
+public static partial class StreamItems
+{
+    public record Query(int Count);
+
+    private static async IAsyncEnumerable<int> HandleAsync(
+        Query query,
+        [EnumeratorCancellation] CancellationToken token)
+    {
+        for (var i = 0; i < query.Count; i++)
+        {
+            await Task.Yield();
+            yield return i;
+        }
+    }
+}
+```
+
+The generated `StreamItems.Handler` implements `IStreamingHandler<StreamItems.Query, int>`, allowing consumers to
+use either the concrete handler or the interface abstraction:
+
+```cs
+public class Consumer(IStreamingHandler<StreamItems.Query, int> handler)
+{
+    public async Task ConsumeAsync(CancellationToken token)
+    {
+        await foreach (var item in handler.HandleAsync(new(5), token))
+            Console.WriteLine(item);
+    }
+}
+```
+
+#### Streaming Behavior
+
+Create a streaming pipeline behavior by extending `StreamingBehavior<TRequest, TResponse>`:
+
+```cs
+public class LoggingBehavior<TRequest, TResponse>(ILogger<LoggingBehavior<TRequest, TResponse>> logger)
+    : StreamingBehavior<TRequest, TResponse>
+{
+    public override async IAsyncEnumerable<TResponse> HandleAsync(
+        TRequest request,
+        [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        logger.LogInformation("LoggingBehavior.Enter");
+        await foreach (var item in Next(request, cancellationToken))
+            yield return item;
+        logger.LogInformation("LoggingBehavior.Exit");
+    }
+}
+```
+
+#### Using Streaming Behaviors
+
+Streaming behaviors are registered and applied in the same ways as regular behaviors — assembly-wide, per-handler,
+or via a custom attribute — but they are only applied to streaming handlers. Likewise, non-streaming behaviors are
+only applied to non-streaming handlers, so both kinds can coexist in the same pipeline configuration without
+interfering with each other.
+
 ### Using with Swashbuckle
 For Swagger to work the JSON schema generated is required to have unique schemaId's. To achieve this, Swashbuckle uses class names as simple schemaId's.
 When using Immediate Handlers classes with a controller action inside, you might end up with Swashbuckle stating an error similar to this:

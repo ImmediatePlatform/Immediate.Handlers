@@ -4,22 +4,22 @@ using System.Diagnostics.CodeAnalysis;
 namespace Immediate.Handlers.Shared;
 
 /// <summary>
-///		Represents a cross-cutting pipeline behavior
+///		Represents a cross-cutting pipeline behavior for streaming handlers
 /// </summary>
 /// <typeparam name="TRequest">
 ///		The type of a command-request
 /// </typeparam>
 /// <typeparam name="TResponse">
-///		The type of a command-response
+///		The type of each streamed response element
 /// </typeparam>
-public abstract class Behavior<TRequest, TResponse>
+public abstract class StreamingBehavior<TRequest, TResponse>
 {
 	/// <summary>
 	///		The <see cref="Type"/> of the Handler class for the current request.
 	/// </summary>
 	public Type HandlerType { get; [EditorBrowsable(EditorBrowsableState.Never)] set; } = default!;
 
-	private Behavior<TRequest, TResponse>? _innerHandler;
+	private StreamingBehavior<TRequest, TResponse>? _innerHandler;
 
 	[DoesNotReturn]
 	private static void ThrowException(string message) =>
@@ -32,7 +32,7 @@ public abstract class Behavior<TRequest, TResponse>
 	///	    This method is called by the infrastructure, and should not be called manually.
 	/// </remarks>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public void SetInnerHandler(Behavior<TRequest, TResponse> handler)
+	public void SetInnerHandler(StreamingBehavior<TRequest, TResponse> handler)
 	{
 		if (_innerHandler != null)
 			ThrowException("Cannot set `_innerHandler` more than once.");
@@ -40,7 +40,7 @@ public abstract class Behavior<TRequest, TResponse>
 	}
 
 	/// <summary>
-	///	    Calls the next entry in the pipeline for the current request.
+	///	    Calls the next entry in the pipeline for the current streaming request.
 	/// </summary>
 	/// <param name="request">
 	///	    The currently processing request.
@@ -49,10 +49,9 @@ public abstract class Behavior<TRequest, TResponse>
 	///	    The optional cancellation token to be used for cancelling the operation at any time.
 	/// </param>
 	/// <returns>
-	///	    A <see cref="Task{TResult}"/> representing a promise to return a <typeparamref name="TResponse"/> from the
-	///	    next entry in the pipeline.
+	///	    An <see cref="IAsyncEnumerable{TResponse}"/> from the next entry in the pipeline.
 	/// </returns>
-	protected ValueTask<TResponse> Next(TRequest request, CancellationToken cancellationToken)
+	protected IAsyncEnumerable<TResponse> Next(TRequest request, CancellationToken cancellationToken)
 	{
 		if (_innerHandler == null)
 			ThrowException("`_innerHandler` must be set before calling `Next()`");
@@ -60,8 +59,8 @@ public abstract class Behavior<TRequest, TResponse>
 	}
 
 	/// <summary>
-	///	    Pipeline handler. Perform any additional behavior and <c><see langword="await"/>
-	///     Next(request, cancellationToken)</c>.
+	///	    Pipeline handler. Perform any additional behavior and iterate over
+	///     <c>Next(request, cancellationToken)</c> using <c><see langword="await"/> foreach</c>.
 	/// </summary>
 	/// <param name="request">
 	///	    Incoming request
@@ -70,7 +69,7 @@ public abstract class Behavior<TRequest, TResponse>
 	///	    The optional cancellation token to be used for cancelling the operation at any time.
 	///	</param>
 	/// <returns>
-	///	    A <see cref="Task{TResult}"/> representing a promise to return a <typeparamref name="TResponse"/>.
+	///	    An <see cref="IAsyncEnumerable{TResponse}"/> of <typeparamref name="TResponse"/> elements.
 	/// </returns>
-	public abstract ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
+	public abstract IAsyncEnumerable<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
 }

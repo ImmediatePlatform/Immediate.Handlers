@@ -84,6 +84,7 @@ internal static class TransformBehaviors
 					RequestType = constraintInfo.RequestConstraints.ToEquatableConstraint(),
 					ResponseType = constraintInfo.ResponseConstraints.ToEquatableConstraint(),
 					Name = originalDefinition.Name,
+					IsStreaming = originalDefinition.ImplementsStreamingBehavior(),
 				};
 			})
 			.ToEquatableReadOnlyList();

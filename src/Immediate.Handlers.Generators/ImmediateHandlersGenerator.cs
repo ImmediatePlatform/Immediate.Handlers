@@ -173,11 +173,18 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			Implements = default,
 		};
 
+		var behaviorSource = handler.OverrideBehaviors?.AsEnumerable()
+			?? behaviors.AsEnumerable();
+
+		// Only include behaviors that match the handler's streaming type.
+		// Null behaviors (invalid/unparseable) are kept to trigger generation abort downstream.
+		var filteredBehaviors = behaviorSource
+			.Where(b => b is null || b.IsStreaming == handler.IsStreaming);
+
 		var pipelineBehaviors = BuildPipeline(
 			handler.RequestType,
 			responseType,
-			handler.OverrideBehaviors?.AsEnumerable()
-				?? behaviors.AsEnumerable()
+			filteredBehaviors
 		);
 
 		cancellationToken.ThrowIfCancellationRequested();
@@ -201,6 +208,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 			Behaviors = BuildRenderBehaviors(pipelineBehaviors, handler.RequestType.Name, responseType.Name),
 			HasMsDi = hasMsDi,
+			handler.IsStreaming,
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();

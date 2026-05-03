@@ -10,7 +10,12 @@ internal static class ITypeSymbolExtensions
 	{
 		public bool ImplementsBehavior() =>
 			typeSymbol.IsBehavior2
+			|| typeSymbol.IsStreamingBehavior2
 			|| (typeSymbol.BaseType is not null && ImplementsBehavior(typeSymbol.BaseType.OriginalDefinition));
+
+		public bool ImplementsStreamingBehavior() =>
+			typeSymbol.IsStreamingBehavior2
+			|| (typeSymbol.BaseType is not null && ImplementsStreamingBehavior(typeSymbol.BaseType.OriginalDefinition));
 
 		public BehaviorConstraintInfo? GetBehaviorConstraintInfo()
 		{
@@ -33,7 +38,7 @@ internal static class ITypeSymbolExtensions
 				if (typeSymbol.SpecialType is SpecialType.System_Object)
 					return null;
 
-				if (typeSymbol.IsBehavior2)
+				if (typeSymbol.IsBehavior2 || typeSymbol.IsStreamingBehavior2)
 				{
 					return
 					[
@@ -170,11 +175,27 @@ internal static class ITypeSymbolExtensions
 				ContainingNamespace.IsImmediateHandlersShared: true,
 			};
 
+		public bool IsStreamingBehavior2 =>
+			typeSymbol is INamedTypeSymbol
+			{
+				Arity: 2,
+				Name: "StreamingBehavior",
+				ContainingNamespace.IsImmediateHandlersShared: true,
+			};
+
 		public bool IsIHandler =>
 			typeSymbol is INamedTypeSymbol
 			{
 				Arity: 2,
 				Name: "IHandler",
+				ContainingNamespace.IsImmediateHandlersShared: true,
+			};
+
+		public bool IsIStreamingHandler =>
+			typeSymbol is INamedTypeSymbol
+			{
+				Arity: 2,
+				Name: "IStreamingHandler",
 				ContainingNamespace.IsImmediateHandlersShared: true,
 			};
 
@@ -196,6 +217,18 @@ internal static class ITypeSymbolExtensions
 				Arity: 0 or 1,
 				Name: "ValueTask",
 				ContainingNamespace.IsSystemThreadingTasks: true,
+			}
+			|| typeSymbol.IsIAsyncEnumerable1;
+
+		public bool IsStreamingHandlerReturn =>
+			typeSymbol.IsIAsyncEnumerable1;
+
+		public bool IsIAsyncEnumerable1 =>
+			typeSymbol is INamedTypeSymbol
+			{
+				Arity: 1,
+				Name: "IAsyncEnumerable",
+				ContainingNamespace.IsSystemCollectionsGeneric: true,
 			};
 
 		public bool IsValueTask1 =>
@@ -211,19 +244,16 @@ internal static class ITypeSymbolExtensions
 				? ((INamedTypeSymbol)typeSymbol).TypeArguments.FirstOrDefault()
 				: null;
 
+		public ITypeSymbol? StreamingReturnType =>
+			typeSymbol.IsIAsyncEnumerable1
+				? ((INamedTypeSymbol)typeSymbol).TypeArguments.FirstOrDefault()
+				: null;
+
 		public bool IsCancellationToken =>
 			typeSymbol is INamedTypeSymbol
 			{
 				Name: "CancellationToken",
-				ContainingNamespace:
-				{
-					Name: "Threading",
-					ContainingNamespace:
-					{
-						Name: "System",
-						ContainingNamespace.IsGlobalNamespace: true,
-					},
-				},
+				ContainingNamespace.IsSystemThreading: true,
 			};
 	}
 
@@ -236,6 +266,32 @@ internal static class ITypeSymbolExtensions
 				ContainingNamespace:
 				{
 					Name: "Threading",
+					ContainingNamespace:
+					{
+						Name: "System",
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
+			};
+
+		public bool IsSystemThreading =>
+			namespaceSymbol is
+			{
+				Name: "Threading",
+				ContainingNamespace:
+				{
+					Name: "System",
+					ContainingNamespace.IsGlobalNamespace: true,
+				},
+			};
+
+		public bool IsSystemCollectionsGeneric =>
+			namespaceSymbol is
+			{
+				Name: "Generic",
+				ContainingNamespace:
+				{
+					Name: "Collections",
 					ContainingNamespace:
 					{
 						Name: "System",

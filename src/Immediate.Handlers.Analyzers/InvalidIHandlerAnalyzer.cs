@@ -10,12 +10,12 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor IHandlerMissingImplementation =
 		new(
 			id: DiagnosticIds.IHR0013IHandlerMissingImplementation,
-			title: "`IHandler<,>` is missing a concrete implementation",
-			messageFormat: "`IHandler<{0},{1}>` is missing a concrete implementation",
+			title: "`IHandler<,>` or `IStreamingHandler<,>` is missing a concrete implementation",
+			messageFormat: "`{0}<{1}, {2}>` is missing a concrete implementation",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
-			description: "`IHandler<,>` should only be used in reference to concrete handlers for the parameters."
+			description: "`IHandler<,>` and `IStreamingHandler<,>` should only be used in reference to concrete handlers for the parameters."
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
@@ -43,11 +43,10 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 		foreach (var parameter in methodSymbol.Parameters)
 		{
 			var type = parameter.Type as INamedTypeSymbol;
-			if (!type.IsIHandler)
+			if (!type.IsIHandler && !type.IsIStreamingHandler)
 				continue;
 
-			if (type.TypeArguments[0].TypeKind is TypeKind.TypeParameter
-				|| type.TypeArguments[1].TypeKind is TypeKind.TypeParameter)
+			if (type.TypeArguments is [{ TypeKind: TypeKind.TypeParameter }, _] or [_, { TypeKind: TypeKind.TypeParameter }])
 			{
 				continue;
 			}
@@ -62,10 +61,13 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 			if (hasConcrete)
 				continue;
 
+			var interfaceName = type.IsIStreamingHandler ? "IStreamingHandler" : "IHandler";
+
 			context.ReportDiagnostic(
 				Diagnostic.Create(
 					IHandlerMissingImplementation,
 					parameter.Locations[0],
+					interfaceName,
 					type.TypeArguments[0].ToDisplayString(),
 					type.TypeArguments[1].ToDisplayString()
 				)

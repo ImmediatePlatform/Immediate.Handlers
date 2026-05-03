@@ -12,6 +12,7 @@ public sealed record Behavior
 	public required string Name { get; init; }
 	public required ConstraintInfo RequestType { get; init; }
 	public required ConstraintInfo ResponseType { get; init; }
+	public required bool IsStreaming { get; init; }
 }
 
 [ExcludeFromCodeCoverage]
@@ -43,6 +44,8 @@ public sealed record Handler
 
 	public required GenericType RequestType { get; init; }
 	public required GenericType? ResponseType { get; init; }
+
+	public required bool IsStreaming { get; init; }
 
 	public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
 }

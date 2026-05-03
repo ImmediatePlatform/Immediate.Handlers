@@ -59,7 +59,10 @@ internal static class TransformHandler
 
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var responseType = BuildGenericType(handleMethod.ReturnType.ValueTaskReturnType);
+		var isStreaming = handleMethod.ReturnType.IsStreamingHandlerReturn;
+		var responseType = isStreaming
+			? BuildGenericType(handleMethod.ReturnType.StreamingReturnType)
+			: BuildGenericType(handleMethod.ReturnType.ValueTaskReturnType);
 
 		cancellationToken.ThrowIfCancellationRequested();
 
@@ -93,6 +96,8 @@ internal static class TransformHandler
 
 			RequestType = requestType,
 			ResponseType = responseType,
+
+			IsStreaming = isStreaming,
 
 			OverrideBehaviors = behaviors,
 		};
