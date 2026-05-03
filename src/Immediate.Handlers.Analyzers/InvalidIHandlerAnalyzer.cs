@@ -11,7 +11,7 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 		new(
 			id: DiagnosticIds.IHR0013IHandlerMissingImplementation,
 			title: "`IHandler<,>` or `IStreamingHandler<,>` is missing a concrete implementation",
-			messageFormat: "`{0}<{1},{2}>` is missing a concrete implementation",
+			messageFormat: "`{0}<{1}, {2}>` is missing a concrete implementation",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Warning,
 			isEnabledByDefault: true,
@@ -46,8 +46,7 @@ public sealed class InvalidIHandlerAnalyzer : DiagnosticAnalyzer
 			if (!type.IsIHandler && !type.IsIStreamingHandler)
 				continue;
 
-			if (type.TypeArguments[0].TypeKind is TypeKind.TypeParameter
-				|| type.TypeArguments[1].TypeKind is TypeKind.TypeParameter)
+			if (type.TypeArguments is [{ TypeKind: TypeKind.TypeParameter }, _] or [_, { TypeKind: TypeKind.TypeParameter }])
 			{
 				continue;
 			}

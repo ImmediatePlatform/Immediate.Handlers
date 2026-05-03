@@ -29,7 +29,7 @@ public abstract class Behavior<TRequest, TResponse>
 	///	    The next entry in the pipeline for the current request.
 	/// </summary>
 	/// <remarks>
-	///	    This property is called by the infrastructure, and should not be called manually.
+	///	    This method is called by the infrastructure, and should not be called manually.
 	/// </remarks>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public void SetInnerHandler(Behavior<TRequest, TResponse> handler)
