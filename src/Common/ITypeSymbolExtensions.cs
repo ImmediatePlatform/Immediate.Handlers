@@ -228,19 +228,7 @@ internal static class ITypeSymbolExtensions
 			{
 				Arity: 1,
 				Name: "IAsyncEnumerable",
-				ContainingNamespace:
-				{
-					Name: "Generic",
-					ContainingNamespace:
-					{
-						Name: "Collections",
-						ContainingNamespace:
-						{
-							Name: "System",
-							ContainingNamespace.IsGlobalNamespace: true,
-						},
-					},
-				},
+				ContainingNamespace.IsSystemCollectionsGeneric: true,
 			};
 
 		public bool IsValueTask1 =>
@@ -265,15 +253,7 @@ internal static class ITypeSymbolExtensions
 			typeSymbol is INamedTypeSymbol
 			{
 				Name: "CancellationToken",
-				ContainingNamespace:
-				{
-					Name: "Threading",
-					ContainingNamespace:
-					{
-						Name: "System",
-						ContainingNamespace.IsGlobalNamespace: true,
-					},
-				},
+				ContainingNamespace.IsSystemThreading: true,
 			};
 	}
 
@@ -286,6 +266,32 @@ internal static class ITypeSymbolExtensions
 				ContainingNamespace:
 				{
 					Name: "Threading",
+					ContainingNamespace:
+					{
+						Name: "System",
+						ContainingNamespace.IsGlobalNamespace: true,
+					},
+				},
+			};
+
+		public bool IsSystemThreading =>
+			namespaceSymbol is
+			{
+				Name: "Threading",
+				ContainingNamespace:
+				{
+					Name: "System",
+					ContainingNamespace.IsGlobalNamespace: true,
+				},
+			};
+
+		public bool IsSystemCollectionsGeneric =>
+			namespaceSymbol is
+			{
+				Name: "Generic",
+				ContainingNamespace:
+				{
+					Name: "Collections",
 					ContainingNamespace:
 					{
 						Name: "System",
