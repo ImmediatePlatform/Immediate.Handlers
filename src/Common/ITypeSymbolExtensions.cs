@@ -15,7 +15,7 @@ internal static class ITypeSymbolExtensions
 
 		public bool ImplementsStreamingBehavior() =>
 			typeSymbol.IsStreamingBehavior2
-			|| (typeSymbol.BaseType is not null && typeSymbol.BaseType.OriginalDefinition.ImplementsStreamingBehavior());
+			|| (typeSymbol.BaseType is not null && ImplementsStreamingBehavior(typeSymbol.BaseType.OriginalDefinition));
 
 		public BehaviorConstraintInfo? GetBehaviorConstraintInfo()
 		{
