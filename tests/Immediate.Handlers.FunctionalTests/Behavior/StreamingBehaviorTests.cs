@@ -1,9 +1,9 @@
 using System.Runtime.CompilerServices;
 using Immediate.Handlers.Shared;
 
-namespace Immediate.Handlers.FunctionalTests.Streaming;
+namespace Immediate.Handlers.FunctionalTests.Behavior;
 
-public sealed class StreamingBehaviorUnitTests
+public sealed class StreamingBehaviorTests
 {
 	private sealed class TestStreamingBehavior : StreamingBehavior<int, int>
 	{
