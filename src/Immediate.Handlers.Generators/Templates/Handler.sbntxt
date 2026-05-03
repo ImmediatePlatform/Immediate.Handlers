@@ -10,7 +10,11 @@ namespace {{ namespace }};
 {{~ end ~}}
 partial class {{ class_name }}
 {
+	{{~ if is_streaming ~}}
+	public sealed partial class Handler : global::Immediate.Handlers.Shared.IStreamingHandler<{{ request_type }}, {{ response_type }}>
+	{{~ else ~}}
 	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>
+	{{~ end ~}}
 	{
 		private readonly {{ class_fully_qualified_name }}.HandleBehavior _handleBehavior;
 		{{~ for behavior in (behaviors | array.reverse) ~}}
@@ -42,6 +46,21 @@ partial class {{ class_name }}
 			{{~ end ~}}
 		}
 
+		{{~ if is_streaming ~}}
+		public global::System.Collections.Generic.IAsyncEnumerable<{{ response_type }}> HandleAsync(
+			{{ request_type }} request,
+			global::System.Threading.CancellationToken cancellationToken = default
+		)
+		{
+			{{~ if behaviors.size > 0 ~}}
+			return _{{ behaviors[0].variable_name }}
+				.HandleAsync(request, cancellationToken);
+			{{~ else ~}}
+			return _handleBehavior
+				.HandleAsync(request, cancellationToken);
+			{{~ end ~}}
+		}
+		{{~ else ~}}
 		public async global::System.Threading.Tasks.ValueTask<{{ response_type }}> HandleAsync(
 			{{ request_type }} request,
 			global::System.Threading.CancellationToken cancellationToken = default
@@ -57,11 +76,16 @@ partial class {{ class_name }}
 				.ConfigureAwait(false);
 			{{~ end ~}}
 		}
+		{{~ end ~}}
 	}
 
 	{{~ if is_static ~}}
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+	{{~ if is_streaming ~}}
+	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.StreamingBehavior<{{ request_type }}, {{ response_type }}>
+	{{~ else ~}}
 	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
+	{{~ end ~}}
 	{
 		{{~ for parameter in handler_parameters ~}}
 		private readonly {{ parameter.type }} _{{ parameter.name }};
@@ -78,6 +102,24 @@ partial class {{ class_name }}
 			{{~ end ~}}
 		}
 
+		{{~ if is_streaming ~}}
+		public override global::System.Collections.Generic.IAsyncEnumerable<{{ response_type }}> HandleAsync(
+			{{ request_type }} request,
+			global::System.Threading.CancellationToken cancellationToken
+		)
+		{
+			return {{ class_fully_qualified_name }}
+				.{{ method_name }}(
+					request
+					{{~ for parameter in handler_parameters ~}}
+					, _{{ parameter.name }}
+					{{~ end ~}}
+					{{~ if use_token ~}}
+					, cancellationToken
+					{{~ end ~}}
+				);
+		}
+		{{~ else ~}}
 		public override async global::System.Threading.Tasks.ValueTask<{{ response_type }}> HandleAsync(
 			{{ request_type }} request,
 			global::System.Threading.CancellationToken cancellationToken
@@ -111,10 +153,15 @@ partial class {{ class_name }}
 			return default;
 			{{~ end ~}}
 		}
+		{{~ end ~}}
 	}
 	{{~ else ~}}
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+	{{~ if is_streaming ~}}
+	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.StreamingBehavior<{{ request_type }}, {{ response_type }}>
+	{{~ else ~}}
 	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<{{ request_type }}, {{ response_type }}>
+	{{~ end ~}}
 	{
 		private readonly {{ class_fully_qualified_name }} _container;
 
@@ -125,6 +172,21 @@ partial class {{ class_name }}
 			_container = container;
 		}
 
+		{{~ if is_streaming ~}}
+		public override global::System.Collections.Generic.IAsyncEnumerable<{{ response_type }}> HandleAsync(
+			{{ request_type }} request,
+			global::System.Threading.CancellationToken cancellationToken
+		)
+		{
+			return _container
+				.{{ method_name }}(
+					request
+					{{~ if use_token ~}}
+					, cancellationToken
+					{{~ end ~}}
+				);
+		}
+		{{~ else ~}}
 		public override async global::System.Threading.Tasks.ValueTask<{{ response_type }}> HandleAsync(
 			{{ request_type }} request,
 			global::System.Threading.CancellationToken cancellationToken
@@ -152,6 +214,7 @@ partial class {{ class_name }}
 			return default;
 			{{~ end ~}}
 		}
+		{{~ end ~}}
 	}
 	{{~ end ~}}
 	{{~ if has_ms_di ~}}
@@ -163,7 +226,11 @@ partial class {{ class_name }}
 	)
 	{
 		services.Add(new(typeof({{ class_fully_qualified_name }}.Handler), typeof({{ class_fully_qualified_name }}.Handler), lifetime));
+		{{~ if is_streaming ~}}
+		services.Add(new(typeof(global::Immediate.Handlers.Shared.IStreamingHandler<{{ request_type }}, {{ response_type }}>), typeof({{ class_fully_qualified_name }}.Handler), lifetime));
+		{{~ else ~}}
 		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<{{ request_type }}, {{ response_type }}>), typeof({{ class_fully_qualified_name }}.Handler), lifetime));
+		{{~ end ~}}
 		services.Add(new(typeof({{ class_fully_qualified_name }}.HandleBehavior), typeof({{ class_fully_qualified_name }}.HandleBehavior), lifetime));
 		{{~ if !is_static ~}}
 		services.Add(new(typeof({{ class_fully_qualified_name }}), typeof({{ class_fully_qualified_name }}), lifetime));

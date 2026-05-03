@@ -1,0 +1,68 @@
+using Immediate.Handlers.Analyzers;
+
+namespace Immediate.Handlers.Tests.AnalyzerTests.HandlerClassAnalyzerTests;
+
+public partial class Tests
+{
+	[Fact]
+	public async Task StreamingHandlerMethodIsCorrect_Static_DoesNotAlert() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Runtime.CompilerServices;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public static partial class {|IHR0019:GetUsersQuery|}
+			{
+				public record Query;
+
+				private static async IAsyncEnumerable<int> HandleAsync(
+					Query _,
+					[EnumeratorCancellation] CancellationToken token)
+				{
+					await Task.Yield();
+					yield return 0;
+				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync(TestContext.Current.CancellationToken);
+
+	[Fact]
+	public async Task StreamingHandlerMethodIsCorrect_Instance_DoesNotAlert() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Runtime.CompilerServices;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public sealed partial class GetUsersQuery
+			{
+				public record Query;
+
+				private async IAsyncEnumerable<int> HandleAsync(
+					Query _,
+					[EnumeratorCancellation] CancellationToken token)
+				{
+					await Task.Yield();
+					yield return 0;
+				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync(TestContext.Current.CancellationToken);
+}

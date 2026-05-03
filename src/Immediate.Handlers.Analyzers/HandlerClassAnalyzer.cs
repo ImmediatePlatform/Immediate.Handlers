@@ -23,12 +23,12 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor HandlerMethodMustReturnTask =
 		new(
 			id: DiagnosticIds.IHR0002HandlerMethodMustReturnTask,
-			title: "Handler method must return a ValueTask or ValueTask<T>",
-			messageFormat: "Method '{0}' must return a ValueTask or ValueTask<T>",
+			title: "Handler method must return a ValueTask, ValueTask<T>, or IAsyncEnumerable<T>",
+			messageFormat: "Method '{0}' must return a ValueTask, ValueTask<T>, or IAsyncEnumerable<T>",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "Handler methods must return a ValueTask or ValueTask<T>.",
+			description: "Handler methods must return a ValueTask, ValueTask<T>, or IAsyncEnumerable<T>.",
 			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
@@ -379,6 +379,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		var responseType =
 			method.ReturnType.ValueTaskReturnType
+			?? method.ReturnType.StreamingReturnType
 			?? context.Compilation.GetTypeByMetadataName("System.ValueTuple")!;
 
 		foreach (var attribute in method.ContainingSymbol.GetAttributes())

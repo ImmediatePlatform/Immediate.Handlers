@@ -12,12 +12,12 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 	public static readonly DiagnosticDescriptor BehaviorsMustInheritFromBehavior =
 		new(
 			id: DiagnosticIds.IHR0006BehaviorsMustInheritFromBehavior,
-			title: "Behaviors must inherit from Behavior<,>",
-			messageFormat: "Behavior type '{0}' must inherit from Behavior<,>",
+			title: "Behaviors must inherit from Behavior<,> or StreamingBehavior<,>",
+			messageFormat: "Behavior type '{0}' must inherit from Behavior<,> or StreamingBehavior<,>",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "All Behaviors must inherit from Behavior<,>.",
+			description: "All Behaviors must inherit from Behavior<,> or StreamingBehavior<,>.",
 			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
