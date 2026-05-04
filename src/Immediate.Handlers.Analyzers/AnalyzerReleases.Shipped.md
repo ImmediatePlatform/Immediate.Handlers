@@ -43,7 +43,7 @@ IHR0015 | ImmediateHandler | Error | HandlerClassAnalyzer
 IHR0016 | ImmediateHandler | Warning | HandlerClassAnalyzer
 IHR0017 | ImmediateHandler | Warning | HandlerClassAnalyzer
 IHR0018 | ImmediateHandler | Warning | HandlerClassAnalyzer
-IHR0019 | ImmediateHandler | Hidden | HandlerClassAnalyzer
+IHR0019 | ImmediateHandler | Info | HandlerClassAnalyzer
 
 ### Removed Rules
 
