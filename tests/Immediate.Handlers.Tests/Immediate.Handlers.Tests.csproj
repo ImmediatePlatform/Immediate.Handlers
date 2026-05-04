@@ -3,6 +3,7 @@
   <PropertyGroup>
 	<TargetFrameworks>net8.0;net9.0;net10.0;net11.0</TargetFrameworks>
 	<OutputType>Exe</OutputType>
+	<_SkipUpgradeNetAnalyzersNuGetWarning>true</_SkipUpgradeNetAnalyzersNuGetWarning>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net11.0'">
@@ -54,6 +55,17 @@
 
   <ItemGroup>
 	<Compile Include="../../src/Immediate.Handlers.Analyzers/DiagnosticIds.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all" GeneratePathProperty="true" />
+
+	<Reference Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))"
+			   Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
+	<Reference Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))"
+			   Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
+
+	<Reference Include="$(PkgMicrosoft_CodeAnalysis_NetAnalyzers)\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll" />
   </ItemGroup>
 
 </Project>

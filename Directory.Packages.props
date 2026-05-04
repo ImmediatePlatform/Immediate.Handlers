@@ -27,6 +27,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net11.0' ">
 	<PackageVersion Include="Basic.Reference.Assemblies.Net110" Version="1.8.6" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="11.0.100-preview.3.26207.106" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0-preview.3.26207.106" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="11.0.0-preview.3.26207.106" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.5.0" />
@@ -34,6 +35,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
 	<PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.6" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.203" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.7" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.7" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.5.0" />
@@ -41,6 +43,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
 	<PackageVersion Include="Basic.Reference.Assemblies.Net90" Version="1.8.6" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.14" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.14" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="9.10.0" />
@@ -48,6 +51,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
 	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.8.6" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="8.10.0" />
