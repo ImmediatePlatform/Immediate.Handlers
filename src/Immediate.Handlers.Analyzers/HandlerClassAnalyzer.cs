@@ -322,13 +322,20 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	private static void AnalyzeStaticHandler(SymbolAnalysisContext context, INamedTypeSymbol containerSymbol, IMethodSymbol method)
 	{
-		context.ReportDiagnostic(
-			Diagnostic.Create(
-				StaticHandlerCouldBeSealed,
-				containerSymbol.Locations[0],
-				containerSymbol.Name
-			)
-		);
+		if (
+			method.Parameters.Length > 2
+			|| (method.Parameters.Length > 1 && !method.Parameters[^1].Type.IsCancellationToken)
+			|| context.Options.GetConfigurationValue(method, "dotnet_diagnostic.IHR0019.enable_when_handler_has_no_dependencies", defaultValue: false)
+		)
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					StaticHandlerCouldBeSealed,
+					containerSymbol.Locations[0],
+					containerSymbol.Name
+				)
+			);
+		}
 
 		if (method.Parameters is [] or [{ Type.IsCancellationToken: true }])
 		{

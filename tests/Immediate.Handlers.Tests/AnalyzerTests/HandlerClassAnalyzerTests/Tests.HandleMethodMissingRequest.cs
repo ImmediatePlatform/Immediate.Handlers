@@ -18,7 +18,7 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static partial class {|IHR0019:GetUsersQuery|}
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 			
@@ -45,7 +45,7 @@ public partial class Tests
 			using Immediate.Handlers.Shared;
 
 			[Handler]
-			public static partial class {|IHR0019:GetUsersQuery|}
+			public static partial class GetUsersQuery
 			{
 				public record Query;
 			
