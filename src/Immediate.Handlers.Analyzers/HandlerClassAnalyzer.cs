@@ -142,7 +142,7 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 			title: "Static handler may be converted to a sealed handler",
 			messageFormat: "Class '{0}' can be converted to be a `sealed` handler",
 			category: "ImmediateHandler",
-			defaultSeverity: DiagnosticSeverity.Hidden,
+			defaultSeverity: DiagnosticSeverity.Info,
 			isEnabledByDefault: true,
 			description: "Static handler may be converted to a sealed handler."
 		);
