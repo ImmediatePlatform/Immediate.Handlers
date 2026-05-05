@@ -70,7 +70,7 @@ For Command handlers, use a `ValueTask`, and Immediate.Handlers will insert a re
 of `ValueTuple` to your handler automatically. 
 ```cs
 [Handler]
-public sealed partial class CreateUserCommand()
+public sealed partial class CreateUserCommand(
     UsersService usersService
 )
 {
