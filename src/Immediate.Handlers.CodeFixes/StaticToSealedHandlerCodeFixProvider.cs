@@ -146,7 +146,7 @@ file static class SyntaxExtensions
 				Token(SyntaxKind.SealedKeyword).WithTrailingTrivia(ElasticSpace)
 			);
 
-		if (!list[^1].IsKind(SyntaxKind.PartialKeyword))
+		if (!list.Any(static token => token.IsKind(SyntaxKind.PartialKeyword)))
 			list = list.Add(Token(SyntaxKind.PartialKeyword).WithTrailingTrivia(ElasticSpace));
 
 		return list;
