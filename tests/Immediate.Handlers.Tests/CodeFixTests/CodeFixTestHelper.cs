@@ -16,6 +16,8 @@ public static class CodeFixTestHelper
 		indent_style = tab
 		insert_final_newline = true
 		indent_size = 4
+
+		dotnet_diagnostic.IHR0019.enable_when_handler_has_no_dependencies = true
 		""";
 
 	public static CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier> CreateCodeFixTest<TAnalyzer, TCodeFix>(

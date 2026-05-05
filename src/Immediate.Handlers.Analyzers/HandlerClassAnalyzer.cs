@@ -8,6 +8,8 @@ namespace Immediate.Handlers.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 {
+	public const string DiagnosticOptionIhr0019EnableNoDependencies = "dotnet_diagnostic.IHR0019.enable_when_handler_has_no_dependencies";
+
 	public static readonly DiagnosticDescriptor HandlerMethodMustExist =
 		new(
 			id: DiagnosticIds.IHR0001HandlerMethodMustExist,
@@ -322,13 +324,20 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 	private static void AnalyzeStaticHandler(SymbolAnalysisContext context, INamedTypeSymbol containerSymbol, IMethodSymbol method)
 	{
-		context.ReportDiagnostic(
-			Diagnostic.Create(
-				StaticHandlerCouldBeSealed,
-				containerSymbol.Locations[0],
-				containerSymbol.Name
-			)
-		);
+		if (
+			method.Parameters.Length > 2
+			|| (method.Parameters.Length > 1 && !method.Parameters[^1].Type.IsCancellationToken)
+			|| context.Options.GetConfigurationValue(method, DiagnosticOptionIhr0019EnableNoDependencies, defaultValue: false)
+		)
+		{
+			context.ReportDiagnostic(
+				Diagnostic.Create(
+					StaticHandlerCouldBeSealed,
+					containerSymbol.Locations[0],
+					containerSymbol.Name
+				)
+			);
+		}
 
 		if (method.Parameters is [] or [{ Type.IsCancellationToken: true }])
 		{

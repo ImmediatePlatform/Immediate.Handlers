@@ -80,7 +80,7 @@ file sealed class RefactoringService(
 	{
 		var methodParameters = methodDeclarationSyntax.ParameterList.Parameters;
 
-		var isLastParamCancellationToken = model.IsCancellationToken(methodParameters[^1].Type, token);
+		var isLastParamCancellationToken = methodParameters.Count > 0 && model.IsCancellationToken(methodParameters[^1].Type, token);
 
 		var classParameters = methodParameters
 			.Skip(1)
@@ -104,12 +104,7 @@ file sealed class RefactoringService(
 			.ReplaceNode(methodDeclarationSyntax, newMethodDeclarationSyntax)
 			.WithModifiers(
 				classDeclarationSyntax.Modifiers
-					.RemoveStaticModifier()
-					.Insert(
-						// valid case will have `partial` as final element; insert `sealed` before `partial`
-						classDeclarationSyntax.Modifiers.Count - 2,
-						Token(SyntaxKind.SealedKeyword).WithTrailingTrivia(ElasticSpace)
-					)
+					.CorrectClassModifiers()
 			);
 
 		if (classParameters.Count > 0)
@@ -140,4 +135,20 @@ file static class SyntaxExtensions
 	public static SyntaxTokenList RemoveStaticModifier(
 		this SyntaxTokenList list
 	) => new(list.Where(static token => !token.IsKind(SyntaxKind.StaticKeyword)));
+
+	public static SyntaxTokenList CorrectClassModifiers(
+		this SyntaxTokenList list
+	)
+	{
+		list = list
+			.Replace(
+				list.First(static token => token.IsKind(SyntaxKind.StaticKeyword)),
+				Token(SyntaxKind.SealedKeyword).WithTrailingTrivia(ElasticSpace)
+			);
+
+		if (!list.Any(static token => token.IsKind(SyntaxKind.PartialKeyword)))
+			list = list.Add(Token(SyntaxKind.PartialKeyword).WithTrailingTrivia(ElasticSpace));
+
+		return list;
+	}
 }
