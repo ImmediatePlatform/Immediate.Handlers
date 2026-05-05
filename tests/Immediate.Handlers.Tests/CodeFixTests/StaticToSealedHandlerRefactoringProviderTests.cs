@@ -184,4 +184,94 @@ public sealed class StaticToSealedHandlerCodeFixProviderTests
 			""",
 			DriverReferenceAssemblies.Normal
 		).RunAsync(TestContext.Current.CancellationToken);
+
+	[Fact]
+	public async Task RefactorWithNoParameters() =>
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, StaticToSealedHandlerCodeFixProvider>(
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+
+			namespace Immediate.Handlers.Shared;
+
+			[Handler]
+			public static partial class {|IHR0019:DoSomething|}
+			{
+				public sealed record Query;
+				public sealed record Response;
+
+				private static ValueTask<Response> {|IHR0014:HandleAsync|}()
+				{
+					return new();
+				}
+			}
+			""",
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+			
+			namespace Immediate.Handlers.Shared;
+			
+			[Handler]
+			public sealed partial class DoSomething
+			{
+				public sealed record Query;
+				public sealed record Response;
+			
+				private ValueTask<Response> {|IHR0014:HandleAsync|}()
+				{
+					return new();
+				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync(TestContext.Current.CancellationToken);
+
+	[Fact]
+	public async Task RefactorWithMinimalModifiers() =>
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, StaticToSealedHandlerCodeFixProvider>(
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+
+			namespace Immediate.Handlers.Shared;
+
+			[Handler]
+			static class {|IHR0019:DoSomething|}
+			{
+				public sealed record Query;
+				public sealed record Response;
+
+				private static ValueTask<Response> HandleAsync(
+					Query query,
+					CancellationToken token
+				)
+				{
+					return new();
+				}
+			}
+			""",
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+			
+			namespace Immediate.Handlers.Shared;
+			
+			[Handler]
+			sealed partial class DoSomething
+			{
+				public sealed record Query;
+				public sealed record Response;
+			
+				private ValueTask<Response> HandleAsync(
+					Query query,
+					CancellationToken token
+				)
+				{
+					return new();
+				}
+			}
+			""",
+			DriverReferenceAssemblies.Normal
+		).RunAsync(TestContext.Current.CancellationToken);
 }
