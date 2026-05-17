@@ -18,7 +18,7 @@ public static class HandlerServiceCollectionExtensions
 		ServiceLifetime lifetime = ServiceLifetime.Scoped
 	)
 	{
-		global::Dummy.GetUsersQuery.AddHandlers(services, Microsoft.Extensions.DependencyInjection.ServiceLifetime.Transient);
+		global::Dummy.GetUsersQuery.AddHandlers(services, global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Transient);
 		
 		return services;
 	}
