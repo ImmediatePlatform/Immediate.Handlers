@@ -2,10 +2,8 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class InvalidBehaviorsTests
 {
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task NonBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task NonBehaviorShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -55,8 +53,7 @@ public sealed class InvalidBehaviorsTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -64,14 +61,11 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task BoundGenericShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task BoundGenericShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -122,8 +116,7 @@ public sealed class InvalidBehaviorsTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -131,14 +124,11 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task AbstractBehaviorShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task AbstractBehaviorShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -181,8 +171,7 @@ public sealed class InvalidBehaviorsTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -190,14 +179,11 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task BehaviorHasTooManyTypeParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task BehaviorHasTooManyTypeParametersShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -248,8 +234,7 @@ public sealed class InvalidBehaviorsTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -257,7 +242,6 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 }

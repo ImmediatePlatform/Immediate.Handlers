@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class StreamingHandlerTests
@@ -32,24 +30,23 @@ public sealed class StreamingHandlerTests
 					yield return 0;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Verify(result)
+			.UseParameters(modifier);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task StreamingBehavior(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task StreamingBehavior()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -111,26 +108,17 @@ public sealed class StreamingHandlerTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 }

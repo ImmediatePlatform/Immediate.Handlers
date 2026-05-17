@@ -22,8 +22,7 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -47,8 +46,7 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-		DriverReferenceAssemblies.Normal
+			"""
 	).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -72,8 +70,7 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -97,8 +94,7 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -120,8 +116,7 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -143,8 +138,7 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -166,8 +160,7 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -189,7 +182,6 @@ public sealed class BehaviorClassAnalyzerTests
 				public override async ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken) =>
 					default;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

@@ -64,7 +64,6 @@ public sealed partial class Tests
 					return usersService.GetUsers();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

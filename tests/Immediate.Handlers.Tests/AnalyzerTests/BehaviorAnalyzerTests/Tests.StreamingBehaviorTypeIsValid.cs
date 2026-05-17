@@ -56,7 +56,6 @@ public sealed partial class Tests
 					yield return 0;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

@@ -32,7 +32,6 @@ public sealed partial class Tests
 					}
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

@@ -141,10 +141,7 @@ public partial class Tests
 	[InlineData(SealedDependencies, true, false)]
 	public async Task StaticHandlerCanBeSealed(string source, bool? enableWithNoDependencies, bool triggerDiagnostic)
 	{
-		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(
-			source,
-			DriverReferenceAssemblies.Normal
-		);
+		var test = AnalyzerTestHelpers.CreateAnalyzerTest<HandlerClassAnalyzer>(source);
 
 		if (triggerDiagnostic)
 		{

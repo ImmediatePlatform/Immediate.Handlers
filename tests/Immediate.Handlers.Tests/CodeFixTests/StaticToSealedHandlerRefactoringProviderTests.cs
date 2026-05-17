@@ -67,8 +67,7 @@ public sealed class StaticToSealedHandlerCodeFixProviderTests
 				{
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -133,8 +132,7 @@ public sealed class StaticToSealedHandlerCodeFixProviderTests
 				{
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -181,8 +179,7 @@ public sealed class StaticToSealedHandlerCodeFixProviderTests
 					return new();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -223,8 +220,7 @@ public sealed class StaticToSealedHandlerCodeFixProviderTests
 					return new();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -271,7 +267,6 @@ public sealed class StaticToSealedHandlerCodeFixProviderTests
 					return new();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

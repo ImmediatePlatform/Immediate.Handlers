@@ -4,7 +4,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.2" />
 	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
 	<PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.3.0" />
@@ -58,6 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
+	<GlobalPackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.2" PrivateAssets="All" />
 	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.85" PrivateAssets="All" />
 	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.130" PrivateAssets="All" />
 	<GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All" />

@@ -12,16 +12,15 @@ internal static class TransformHandler
 	)
 	{
 		cancellationToken.ThrowIfCancellationRequested();
+
 		var symbol = (INamedTypeSymbol)context.TargetSymbol;
+		if (symbol.ContainingType is not null)
+			return null;
 
 		var @namespace = symbol.ContainingNamespace.ToString().NullIf("<global namespace>");
 		var name = symbol.Name;
 		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-
-		cancellationToken.ThrowIfCancellationRequested();
-
-		if (symbol.ContainingType is not null)
-			return null;
+		var serviceLifetime = context.Attributes[0].GetServiceLifetime();
 
 		var handleMethod = symbol.GetHandleMethod();
 
@@ -37,8 +36,6 @@ internal static class TransformHandler
 		{
 			return null;
 		}
-
-		cancellationToken.ThrowIfCancellationRequested();
 
 		var requestType = BuildGenericType(handleMethod.Parameters[0].Type);
 		var isStatic = handleMethod.IsStatic;
@@ -57,14 +54,10 @@ internal static class TransformHandler
 		if (!isParameterCountValid)
 			return null;
 
-		cancellationToken.ThrowIfCancellationRequested();
-
 		var isStreaming = handleMethod.ReturnType.IsStreamingHandlerReturn;
 		var responseType = isStreaming
 			? BuildGenericType(handleMethod.ReturnType.StreamingReturnType)
 			: BuildGenericType(handleMethod.ReturnType.ValueTaskReturnType);
-
-		cancellationToken.ThrowIfCancellationRequested();
 
 		var parameters = handleMethod.Parameters
 			.Skip(1)
@@ -77,11 +70,7 @@ internal static class TransformHandler
 			})
 			.ToEquatableReadOnlyList();
 
-		cancellationToken.ThrowIfCancellationRequested();
-
 		var behaviors = GetOverrideBehaviors(symbol, cancellationToken);
-
-		cancellationToken.ThrowIfCancellationRequested();
 
 		return new()
 		{
@@ -93,6 +82,7 @@ internal static class TransformHandler
 			Parameters = parameters,
 			IsStatic = isStatic,
 			UseToken = useToken,
+			ServiceLifetime = serviceLifetime,
 
 			RequestType = requestType,
 			ResponseType = responseType,
@@ -149,6 +139,14 @@ internal static class TransformHandler
 
 file static class Extensions
 {
+	public static string? GetServiceLifetime(this AttributeData attributeData)
+	{
+		if (attributeData.ConstructorArguments is not [{ } constant])
+			return null;
+
+		return constant.ToCSharpString();
+	}
+
 	public static IMethodSymbol? GetHandleMethod(this INamedTypeSymbol symbol)
 	{
 		var candidates = symbol

@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Reflection;
 using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
@@ -32,23 +31,12 @@ public static class Utility
 #error .net version not yet implemented
 #endif
 
-	public static IEnumerable<MetadataReference> GetAdditionalReferences(this DriverReferenceAssemblies assemblies) =>
-		assemblies switch
-		{
-			DriverReferenceAssemblies.Normal =>
-			[
-				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(HandlerAttribute))),
-			],
-
-			DriverReferenceAssemblies.Msdi =>
-			[
-				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(HandlerAttribute))),
-				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(ServiceCollection))),
-				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(IServiceCollection))),
-			],
-
-			DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-		};
+	public static IEnumerable<MetadataReference> GetAdditionalReferences() =>
+	[
+		MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(HandlerAttribute))),
+		MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(ServiceCollection))),
+		MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(IServiceCollection))),
+	];
 
 	private static string GetAssemblyLocation(this Type type)
 	{
@@ -57,11 +45,4 @@ public static class Utility
 
 		return location;
 	}
-}
-
-public enum DriverReferenceAssemblies
-{
-	None = 0,
-	Normal,
-	Msdi,
 }

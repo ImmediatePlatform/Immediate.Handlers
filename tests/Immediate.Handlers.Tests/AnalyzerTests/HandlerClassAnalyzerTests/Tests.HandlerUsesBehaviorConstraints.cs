@@ -56,8 +56,7 @@ public sealed partial class Tests
 					return usersService.GetUsers();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -112,8 +111,7 @@ public sealed partial class Tests
 					return usersService.GetUsers();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -168,8 +166,7 @@ public sealed partial class Tests
 					return usersService.GetUsers();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -226,8 +223,7 @@ public sealed partial class Tests
 					return default;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -282,7 +278,6 @@ public sealed partial class Tests
 					return usersService.GetUsers();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

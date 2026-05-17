@@ -13,13 +13,6 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 {
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
-		var hasMsDi = context
-			.MetadataReferencesProvider
-			.Where(r => (r.Display ?? "").Contains("Microsoft.Extensions.DependencyInjection.Abstractions"))
-			.Collect()
-			.Select((refs, _) => refs.Any())
-			.WithTrackingName("MsDi");
-
 		var assemblyName = context.CompilationProvider
 			.Select((cp, _) => cp.AssemblyName!
 				.Replace(".", string.Empty)
@@ -57,7 +50,6 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var handlerNodes = handlers
 			.Combine(behaviors)
-			.Combine(hasMsDi)
 			.WithTrackingName("HandlersWithBehaviors");
 
 		var template = GetTemplate("Handler");
@@ -65,19 +57,17 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			handlerNodes,
 			(spc, node) => RenderHandler(
 				spc,
-				handler: node.Left.Left,
-				behaviors: node.Left.Right,
-				hasMsDi: node.Right,
+				handler: node.Left,
+				behaviors: node.Right,
 				template
 			)
 		);
 
 		var registrationNodes = handlers
-			.Select((h, _) => (h?.DisplayName, h?.OverrideBehaviors))
+			.Select((h, _) => (h?.DisplayName, h?.ServiceLifetime, h?.OverrideBehaviors))
 			.Collect()
 			.Combine(behaviors)
 			.Combine(@namespace
-				.Combine(hasMsDi)
 				.Combine(assemblyName)
 			)
 			.WithTrackingName("Registrations");
@@ -88,8 +78,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				spc,
 				handlers: node.Left.Left,
 				behaviors: node.Left.Right,
-				hasDi: node.Right.Left.Right,
-				@namespace: node.Right.Left.Left,
+				@namespace: node.Right.Left,
 				assemblyName: node.Right.Right
 			)
 		);
@@ -97,9 +86,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static void RenderServiceCollectionExtension(
 		SourceProductionContext context,
-		ImmutableArray<(string? displayName, EquatableReadOnlyList<Behavior?>? behaviors)> handlers,
+		ImmutableArray<(string? DisplayName, string? ServiceLifetime, EquatableReadOnlyList<Behavior?>? Behaviors)> handlers,
 		ImmutableArray<Behavior?> behaviors,
-		bool hasDi,
 		string? @namespace,
 		string assemblyName
 	)
@@ -107,13 +95,10 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
 
-		if (!hasDi)
-			return;
-
 		if (!handlers.Any())
 			return;
 
-		if (handlers.Any(h => h.displayName is null || (h.behaviors?.Any(b => b is null) ?? false)))
+		if (handlers.Any(h => h.DisplayName is null || (h.Behaviors?.Any(b => b is null) ?? false)))
 			return;
 
 		if (behaviors.Any(b => b is null))
@@ -131,9 +116,9 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			{
 				Namespace = @namespace,
 				AssemblyName = assemblyName,
-				Handlers = handlers.Select(x => x.displayName),
+				Handlers = handlers.Select(x => new { x.DisplayName, x.ServiceLifetime }),
 				Behaviors = behaviors
-					.Concat(handlers.SelectMany(h => h.behaviors ?? Enumerable.Empty<Behavior?>()))
+					.Concat(handlers.SelectMany(h => h.Behaviors ?? []))
 					.WhereNotNull()
 					.Select(b => new { b.RegistrationType })
 					.Distinct(),
@@ -157,7 +142,6 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		SourceProductionContext context,
 		Handler? handler,
 		ImmutableArray<Behavior?> behaviors,
-		bool hasMsDi,
 		Template template
 	)
 	{
@@ -201,13 +185,13 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			HandlerParameters = handler.Parameters,
 			handler.IsStatic,
 			handler.UseToken,
+			handler.ServiceLifetime,
 
 			RequestType = handler.RequestType.Name,
 			ResponseType = responseType.Name,
 			IsImplicitValueTuple = handler.ResponseType is null,
 
 			Behaviors = BuildRenderBehaviors(pipelineBehaviors, handler.RequestType.Name, responseType.Name),
-			HasMsDi = hasMsDi,
 			handler.IsStreaming,
 		});
 

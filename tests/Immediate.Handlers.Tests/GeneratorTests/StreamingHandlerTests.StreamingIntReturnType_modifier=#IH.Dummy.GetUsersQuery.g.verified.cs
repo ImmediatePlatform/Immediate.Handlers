@@ -1,4 +1,6 @@
 ﻿//HintName: IH.Dummy.GetUsersQuery.g.cs
+using Microsoft.Extensions.DependencyInjection;
+
 #pragma warning disable CS1591
 
 namespace Dummy;
@@ -52,5 +54,18 @@ partial class GetUsersQuery
 					, cancellationToken
 				);
 		}
+	}
+
+	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+	public static IServiceCollection AddHandlers(
+		IServiceCollection services,
+		ServiceLifetime lifetime = ServiceLifetime.Scoped
+	)
+	{
+		services.Add(new(typeof(global::Dummy.GetUsersQuery.Handler), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
+		services.Add(new(typeof(global::Immediate.Handlers.Shared.IStreamingHandler<global::Dummy.GetUsersQuery.Query, int>), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
+		services.Add(new(typeof(global::Dummy.GetUsersQuery.HandleBehavior), typeof(global::Dummy.GetUsersQuery.HandleBehavior), lifetime));
+		services.Add(new(typeof(global::Dummy.GetUsersQuery), typeof(global::Dummy.GetUsersQuery), lifetime));
+		return services;
 	}
 }

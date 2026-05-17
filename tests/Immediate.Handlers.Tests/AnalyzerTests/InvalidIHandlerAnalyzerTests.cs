@@ -26,8 +26,7 @@ public sealed class InvalidIHandlerAnalyzerTests
 				{
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -63,8 +62,7 @@ public sealed class InvalidIHandlerAnalyzerTests
 					return ValueTask.FromResult(new Response());
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -90,8 +88,7 @@ public sealed class InvalidIHandlerAnalyzerTests
 				{
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -116,8 +113,7 @@ public sealed class InvalidIHandlerAnalyzerTests
 				{
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -155,7 +151,6 @@ public sealed class InvalidIHandlerAnalyzerTests
 					yield return new Response();
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

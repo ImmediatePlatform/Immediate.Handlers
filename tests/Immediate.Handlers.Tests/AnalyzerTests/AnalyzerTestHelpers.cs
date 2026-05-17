@@ -12,8 +12,8 @@ namespace Immediate.Handlers.Tests.AnalyzerTests;
 public static class AnalyzerTestHelpers
 {
 	public static CSharpAnalyzerTest<TAnalyzer, DefaultVerifier> CreateAnalyzerTest<TAnalyzer>(
-		[StringSyntax("c#-test")] string inputSource,
-		DriverReferenceAssemblies assemblies)
+		[StringSyntax("c#-test")] string inputSource
+	)
 		where TAnalyzer : DiagnosticAnalyzer, new()
 	{
 		var csTest = new ImmediateHandlersGeneratorAnalyzerTest<TAnalyzer>
@@ -27,7 +27,7 @@ public static class AnalyzerTestHelpers
 		};
 
 		csTest.TestState.AdditionalReferences
-			.AddRange(assemblies.GetAdditionalReferences());
+			.AddRange(Utility.GetAdditionalReferences());
 
 		return csTest;
 	}
@@ -135,7 +135,7 @@ public static class AnalyzerTestHelpers
 		};
 
 		test.TestState.AdditionalReferences
-			.AddRange(DriverReferenceAssemblies.Normal.GetAdditionalReferences());
+			.AddRange(Utility.GetAdditionalReferences());
 
 		return test;
 	}

@@ -44,8 +44,7 @@ public sealed partial class HandlerMethodMustExistCodeFixProviderTests
 					return default;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -87,7 +86,6 @@ public sealed partial class HandlerMethodMustExistCodeFixProviderTests
 					return default;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

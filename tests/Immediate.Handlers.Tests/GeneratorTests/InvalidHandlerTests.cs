@@ -2,10 +2,8 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class InvalidHandlerTests
 {
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task HandlerWithoutHandlerMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task HandlerWithoutHandlerMethodShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -23,8 +21,7 @@ public sealed class InvalidHandlerTests
 			{
 				public record Query;
 			}
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -32,14 +29,11 @@ public sealed class InvalidHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task InstanceHandlerMethodWithTooManyParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task InstanceHandlerMethodWithTooManyParametersShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -72,8 +66,7 @@ public sealed class InvalidHandlerTests
 				public ValueTask<IEnumerable<User>> GetUsers() =>
 					ValueTask.FromResult(Enumerable.Empty<User>());
 			}
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -81,14 +74,11 @@ public sealed class InvalidHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task HandlerWithTwoHandlersMethodShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task HandlerWithTwoHandlersMethodShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -131,8 +121,7 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -140,14 +129,11 @@ public sealed class InvalidHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task HandlerWithNoParametersShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task HandlerWithNoParametersShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -179,8 +165,7 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -188,14 +173,11 @@ public sealed class InvalidHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task HandlerWithVoidResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task HandlerWithVoidResponseShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -229,8 +211,7 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -238,14 +219,11 @@ public sealed class InvalidHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task HandlerWithTaskResponseShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task HandlerWithTaskResponseShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -280,8 +258,7 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -289,14 +266,11 @@ public sealed class InvalidHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task NestedHandlerShouldProduceNothing(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task NestedHandlerShouldProduceNothing()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -334,8 +308,7 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
@@ -343,7 +316,6 @@ public sealed class InvalidHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 }
