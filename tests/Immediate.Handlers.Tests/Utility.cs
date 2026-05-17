@@ -1,6 +1,9 @@
 using System.Diagnostics;
+using System.Reflection;
+using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Immediate.Handlers.Tests;
 
@@ -20,7 +23,7 @@ public static class Utility
 		"net11.0",
 		new PackageIdentity(
 			"Microsoft.NETCore.App.Ref",
-			"11.0.0-preview.3.26207.106"
+			"11.0.0-preview.4.26230.115"
 		),
 		Path.Combine("ref", "net11.0")
 	);
@@ -34,18 +37,26 @@ public static class Utility
 		{
 			DriverReferenceAssemblies.Normal =>
 			[
-				MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll"),
+				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(HandlerAttribute))),
 			],
 
 			DriverReferenceAssemblies.Msdi =>
 			[
-				MetadataReference.CreateFromFile("./Immediate.Handlers.Shared.dll"),
-				MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.dll"),
-				MetadataReference.CreateFromFile("./Microsoft.Extensions.DependencyInjection.Abstractions.dll"),
+				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(HandlerAttribute))),
+				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(ServiceCollection))),
+				MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(IServiceCollection))),
 			],
 
 			DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
 		};
+
+	private static string GetAssemblyLocation(this Type type)
+	{
+		if (Assembly.GetAssembly(type) is not { Location: { } location })
+			throw new InvalidOperationException("Missing assembly");
+
+		return location;
+	}
 }
 
 public enum DriverReferenceAssemblies
