@@ -25,7 +25,7 @@ public static class HandlerServiceCollectionExtensions
 	)
 	{
 		{{~ for h in handlers ~}}
-		{{ h.display_name }}.AddHandlers(services, {{ if h.service_lifetime != null; h.service_lifetime; else; "lifetime"; end }});
+		{{ h.display_name }}.AddHandlers(services, {{ if h.service_lifetime != null; "global::" + h.service_lifetime; else; "lifetime"; end }});
 		{{~ end ~}}
 		
 		return services;

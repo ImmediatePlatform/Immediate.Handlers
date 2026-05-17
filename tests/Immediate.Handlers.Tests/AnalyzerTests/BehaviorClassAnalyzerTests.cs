@@ -27,8 +27,8 @@ public sealed class BehaviorClassAnalyzerTests
 
 	[Fact]
 	public async Task ValidInterfaceConstraint_DoesNotAlert() =>
-	await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsClassAnalyzer>(
-		"""
+		await AnalyzerTestHelpers.CreateAnalyzerTest<BehaviorsClassAnalyzer>(
+			"""
 			using System;
 			using System.Collections.Generic;
 			using System.IO;
