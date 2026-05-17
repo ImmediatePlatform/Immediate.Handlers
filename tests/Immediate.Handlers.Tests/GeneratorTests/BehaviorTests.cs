@@ -1,13 +1,9 @@
-using System.Diagnostics;
-
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class BehaviorTests
 {
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task SingleBehavior(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task SingleBehavior()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -64,33 +60,22 @@ public sealed class BehaviorTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task MultipleBehaviors(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task MultipleBehaviors()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -213,33 +198,22 @@ public sealed class BehaviorTests
 
 				public interface ILogger<T>;
 			}
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task CrtpBehavior(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task CrtpBehavior()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -282,33 +256,22 @@ public sealed class BehaviorTests
 					CancellationToken __
 				) => ValueTask.CompletedTask;
 			}
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH..ConstraintHandler.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task NestedBehavior(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task NestedBehavior()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -370,33 +333,22 @@ public sealed class BehaviorTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task ZeroTypeParameterBehavior(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task ZeroTypeParameterBehavior()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -457,33 +409,22 @@ public sealed class BehaviorTests
 			{
 				void Log(string message);
 			}
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task RequestTypeParameterBehavior(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task RequestTypeParameterBehavior()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -544,33 +485,22 @@ public sealed class BehaviorTests
 			{
 				void Validate(object request);
 			}
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task BehaviorHasMultipleTRequestConstraints(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task BehaviorHasMultipleTRequestConstraints()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -626,33 +556,22 @@ public sealed class BehaviorTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task ResponseTypeParameterBehavior(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task ResponseTypeParameterBehavior()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -713,33 +632,22 @@ public sealed class BehaviorTests
 			{
 				void Validate(object request);
 			}
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task BehaviorHasMultipleTResponseConstraints(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task BehaviorHasMultipleTResponseConstraints()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -797,26 +705,17 @@ public sealed class BehaviorTests
 			}
 
 			public interface ILogger<T>;
-			""",
-			assemblies
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
-				.. assemblies switch
-				{
-					DriverReferenceAssemblies.Normal => Enumerable.Empty<string>(),
-					DriverReferenceAssemblies.Msdi =>
-						["Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs"],
-
-					DriverReferenceAssemblies.None or _ => throw new UnreachableException(),
-				},
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(string.Join('_', assemblies));
+		_ = await Verify(result);
 	}
 }

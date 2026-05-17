@@ -33,7 +33,6 @@ public sealed partial class Tests
 				protected int {|IHR0017:Test2|} => 1;
 				internal int {|IHR0017:_test3|};
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

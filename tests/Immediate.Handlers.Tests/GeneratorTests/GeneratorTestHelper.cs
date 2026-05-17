@@ -10,7 +10,6 @@ public static class GeneratorTestHelper
 {
 	public static GeneratorDriverRunResult RunGenerator(
 		[StringSyntax("c#-test")] string source,
-		DriverReferenceAssemblies assemblies,
 		params ReadOnlySpan<string> skippedSteps
 	)
 	{
@@ -26,7 +25,7 @@ public static class GeneratorTestHelper
 			references:
 			[
 				..Utility.NetCoreAssemblies,
-				..assemblies.GetAdditionalReferences(),
+				..Utility.GetAdditionalReferences(),
 			],
 			options: new(
 				outputKind: OutputKind.DynamicallyLinkedLibrary
@@ -128,7 +127,6 @@ public static class GeneratorTestHelper
 	private static ReadOnlySpan<string> TrackedSteps =>
 		new string[]
 		{
-			"MsDi",
 			"AssemblyName",
 			"RootNamespace",
 			"Behaviors",

@@ -48,9 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="All" />
-	<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 	<PackageReference Include="MinVer" PrivateAssets="all" />
+	<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>

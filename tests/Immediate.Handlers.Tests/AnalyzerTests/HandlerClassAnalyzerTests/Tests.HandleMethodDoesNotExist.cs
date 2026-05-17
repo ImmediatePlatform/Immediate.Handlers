@@ -22,7 +22,6 @@ public partial class Tests
 			{
 				public record Query;
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

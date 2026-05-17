@@ -42,6 +42,8 @@ public sealed record Handler
 	public required bool IsStatic { get; init; }
 	public required bool UseToken { get; init; }
 
+	public required string? ServiceLifetime { get; init; }
+
 	public required GenericType RequestType { get; init; }
 	public required GenericType? ResponseType { get; init; }
 

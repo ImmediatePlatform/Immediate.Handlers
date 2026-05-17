@@ -27,18 +27,19 @@ public sealed class HandlerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Verify(result)
+			.UseParameters(modifier);
 	}
 
 	[Theory]
@@ -66,18 +67,19 @@ public sealed class HandlerTests
 					return ValueTask.CompletedTask;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Verify(result)
+			.UseParameters(modifier);
 	}
 
 	[Theory]
@@ -104,18 +106,19 @@ public sealed class HandlerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		);
 
 		Assert.Equal(
 			[
 				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
 			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Verify(result)
+			.UseParameters(modifier);
 	}
 
 	[Fact]
@@ -145,8 +148,7 @@ public sealed class HandlerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Msdi
+			"""
 		);
 
 		Assert.Equal(
@@ -197,8 +199,7 @@ public sealed class HandlerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Msdi
+			"""
 		);
 
 		Assert.Equal(
@@ -248,8 +249,7 @@ public sealed class HandlerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Msdi
+			"""
 		);
 
 		Assert.Equal(
@@ -263,10 +263,8 @@ public sealed class HandlerTests
 		_ = await Verify(result);
 	}
 
-	[Theory]
-	[InlineData(DriverReferenceAssemblies.Normal)]
-	[InlineData(DriverReferenceAssemblies.Msdi)]
-	public async Task NoHandlersGeneratesZeroFiles(DriverReferenceAssemblies assemblies)
+	[Fact]
+	public async Task NoHandlersGeneratesZeroFiles()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -274,7 +272,6 @@ public sealed class HandlerTests
 
 			public sealed class Test;
 			""",
-			assemblies,
 			["Handlers", "HandlersWithBehaviors"]
 		);
 
@@ -284,4 +281,47 @@ public sealed class HandlerTests
 
 		_ = await Verify(result);
 	}
+
+	[Theory]
+	[InlineData("Transient")]
+	[InlineData("Scoped")]
+	[InlineData("Singleton")]
+	public async Task ServiceLifetime(string lifetime)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			$$"""
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			using Microsoft.Extensions.DependencyInjection;
+			
+			namespace Dummy;
+
+			[Handler(ServiceLifetime.{{lifetime}})]
+			public sealed partial class GetUsersQuery
+			{
+				public record Query;
+
+				private ValueTask<int> HandleAsync(
+					Query _,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult(0);
+				}
+			}
+			"""
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(lifetime);
+	}
+
 }

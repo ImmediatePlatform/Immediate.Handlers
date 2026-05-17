@@ -1,7 +1,5 @@
-{{~ if has_ms_di ~}}
 using Microsoft.Extensions.DependencyInjection;
 
-{{~ end ~}}
 #pragma warning disable CS1591
 
 {{~ if !string.empty namespace ~}}
@@ -217,7 +215,6 @@ partial class {{ class_name }}
 		{{~ end ~}}
 	}
 	{{~ end ~}}
-	{{~ if has_ms_di ~}}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
 	public static IServiceCollection AddHandlers(
@@ -237,5 +234,4 @@ partial class {{ class_name }}
 		{{~ end ~}}
 		return services;
 	}
-	{{~ end ~}}
 }

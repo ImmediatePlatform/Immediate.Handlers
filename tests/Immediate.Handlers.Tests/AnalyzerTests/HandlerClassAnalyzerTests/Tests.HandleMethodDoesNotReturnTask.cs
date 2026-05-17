@@ -29,8 +29,7 @@ public partial class Tests
 					return 0;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
@@ -58,7 +57,6 @@ public partial class Tests
 					return 0;
 				}
 			}
-			""",
-			DriverReferenceAssemblies.Normal
+			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 }

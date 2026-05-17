@@ -23,7 +23,6 @@ public static class CodeFixTestHelper
 	public static CSharpCodeFixTest<TAnalyzer, TCodeFix, DefaultVerifier> CreateCodeFixTest<TAnalyzer, TCodeFix>(
 		[StringSyntax("c#-test")] string inputSource,
 		[StringSyntax("c#-test")] string fixedSource,
-		DriverReferenceAssemblies assemblies,
 		int codeActionIndex = 0
 	)
 		where TAnalyzer : DiagnosticAnalyzer, new()
@@ -49,7 +48,7 @@ public static class CodeFixTestHelper
 		};
 
 		csTest.TestState.AdditionalReferences
-			.AddRange(assemblies.GetAdditionalReferences());
+			.AddRange(Utility.GetAdditionalReferences());
 
 		return csTest;
 	}
