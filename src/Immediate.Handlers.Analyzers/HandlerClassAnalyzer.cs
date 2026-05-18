@@ -196,13 +196,8 @@ public sealed class HandlerClassAnalyzer : DiagnosticAnalyzer
 
 		var containerSymbol = (INamedTypeSymbol)context.Symbol;
 
-		if (!containerSymbol
-				.GetAttributes()
-				.Any(a => a is { AttributeClass.IsHandlerAttribute: true })
-		)
-		{
+		if (!containerSymbol.IsHandler)
 			return;
-		}
 
 		token.ThrowIfCancellationRequested();
 		if (containerSymbol.ContainingType is not null)

@@ -151,6 +151,10 @@ internal static class ITypeSymbolExtensions
 
 	extension([NotNullWhen(true)] ITypeSymbol? typeSymbol)
 	{
+		public bool IsHandler =>
+			typeSymbol is INamedTypeSymbol s
+			&& s.GetAttributes().Any(a => a is { AttributeClass.IsHandlerAttribute: true });
+
 		public bool IsHandlerAttribute =>
 			typeSymbol is INamedTypeSymbol
 			{

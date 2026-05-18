@@ -33,7 +33,7 @@ public sealed class StaticToSealedHandlerCodeFixProvider : CodeFixProvider
 		if (model.GetDeclaredSymbol(cds, token) is not INamedTypeSymbol { IsStatic: true } container)
 			return;
 
-		if (!container.GetAttributes().Any(a => a is { AttributeClass.IsHandlerAttribute: true }))
+		if (!container.IsHandler)
 			return;
 
 		var method = container.GetMembers()

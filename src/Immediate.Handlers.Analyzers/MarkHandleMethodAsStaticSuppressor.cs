@@ -35,8 +35,8 @@ public sealed class MarkHandleMethodAsStaticSuppressor : DiagnosticSuppressor
 					MethodKind: MethodKind.Ordinary,
 					Name: "Handle" or "HandleAsync",
 					ReturnType.IsValidHandlerReturn: true,
+					ContainingSymbol: INamedTypeSymbol { IsHandler: true },
 				}
-				|| !method.ContainingSymbol.GetAttributes().Any(ad => ad.AttributeClass.IsHandlerAttribute)
 			)
 			{
 				continue;
