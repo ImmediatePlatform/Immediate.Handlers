@@ -8,9 +8,9 @@ namespace Immediate.Handlers.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 {
-	public static readonly DiagnosticDescriptor SealedHandlerShouldUsedCorrectly =
+	public static readonly DiagnosticDescriptor SealedHandlerShouldBeUsedCorrectly =
 		new(
-			id: DiagnosticIds.IHR0022SealedHandlerShouldUsedCorrectly,
+			id: DiagnosticIds.IHR0022SealedHandlerShouldBeUsedCorrectly,
 			title: "Non-static handler should not be used directly",
 			messageFormat: "Handler type '{0}' should not be used directly; use '{0}.Handler' instead",
 			category: "ImmediateHandler",
@@ -22,7 +22,7 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
-			SealedHandlerShouldUsedCorrectly,
+			SealedHandlerShouldBeUsedCorrectly,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -45,46 +45,50 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 
 	private void AnalyzeSymbol(SymbolAnalysisContext context)
 	{
-		if (!IsTargetInvalid(context.Symbol))
+		if (!IsTargetInvalid(context.Symbol, context.CancellationToken))
 			return;
 
 		var location = GetLocation(context.Symbol, context.CancellationToken);
 
 		context.ReportDiagnostic(
 			Diagnostic.Create(
-				SealedHandlerShouldUsedCorrectly,
+				SealedHandlerShouldBeUsedCorrectly,
 				location,
 				GetTargetType(context.Symbol)?.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
 			)
 		);
 	}
 
-	private static bool IsTargetInvalid(ISymbol symbol)
+	private static bool IsTargetInvalid(ISymbol symbol, CancellationToken token)
 	{
+		token.ThrowIfCancellationRequested();
+
 		return symbol switch
 		{
 			INamedTypeSymbol
 			{
 				BaseType: var baseType,
 				AllInterfaces: var interfaces,
-			} => Enumerable.Any([baseType, .. interfaces], IsInvalid),
+			} => Enumerable.Any([baseType, .. interfaces], t => IsInvalid(t, token)),
 
-			IParameterSymbol { Type: INamedTypeSymbol type } => IsInvalid(type),
-			IFieldSymbol { Type: INamedTypeSymbol type } => IsInvalid(type),
-			IPropertySymbol { Type: INamedTypeSymbol type } => IsInvalid(type),
+			IParameterSymbol { Type: INamedTypeSymbol type } => IsInvalid(type, token),
+			IFieldSymbol { Type: INamedTypeSymbol type } => IsInvalid(type, token),
+			IPropertySymbol { Type: INamedTypeSymbol type } => IsInvalid(type, token),
 
 			IMethodSymbol
 			{
 				ReturnType: INamedTypeSymbol type,
 				MethodKind: not (MethodKind.PropertyGet or MethodKind.PropertySet),
-			} => IsInvalid(type),
+			} => IsInvalid(type, token),
 
 			_ => false,
 		};
 	}
 
-	private static bool IsInvalid(ISymbol? symbol)
+	private static bool IsInvalid(ISymbol? symbol, CancellationToken token)
 	{
+		token.ThrowIfCancellationRequested();
+
 		if (symbol is not INamedTypeSymbol { SpecialType: SpecialType.None } typeSymbol)
 			return false;
 
@@ -94,12 +98,12 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 		if (!typeSymbol.IsGenericType)
 			return false;
 
-		if (IsInvalid(typeSymbol.BaseType))
+		if (IsInvalid(typeSymbol.BaseType, token))
 			return true;
 
 		foreach (var argument in typeSymbol.TypeArguments)
 		{
-			if (IsInvalid(argument))
+			if (IsInvalid(argument, token))
 				return true;
 		}
 
@@ -108,7 +112,7 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 			.Where(i => i is not { TypeArguments: [{ } t] } || !SymbolEqualityComparer.Default.Equals(t, typeSymbol))
 		)
 		{
-			if (IsInvalid(@interface))
+			if (IsInvalid(@interface, token))
 				return true;
 		}
 
@@ -148,6 +152,7 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 		return symbol switch
 		{
 			INamedTypeSymbol ints => ints,
+
 			IParameterSymbol { Type: INamedTypeSymbol type } => type,
 			IFieldSymbol { Type: INamedTypeSymbol type } => type,
 			IPropertySymbol { Type: INamedTypeSymbol type } => type,
