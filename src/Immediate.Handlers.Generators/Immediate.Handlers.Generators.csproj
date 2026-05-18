@@ -17,11 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="AssemblyMetadata.Generators" PrivateAssets="All" />
 	<PackageReference Include="Microsoft.Bcl.HashCode" />
 	<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
-	<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
 	<PackageReference Include="MinVer" PrivateAssets="all" />
+	<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -33,11 +34,5 @@
 	  <TargetPathWithTargetPlatformMoniker Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" IncludeRuntimeDependency="false" />
 	</ItemGroup>
   </Target>
-
-  <PropertyGroup Label="MinVer">
-	<MinVerAutoIncrement>minor</MinVerAutoIncrement>
-	<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
-	<MinVerTagPrefix>v</MinVerTagPrefix>
-  </PropertyGroup>
 
 </Project>

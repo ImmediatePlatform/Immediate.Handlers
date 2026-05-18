@@ -1,4 +1,3 @@
-using System.Reflection;
 using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
@@ -33,16 +32,8 @@ public static class Utility
 
 	public static IEnumerable<MetadataReference> GetAdditionalReferences() =>
 	[
-		MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(HandlerAttribute))),
-		MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(ServiceCollection))),
-		MetadataReference.CreateFromFile(GetAssemblyLocation(typeof(IServiceCollection))),
+		MetadataReference.CreateFromFile(typeof(HandlerAttribute).Assembly.Location),
+		MetadataReference.CreateFromFile(typeof(ServiceCollection).Assembly.Location),
+		MetadataReference.CreateFromFile(typeof(IServiceCollection).Assembly.Location),
 	];
-
-	private static string GetAssemblyLocation(this Type type)
-	{
-		if (Assembly.GetAssembly(type) is not { Location: { } location })
-			throw new InvalidOperationException("Missing assembly");
-
-		return location;
-	}
 }

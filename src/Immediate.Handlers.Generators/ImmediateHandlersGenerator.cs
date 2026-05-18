@@ -122,6 +122,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 					.WhereNotNull()
 					.Select(b => new { b.RegistrationType })
 					.Distinct(),
+
+				Version = ThisAssembly.InformationalVersion,
 			}
 		);
 
@@ -193,6 +195,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 			Behaviors = BuildRenderBehaviors(pipelineBehaviors, handler.RequestType.Name, responseType.Name),
 			handler.IsStreaming,
+
+			Version = ThisAssembly.InformationalVersion,
 		});
 
 		cancellationToken.ThrowIfCancellationRequested();

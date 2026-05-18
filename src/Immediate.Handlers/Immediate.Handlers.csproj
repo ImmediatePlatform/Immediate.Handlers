@@ -60,10 +60,4 @@
 	<ProjectReference Include="../Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
-  <PropertyGroup Label="MinVer">
-	<MinVerAutoIncrement>minor</MinVerAutoIncrement>
-	<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
-	<MinVerTagPrefix>v</MinVerTagPrefix>
-  </PropertyGroup>
-
 </Project>
