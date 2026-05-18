@@ -1,4 +1,3 @@
-using System.Reflection;
 using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
