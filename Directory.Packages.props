@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
-	<PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.7" />
+	<PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.8" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.300" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.8" />
