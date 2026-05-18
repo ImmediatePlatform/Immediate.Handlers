@@ -17,10 +17,4 @@
 	<PackageReference Include="MinVer" PrivateAssets="all" />
   </ItemGroup>
 
-  <PropertyGroup Label="MinVer">
-	<MinVerAutoIncrement>minor</MinVerAutoIncrement>
-	<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
-	<MinVerTagPrefix>v</MinVerTagPrefix>
-  </PropertyGroup>
-
 </Project>
