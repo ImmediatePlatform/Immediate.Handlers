@@ -60,3 +60,12 @@ Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
 IHR0020 | ImmediateHandler | Warning | HandlerClassAnalyzer
 IHR0021 | ImmediateHandler | Error | BehaviorsClassAnalyzer
+
+
+## Release 3.7
+
+### New Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|--------------------
+IHR0022 | ImmediateHandler | Warning | InvalidHandlerUsageAnalyzer

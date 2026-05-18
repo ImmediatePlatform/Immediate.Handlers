@@ -23,4 +23,5 @@ internal static class DiagnosticIds
 	public const string IHR0019StaticHandlerCouldBeSealed = "IHR0019";
 	public const string IHR0020HandlerUsesBehaviorWithIncorrectTypeArguments = "IHR0020";
 	public const string IHR0021BehaviorClassUsesInvalidConstraints = "IHR0021";
+	public const string IHR0022SealedHandlerShouldBeUsedCorrectly = "IHR0022";
 }
