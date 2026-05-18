@@ -19,7 +19,7 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 			description: "Non-static handler classes can be used, but usage is probably incorrect. The generated `.Handler` class is probably the intended use."
 		);
 
-	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
 			SealedHandlerShouldUsedCorrectly,
