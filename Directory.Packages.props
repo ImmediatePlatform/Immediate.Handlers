@@ -15,7 +15,7 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing" Version="1.1.3" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
-	<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.6.2" />
+	<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.7.0" />
 	<PackageVersion Include="MinVer" Version="7.0.0" />
 	<PackageVersion Include="Scriban" Version="7.2.0" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.7" />
@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net11.0' ">
-	<PackageVersion Include="Basic.Reference.Assemblies.Net110" Version="1.8.7" />
+	<PackageVersion Include="Basic.Reference.Assemblies.Net110" Version="1.8.8" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="11.0.100-preview.4.26230.115" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0-preview.4.26230.115" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="11.0.0-preview.4.26230.115" />
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
-	<PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.7" />
+	<PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.8" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.300" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.8" />
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
-	<PackageVersion Include="Basic.Reference.Assemblies.Net90" Version="1.8.7" />
+	<PackageVersion Include="Basic.Reference.Assemblies.Net90" Version="1.8.8" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.16" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.16" />
@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
-	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.8.7" />
+	<PackageVersion Include="Basic.Reference.Assemblies.Net80" Version="1.8.8" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
@@ -59,8 +59,8 @@
 
   <ItemGroup>
 	<GlobalPackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.2" PrivateAssets="All" />
-	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.85" PrivateAssets="All" />
-	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.130" PrivateAssets="All" />
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.86" PrivateAssets="All" />
+	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.131" PrivateAssets="All" />
 	<GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All" />
   </ItemGroup>
 </Project>
