@@ -64,7 +64,7 @@ internal static class TransformBehaviors
 
 				// global::Dummy.LoggingBehavior<,> or global::Dummy.LoggingBehavior<> or global::Dummy.LoggingBehavior
 				// for: `services.AddScoped(typeof(..));`
-				var typeName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+				var typeName = symbol.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat);
 
 				cancellationToken.ThrowIfCancellationRequested();
 
@@ -97,10 +97,10 @@ file static class Extensions
 	{
 		return new()
 		{
-			ExactType = constraint.ExactType?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+			ExactType = constraint.ExactType?.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat),
 
 			TypeConstraints = constraint.TypeConstraints
-				.Select(tc => tc.OriginalDefinition.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
+				.Select(tc => tc.OriginalDefinition.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat))
 				.ToEquatableReadOnlyList(),
 		};
 	}

@@ -100,20 +100,13 @@ internal static class TransformHandler
 			? ba.ParseBehaviors(cancellationToken)
 			: null;
 
-	private static SymbolDisplayFormat FullyQualifiedWithNullableFormat { get; } =
-		SymbolDisplayFormat.FullyQualifiedFormat
-			.WithMiscellaneousOptions(
-				SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
-				| SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-			);
-
 	[return: NotNullIfNotNull(nameof(type))]
 	private static GenericType? BuildGenericType(ITypeSymbol? type)
 	{
 		if (type == null)
 			return null;
 
-		var name = type.ToDisplayString(FullyQualifiedWithNullableFormat);
+		var name = type.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat);
 
 		var implements = new List<string>();
 		AddBaseTypes(type, implements);
@@ -134,7 +127,7 @@ internal static class TransformHandler
 			return;
 		}
 
-		implements.Add(type.OriginalDefinition.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+		implements.Add(type.OriginalDefinition.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat));
 
 		if (type.BaseType is not null)
 			AddBaseTypes(type.BaseType, implements);
