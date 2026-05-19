@@ -71,28 +71,71 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 				AllInterfaces: var interfaces,
 			} ints when
 				Enumerable
-					.Select([baseType, .. interfaces], t => GetInvalidSymbol(t, token))
+					.Select([baseType, .. interfaces], t => GetInvalidSymbol(t, new(SymbolEqualityComparer.Default), token))
 					.FirstOrDefault(x => x is { }) is { } invalidSymbol =>
 				new(GetTypeIdentifierLocation(ints), invalidSymbol),
 
 			IParameterSymbol { Type: INamedTypeSymbol type } ips
-				when GetInvalidSymbol(type, token) is { } invalidSymbol => new(GetTypeLocation(ips, token), invalidSymbol),
+				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				new(GetTypeLocation(ips, token), invalidSymbol),
 
 			IFieldSymbol { Type: INamedTypeSymbol type } ifs
-				when GetInvalidSymbol(type, token) is { } invalidSymbol => new(GetTypeLocation(ifs, token), invalidSymbol),
+				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				new(GetTypeLocation(ifs, token), invalidSymbol),
 
 			IPropertySymbol { Type: INamedTypeSymbol type } ips
-				when GetInvalidSymbol(type, token) is { } invalidSymbol => new(GetTypeLocation(ips, token), invalidSymbol),
+				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				new(GetTypeLocation(ips, token), invalidSymbol),
 
 			IMethodSymbol
 			{
 				ReturnType: INamedTypeSymbol type,
 				MethodKind: not (MethodKind.PropertyGet or MethodKind.PropertySet),
-			} ims when GetInvalidSymbol(type, token) is { } invalidSymbol =>
+			} ims when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
 				new(GetTypeLocation(ims, token), invalidSymbol),
 
 			_ => null,
 		};
+	}
+
+	private static INamedTypeSymbol? GetInvalidSymbol(ISymbol? symbol, HashSet<INamedTypeSymbol> seen, CancellationToken token)
+	{
+		token.ThrowIfCancellationRequested();
+
+		if (symbol is not INamedTypeSymbol { SpecialType: SpecialType.None } typeSymbol)
+			return null;
+
+		if (!seen.Add(typeSymbol))
+			return null;
+
+		if (typeSymbol is { Arity: 1, Name: nameof(IEquatable<>) })
+			return null;
+
+		if (typeSymbol is { IsHandler: true })
+			return typeSymbol;
+
+		if (!typeSymbol.IsGenericType)
+			return null;
+
+		if (GetInvalidSymbol(typeSymbol.BaseType, seen, token) is { } invalidBase)
+			return invalidBase;
+
+		foreach (var argument in typeSymbol.TypeArguments)
+		{
+			if (GetInvalidSymbol(argument, seen, token) is { } invalidArgument)
+				return invalidArgument;
+		}
+
+		foreach (var @interface in typeSymbol.Interfaces
+			.Where(i => !SymbolEqualityComparer.Default.Equals(i, typeSymbol))
+			.Where(i => i is not { TypeArguments: [{ } t] } || !SymbolEqualityComparer.Default.Equals(t, typeSymbol))
+		)
+		{
+			if (GetInvalidSymbol(typeSymbol.BaseType, seen, token) is { } invalidInterface)
+				return invalidInterface;
+		}
+
+		return null;
 	}
 
 	private static Location GetTypeLocation(ISymbol symbol, CancellationToken token)
@@ -109,43 +152,6 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 
 			_ => Location.None,
 		};
-	}
-
-	private static INamedTypeSymbol? GetInvalidSymbol(ISymbol? symbol, CancellationToken token)
-	{
-		token.ThrowIfCancellationRequested();
-
-		if (symbol is not INamedTypeSymbol { SpecialType: SpecialType.None } typeSymbol)
-			return null;
-
-		if (typeSymbol is { Arity: 1, Name: nameof(IEquatable<>) })
-			return null;
-
-		if (typeSymbol is { IsHandler: true })
-			return typeSymbol;
-
-		if (!typeSymbol.IsGenericType)
-			return null;
-
-		if (GetInvalidSymbol(typeSymbol.BaseType, token) is { } invalidBase)
-			return invalidBase;
-
-		foreach (var argument in typeSymbol.TypeArguments)
-		{
-			if (GetInvalidSymbol(argument, token) is { } invalidArgument)
-				return invalidArgument;
-		}
-
-		foreach (var @interface in typeSymbol.Interfaces
-			.Where(i => !SymbolEqualityComparer.Default.Equals(i, typeSymbol))
-			.Where(i => i is not { TypeArguments: [{ } t] } || !SymbolEqualityComparer.Default.Equals(t, typeSymbol))
-		)
-		{
-			if (GetInvalidSymbol(typeSymbol.BaseType, token) is { } invalidInterface)
-				return invalidInterface;
-		}
-
-		return null;
 	}
 
 	private static Location GetTypeIdentifierLocation(INamedTypeSymbol namedTypeSymbol)
