@@ -73,7 +73,7 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 				Enumerable
 					.Select([baseType, .. interfaces], t => GetInvalidSymbol(t, new(SymbolEqualityComparer.Default), token))
 					.FirstOrDefault(x => x is { }) is { } invalidSymbol =>
-				new(GetTypeIdentifierLocation(ints), invalidSymbol),
+				new(GetTypeIdentifierLocation(ints, token), invalidSymbol),
 
 			IParameterSymbol { Type: INamedTypeSymbol type } ips
 				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
@@ -151,11 +151,11 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 		};
 	}
 
-	private static Location GetTypeIdentifierLocation(INamedTypeSymbol namedTypeSymbol)
+	private static Location GetTypeIdentifierLocation(INamedTypeSymbol namedTypeSymbol, CancellationToken token)
 	{
 		foreach (var syntax in namedTypeSymbol.DeclaringSyntaxReferences)
 		{
-			if (syntax.GetSyntax() is not TypeDeclarationSyntax { BaseList: { } } tds)
+			if (syntax.GetSyntax(token) is not TypeDeclarationSyntax { BaseList: { } } tds)
 				continue;
 
 			return tds.Identifier.GetLocation();
