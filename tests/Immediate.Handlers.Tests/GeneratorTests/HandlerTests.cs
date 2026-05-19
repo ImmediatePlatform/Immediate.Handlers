@@ -85,6 +85,49 @@ public sealed class HandlerTests
 	[Theory]
 	[InlineData("")]
 	[InlineData("static")]
+	public async Task NullableReturnType(string modifier)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			$$"""
+			#nullable enable
+
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			
+			namespace Dummy;
+
+			[Handler]
+			public {{modifier}} partial class GetUsersQuery
+			{
+				public record Query;
+				public record Response;
+
+				private {{modifier}} ValueTask<Response?> HandleAsync(
+					Query _,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult<Response?>(null);
+				}
+			}
+			"""
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result)
+			.UseParameters(modifier);
+	}
+
+	[Theory]
+	[InlineData("")]
+	[InlineData("static")]
 	public async Task MissingCancellationToken(string modifier)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
