@@ -45,21 +45,21 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 
 	private void AnalyzeSymbol(SymbolAnalysisContext context)
 	{
-		if (!IsTargetInvalid(context.Symbol, context.CancellationToken))
+		if (GetTargetInvalidSymbol(context.Symbol, context.CancellationToken) is not { } symbol)
 			return;
-
-		var location = GetLocation(context.Symbol, context.CancellationToken);
 
 		context.ReportDiagnostic(
 			Diagnostic.Create(
 				SealedHandlerShouldBeUsedCorrectly,
-				location,
-				GetTargetType(context.Symbol)?.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
+				symbol.Location,
+				symbol.NamedTypeSymbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
 			)
 		);
 	}
 
-	private static bool IsTargetInvalid(ISymbol symbol, CancellationToken token)
+	private record struct InvalidSymbolLocation(Location Location, INamedTypeSymbol NamedTypeSymbol);
+
+	private static InvalidSymbolLocation? GetTargetInvalidSymbol(ISymbol symbol, CancellationToken token)
 	{
 		token.ThrowIfCancellationRequested();
 
@@ -69,101 +69,98 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 			{
 				BaseType: var baseType,
 				AllInterfaces: var interfaces,
-			} => Enumerable.Any([baseType, .. interfaces], t => IsInvalid(t, token)),
+			} ints when
+				Enumerable
+					.Select([baseType, .. interfaces], t => GetInvalidSymbol(t, new(SymbolEqualityComparer.Default), token))
+					.FirstOrDefault(x => x is { }) is { } invalidSymbol =>
+				new(GetTypeIdentifierLocation(ints, token), invalidSymbol),
 
-			IParameterSymbol { Type: INamedTypeSymbol type } => IsInvalid(type, token),
-			IFieldSymbol { Type: INamedTypeSymbol type } => IsInvalid(type, token),
-			IPropertySymbol { Type: INamedTypeSymbol type } => IsInvalid(type, token),
+			IParameterSymbol { Type: INamedTypeSymbol type } ips
+				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				new(GetTypeLocation(ips, token), invalidSymbol),
+
+			IFieldSymbol { Type: INamedTypeSymbol type } ifs
+				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				new(GetTypeLocation(ifs, token), invalidSymbol),
+
+			IPropertySymbol { Type: INamedTypeSymbol type } ips
+				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				new(GetTypeLocation(ips, token), invalidSymbol),
 
 			IMethodSymbol
 			{
 				ReturnType: INamedTypeSymbol type,
 				MethodKind: not (MethodKind.PropertyGet or MethodKind.PropertySet),
-			} => IsInvalid(type, token),
+			} ims when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				new(GetTypeLocation(ims, token), invalidSymbol),
 
-			_ => false,
+			_ => null,
 		};
 	}
 
-	private static bool IsInvalid(ISymbol? symbol, CancellationToken token)
+	private static INamedTypeSymbol? GetInvalidSymbol(ISymbol? symbol, HashSet<INamedTypeSymbol> seen, CancellationToken token)
 	{
 		token.ThrowIfCancellationRequested();
 
 		if (symbol is not INamedTypeSymbol { SpecialType: SpecialType.None } typeSymbol)
-			return false;
+			return null;
+
+		if (!seen.Add(typeSymbol))
+			return null;
+
+		if (typeSymbol is { Arity: 1, Name: nameof(IEquatable<>) })
+			return null;
 
 		if (typeSymbol is { IsHandler: true })
-			return true;
+			return typeSymbol;
 
 		if (!typeSymbol.IsGenericType)
-			return false;
+			return null;
 
-		if (IsInvalid(typeSymbol.BaseType, token))
-			return true;
+		if (GetInvalidSymbol(typeSymbol.BaseType, seen, token) is { } invalidBase)
+			return invalidBase;
 
 		foreach (var argument in typeSymbol.TypeArguments)
 		{
-			if (IsInvalid(argument, token))
-				return true;
+			if (GetInvalidSymbol(argument, seen, token) is { } invalidArgument)
+				return invalidArgument;
 		}
 
-		foreach (var @interface in typeSymbol.Interfaces
-			.Where(i => !SymbolEqualityComparer.Default.Equals(i, typeSymbol))
-			.Where(i => i is not { TypeArguments: [{ } t] } || !SymbolEqualityComparer.Default.Equals(t, typeSymbol))
-		)
+		foreach (var @interface in typeSymbol.Interfaces)
 		{
-			if (IsInvalid(@interface, token))
-				return true;
+			if (GetInvalidSymbol(@interface, seen, token) is { } invalidInterface)
+				return invalidInterface;
 		}
 
-		return false;
+		return null;
 	}
 
-	private static Location? GetLocation(ISymbol symbol, CancellationToken token)
+	private static Location GetTypeLocation(ISymbol symbol, CancellationToken token)
 	{
-		var syntax = symbol
-			.DeclaringSyntaxReferences
-			.FirstOrDefault()
-			?.GetSyntax(token);
-
-		return (symbol, syntax) switch
+		return symbol.DeclaringSyntaxReferences[0].GetSyntax(token) switch
 		{
-			(INamedTypeSymbol, TypeDeclarationSyntax { BaseList: { } baseList }) =>
-				baseList.GetLocation(),
+			PropertyDeclarationSyntax { Type: { } type } => type.GetLocation(),
 
-			(IFieldSymbol, VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Type: { } type } }) =>
-				type.GetLocation(),
+			VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Type: { } type } } => type.GetLocation(),
 
-			(IPropertySymbol, PropertyDeclarationSyntax { Type: { } type }) =>
-				type.GetLocation(),
+			ParameterSyntax { Type: { } type } => type.GetLocation(),
 
-			(IParameterSymbol, ParameterSyntax { Type: { } type }) =>
-				type.GetLocation(),
+			MethodDeclarationSyntax { ReturnType: { } type } => type.GetLocation(),
 
-			(IMethodSymbol, MethodDeclarationSyntax { ReturnType: { } type }) =>
-				type.GetLocation(),
-
-			_ => syntax?.GetLocation(),
+			_ => Location.None,
 		};
 	}
 
-	private static INamedTypeSymbol? GetTargetType(ISymbol symbol)
+	private static Location GetTypeIdentifierLocation(INamedTypeSymbol namedTypeSymbol, CancellationToken token)
 	{
-		return symbol switch
+		foreach (var syntax in namedTypeSymbol.DeclaringSyntaxReferences)
 		{
-			INamedTypeSymbol ints => ints,
+			if (syntax.GetSyntax(token) is not TypeDeclarationSyntax { BaseList: { } } tds)
+				continue;
 
-			IParameterSymbol { Type: INamedTypeSymbol type } => type,
-			IFieldSymbol { Type: INamedTypeSymbol type } => type,
-			IPropertySymbol { Type: INamedTypeSymbol type } => type,
+			return tds.Identifier.GetLocation();
+		}
 
-			IMethodSymbol
-			{
-				ReturnType: INamedTypeSymbol type,
-				MethodKind: not (MethodKind.PropertyGet or MethodKind.PropertySet),
-			} => type,
-
-			_ => null,
-		};
+		return Location.None;
 	}
 }
