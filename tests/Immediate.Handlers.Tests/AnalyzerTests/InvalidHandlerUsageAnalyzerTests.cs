@@ -29,7 +29,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 					new();
 			}
 
-			public class Test2 {|IHR0022:: IInterface<Test>|};
+			public class {|IHR0022:Test2|} : IInterface<Test>;
 			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
@@ -87,7 +87,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 					new();
 			}
 
-			public class Test2 {|IHR0022:: Test|};
+			public class {|IHR0022:Test2|} : Test;
 			"""
 		).RunAsync(TestContext.Current.CancellationToken);
 
