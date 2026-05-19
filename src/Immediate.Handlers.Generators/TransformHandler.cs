@@ -65,7 +65,7 @@ internal static class TransformHandler
 			.Select(p => new Parameter
 			{
 				Attributes = p.GetAttributesString(),
-				Type = p.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+				Type = p.Type.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat),
 				Name = p.Name,
 			})
 			.ToEquatableReadOnlyList();

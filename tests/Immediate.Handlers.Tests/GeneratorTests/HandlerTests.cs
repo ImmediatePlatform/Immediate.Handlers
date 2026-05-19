@@ -82,13 +82,11 @@ public sealed class HandlerTests
 			.UseParameters(modifier);
 	}
 
-	[Theory]
-	[InlineData("")]
-	[InlineData("static")]
-	public async Task NullableReturnType(string modifier)
+	[Fact]
+	public async Task NullableParameterType()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
-			$$"""
+			"""
 			#nullable enable
 
 			using System.Threading;
@@ -98,16 +96,16 @@ public sealed class HandlerTests
 			namespace Dummy;
 
 			[Handler]
-			public {{modifier}} partial class GetUsersQuery
+			public partial class GetUsersQuery
 			{
 				public record Query;
 				public record Response;
 
-				private {{modifier}} ValueTask<Response?> HandleAsync(
-					Query _,
+				private ValueTask<Response> HandleAsync(
+					Query? _,
 					CancellationToken token)
 				{
-					return ValueTask.FromResult<Response?>(null);
+					return ValueTask.FromResult<Response>(new());
 				}
 			}
 			"""
@@ -121,8 +119,47 @@ public sealed class HandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
-			.UseParameters(modifier);
+		_ = await Verify(result);
+	}
+
+	[Fact]
+	public async Task NullableReturnType()
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			#nullable enable
+
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			
+			namespace Dummy;
+
+			[Handler]
+			public partial class GetUsersQuery
+			{
+				public record Query;
+				public record Response;
+
+				private ValueTask<Response?> HandleAsync(
+					Query? _,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult<Response?>(new());
+				}
+			}
+			"""
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result);
 	}
 
 	[Theory]

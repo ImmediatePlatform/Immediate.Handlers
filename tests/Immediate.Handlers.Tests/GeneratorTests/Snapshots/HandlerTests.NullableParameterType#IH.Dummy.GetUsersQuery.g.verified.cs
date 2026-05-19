@@ -8,7 +8,7 @@ namespace Dummy;
 
 partial class GetUsersQuery
 {
-	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::Dummy.GetUsersQuery.Response?>
+	public sealed partial class Handler : global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query?, global::Dummy.GetUsersQuery.Response>
 	{
 		private readonly global::Dummy.GetUsersQuery.HandleBehavior _handleBehavior;
 
@@ -22,8 +22,8 @@ partial class GetUsersQuery
 
 		}
 
-		public async global::System.Threading.Tasks.ValueTask<global::Dummy.GetUsersQuery.Response?> HandleAsync(
-			global::Dummy.GetUsersQuery.Query request,
+		public async global::System.Threading.Tasks.ValueTask<global::Dummy.GetUsersQuery.Response> HandleAsync(
+			global::Dummy.GetUsersQuery.Query? request,
 			global::System.Threading.CancellationToken cancellationToken = default
 		)
 		{
@@ -34,7 +34,7 @@ partial class GetUsersQuery
 	}
 
 	[global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<global::Dummy.GetUsersQuery.Query, global::Dummy.GetUsersQuery.Response?>
+	public sealed class HandleBehavior : global::Immediate.Handlers.Shared.Behavior<global::Dummy.GetUsersQuery.Query?, global::Dummy.GetUsersQuery.Response>
 	{
 		private readonly global::Dummy.GetUsersQuery _container;
 
@@ -45,8 +45,8 @@ partial class GetUsersQuery
 			_container = container;
 		}
 
-		public override async global::System.Threading.Tasks.ValueTask<global::Dummy.GetUsersQuery.Response?> HandleAsync(
-			global::Dummy.GetUsersQuery.Query request,
+		public override async global::System.Threading.Tasks.ValueTask<global::Dummy.GetUsersQuery.Response> HandleAsync(
+			global::Dummy.GetUsersQuery.Query? request,
 			global::System.Threading.CancellationToken cancellationToken
 		)
 		{
@@ -66,7 +66,7 @@ partial class GetUsersQuery
 	)
 	{
 		services.Add(new(typeof(global::Dummy.GetUsersQuery.Handler), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
-		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query, global::Dummy.GetUsersQuery.Response?>), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
+		services.Add(new(typeof(global::Immediate.Handlers.Shared.IHandler<global::Dummy.GetUsersQuery.Query?, global::Dummy.GetUsersQuery.Response>), typeof(global::Dummy.GetUsersQuery.Handler), lifetime));
 		services.Add(new(typeof(global::Dummy.GetUsersQuery.HandleBehavior), typeof(global::Dummy.GetUsersQuery.HandleBehavior), lifetime));
 		services.Add(new(typeof(global::Dummy.GetUsersQuery), typeof(global::Dummy.GetUsersQuery), lifetime));
 		return services;
