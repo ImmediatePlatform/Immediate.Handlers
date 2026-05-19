@@ -126,12 +126,9 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 				return invalidArgument;
 		}
 
-		foreach (var @interface in typeSymbol.Interfaces
-			.Where(i => !SymbolEqualityComparer.Default.Equals(i, typeSymbol))
-			.Where(i => i is not { TypeArguments: [{ } t] } || !SymbolEqualityComparer.Default.Equals(t, typeSymbol))
-		)
+		foreach (var @interface in typeSymbol.Interfaces)
 		{
-			if (GetInvalidSymbol(typeSymbol.BaseType, seen, token) is { } invalidInterface)
+			if (GetInvalidSymbol(@interface, seen, token) is { } invalidInterface)
 				return invalidInterface;
 		}
 
