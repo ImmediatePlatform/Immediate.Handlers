@@ -65,7 +65,7 @@ internal static class TransformHandler
 			.Select(p => new Parameter
 			{
 				Attributes = p.GetAttributesString(),
-				Type = p.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+				Type = p.Type.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat),
 				Name = p.Name,
 			})
 			.ToEquatableReadOnlyList();
@@ -106,7 +106,7 @@ internal static class TransformHandler
 		if (type == null)
 			return null;
 
-		var name = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+		var name = type.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat);
 
 		var implements = new List<string>();
 		AddBaseTypes(type, implements);
@@ -127,7 +127,7 @@ internal static class TransformHandler
 			return;
 		}
 
-		implements.Add(type.OriginalDefinition.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+		implements.Add(type.OriginalDefinition.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat));
 
 		if (type.BaseType is not null)
 			AddBaseTypes(type.BaseType, implements);

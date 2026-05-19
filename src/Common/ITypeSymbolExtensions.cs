@@ -127,7 +127,7 @@ internal static class ITypeSymbolExtensions
 				return true;
 
 			if (constraints.ExactType is not null)
-				return SymbolEqualityComparer.Default.Equals(constraints.ExactType, typeSymbol);
+				return SymbolEqualityComparer.IncludeNullability.Equals(constraints.ExactType, typeSymbol);
 
 			foreach (var constraint in constraints.TypeConstraints)
 			{

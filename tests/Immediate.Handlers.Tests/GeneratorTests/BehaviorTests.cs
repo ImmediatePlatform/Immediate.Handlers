@@ -718,4 +718,94 @@ public sealed class BehaviorTests
 
 		_ = await Verify(result);
 	}
+
+	[Theory]
+	[InlineData(true, true)]
+	[InlineData(false, true)]
+	[InlineData(true, false)]
+	[InlineData(false, false)]
+	public async Task NullableBehavior(bool behaviorNullable, bool returnNullable)
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			$$"""
+			#nullable enable
+
+			using System.Collections.Generic;
+			using System.Linq;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Dummy;
+			using Immediate.Handlers.Shared;
+
+			#pragma warning disable CS9113
+
+			[assembly: Behaviors(
+				typeof(AuditBehavior)
+			)]
+
+			namespace Dummy;
+
+			public class GetUsersEndpoint(GetUsersQuery.Handler handler)
+			{
+				public ValueTask<IEnumerable<User>{{(returnNullable ? "?" : "")}}> GetUsers() =>
+					handler.HandleAsync(new GetUsersQuery.Query());
+			}
+
+			[Handler]
+			public partial class GetUsersQuery(UsersService usersService)
+			{
+				public record Query;
+
+				private ValueTask<IEnumerable<User>{{(returnNullable ? "?" : "")}}> HandleAsync(
+					Query _,
+					CancellationToken token)
+				{
+					return usersService.GetUsers();
+				}
+			}
+
+			public class AuditBehavior(IAuditService auditService)
+				: Behavior<GetUsersQuery.Query, IEnumerable<User>{{(behaviorNullable ? "?" : "")}}>
+			{
+				public override async ValueTask<IEnumerable<User>{{(behaviorNullable ? "?" : "")}}> HandleAsync(GetUsersQuery.Query request, CancellationToken cancellationToken)
+				{
+					auditService.Log("GetUsers called");
+					var response = await Next(request, cancellationToken);
+					return response;
+				}
+			}
+
+			public class User { }
+
+			public class UsersService
+			{
+				public ValueTask<IEnumerable<User>{{(returnNullable ? "?" : "")}}> GetUsers() =>
+					ValueTask.FromResult<IEnumerable<User>{{(returnNullable ? "?" : "")}}>([]);
+			}
+
+			public interface IAuditService
+			{
+				void Log(string message);
+			}
+			"""
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		var text = (await result.GeneratedTrees[0].GetTextAsync(TestContext.Current.CancellationToken)).ToString();
+
+		if (behaviorNullable == returnNullable)
+			Assert.Contains("AuditBehavior", text, StringComparison.Ordinal);
+		else
+			Assert.DoesNotContain("AuditBehavior", text, StringComparison.Ordinal);
+
+		_ = await Verify(result)
+			.UseParameters(behaviorNullable, returnNullable);
+	}
 }
