@@ -18,7 +18,7 @@
 	<PackageTags>csharp-sourcegenerator;mediator;mediator-pattern</PackageTags>
 
 	<PublishRepositoryUrl>true</PublishRepositoryUrl>
-	<RepositoryUrl>https://github.com/viceroypenguin/Immediate.Handlers</RepositoryUrl>
+	<RepositoryUrl>https://github.com/ImmediatePlatform/Immediate.Handlers</RepositoryUrl>
   </PropertyGroup>
 
   <!--
