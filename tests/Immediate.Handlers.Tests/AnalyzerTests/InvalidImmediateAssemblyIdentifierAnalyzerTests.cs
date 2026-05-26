@@ -31,7 +31,8 @@ public sealed class InvalidImmediateAssemblyIdentifierAnalyzerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			""").RunAsync(TestContext.Current.CancellationToken);
+			"""
+		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Theory]
 	[InlineData("")]
@@ -61,5 +62,6 @@ public sealed class InvalidImmediateAssemblyIdentifierAnalyzerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			""").RunAsync(TestContext.Current.CancellationToken);
+			"""
+		).RunAsync(TestContext.Current.CancellationToken);
 }
