@@ -1,29 +1,30 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 
 namespace Immediate.Handlers.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class InvalidImmediatePrefixAnalyzer : DiagnosticAnalyzer
+public sealed class InvalidImmediateAssemblyIdentifierAnalyzer : DiagnosticAnalyzer
 {
-	public static readonly DiagnosticDescriptor InvalidImmediatePrefix =
+	public static readonly DiagnosticDescriptor InvalidImmediateAssemblyIdentifier =
 		new(
-			id: DiagnosticIds.IHR0023InvalidImmediatePrefix,
-			title: "Invalid Immediate prefix",
-			messageFormat: "Immediate prefix '{0}' is not a valid identifier",
+			id: DiagnosticIds.IHR0023InvalidImmediateAssemblyIdentifier,
+			title: "Invalid assembly identifier",
+			messageFormat: "Assembly identifier '{0}' is not a valid C# identifier",
 			category: "ImmediateHandler",
 			defaultSeverity: DiagnosticSeverity.Error,
 			isEnabledByDefault: true,
-			description: "The prefix supplied to [assembly: ImmediatePrefix] must be a valid C# identifier (start with a letter or underscore, followed by letters, digits, or underscores).",
+			description: "The value supplied to [assembly: ImmediateAssemblyIdentifier] must be a valid C# identifier.",
 			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
-			InvalidImmediatePrefix,
+			InvalidImmediateAssemblyIdentifier,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -47,8 +48,8 @@ public sealed class InvalidImmediatePrefixAnalyzer : DiagnosticAnalyzer
 
 		if (attribute is not
 			{
-				Type.IsImmediatePrefixAttribute: true,
-				Arguments: [{ Value.ConstantValue: { HasValue: true, Value: string prefix } }],
+				Type.IsImmediateAssemblyIdentifierAttribute: true,
+				Arguments: [{ Value.ConstantValue: { HasValue: true, Value: string identifier } }],
 			})
 		{
 			return;
@@ -56,14 +57,14 @@ public sealed class InvalidImmediatePrefixAnalyzer : DiagnosticAnalyzer
 
 		token.ThrowIfCancellationRequested();
 
-		if (Utility.IsValidIdentifier(prefix))
+		if (SyntaxFacts.IsValidIdentifier(identifier))
 			return;
 
 		context.ReportDiagnostic(
 			Diagnostic.Create(
-				InvalidImmediatePrefix,
+				InvalidImmediateAssemblyIdentifier,
 				attribute.Syntax.GetLocation(),
-				prefix
+				identifier
 			)
 		);
 	}

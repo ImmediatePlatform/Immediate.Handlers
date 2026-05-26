@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Scriban;
 using Scriban.Runtime;
@@ -14,7 +15,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
 		var assemblyName = context.CompilationProvider
-			.Select((cp, _) => Utility.GetAssemblyPrefix(cp))
+			.Select((cp, _) => cp.GetAssemblyIdentifier())
 			.WithTrackingName("AssemblyName");
 
 		var @namespace = context
@@ -271,6 +272,22 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 file static class Extensions
 {
+	public static string GetAssemblyIdentifier(this Compilation compilation)
+	{
+		if (compilation.Assembly.GetAttributes()
+				.FirstOrDefault(a => a.AttributeClass.IsImmediateAssemblyIdentifierAttribute)
+				is { ConstructorArguments: [{ Value: string identifier }] }
+			&& SyntaxFacts.IsValidIdentifier(identifier))
+		{
+			return identifier;
+		}
+
+		return compilation.AssemblyName!
+			.Replace(".", string.Empty)
+			.Replace(" ", string.Empty)
+			.Trim();
+	}
+
 	public static bool IsValid(
 		this Behavior? behavior,
 		GenericType requestType,

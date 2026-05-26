@@ -171,11 +171,11 @@ internal static class ITypeSymbolExtensions
 				ContainingNamespace.IsImmediateHandlersShared: true,
 			};
 
-		public bool IsImmediatePrefixAttribute =>
+		public bool IsImmediateAssemblyIdentifierAttribute =>
 			typeSymbol is INamedTypeSymbol
 			{
 				Arity: 0,
-				Name: "ImmediatePrefixAttribute",
+				Name: "ImmediateAssemblyIdentifierAttribute",
 				ContainingNamespace.IsImmediateHandlersShared: true,
 			};
 

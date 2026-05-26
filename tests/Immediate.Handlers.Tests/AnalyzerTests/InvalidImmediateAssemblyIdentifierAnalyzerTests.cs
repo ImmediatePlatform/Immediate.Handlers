@@ -2,20 +2,20 @@ using Immediate.Handlers.Analyzers;
 
 namespace Immediate.Handlers.Tests.AnalyzerTests;
 
-public sealed class InvalidImmediatePrefixAnalyzerTests
+public sealed class InvalidImmediateAssemblyIdentifierAnalyzerTests
 {
 	[Theory]
 	[InlineData("_Test")]
 	[InlineData("Test_Name")]
 	[InlineData("Test123")]
-	public async Task ValidPrefix_DoesNotAlert(string prefix) =>
-		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidImmediatePrefixAnalyzer>(
+	public async Task ValidIdentifier_DoesNotAlert(string identifier) =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidImmediateAssemblyIdentifierAnalyzer>(
 			$$"""
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 
-			[assembly: ImmediatePrefix("{{prefix}}")]
+			[assembly: ImmediateAssemblyIdentifier("{{identifier}}")]
 
 			namespace Dummy;
 
@@ -31,22 +31,21 @@ public sealed class InvalidImmediatePrefixAnalyzerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			"""
-		).RunAsync(TestContext.Current.CancellationToken);
+			""").RunAsync(TestContext.Current.CancellationToken);
 
 	[Theory]
 	[InlineData("")]
 	[InlineData("123Test")]
 	[InlineData("Test.Name")]
 	[InlineData("Test Name")]
-	public async Task InvalidPrefix_Alerts(string prefix) =>
-		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidImmediatePrefixAnalyzer>(
+	public async Task InvalidIdentifier_Alerts(string identifier) =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidImmediateAssemblyIdentifierAnalyzer>(
 			$$"""
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 
-			[assembly: {|IHR0023:ImmediatePrefix("{{prefix}}")|}]
+			[assembly: {|IHR0023:ImmediateAssemblyIdentifier("{{identifier}}")|}]
 
 			namespace Dummy;
 
@@ -62,6 +61,5 @@ public sealed class InvalidImmediatePrefixAnalyzerTests
 					return ValueTask.FromResult(0);
 				}
 			}
-			"""
-		).RunAsync(TestContext.Current.CancellationToken);
+			""").RunAsync(TestContext.Current.CancellationToken);
 }

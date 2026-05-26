@@ -1,9 +1,9 @@
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
-public sealed class ImmediatePrefixTests
+public sealed class ImmediateAssemblyIdentifierTests
 {
 	[Fact]
-	public async Task ImmediatePrefixOverridesAssemblyName()
+	public async Task ImmediateAssemblyIdentifierOverridesAssemblyName()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -11,7 +11,7 @@ public sealed class ImmediatePrefixTests
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 
-			[assembly: ImmediatePrefix("Custom")]
+			[assembly: ImmediateAssemblyIdentifier("Custom")]
 
 			namespace Dummy;
 
