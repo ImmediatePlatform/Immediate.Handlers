@@ -193,6 +193,16 @@ In your `Program.cs`, add a call to `services.AddXxxBehaviors()`, where `Xxx` is
 
 This registers all behaviors referenced in any `[Behaviors]` attribute.
 
+#### Overriding the generated name
+
+`Xxx` defaults to the assembly name with `.` and spaces removed. Override it with an assembly attribute:
+
+```cs
+[assembly: ImmediatePrefix("Api")] // services.AddApiHandlers(), services.AddApiBehaviors()
+```
+
+The value must be a valid C# identifier.
+
 ### Streaming Handlers
 
 Immediate.Handlers supports streaming handlers that return `IAsyncEnumerable<TResponse>` for scenarios where

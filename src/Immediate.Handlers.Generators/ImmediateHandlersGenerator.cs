@@ -14,11 +14,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
 		var assemblyName = context.CompilationProvider
-			.Select((cp, _) => cp.AssemblyName!
-				.Replace(".", string.Empty)
-				.Replace(" ", string.Empty)
-				.Trim()
-			)
+			.Select((cp, _) => Utility.GetAssemblyPrefix(cp))
 			.WithTrackingName("AssemblyName");
 
 		var @namespace = context
