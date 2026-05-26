@@ -49,22 +49,24 @@ public sealed class InvalidImmediateAssemblyIdentifierAnalyzer : DiagnosticAnaly
 		if (attribute is not
 			{
 				Type.IsImmediateAssemblyIdentifierAttribute: true,
-				Arguments: [{ Value.ConstantValue: { HasValue: true, Value: string identifier } }],
+				Arguments: [{ Value.ConstantValue: { HasValue: true, Value: var identifier } }],
 			})
 		{
 			return;
 		}
 
-		token.ThrowIfCancellationRequested();
-
-		if (SyntaxFacts.IsValidIdentifier(identifier))
+		if (identifier is string id
+			&& id[0] != '@'
+			&& SyntaxFacts.IsValidIdentifier(id))
+		{
 			return;
+		}
 
 		context.ReportDiagnostic(
 			Diagnostic.Create(
 				InvalidImmediateAssemblyIdentifier,
 				attribute.Syntax.GetLocation(),
-				identifier
+				id
 			)
 		);
 	}

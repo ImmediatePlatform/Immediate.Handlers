@@ -35,7 +35,9 @@ public sealed class InvalidImmediateAssemblyIdentifierAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Theory]
+	[InlineData(null)]
 	[InlineData("")]
+	[InlineData("@class")]
 	[InlineData("123Test")]
 	[InlineData("Test.Name")]
 	[InlineData("Test Name")]
