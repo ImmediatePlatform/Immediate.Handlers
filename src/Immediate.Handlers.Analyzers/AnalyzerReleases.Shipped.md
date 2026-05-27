@@ -69,3 +69,12 @@ IHR0021 | ImmediateHandler | Error | BehaviorsClassAnalyzer
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
 IHR0022 | ImmediateHandler | Warning | InvalidHandlerUsageAnalyzer
+
+
+## Release 3.8
+
+### New Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|--------------------
+IHR0023 | ImmediateHandler | Error | InvalidImmediateAssemblyIdentifierAnalyzer
