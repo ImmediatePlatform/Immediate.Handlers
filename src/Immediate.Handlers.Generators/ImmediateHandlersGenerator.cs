@@ -276,7 +276,7 @@ file static class Extensions
 	{
 		if (compilation.Assembly.GetAttributes()
 				.FirstOrDefault(a => a.AttributeClass.IsImmediateAssemblyIdentifierAttribute)
-				is { ConstructorArguments: [{ Value: string identifier }] }
+				is { ConstructorArguments: [{ Value: string { Length: >= 1 } identifier }] }
 			&& identifier[0] != '@'
 			&& SyntaxFacts.IsValidIdentifier(identifier))
 		{

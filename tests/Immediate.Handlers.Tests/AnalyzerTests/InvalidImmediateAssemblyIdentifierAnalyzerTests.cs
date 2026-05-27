@@ -35,20 +35,20 @@ public sealed class InvalidImmediateAssemblyIdentifierAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Theory]
-	[InlineData(null)]
-	[InlineData("")]
-	[InlineData("@class")]
-	[InlineData("123Test")]
-	[InlineData("Test.Name")]
-	[InlineData("Test Name")]
-	public async Task InvalidIdentifier_Alerts(string identifier) =>
+	[InlineData("null")]
+	[InlineData("\"\"")]
+	[InlineData("\"@class\"")]
+	[InlineData("\"123Test\"")]
+	[InlineData("\"Test.Name\"")]
+	[InlineData("\"Test Name\"")]
+	public async Task InvalidIdentifier_Alerts(string? identifier) =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidImmediateAssemblyIdentifierAnalyzer>(
 			$$"""
 			using System.Threading;
 			using System.Threading.Tasks;
 			using Immediate.Handlers.Shared;
 
-			[assembly: {|IHR0023:ImmediateAssemblyIdentifier("{{identifier}}")|}]
+			[assembly: {|IHR0023:ImmediateAssemblyIdentifier({{identifier}})|}]
 
 			namespace Dummy;
 

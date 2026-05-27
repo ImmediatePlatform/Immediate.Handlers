@@ -55,7 +55,7 @@ public sealed class InvalidImmediateAssemblyIdentifierAnalyzer : DiagnosticAnaly
 			return;
 		}
 
-		if (identifier is string id
+		if (identifier is string { Length: >= 1 } id
 			&& id[0] != '@'
 			&& SyntaxFacts.IsValidIdentifier(id))
 		{
@@ -66,7 +66,7 @@ public sealed class InvalidImmediateAssemblyIdentifierAnalyzer : DiagnosticAnaly
 			Diagnostic.Create(
 				InvalidImmediateAssemblyIdentifier,
 				attribute.Syntax.GetLocation(),
-				id
+				identifier
 			)
 		);
 	}
