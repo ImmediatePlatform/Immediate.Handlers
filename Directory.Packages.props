@@ -60,7 +60,7 @@
   <ItemGroup>
 	<GlobalPackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.2" PrivateAssets="All" />
 	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.94" PrivateAssets="All" />
-	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.135" PrivateAssets="All" />
+	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.140" PrivateAssets="All" />
 	<GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All" />
   </ItemGroup>
 </Project>
