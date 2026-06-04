@@ -33,14 +33,30 @@ jobs:
         dotnet-version: |
           11.0.x
 
+    - name: Restore tools
+      run: dotnet tool restore
+
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build -c Release --no-restore
     - name: Test
-      run: dotnet test -c Release --no-build -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml
+      run: dotnet test -c Release --no-build -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --coverage-settings ./coverage-settings.xml
 
-    - name: Upload coverage reports to Codecov with GitHub Action
-      uses: codecov/codecov-action@v6
+    - name: Package 
+      run: dotnet pack -c Release --no-build --property:PackageOutputPath=../../nupkgs
+    - name: Validate Package 
+      run: dotnet tool run dotnet-validate -- package local ./nupkgs/*.nupkg
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@v2
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+        files: >
+          tests/Immediate.Handlers.FunctionalTests/bin/Release/net8.0/TestResults/coverage.cobertura.xml
+          tests/Immediate.Handlers.FunctionalTests/bin/Release/net9.0/TestResults/coverage.cobertura.xml
+          tests/Immediate.Handlers.FunctionalTests/bin/Release/net10.0/TestResults/coverage.cobertura.xml
+          tests/Immediate.Handlers.FunctionalTests/bin/Release/net11.0/TestResults/coverage.cobertura.xml
+          tests/Immediate.Handlers.Tests/bin/Release/net8.0/TestResults/coverage.cobertura.xml
+          tests/Immediate.Handlers.Tests/bin/Release/net9.0/TestResults/coverage.cobertura.xml
+          tests/Immediate.Handlers.Tests/bin/Release/net10.0/TestResults/coverage.cobertura.xml
+          tests/Immediate.Handlers.Tests/bin/Release/net11.0/TestResults/coverage.cobertura.xml

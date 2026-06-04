@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFramework>netstandard2.0</TargetFramework>
+	<TargetFrameworks>netstandard2.0</TargetFrameworks>
 	<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 	<IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
@@ -14,7 +14,6 @@
 	<PackageReference Include="Microsoft.Bcl.HashCode" />
 	<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="All" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-	<PackageReference Include="MinVer" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

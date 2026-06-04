@@ -6,6 +6,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/ImmediatePlatform/Immediate.Handlers.svg)](https://GitHub.com/ImmediatePlatform/Immediate.Handlers/issues/) 
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/ImmediatePlatform/Immediate.Handlers.svg)](https://GitHub.com/ImmediatePlatform/Immediate.Handlers/issues?q=is%3Aissue+is%3Aclosed) 
 [![GitHub Actions](https://github.com/ImmediatePlatform/Immediate.Handlers/actions/workflows/build.yml/badge.svg)](https://github.com/ImmediatePlatform/Immediate.Handlers/actions)
+[![Coverage Status](https://coveralls.io/repos/github/ImmediatePlatform/Immediate.Handlers/badge.svg)](https://coveralls.io/github/ImmediatePlatform/Immediate.Handlers)
 ---
 
 Immediate.Handlers is an implementation of the mediator pattern in .NET using source-generation. All pipeline behaviors
@@ -17,15 +18,7 @@ safety checks. Behaviors and dependencies are obtained via DI at runtime based o
 
 ## Installing Immediate.Handlers
 
-You can install [Immediate.Handlers with NuGet](https://www.nuget.org/packages/Immediate.Handlers):
-
-    Install-Package Immediate.Handlers
-    
-Or via the .NET Core command line interface:
-
     dotnet add package Immediate.Handlers
-
-Either commands, from Package Manager Console or .NET Core CLI, will download and install Immediate.Handlers.
 
 ## Using Immediate.Handlers
 ### Creating Handlers

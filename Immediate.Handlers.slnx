@@ -3,8 +3,10 @@
     <File Path=".editorconfig" />
     <File Path=".github/dependabot.yml" />
     <File Path=".gitignore" />
+    <File Path="coverage-settings.xml" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
+    <File Path="dotnet-tools.json" />
     <File Path="global.json" />
     <File Path="readme.md" />
   </Folder>
