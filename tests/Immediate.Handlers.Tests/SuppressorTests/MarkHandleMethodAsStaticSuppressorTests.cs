@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeQuality.Analyzers.QualityGuidelines;
 
-namespace Immediate.Handlers.Tests.AnalyzerTests;
+namespace Immediate.Handlers.Tests.SuppressorTests;
 
 public sealed class MarkHandleMethodAsStaticSuppressorTests
 {
@@ -11,7 +11,7 @@ public sealed class MarkHandleMethodAsStaticSuppressorTests
 
 	[Fact]
 	public async Task HandlerMethodCA1822IsNotSuppressedNormally() =>
-		await AnalyzerTestHelpers
+		await SuppressorTestHelper
 			.CreateSuppressorTest<MarkHandleMethodAsStaticSuppressor>(
 				"""
 				using System.Threading;
@@ -44,7 +44,7 @@ public sealed class MarkHandleMethodAsStaticSuppressorTests
 
 	[Fact]
 	public async Task HandlerMethodCA1822IsSuppressedWithEditorConfigOption() =>
-		await AnalyzerTestHelpers
+		await SuppressorTestHelper
 			.CreateSuppressorTest<MarkHandleMethodAsStaticSuppressor>(
 				"""
 				using System.Threading;
