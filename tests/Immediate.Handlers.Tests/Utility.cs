@@ -2,6 +2,7 @@ using Immediate.Handlers.Shared;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Immediate.Handlers.Tests;
 
@@ -35,5 +36,6 @@ public static class Utility
 		MetadataReference.CreateFromFile(typeof(HandlerAttribute).Assembly.Location),
 		MetadataReference.CreateFromFile(typeof(ServiceCollection).Assembly.Location),
 		MetadataReference.CreateFromFile(typeof(IServiceCollection).Assembly.Location),
+		MetadataReference.CreateFromFile(typeof(ILogger).Assembly.Location),
 	];
 }

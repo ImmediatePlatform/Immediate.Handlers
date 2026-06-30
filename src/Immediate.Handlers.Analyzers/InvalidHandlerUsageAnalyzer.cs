@@ -108,7 +108,7 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 		if (!seen.Add(typeSymbol))
 			return null;
 
-		if (typeSymbol is { Arity: 1, Name: nameof(IEquatable<>) })
+		if (typeSymbol.IsIEquatable1 || typeSymbol.IsILogger1)
 			return null;
 
 		if (typeSymbol is { IsHandler: true })

@@ -22,6 +22,7 @@
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" VersionOverride="4.12.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+	<PackageReference Include="Microsoft.Extensions.Logging" />
 	<PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
 	<PackageReference Include="Scriban" />
 	<PackageReference Include="Verify.SourceGenerators" />

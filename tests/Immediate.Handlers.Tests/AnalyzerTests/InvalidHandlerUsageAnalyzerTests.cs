@@ -34,7 +34,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task AnalyzerTriggersForNonUseAsGenericBaseType() =>
+	public async Task AnalyzerDoesNotTriggerForNonUseAsGenericBaseType() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
 			"""
 			using System;
@@ -92,7 +92,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task AnalyzerTriggersForNonUseAsBaseType() =>
+	public async Task AnalyzerDoesNotTriggerForNonUseAsBaseType() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
 			"""
 			using System;
@@ -151,7 +151,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task AnalyzerTriggersForNonUseAsField() =>
+	public async Task AnalyzerDoesNotTriggerForNonUseAsField() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
 			"""
 			using System;
@@ -211,7 +211,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task AnalyzerTriggersForNonUseAsProperty() =>
+	public async Task AnalyzerDoesNotTriggerForNonUseAsProperty() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
 			"""
 			using System;
@@ -271,7 +271,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task AnalyzerTriggersForNonUseAsParameter() =>
+	public async Task AnalyzerDoesNotTriggerForNonUseAsParameter() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
 			"""
 			using System;
@@ -331,7 +331,7 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 		).RunAsync(TestContext.Current.CancellationToken);
 
 	[Fact]
-	public async Task AnalyzerTriggersForNonUseAsMethodReturn() =>
+	public async Task AnalyzerDoesNotTriggerForNonUseAsMethodReturn() =>
 		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
 			"""
 			using System;
@@ -356,6 +356,69 @@ public sealed class InvalidHandlerUsageAnalyzerTests
 			public class Test2
 			{
 				private Test.Handler Method(int test) => default!;
+			}
+			"""
+		).RunAsync(TestContext.Current.CancellationToken);
+
+	[Fact]
+	public async Task AnalyzerTriggersForUseAsT() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			public interface IInterface<T>;
+
+			[Handler]
+			public sealed partial class Test
+			{
+				public sealed record Query;
+				public sealed record Response;
+
+				private async ValueTask<Response> HandleAsync(Query query, CancellationToken token) =>
+					new();
+			}
+
+			public class Test2
+			{
+				private void Method({|IHR0022:IInterface<Test>|} test) { }
+			}
+			"""
+		).RunAsync(TestContext.Current.CancellationToken);
+
+	[Fact]
+	public async Task AnalyzerDoesNotTriggerForUseAsILoggerT() =>
+		await AnalyzerTestHelpers.CreateAnalyzerTest<InvalidHandlerUsageAnalyzer>(
+			"""
+			using System;
+			using System.Collections.Generic;
+			using System.IO;
+			using System.Linq;
+			using System.Net.Http;
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			using Microsoft.Extensions.Logging;
+
+			[Handler]
+			public sealed partial class Test
+			{
+				public sealed record Query;
+				public sealed record Response;
+
+				private async ValueTask<Response> HandleAsync(Query query, CancellationToken token) =>
+					new();
+			}
+
+			public class Test2
+			{
+				private void Method(ILogger<Test> test) { }
 			}
 			"""
 		).RunAsync(TestContext.Current.CancellationToken);

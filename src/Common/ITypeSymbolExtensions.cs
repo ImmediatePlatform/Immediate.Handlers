@@ -243,6 +243,26 @@ internal static class ITypeSymbolExtensions
 				ContainingNamespace.IsSystemCollectionsGeneric: true,
 			};
 
+		public bool IsILogger1 =>
+			typeSymbol is INamedTypeSymbol
+			{
+				Arity: 1,
+				Name: "ILogger",
+				ContainingNamespace:
+				{
+					Name: "Logging",
+					ContainingNamespace:
+					{
+						Name: "Extensions",
+						ContainingNamespace:
+						{
+							Name: "Microsoft",
+							ContainingNamespace.IsGlobalNamespace: true,
+						},
+					},
+				},
+			};
+
 		public bool IsValueTask1 =>
 			typeSymbol is INamedTypeSymbol
 			{
