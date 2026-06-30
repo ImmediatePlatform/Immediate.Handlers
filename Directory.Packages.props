@@ -16,7 +16,7 @@
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 	<!-- Locked until https://github.com/microsoft/codecoverage/issues/221 resolved -->
-	<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="[18.4.1]" />
+	<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="[18.8.0]" />
 	<PackageVersion Include="Scriban" Version="7.2.5" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.2.3" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
