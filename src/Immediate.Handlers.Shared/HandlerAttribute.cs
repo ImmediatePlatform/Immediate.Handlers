@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Immediate.Handlers.Shared;
@@ -6,6 +7,7 @@ namespace Immediate.Handlers.Shared;
 ///	    Applied to a class to indicate that handler code should be generated.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
+[ExcludeFromCodeCoverage]
 public sealed class HandlerAttribute() : Attribute
 {
 	/// <summary>

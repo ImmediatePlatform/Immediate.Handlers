@@ -23,6 +23,7 @@
 	<!--https://github.com/meziantou/Meziantou.Polyfill?tab=readme-ov-file#supported-polyfills-->
 	<Polyfill></Polyfill>
 	<Polyfill>$(Polyfill)|T:System.Index</Polyfill>
+	<Polyfill>$(Polyfill)|T:System.HashCode</Polyfill>
 	<Polyfill>$(Polyfill)|T:System.Range</Polyfill>
 	<Polyfill>$(Polyfill)|T:System.Diagnostics.CodeAnalysis</Polyfill>
 	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute</Polyfill>
@@ -30,6 +31,8 @@
 	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.IsExternalInit</Polyfill>
 	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.RequiredMemberAttribute</Polyfill>
 	<Polyfill>$(Polyfill)|T:System.Runtime.CompilerServices.SkipLocalsInitAttribute</Polyfill>
+	<Polyfill>$(Polyfill)|M:System.ArgumentNullException.ThrowIfNull</Polyfill>
+	<Polyfill>$(Polyfill)|M:System.String.Replace(System.String,System.String,System.StringComparison)</Polyfill>
 	<MeziantouPolyfill_IncludedPolyfills>$(Polyfill)</MeziantouPolyfill_IncludedPolyfills>
   </PropertyGroup>
 

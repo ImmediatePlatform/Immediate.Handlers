@@ -25,16 +25,8 @@
 	-->
   <ItemGroup>
 	<None Include="../../readme.md" Pack="true" PackagePath="/" />
-	<None Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.8/cs" Visible="true" />
-	<None Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.8/cs" Visible="true" />
-	<None Include="../Immediate.Handlers.Generators/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Generators.dll" Pack="true" PackagePath="analyzers/dotnet/roslyn4.8/cs" Visible="true" />
 
-	<TfmSpecificPackageFile
-	  Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll"
-	  Pack="true"
-	  PackagePath="analyzers/dotnet/roslyn4.8/cs"
-	  Condition=" '$(TargetFramework)' == 'net8.0' " />
-
+	<!-- IH.Shared -->
 	<TfmSpecificPackageFile
 	  Include="../Immediate.Handlers.Shared/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.dll"
 	  Pack="true"
@@ -44,6 +36,47 @@
 	  Include="../Immediate.Handlers.Shared/bin/$(Configuration)/$(TargetFramework)/Immediate.Handlers.Shared.xml"
 	  Pack="true"
 	  PackagePath="lib/$(TargetFramework)" />
+  </ItemGroup>
+
+  <!-- roslyn 4.8 for net8/net9 -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Analyzers.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn4.8/cs" />
+
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.CodeFixes.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn4.8/cs" />
+
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.Generators/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Generators.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn4.8/cs" />
+  </ItemGroup>
+
+  <!-- roslyn 5.0 for net10/net11 -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/net10.0/Immediate.Handlers.Analyzers.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
+
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/net10.0/Immediate.Handlers.CodeFixes.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
+
+	<TfmSpecificPackageFile
+	  Include="../Immediate.Handlers.Generators/bin/$(Configuration)/net10.0/Immediate.Handlers.Generators.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
+
+	<TfmSpecificPackageFile
+	  Include="$(PkgScriban)/lib/net8.0/Scriban.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
   </ItemGroup>
 
   <ItemGroup>

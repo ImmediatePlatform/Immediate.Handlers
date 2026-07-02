@@ -6,15 +6,10 @@
   <ItemGroup>
 	<PackageVersion Include="AssemblyMetadata.Generators" Version="2.2.0" />
 	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
-	<PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.3.0" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" Version="1.1.4" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" Version="1.1.4" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing" Version="1.1.4" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
 	<!-- Locked until https://github.com/microsoft/codecoverage/issues/221 resolved -->
 	<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="[18.4.1]" />
 	<PackageVersion Include="Scriban" Version="7.2.5" />
@@ -25,6 +20,7 @@
 	<PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2" />
   </ItemGroup>
 
+  <!-- IH.Shared dependencies -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'net11.0' ">
 	<PackageVersion Include="Basic.Reference.Assemblies.Net110" Version="1.8.9" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="11.0.100-preview.5.26302.115" />
@@ -59,6 +55,42 @@
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="8.10.0" />
 	<PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+  </ItemGroup>
+
+  <!-- IH.Generators dependencies -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net11.0' ">
+	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="5.3.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.3.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="5.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
+	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="5.0.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.0.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
+	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.12.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.12.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.12.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.11.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.11.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.11.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+	<PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.8.0" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.8.0" />
   </ItemGroup>
 
   <ItemGroup>

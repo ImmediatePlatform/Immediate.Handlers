@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
@@ -265,6 +266,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				$"Immediate.Handlers.Generators.Templates.{name}.sbntxt"
 			);
 
+		Debug.Assert(stream is not null);
+
 		using var reader = new StreamReader(stream);
 		return Template.Parse(reader.ReadToEnd());
 	}
@@ -284,8 +287,8 @@ file static class Extensions
 		}
 
 		return compilation.AssemblyName!
-			.Replace(".", string.Empty)
-			.Replace(" ", string.Empty)
+			.Replace(".", string.Empty, StringComparison.Ordinal)
+			.Replace(" ", string.Empty, StringComparison.Ordinal)
 			.Trim();
 	}
 

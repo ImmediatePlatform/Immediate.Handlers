@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Immediate.Handlers.Shared;
 
 /// <summary>
@@ -5,6 +7,7 @@ namespace Immediate.Handlers.Shared;
 /// </summary>
 /// <param name="identifier">The identifier to use in place of the assembly name.</param>
 [AttributeUsage(AttributeTargets.Assembly)]
+[ExcludeFromCodeCoverage]
 public sealed class ImmediateAssemblyIdentifierAttribute(string identifier) : Attribute
 {
 	/// <summary>

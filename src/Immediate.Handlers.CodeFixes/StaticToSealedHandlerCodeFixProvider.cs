@@ -132,9 +132,13 @@ file static class SyntaxExtensions
 		return nodes;
 	}
 
+#pragma warning disable IDE0028 // Simplify collection initialization
+#pragma warning disable IDE0306 // Simplify collection initialization
 	public static SyntaxTokenList RemoveStaticModifier(
 		this SyntaxTokenList list
 	) => new(list.Where(static token => !token.IsKind(SyntaxKind.StaticKeyword)));
+#pragma warning restore IDE0306 // Simplify collection initialization
+#pragma warning restore IDE0028 // Simplify collection initialization
 
 	public static SyntaxTokenList CorrectClassModifiers(
 		this SyntaxTokenList list

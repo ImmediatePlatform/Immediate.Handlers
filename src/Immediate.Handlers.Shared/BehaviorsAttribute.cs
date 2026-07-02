@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Immediate.Handlers.Shared;
 
 /// <summary>
@@ -22,6 +24,7 @@ namespace Immediate.Handlers.Shared;
 ///	    The types for each of the <see cref="Behavior{TRequest, TResponse}"/>s that should be part of the pipeline.
 /// </param>
 [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
+[ExcludeFromCodeCoverage]
 public sealed class BehaviorsAttribute(params Type[] types) : Attribute
 {
 	/// <summary>
