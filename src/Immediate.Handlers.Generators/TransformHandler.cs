@@ -17,7 +17,7 @@ internal static class TransformHandler
 		if (symbol.ContainingType is not null)
 			return null;
 
-		var @namespace = symbol.ContainingNamespace.ToString().NullIf("<global namespace>");
+		var @namespace = symbol.ContainingNamespace.ToDisplayString().NullIf("<global namespace>");
 		var name = symbol.Name;
 		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 		var serviceLifetime = context.Attributes[0].GetServiceLifetime();
