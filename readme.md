@@ -186,6 +186,16 @@ Calling this `AddXxxHandlers()` method will register all classes in the assembly
 In your `Program.cs`, add a call to `services.AddXxxBehaviors()`, where `Xxx` is the application identifier described above.
 Calling this method will register all behaviors referenced in any `[Behaviors]` attribute.
 
+#### `Tags`
+
+Assigns string tags to the registration. When `AddXxxHandlers` is called with tag arguments, only registrations that share at
+least one tag (or registrations with no tags) are included.
+
+```csharp
+[Handler(Tags = ["worker", "background"])]
+public sealed class BackgroundWorker { }
+```
+
 ### Streaming Handlers
 
 Immediate.Handlers supports streaming handlers that return `IAsyncEnumerable<TResponse>` for scenarios where
