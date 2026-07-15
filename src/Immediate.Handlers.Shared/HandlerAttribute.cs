@@ -36,4 +36,9 @@ public sealed class HandlerAttribute() : Attribute
 	///	</para>
 	/// </summary>
 	public ServiceLifetime? ServiceLifetime { get; }
+
+	/// <summary>
+	///		An optional list of tags which can be used to filter the generated handlers to be registered at runtime.
+	/// </summary>
+	public string[]? Tags { get; init; }
 }

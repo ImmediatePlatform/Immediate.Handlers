@@ -16,11 +16,30 @@ public static class HandlerServiceCollectionExtensions
 
 	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddCustomHandlers(
 		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services,
-		global::Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped
+		global::Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped,
+		params string[] tags
 	)
 	{
 		global::Dummy.GetUsersQuery.AddHandlers(services, lifetime);
-		
+
 		return services;
+	}
+
+	// old-fashioned inner-loop; should be fine since neither tags list will ever be large
+	private static bool Intersects(
+		global::System.ReadOnlySpan<string> first,
+		global::System.ReadOnlySpan<string> second
+	)
+	{
+		foreach (var f in first)
+		{
+			foreach (var s in second)
+			{
+				if (string.Equals(f, s, global::System.StringComparison.Ordinal))
+					return true;
+			}
+		}
+
+		return false;
 	}
 }

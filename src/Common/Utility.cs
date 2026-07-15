@@ -1,3 +1,5 @@
+using Microsoft.CodeAnalysis;
+
 namespace Immediate.Handlers;
 
 internal static class Utility
@@ -6,5 +8,8 @@ internal static class Utility
 		value.Equals(check, StringComparison.Ordinal) ? null : value;
 
 	public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> values)
+		where T : class => values.Where(x => x is not null)!;
+
+	public static IncrementalValuesProvider<T> WhereNotNull<T>(this IncrementalValuesProvider<T?> values)
 		where T : class => values.Where(x => x is not null)!;
 }

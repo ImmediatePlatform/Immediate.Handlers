@@ -20,8 +20,6 @@ public static class HandlerServiceCollectionExtensions
 		params string[] tags
 	)
 	{
-		global::Dummy.GetUsersQuery.AddHandlers(services, global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Transient);
-
 		return services;
 	}
 
