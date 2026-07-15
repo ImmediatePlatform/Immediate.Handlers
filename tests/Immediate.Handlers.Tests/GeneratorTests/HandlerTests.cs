@@ -344,7 +344,7 @@ public sealed class HandlerTests
 	}
 
 	[Fact]
-	public async Task NoHandlersGeneratesZeroFiles()
+	public async Task NoHandlersGeneratesServiceCollectionExtensionsFile()
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -355,8 +355,11 @@ public sealed class HandlerTests
 			["Handlers", "HandlersWithBehaviors"]
 		);
 
-		Assert.Empty(
-			result.GeneratedTrees
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
 		_ = await Verify(result);
@@ -402,6 +405,46 @@ public sealed class HandlerTests
 
 		_ = await Verify(result)
 			.UseParameters(lifetime);
+	}
+
+	[Fact]
+	public async Task HandlerTags()
+	{
+		var result = GeneratorTestHelper.RunGenerator(
+			"""
+			#nullable enable
+
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+			
+			namespace Dummy;
+
+			[Handler(Tags = ["Tag1", "Tag2"])]
+			public partial class GetUsersQuery
+			{
+				public record Query;
+				public record Response;
+
+				private ValueTask<Response> HandleAsync(
+					Query _,
+					CancellationToken token)
+				{
+					return ValueTask.FromResult<Response>(new());
+				}
+			}
+			"""
+		);
+
+		Assert.Equal(
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.Dummy.GetUsersQuery.g.cs",
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
+			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
+		);
+
+		_ = await Verify(result);
 	}
 
 }

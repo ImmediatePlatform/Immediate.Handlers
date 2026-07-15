@@ -23,13 +23,41 @@ public static class HandlerServiceCollectionExtensions
 
 	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection Add{{ assembly_name }}Handlers(
 		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services,
-		global::Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped
+		global::Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped,
+		params {{ if language_version <= 1200 }}string[]{{ else }}global::System.ReadOnlySpan<string>{{ end }} tags
 	)
 	{
-		{{~ for h in handlers ~}}
+		{{~ for g in handlers_by_tag ~}}
+		{{~ if g.key != null ~}}
+		if (tags is [] || Intersects(tags, [{{ g.key }}]))
+		{
+		{{~ end ~}}
+		{{~ for h in g ~}}
 		{{ h.display_name }}.AddHandlers(services, {{ if h.service_lifetime != null; "global::" + h.service_lifetime; else; "lifetime"; end }});
 		{{~ end ~}}
-		
+		{{~ if g.key != null ~}}
+		}
+		{{~ end ~}}
+
+		{{~ end ~}}
 		return services;
+	}
+
+	// old-fashioned inner-loop; should be fine since neither tags list will ever be large
+	private static bool Intersects(
+		global::System.ReadOnlySpan<string> first,
+		global::System.ReadOnlySpan<string> second
+	)
+	{
+		foreach (var f in first)
+		{
+			foreach (var s in second)
+			{
+				if (string.Equals(f, s, global::System.StringComparison.Ordinal))
+					return true;
+			}
+		}
+
+		return false;
 	}
 }

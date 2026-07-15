@@ -1,8 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
-
-// ReSharper disable UnusedAutoPropertyAccessor.Local
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Immediate.Handlers.Generators;
+
+[ExcludeFromCodeCoverage]
+public sealed record AssemblyDefaults
+{
+	public required string AssemblyName { get; init; }
+	public required LanguageVersion LanguageVersion { get; init; }
+}
 
 [ExcludeFromCodeCoverage]
 public sealed record Behavior
@@ -43,6 +49,7 @@ public sealed record Handler
 	public required bool UseToken { get; init; }
 
 	public required string? ServiceLifetime { get; init; }
+	public required string? Tags { get; init; }
 
 	public required GenericType RequestType { get; init; }
 	public required GenericType? ResponseType { get; init; }

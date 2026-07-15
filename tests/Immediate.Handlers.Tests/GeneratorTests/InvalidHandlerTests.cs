@@ -21,11 +21,14 @@ public sealed class InvalidHandlerTests
 			{
 				public record Query;
 			}
-			"""
+			""",
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Equal(
-			[],
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
@@ -66,11 +69,14 @@ public sealed class InvalidHandlerTests
 				public ValueTask<IEnumerable<User>> GetUsers() =>
 					ValueTask.FromResult(Enumerable.Empty<User>());
 			}
-			"""
+			""",
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Equal(
-			[],
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
@@ -121,11 +127,14 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			"""
+			""",
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Equal(
-			[],
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
@@ -165,11 +174,14 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			"""
+			""",
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Equal(
-			[],
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
@@ -211,11 +223,14 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			"""
+			""",
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Equal(
-			[],
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
@@ -258,11 +273,14 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			"""
+			""",
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Equal(
-			[],
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
@@ -308,11 +326,14 @@ public sealed class InvalidHandlerTests
 			}
 
 			public interface ILogger<T>;
-			"""
+			""",
+			["Handlers", "HandlersWithBehaviors"]
 		);
 
 		Assert.Equal(
-			[],
+			[
+				"Immediate.Handlers.Generators/Immediate.Handlers.Generators.ImmediateHandlersGenerator/IH.ServiceCollectionExtensions.g.cs",
+			],
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 

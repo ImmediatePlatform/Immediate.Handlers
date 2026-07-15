@@ -22,6 +22,8 @@ internal static class TransformHandler
 		var displayName = symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
 		var serviceLifetime = context.Attributes[0].GetServiceLifetime();
 
+		var tags = context.Attributes[0].NamedArguments.GetArgumentValue("Tags")?.GetStringArray();
+
 		var handleMethod = symbol.GetHandleMethod();
 
 		if (handleMethod
@@ -82,7 +84,9 @@ internal static class TransformHandler
 			Parameters = parameters,
 			IsStatic = isStatic,
 			UseToken = useToken,
+
 			ServiceLifetime = serviceLifetime,
+			Tags = tags,
 
 			RequestType = requestType,
 			ResponseType = responseType,

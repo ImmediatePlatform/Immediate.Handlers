@@ -20,7 +20,10 @@ public static class HandlerServiceCollectionExtensions
 		params string[] tags
 	)
 	{
-		global::Dummy.GetUsersQuery.AddHandlers(services, global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Transient);
+		if (tags is [] || Intersects(tags, ["Tag1", "Tag2"]))
+		{
+		global::Dummy.GetUsersQuery.AddHandlers(services, lifetime);
+		}
 
 		return services;
 	}

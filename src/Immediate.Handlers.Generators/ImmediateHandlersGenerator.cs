@@ -15,8 +15,12 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 {
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
-		var assemblyName = context.CompilationProvider
-			.Select((cp, _) => cp.GetAssemblyIdentifier())
+		var assemblyDefaults = context.CompilationProvider
+			.Select((cp, _) => new AssemblyDefaults
+			{
+				AssemblyName = cp.GetAssemblyIdentifier(),
+				LanguageVersion = (cp.SyntaxTrees.FirstOrDefault()?.Options as CSharpParseOptions)?.LanguageVersion ?? LanguageVersion.CSharp12,
+			})
 			.WithTrackingName("AssemblyName");
 
 		var @namespace = context
@@ -44,6 +48,8 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				predicate: (node, _) => node is TypeDeclarationSyntax,
 				TransformHandler.ParseHandler
 			)
+			.WhereNotNull()
+			.Where(h => h.DisplayName is { } && !(h.OverrideBehaviors?.Any(b => b is null) ?? false))
 			.WithTrackingName("Handlers");
 
 		var handlerNodes = handlers
@@ -62,11 +68,10 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		);
 
 		var registrationNodes = handlers
-			.Select((h, _) => (h?.DisplayName, h?.ServiceLifetime, h?.OverrideBehaviors))
 			.Collect()
 			.Combine(behaviors)
 			.Combine(@namespace
-				.Combine(assemblyName)
+				.Combine(assemblyDefaults)
 			)
 			.WithTrackingName("Registrations");
 
@@ -77,27 +82,21 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				handlers: node.Left.Left,
 				behaviors: node.Left.Right,
 				@namespace: node.Right.Left,
-				assemblyName: node.Right.Right
+				assemblyDefaults: node.Right.Right
 			)
 		);
 	}
 
 	private static void RenderServiceCollectionExtension(
 		SourceProductionContext context,
-		ImmutableArray<(string? DisplayName, string? ServiceLifetime, EquatableReadOnlyList<Behavior?>? Behaviors)> handlers,
+		ImmutableArray<Handler> handlers,
 		ImmutableArray<Behavior?> behaviors,
 		string? @namespace,
-		string assemblyName
+		AssemblyDefaults assemblyDefaults
 	)
 	{
 		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
-
-		if (!handlers.Any())
-			return;
-
-		if (handlers.Any(h => h.DisplayName is null || (h.Behaviors?.Any(b => b is null) ?? false)))
-			return;
 
 		if (behaviors.Any(b => b is null))
 			return;
@@ -112,16 +111,22 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		so.Import(
 			new
 			{
+				assemblyDefaults.AssemblyName,
+				assemblyDefaults.LanguageVersion,
 				Namespace = @namespace,
-				AssemblyName = assemblyName,
-				Handlers = handlers.Select(x => new { x.DisplayName, x.ServiceLifetime }),
+				Version = ThisAssembly.InformationalVersion,
+
 				Behaviors = behaviors
-					.Concat(handlers.SelectMany(h => h.Behaviors ?? []))
+					.Concat(handlers.SelectMany(h => h.OverrideBehaviors ?? []))
 					.WhereNotNull()
 					.Select(b => new { b.RegistrationType })
 					.Distinct(),
 
-				Version = ThisAssembly.InformationalVersion,
+				HandlersByTag = handlers
+					.GroupBy(
+						h => h.Tags,
+						StringComparer.Ordinal
+					),
 			}
 		);
 
@@ -140,16 +145,13 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 	private static void RenderHandler(
 		SourceProductionContext context,
-		Handler? handler,
+		Handler handler,
 		ImmutableArray<Behavior?> behaviors,
 		Template template
 	)
 	{
 		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
-
-		if (handler == null)
-			return;
 
 		var responseType = handler.ResponseType ?? new()
 		{
@@ -204,10 +206,11 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 	private static List<Behavior?> BuildPipeline(
 			GenericType requestType,
 			GenericType responseType,
-			IEnumerable<Behavior?> enumerable) =>
-		[
-			.. enumerable.Where(b => b.IsValid(requestType, responseType)),
-		];
+			IEnumerable<Behavior?> enumerable
+	) =>
+	[
+		.. enumerable.Where(b => b.IsValid(requestType, responseType)),
+	];
 
 	private sealed record RenderBehavior
 	{
