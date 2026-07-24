@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
-	<PackageVersion Include="Basic.Reference.Assemblies.Net90" Version="1.8.9" />
+	<PackageVersion Include="Basic.Reference.Assemblies.Net90" Version="1.8.10" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.17" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.17" />
