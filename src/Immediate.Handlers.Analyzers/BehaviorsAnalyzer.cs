@@ -45,12 +45,25 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 			customTags: [WellKnownDiagnosticTags.NotConfigurable]
 		);
 
+	public static readonly DiagnosticDescriptor BehaviorsMustNotBeAbstract =
+		new(
+			id: DiagnosticIds.IHR0024BehaviorsMustNotBeAbstract,
+			title: "Behaviors must not be abstract",
+			messageFormat: "Behavior type '{0}' must not be abstract",
+			category: "ImmediateHandler",
+			defaultSeverity: DiagnosticSeverity.Error,
+			isEnabledByDefault: true,
+			description: "All behaviors must be concrete (non-abstract) types.",
+			customTags: [WellKnownDiagnosticTags.NotConfigurable]
+		);
+
 	public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
 		ImmutableArray.Create(
 		[
 			BehaviorsMustInheritFromBehavior,
 			BehaviorsMustHaveTwoGenericParameters,
 			BehaviorsMustUseUnboundGenerics,
+			BehaviorsMustNotBeAbstract,
 		]);
 
 	public override void Initialize(AnalysisContext context)
@@ -121,6 +134,16 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 				context.ReportDiagnostic(
 					Diagnostic.Create(
 						BehaviorsMustInheritFromBehavior,
+						location,
+						originalDefinition.Name)
+				);
+			}
+
+			if (originalDefinition.IsAbstract)
+			{
+				context.ReportDiagnostic(
+					Diagnostic.Create(
+						BehaviorsMustNotBeAbstract,
 						location,
 						originalDefinition.Name)
 				);
