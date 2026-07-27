@@ -78,3 +78,12 @@ IHR0022 | ImmediateHandler | Warning | InvalidHandlerUsageAnalyzer
 Rule ID | Category | Severity | Notes
 --------|----------|----------|--------------------
 IHR0023 | ImmediateHandler | Error | InvalidImmediateAssemblyIdentifierAnalyzer
+
+
+## Release 3.12
+
+### New Rules
+
+Rule ID | Category | Severity | Notes
+--------|----------|----------|--------------------
+IHR0024 | ImmediateHandler | Error | BehaviorsAnalyzer
