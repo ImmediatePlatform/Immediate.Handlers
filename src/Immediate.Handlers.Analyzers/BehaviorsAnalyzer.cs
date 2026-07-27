@@ -145,7 +145,8 @@ public sealed class BehaviorsAnalyzer : DiagnosticAnalyzer
 					Diagnostic.Create(
 						BehaviorsMustNotBeAbstract,
 						location,
-						originalDefinition.Name)
+						originalDefinition.Name
+					)
 				);
 			}
 
