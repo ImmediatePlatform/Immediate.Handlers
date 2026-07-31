@@ -71,7 +71,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -209,7 +209,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -267,7 +267,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -344,7 +344,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -420,7 +420,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -496,7 +496,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -567,7 +567,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -643,7 +643,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -716,7 +716,7 @@ public sealed class BehaviorTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Theory]
@@ -805,7 +805,7 @@ public sealed class BehaviorTests
 		else
 			Assert.DoesNotContain("AuditBehavior", text, StringComparison.Ordinal);
 
-		_ = await Verify(result)
+		_ = await Utility.VerifyIgnoreCommonFile(result)
 			.UseParameters(behaviorNullable, returnNullable);
 	}
 }

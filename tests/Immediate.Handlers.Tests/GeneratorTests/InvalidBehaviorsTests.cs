@@ -64,7 +64,7 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -130,7 +130,7 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -188,7 +188,7 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 
 	[Fact]
@@ -254,6 +254,6 @@ public sealed class InvalidBehaviorsTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 }

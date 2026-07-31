@@ -4,9 +4,11 @@
 
 #pragma warning disable CS1591
 
+namespace Immediate.Handlers.Testing;
+
 public static class HandlerServiceCollectionExtensions
 {
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddTestsBehaviors(
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddCustomBehaviors(
 		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services
 	)
 	{
@@ -14,7 +16,7 @@ public static class HandlerServiceCollectionExtensions
 		return services;
 	}
 
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddTestsHandlers(
+	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddCustomHandlers(
 		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services,
 		global::Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped,
 		params string[] tags

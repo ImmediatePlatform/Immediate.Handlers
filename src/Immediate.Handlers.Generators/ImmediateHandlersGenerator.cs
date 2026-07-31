@@ -19,7 +19,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.Select((cp, _) => new AssemblyDefaults
 			{
 				AssemblyName = cp.GetAssemblyIdentifier(),
-				LanguageVersion = (cp.SyntaxTrees.FirstOrDefault()?.Options as CSharpParseOptions)?.LanguageVersion ?? LanguageVersion.CSharp12,
+				LanguageVersion = (cp.SyntaxTrees.FirstOrDefault()?.Options as CSharpParseOptions)?.LanguageVersion ?? LanguageVersion.LatestMajor,
 			})
 			.WithTrackingName("AssemblyName");
 

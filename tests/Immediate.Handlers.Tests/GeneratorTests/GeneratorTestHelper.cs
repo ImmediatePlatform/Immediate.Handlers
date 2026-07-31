@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Immediate.Handlers.Tests.GeneratorTests;
 
@@ -13,9 +14,11 @@ public static class GeneratorTestHelper
 		params ReadOnlySpan<string> skippedSteps
 	)
 	{
+		var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
+
 		var syntaxTree = CSharpSyntaxTree.ParseText(
 			source,
-			ParseOptions,
+			options,
 			cancellationToken: TestContext.Current.CancellationToken
 		);
 
@@ -33,15 +36,19 @@ public static class GeneratorTestHelper
 		);
 
 		GeneratorDriver driver = CSharpGeneratorDriver.Create(
-			generators: [new ImmediateHandlersGenerator().AsSourceGenerator()],
-			parseOptions: ParseOptions,
+			generators:
+			[
+				new ImmediateHandlersGenerator().AsSourceGenerator(),
+			],
+			parseOptions: options,
+			optionsProvider: new OptionsProvider(),
 			driverOptions: new GeneratorDriverOptions(default, trackIncrementalGeneratorSteps: true)
 		);
 
 		driver = RunGenerator(driver, compilation);
 		var result = driver.GetRunResult();
 
-		VerifyIncrementality(driver, compilation, skippedSteps);
+		VerifyIncrementality(driver, compilation, options, skippedSteps);
 
 		return result;
 	}
@@ -72,13 +79,14 @@ public static class GeneratorTestHelper
 	private static void VerifyIncrementality(
 		GeneratorDriver driver,
 		Compilation compilation,
+		CSharpParseOptions options,
 		ReadOnlySpan<string> skippedSteps
 	)
 	{
 		var clone = compilation.Clone().AddSyntaxTrees(
 			CSharpSyntaxTree.ParseText(
 				"// dummy",
-				ParseOptions,
+				options,
 				cancellationToken: TestContext.Current.CancellationToken
 			)
 		);
@@ -90,10 +98,10 @@ public static class GeneratorTestHelper
 			{
 				Results:
 				[
-					{
-						TrackedOutputSteps: { } outputSteps,
-						TrackedSteps: { } trackedSteps,
-					}
+				{
+					TrackedOutputSteps: { } outputSteps,
+					TrackedSteps: { } trackedSteps,
+				},
 				],
 			}
 		)
@@ -122,8 +130,6 @@ public static class GeneratorTestHelper
 		}
 	}
 
-	private static readonly CSharpParseOptions ParseOptions = new(LanguageVersion.CSharp12);
-
 	private static ReadOnlySpan<string> TrackedSteps =>
 		new string[]
 		{
@@ -142,5 +148,26 @@ public static class GeneratorTestHelper
 		var outputs = steps.SelectMany(o => o.Outputs);
 
 		Assert.All(outputs, o => Assert.True(o.Reason is IncrementalStepRunReason.Unchanged or IncrementalStepRunReason.Cached));
+	}
+
+	private sealed class OptionsProvider : AnalyzerConfigOptionsProvider
+	{
+		private static readonly AnalyzerConfigOptions Options =
+			new DictionaryAnalyzerOptions(
+				new(StringComparer.OrdinalIgnoreCase)
+				{
+					["build_property.rootnamespace"] = "Immediate.Handlers.Testing",
+				}
+			);
+
+		public override AnalyzerConfigOptions GetOptions(SyntaxTree tree) => Options;
+		public override AnalyzerConfigOptions GetOptions(AdditionalText textFile) => Options;
+		public override AnalyzerConfigOptions GlobalOptions => Options;
+	}
+
+	private sealed class DictionaryAnalyzerOptions(Dictionary<string, string> properties) : AnalyzerConfigOptions
+	{
+		public override bool TryGetValue(string key, out string value)
+			=> properties.TryGetValue(key, out value!);
 	}
 }
