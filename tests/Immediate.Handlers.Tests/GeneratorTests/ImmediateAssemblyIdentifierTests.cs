@@ -2,8 +2,9 @@ namespace Immediate.Handlers.Tests.GeneratorTests;
 
 public sealed class ImmediateAssemblyIdentifierTests
 {
-	[Fact]
-	public async Task ImmediateAssemblyIdentifierOverridesAssemblyName()
+	[Theory]
+	[MemberData(nameof(AddHandlersTests.Frameworks), MemberType = typeof(AddHandlersTests))]
+	public async Task ImmediateAssemblyIdentifierOverridesAssemblyName(string framework)
 	{
 		var result = GeneratorTestHelper.RunGenerator(
 			"""
@@ -38,6 +39,7 @@ public sealed class ImmediateAssemblyIdentifierTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Utility.VerifyIgnoreCommonFile(result);
+		_ = await Verify(result)
+			.UseParameters(framework);
 	}
 }
