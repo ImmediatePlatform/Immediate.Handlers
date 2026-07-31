@@ -4,6 +4,8 @@
 
 #pragma warning disable CS1591
 
+namespace Immediate.Handlers.Testing;
+
 public static class HandlerServiceCollectionExtensions
 {
 	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddTestsBehaviors(
