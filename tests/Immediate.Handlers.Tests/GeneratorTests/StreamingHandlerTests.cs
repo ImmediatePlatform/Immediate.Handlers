@@ -41,7 +41,7 @@ public sealed class StreamingHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result)
+		_ = await Utility.VerifyIgnoreCommonFile(result)
 			.UseParameters(modifier);
 	}
 
@@ -119,6 +119,6 @@ public sealed class StreamingHandlerTests
 			result.GeneratedTrees.Select(t => t.FilePath.Replace('\\', '/'))
 		);
 
-		_ = await Verify(result);
+		_ = await Utility.VerifyIgnoreCommonFile(result);
 	}
 }
