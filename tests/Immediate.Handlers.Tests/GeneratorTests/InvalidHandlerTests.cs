@@ -22,7 +22,7 @@ public sealed class InvalidHandlerTests
 				public record Query;
 			}
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -70,7 +70,7 @@ public sealed class InvalidHandlerTests
 					ValueTask.FromResult(Enumerable.Empty<User>());
 			}
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -128,7 +128,7 @@ public sealed class InvalidHandlerTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -175,7 +175,7 @@ public sealed class InvalidHandlerTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -224,7 +224,7 @@ public sealed class InvalidHandlerTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -274,7 +274,7 @@ public sealed class InvalidHandlerTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -327,7 +327,7 @@ public sealed class InvalidHandlerTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(

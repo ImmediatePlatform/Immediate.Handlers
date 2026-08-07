@@ -8,14 +8,6 @@ namespace Immediate.Handlers.Testing;
 
 public static class HandlerServiceCollectionExtensions
 {
-	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddCustomBehaviors(
-		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services
-	)
-	{
-		
-		return services;
-	}
-
 	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddCustomHandlers(
 		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services,
 		global::Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped,

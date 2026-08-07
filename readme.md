@@ -181,10 +181,7 @@ However, this name can be overridden using `[assembly: ImmediateAssemblyIdentifi
 
 Calling this `AddXxxHandlers()` method will register all classes in the assembly marked with `[Handler]`.
 
-#### Registering Behaviors
-
-In your `Program.cs`, add a call to `services.AddXxxBehaviors()`, where `Xxx` is the application identifier described above.
-Calling this method will register all behaviors referenced in any `[Behaviors]` attribute.
+Behavior dependencies are registered automatically alongside each handler when `AddXxxHandlers()` is called.
 
 #### `Tags`
 

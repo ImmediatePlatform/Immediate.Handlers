@@ -25,8 +25,7 @@ public sealed class TaggedRegistrationTests
 	private static object? Resolve(string? tag, Type type)
 	{
 		var serviceCollection = new ServiceCollection()
-			.AddImmediateHandlersFunctionalTestsHandlers(tags: tag is { } ? [tag] : [])
-			.AddImmediateHandlersFunctionalTestsBehaviors();
+			.AddImmediateHandlersFunctionalTestsHandlers(tags: tag is { } ? [tag] : []);
 
 		var serviceProvider = serviceCollection.BuildServiceProvider();
 		return serviceProvider.GetService(type);
