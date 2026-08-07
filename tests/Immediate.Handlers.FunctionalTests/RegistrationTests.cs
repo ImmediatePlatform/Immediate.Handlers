@@ -40,5 +40,24 @@ public sealed class RegistrationTests
 			d => Assert.Equal(typeof(IStreamingHandler<MultipleStreamingBehaviorsHandler.Query, int>), d.ServiceType),
 			d => Assert.Equal(typeof(MultipleStreamingBehaviorsHandler.HandleBehavior), d.ServiceType)
 		);
+
+		_ = MultipleBehaviorHandler.AddHandlers(services);
+		_ = MultipleStreamingBehaviorsHandler.AddHandlers(services);
+
+		Assert.Collection(
+			services,
+
+			d => Assert.Equal(typeof(Behavior1<MultipleBehaviorHandler.Query, int>), d.ServiceType),
+			d => Assert.Equal(typeof(Behavior2<MultipleBehaviorHandler.Query, int>), d.ServiceType),
+			d => Assert.Equal(typeof(MultipleBehaviorHandler.Handler), d.ServiceType),
+			d => Assert.Equal(typeof(IHandler<MultipleBehaviorHandler.Query, int>), d.ServiceType),
+			d => Assert.Equal(typeof(MultipleBehaviorHandler.HandleBehavior), d.ServiceType),
+
+			d => Assert.Equal(typeof(StreamingBehavior1<MultipleStreamingBehaviorsHandler.Query, int>), d.ServiceType),
+			d => Assert.Equal(typeof(StreamingBehavior2<MultipleStreamingBehaviorsHandler.Query, int>), d.ServiceType),
+			d => Assert.Equal(typeof(MultipleStreamingBehaviorsHandler.Handler), d.ServiceType),
+			d => Assert.Equal(typeof(IStreamingHandler<MultipleStreamingBehaviorsHandler.Query, int>), d.ServiceType),
+			d => Assert.Equal(typeof(MultipleStreamingBehaviorsHandler.HandleBehavior), d.ServiceType)
+		);
 	}
 }
