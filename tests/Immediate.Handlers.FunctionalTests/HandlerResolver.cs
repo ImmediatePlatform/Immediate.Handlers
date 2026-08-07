@@ -8,8 +8,7 @@ public static class HandlerResolver
 		where T : notnull
 	{
 		var serviceCollection = new ServiceCollection()
-			.AddImmediateHandlersFunctionalTestsHandlers()
-			.AddImmediateHandlersFunctionalTestsBehaviors();
+			.AddImmediateHandlersFunctionalTestsHandlers();
 
 		serviceCollectionConfigurator?.Invoke(serviceCollection);
 

@@ -352,7 +352,7 @@ public sealed class HandlerTests
 
 			public sealed class Test;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(

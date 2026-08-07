@@ -54,7 +54,7 @@ public sealed class InvalidBehaviorsTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -120,7 +120,7 @@ public sealed class InvalidBehaviorsTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -178,7 +178,7 @@ public sealed class InvalidBehaviorsTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(
@@ -244,7 +244,7 @@ public sealed class InvalidBehaviorsTests
 
 			public interface ILogger<T>;
 			""",
-			["Handlers", "HandlersWithBehaviors"]
+			["Handlers", "HandlersWithBehaviors", "Behaviors"]
 		);
 
 		Assert.Equal(

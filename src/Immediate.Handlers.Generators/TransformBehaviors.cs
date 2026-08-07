@@ -62,12 +62,6 @@ internal static class TransformBehaviors
 
 				cancellationToken.ThrowIfCancellationRequested();
 
-				// global::Dummy.LoggingBehavior<,> or global::Dummy.LoggingBehavior<> or global::Dummy.LoggingBehavior
-				// for: `services.AddScoped(typeof(..));`
-				var typeName = symbol.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat);
-
-				cancellationToken.ThrowIfCancellationRequested();
-
 				// global::Dummy.LoggingBehavior
 				// for: private readonly global::Dummy.LoggingBehavior
 				var constructorType = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
@@ -79,7 +73,6 @@ internal static class TransformBehaviors
 				cancellationToken.ThrowIfCancellationRequested();
 				return new Behavior
 				{
-					RegistrationType = typeName,
 					NonGenericTypeName = constructorType,
 					RequestType = constraintInfo.RequestConstraints.ToEquatableConstraint(),
 					ResponseType = constraintInfo.ResponseConstraints.ToEquatableConstraint(),

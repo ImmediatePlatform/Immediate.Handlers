@@ -69,7 +69,6 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		var registrationNodes = handlers
 			.Collect()
-			.Combine(behaviors)
 			.Combine(@namespace
 				.Combine(assemblyDefaults)
 			)
@@ -79,8 +78,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			registrationNodes,
 			(spc, node) => RenderServiceCollectionExtension(
 				spc,
-				handlers: node.Left.Left,
-				behaviors: node.Left.Right,
+				handlers: node.Left,
 				@namespace: node.Right.Left,
 				assemblyDefaults: node.Right.Right
 			)
@@ -90,16 +88,12 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 	private static void RenderServiceCollectionExtension(
 		SourceProductionContext context,
 		ImmutableArray<Handler> handlers,
-		ImmutableArray<Behavior?> behaviors,
 		string? @namespace,
 		AssemblyDefaults assemblyDefaults
 	)
 	{
 		var cancellationToken = context.CancellationToken;
 		cancellationToken.ThrowIfCancellationRequested();
-
-		if (behaviors.Any(b => b is null))
-			return;
 
 		cancellationToken.ThrowIfCancellationRequested();
 		var template = GetTemplate("ServiceCollectionExtensions");
@@ -115,12 +109,6 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				assemblyDefaults.LanguageVersion,
 				Namespace = @namespace,
 				Version = ThisAssembly.InformationalVersion,
-
-				Behaviors = behaviors
-					.Concat(handlers.SelectMany(h => h.OverrideBehaviors ?? []))
-					.WhereNotNull()
-					.Select(b => new { b.RegistrationType })
-					.Distinct(),
 
 				HandlersByTag = handlers
 					.GroupBy(
@@ -243,13 +231,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.WhereNotNull()
 			.Select(b => new RenderBehavior
 			{
-				TypeName = (b.RequestType.ExactType, b.ResponseType.ExactType) switch
-				{
-					(null, null) => $"{b.NonGenericTypeName}<{requestName}, {responseName}>",
-					({ }, null) => $"{b.NonGenericTypeName}<{responseName}>",
-					(null, { }) => $"{b.NonGenericTypeName}<{requestName}>",
-					({ }, { }) => b.NonGenericTypeName,
-				},
+				TypeName = GetBehaviorTypeName(b, requestName, responseName),
 
 				VariableName = b.Name[0..1].ToLowerInvariant()
 					+ b.Name[1..]
@@ -259,6 +241,21 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 #pragma warning restore CA1308 // Normalize strings to uppercase
 
 		return renderBehaviors;
+	}
+
+	private static string GetBehaviorTypeName(
+		Behavior behavior,
+		string requestName,
+		string responseName
+	)
+	{
+		return (behavior.RequestType.ExactType, behavior.ResponseType.ExactType) switch
+		{
+			(null, null) => $"{behavior.NonGenericTypeName}<{requestName}, {responseName}>",
+			({ }, null) => $"{behavior.NonGenericTypeName}<{responseName}>",
+			(null, { }) => $"{behavior.NonGenericTypeName}<{requestName}>",
+			({ }, { }) => behavior.NonGenericTypeName,
+		};
 	}
 
 	private static Template GetTemplate(string name)
