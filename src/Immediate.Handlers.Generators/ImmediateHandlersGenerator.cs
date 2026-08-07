@@ -116,10 +116,28 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 				Namespace = @namespace,
 				Version = ThisAssembly.InformationalVersion,
 
-				Behaviors = behaviors
-					.Concat(handlers.SelectMany(h => h.OverrideBehaviors ?? []))
-					.WhereNotNull()
-					.Select(b => new { b.RegistrationType })
+				Behaviors = handlers
+					.SelectMany(h =>
+					{
+						var responseType = h.ResponseType ?? new GenericType
+						{
+							Name = "global::System.ValueTuple",
+							Implements = default,
+						};
+						var behaviorSource = h.OverrideBehaviors?.AsEnumerable()
+							?? behaviors.AsEnumerable();
+
+						return BuildPipeline(
+							h.RequestType,
+							responseType,
+							behaviorSource.Where(b => b is null || b.IsStreaming == h.IsStreaming)
+						)
+							.WhereNotNull()
+							.Select(b => new
+							{
+								TypeName = GetBehaviorTypeName(b, h.RequestType.Name, responseType.Name),
+							});
+					})
 					.Distinct(),
 
 				HandlersByTag = handlers
@@ -243,13 +261,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.WhereNotNull()
 			.Select(b => new RenderBehavior
 			{
-				TypeName = (b.RequestType.ExactType, b.ResponseType.ExactType) switch
-				{
-					(null, null) => $"{b.NonGenericTypeName}<{requestName}, {responseName}>",
-					({ }, null) => $"{b.NonGenericTypeName}<{responseName}>",
-					(null, { }) => $"{b.NonGenericTypeName}<{requestName}>",
-					({ }, { }) => b.NonGenericTypeName,
-				},
+				TypeName = GetBehaviorTypeName(b, requestName, responseName),
 
 				VariableName = b.Name[0..1].ToLowerInvariant()
 					+ b.Name[1..]
@@ -260,6 +272,18 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 
 		return renderBehaviors;
 	}
+
+	private static string GetBehaviorTypeName(
+		Behavior behavior,
+		string requestName,
+		string responseName
+	) => (behavior.RequestType.ExactType, behavior.ResponseType.ExactType) switch
+	{
+		(null, null) => $"{behavior.NonGenericTypeName}<{requestName}, {responseName}>",
+		({ }, null) => $"{behavior.NonGenericTypeName}<{responseName}>",
+		(null, { }) => $"{behavior.NonGenericTypeName}<{requestName}>",
+		({ }, { }) => behavior.NonGenericTypeName,
+	};
 
 	private static Template GetTemplate(string name)
 	{

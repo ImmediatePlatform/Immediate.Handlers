@@ -13,7 +13,6 @@ public sealed record AssemblyDefaults
 [ExcludeFromCodeCoverage]
 public sealed record Behavior
 {
-	public required string RegistrationType { get; init; }
 	public required string NonGenericTypeName { get; init; }
 	public required string Name { get; init; }
 	public required ConstraintInfo RequestType { get; init; }

@@ -15,7 +15,7 @@ public static class HandlerServiceCollectionExtensions
 	)
 	{
 		{{~ for b in behaviors ~}}
-		global::Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddTransient(services, typeof({{ b.registration_type }}));
+		global::Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddTransient(services, typeof({{ b.type_name }}));
 		{{~ end ~}}
 		
 		return services;
