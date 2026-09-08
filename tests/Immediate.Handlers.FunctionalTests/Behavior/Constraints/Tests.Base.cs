@@ -1,6 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Shared;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Immediate.Handlers.FunctionalTests.Behavior.Constraints;
 
@@ -11,21 +9,6 @@ public record B : A;
 public record C : A;
 
 public record D : B;
-
-[SuppressMessage("Naming", "CA1707", Justification = "Test names.")]
-public sealed partial class Tests
-{
-	private static IServiceCollection ConfigureBehaviors(IServiceCollection services)
-	{
-		_ = services.AddSingleton<BehaviorWalker>();
-		_ = services.AddScoped(typeof(BehaviorA<,>));
-		_ = services.AddScoped(typeof(BehaviorB<,>));
-		_ = services.AddScoped(typeof(BehaviorC<,>));
-		_ = services.AddScoped(typeof(BehaviorD<,>));
-
-		return services;
-	}
-}
 
 public sealed class BehaviorWalker
 {
