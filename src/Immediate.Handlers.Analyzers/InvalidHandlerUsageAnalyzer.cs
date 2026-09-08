@@ -70,27 +70,27 @@ public sealed class InvalidHandlerUsageAnalyzer : DiagnosticAnalyzer
 				AllInterfaces: var interfaces,
 			} ints when
 				Enumerable
-					.Select([baseType, .. interfaces], t => GetInvalidSymbol(t, new(SymbolEqualityComparer.Default), token))
+					.Select([baseType, .. interfaces], t => GetInvalidSymbol(t, [with(SymbolEqualityComparer.Default)], token))
 					.FirstOrDefault(x => x is { }) is { } invalidSymbol =>
 				new(GetTypeIdentifierLocation(ints, token), invalidSymbol),
 
 			IParameterSymbol { Type: INamedTypeSymbol type } ips
-				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				when GetInvalidSymbol(type, [with(SymbolEqualityComparer.Default)], token) is { } invalidSymbol =>
 				new(GetTypeLocation(ips, token), invalidSymbol),
 
 			IFieldSymbol { Type: INamedTypeSymbol type } ifs
-				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				when GetInvalidSymbol(type, [with(SymbolEqualityComparer.Default)], token) is { } invalidSymbol =>
 				new(GetTypeLocation(ifs, token), invalidSymbol),
 
 			IPropertySymbol { Type: INamedTypeSymbol type } ips
-				when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+				when GetInvalidSymbol(type, [with(SymbolEqualityComparer.Default)], token) is { } invalidSymbol =>
 				new(GetTypeLocation(ips, token), invalidSymbol),
 
 			IMethodSymbol
 			{
 				ReturnType: INamedTypeSymbol type,
 				MethodKind: not (MethodKind.PropertyGet or MethodKind.PropertySet),
-			} ims when GetInvalidSymbol(type, new(SymbolEqualityComparer.Default), token) is { } invalidSymbol =>
+			} ims when GetInvalidSymbol(type, [with(SymbolEqualityComparer.Default)], token) is { } invalidSymbol =>
 				new(GetTypeLocation(ims, token), invalidSymbol),
 
 			_ => null,

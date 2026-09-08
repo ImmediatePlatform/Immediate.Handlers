@@ -26,8 +26,8 @@ public sealed partial class Tests
 	[Fact]
 	public async Task BehaviorShouldConstrain_B()
 	{
-		IServiceCollection services = new ServiceCollection();
-		services = ConfigureBehaviors(services);
+		var services = new ServiceCollection()
+			.AddSingleton<BehaviorWalker>();
 		services = BehaviorShouldConstrainB.AddHandlers(services);
 		var serviceProvider = services.BuildServiceProvider();
 
