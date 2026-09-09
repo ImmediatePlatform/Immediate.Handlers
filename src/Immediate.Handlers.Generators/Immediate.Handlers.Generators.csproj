@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
+	<TargetFrameworks>roslyn4.8;roslyn5.0;roslyn5.9</TargetFrameworks>
 	<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 	<IsRoslynComponent>true</IsRoslynComponent>
 	<NoWarn>$(NoWarn);CA1716</NoWarn>
@@ -21,29 +21,47 @@
 	<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
   </ItemGroup>
-  
+
   <!-- Scriban (code in netstandard2.0; lib in net10+) -->
-  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'roslyn4.8' ">
 	<PackageReference Include="Scriban" PrivateAssets="all" IncludeAssets="Build" />
   </ItemGroup>
 
-  <PropertyGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'roslyn4.8' ">
 	<PackageScribanIncludeSource>true</PackageScribanIncludeSource>
 	<DefineConstants>$(DefineConstants);SCRIBAN_NO_ASYNC</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+  <ItemGroup Condition=" '$(TargetFramework)' != 'roslyn4.8' ">
 	<PackageReference Include="Scriban" PrivateAssets="all" GeneratePathProperty="true" />
   </ItemGroup>
 
-  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+  <PropertyGroup Condition=" '$(TargetFramework)' != 'roslyn4.8' ">
 	<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
   </PropertyGroup>
 
-  <Target Name="GetDependencyTargetPaths" Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+  <Target Name="GetDependencyTargetPaths" Condition=" '$(TargetFramework)' != 'roslyn4.8' ">
 	<ItemGroup>
 	  <TargetPathWithTargetPlatformMoniker Include="$(PkgScriban)/lib/netstandard2.0/Scriban.dll" IncludeRuntimeDependency="false" />
 	</ItemGroup>
   </Target>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'roslyn4.8' ">
+	<TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+	<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+	<TargetFrameworkMoniker>.NETStandard,Version=v2.0</TargetFrameworkMoniker>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'roslyn5.0' ">
+	<TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
+	<TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+	<TargetFrameworkMoniker>.NETCoreApp,Version=v10.0</TargetFrameworkMoniker>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'roslyn5.9' ">
+	<TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
+	<TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+	<TargetFrameworkMoniker>.NETCoreApp,Version=v10.0</TargetFrameworkMoniker>
+  </PropertyGroup>
 
 </Project>
