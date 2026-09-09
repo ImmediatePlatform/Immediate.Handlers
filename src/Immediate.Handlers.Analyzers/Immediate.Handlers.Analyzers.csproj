@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
+	<TargetFrameworks>roslyn4.8;roslyn5.0;roslyn5.9</TargetFrameworks>
 	<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 	<IsRoslynComponent>true</IsRoslynComponent>
   </PropertyGroup>
@@ -14,5 +14,23 @@
 	<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="All" />
 	<PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
   </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'roslyn4.8' ">
+	<TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+	<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+	<TargetFrameworkMoniker>.NETStandard,Version=v2.0</TargetFrameworkMoniker>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'roslyn5.0' ">
+	<TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+	<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+	<TargetFrameworkMoniker>.NETStandard,Version=v2.0</TargetFrameworkMoniker>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'roslyn5.9' ">
+	<TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+	<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+	<TargetFrameworkMoniker>.NETStandard,Version=v2.0</TargetFrameworkMoniker>
+  </PropertyGroup>
 
 </Project>

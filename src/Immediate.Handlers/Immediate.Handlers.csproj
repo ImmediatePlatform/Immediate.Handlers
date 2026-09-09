@@ -38,45 +38,67 @@
 	  PackagePath="lib/$(TargetFramework)" />
   </ItemGroup>
 
-  <!-- roslyn 4.8 for net8/net9 -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-	<TfmSpecificPackageFile
-	  Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Analyzers.dll"
+  <ItemGroup>
+	<None
+	  Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/roslyn4.8/Immediate.Handlers.Analyzers.dll"
 	  Pack="true"
 	  PackagePath="analyzers/dotnet/roslyn4.8/cs" />
 
-	<TfmSpecificPackageFile
-	  Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.CodeFixes.dll"
+	<None
+	  Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/roslyn4.8/Immediate.Handlers.CodeFixes.dll"
 	  Pack="true"
 	  PackagePath="analyzers/dotnet/roslyn4.8/cs" />
 
-	<TfmSpecificPackageFile
-	  Include="../Immediate.Handlers.Generators/bin/$(Configuration)/netstandard2.0/Immediate.Handlers.Generators.dll"
+	<None
+	  Include="../Immediate.Handlers.Generators/bin/$(Configuration)/roslyn4.8/Immediate.Handlers.Generators.dll"
 	  Pack="true"
 	  PackagePath="analyzers/dotnet/roslyn4.8/cs" />
   </ItemGroup>
 
-  <!-- roslyn 5.0 for net10/net11 -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-	<TfmSpecificPackageFile
-	  Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/net10.0/Immediate.Handlers.Analyzers.dll"
+  <ItemGroup>
+	<None
+	  Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/roslyn5.0/Immediate.Handlers.Analyzers.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
+
+	<None
+	  Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/roslyn5.0/Immediate.Handlers.CodeFixes.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
+
+	<None
+	  Include="../Immediate.Handlers.Generators/bin/$(Configuration)/roslyn5.0/Immediate.Handlers.Generators.dll"
 	  Pack="true"
 	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
 
 	<TfmSpecificPackageFile
-	  Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/net10.0/Immediate.Handlers.CodeFixes.dll"
-	  Pack="true"
-	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
-
-	<TfmSpecificPackageFile
-	  Include="../Immediate.Handlers.Generators/bin/$(Configuration)/net10.0/Immediate.Handlers.Generators.dll"
-	  Pack="true"
-	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
-
-	<TfmSpecificPackageFile
+	  Condition=" '$(TargetFramework)' == 'net8.0' "
 	  Include="$(PkgScriban)/lib/net8.0/Scriban.dll"
 	  Pack="true"
 	  PackagePath="analyzers/dotnet/roslyn5.0/cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None
+	  Include="../Immediate.Handlers.Analyzers/bin/$(Configuration)/roslyn5.9/Immediate.Handlers.Analyzers.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.9/cs" />
+
+	<None
+	  Include="../Immediate.Handlers.CodeFixes/bin/$(Configuration)/roslyn5.9/Immediate.Handlers.CodeFixes.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.9/cs" />
+
+	<None
+	  Include="../Immediate.Handlers.Generators/bin/$(Configuration)/roslyn5.9/Immediate.Handlers.Generators.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.9/cs" />
+
+	<TfmSpecificPackageFile
+	  Condition=" '$(TargetFramework)' == 'net8.0' "
+	  Include="$(PkgScriban)/lib/net8.0/Scriban.dll"
+	  Pack="true"
+	  PackagePath="analyzers/dotnet/roslyn5.9/cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,10 +107,27 @@
   </ItemGroup>
 
   <ItemGroup>
-	<ProjectReference Include="../Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" ReferenceOutputAssembly="false" />
-	<ProjectReference Include="../Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" ReferenceOutputAssembly="false" />
-	<ProjectReference Include="../Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" ReferenceOutputAssembly="false" />
 	<ProjectReference Include="../Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <PropertyGroup>
+	<RoslynVersion Condition=" '$(TargetFramework)' == 'net8.0' ">roslyn4.8</RoslynVersion>
+	<RoslynVersion Condition=" '$(TargetFramework)' == 'net10.0' ">roslyn5.0</RoslynVersion>
+	<RoslynVersion Condition=" '$(TargetFramework)' == 'net11.0' ">roslyn5.9</RoslynVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="../../src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" ReferenceOutputAssembly="false">
+	  <SetTargetFramework>TargetFramework=$(RoslynVersion)</SetTargetFramework>
+	</ProjectReference>
+
+	<ProjectReference Include="../../src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" ReferenceOutputAssembly="false">
+	  <SetTargetFramework>TargetFramework=$(RoslynVersion)</SetTargetFramework>
+	</ProjectReference>
+
+	<ProjectReference Include="../../src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" ReferenceOutputAssembly="false">
+	  <SetTargetFramework>TargetFramework=$(RoslynVersion)</SetTargetFramework>
+	</ProjectReference>
   </ItemGroup>
 
 </Project>

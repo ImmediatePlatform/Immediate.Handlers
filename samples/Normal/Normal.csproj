@@ -5,9 +5,18 @@
 
   <ItemGroup>
 	<ProjectReference Include="../../src/Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
-	<ProjectReference Include="../../src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-	<ProjectReference Include="../../src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-	<ProjectReference Include="../../src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="../../src/Immediate.Handlers.Analyzers/Immediate.Handlers.Analyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
+	  <SetTargetFramework>TargetFramework=roslyn5.0</SetTargetFramework>
+	</ProjectReference>
+	<ProjectReference Include="../../src/Immediate.Handlers.CodeFixes/Immediate.Handlers.CodeFixes.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
+	  <SetTargetFramework>TargetFramework=roslyn5.0</SetTargetFramework>
+	</ProjectReference>
+	<ProjectReference Include="../../src/Immediate.Handlers.Generators/Immediate.Handlers.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
+	  <SetTargetFramework>TargetFramework=roslyn5.0</SetTargetFramework>
+	</ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
