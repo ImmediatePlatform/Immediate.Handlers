@@ -46,6 +46,10 @@
 	<PackageReference Include="Basic.Reference.Assemblies.Net80" />
   </ItemGroup>
 
+  <ItemGroup Label="Security Dependency">
+	<PackageReference Include="System.Security.Cryptography.Pkcs" />
+  </ItemGroup>
+
   <ItemGroup>
 	<ProjectReference Include="../../src/Immediate.Handlers.Shared/Immediate.Handlers.Shared.csproj" />
   </ItemGroup>
