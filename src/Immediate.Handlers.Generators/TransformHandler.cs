@@ -97,7 +97,7 @@ internal static class TransformHandler
 		};
 	}
 
-	private static EquatableReadOnlyList<Behavior?>? GetOverrideBehaviors(
+	private static EquatableReadOnlyList<BehaviorRegistration>? GetOverrideBehaviors(
 			INamedTypeSymbol symbol,
 			CancellationToken cancellationToken) =>
 		symbol.GetBehaviorsAttribute() is { } ba

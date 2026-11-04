@@ -21,6 +21,15 @@ public sealed record Behavior
 }
 
 [ExcludeFromCodeCoverage]
+public sealed record BehaviorRegistration
+{
+	public required string TypeName { get; init; }
+	public required string Declaration { get; init; }
+	public required Behavior? Behavior { get; init; }
+	public string? Error { get; init; }
+}
+
+[ExcludeFromCodeCoverage]
 public sealed record Parameter
 {
 	public required string? Attributes { get; init; }
@@ -55,7 +64,7 @@ public sealed record Handler
 
 	public required bool IsStreaming { get; init; }
 
-	public EquatableReadOnlyList<Behavior?>? OverrideBehaviors { get; init; }
+	public EquatableReadOnlyList<BehaviorRegistration>? OverrideBehaviors { get; init; }
 }
 
 public sealed record ConstraintInfo

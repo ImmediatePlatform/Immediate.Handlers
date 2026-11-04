@@ -4,12 +4,12 @@ namespace Immediate.Handlers.Generators;
 
 internal static class TransformBehaviors
 {
-	public static EquatableReadOnlyList<Behavior?> ParseBehaviors(
+	public static EquatableReadOnlyList<BehaviorRegistration> ParseBehaviors(
 		GeneratorAttributeSyntaxContext context,
 		CancellationToken cancellationToken
 	) => context.Attributes[0].ParseBehaviors(cancellationToken);
 
-	public static EquatableReadOnlyList<Behavior?> ParseBehaviors(
+	public static EquatableReadOnlyList<BehaviorRegistration> ParseBehaviors(
 		this AttributeData attribute,
 		CancellationToken cancellationToken
 	)
@@ -38,49 +38,64 @@ internal static class TransformBehaviors
 
 		cancellationToken.ThrowIfCancellationRequested();
 		return ca.Values
-			.Select(v =>
-			{
-				cancellationToken.ThrowIfCancellationRequested();
-				if (v.Value is not INamedTypeSymbol symbol)
-					return null;
-
-				var originalDefinition = symbol.OriginalDefinition;
-
-				// Accept behaviors with 0, 1, or 2 type parameters
-				if (originalDefinition.TypeParameters.Length > 2)
-					return null;
-
-				// For generic types, must be unbound. For non-generic types, this check doesn't apply
-				if (originalDefinition.IsGenericType && !symbol.IsUnboundGenericType)
-					return null;
-
-				if (originalDefinition.IsAbstract)
-					return null;
-
-				if (!originalDefinition.ImplementsBehavior())
-					return null;
-
-				cancellationToken.ThrowIfCancellationRequested();
-
-				// global::Dummy.LoggingBehavior
-				// for: private readonly global::Dummy.LoggingBehavior
-				var constructorType = symbol.OriginalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat);
-
-				var constraintInfo = symbol.GetBehaviorConstraintInfo();
-				if (constraintInfo is not { RequestConstraints: { }, ResponseConstraints: { } })
-					return null;
-
-				cancellationToken.ThrowIfCancellationRequested();
-				return new Behavior
-				{
-					NonGenericTypeName = constructorType,
-					RequestType = constraintInfo.RequestConstraints.ToEquatableConstraint(),
-					ResponseType = constraintInfo.ResponseConstraints.ToEquatableConstraint(),
-					Name = originalDefinition.Name,
-					IsStreaming = originalDefinition.ImplementsStreamingBehavior(),
-				};
-			})
+			.Select(v => ParseBehavior(v, cancellationToken))
 			.ToEquatableReadOnlyList();
+	}
+
+	private static BehaviorRegistration ParseBehavior(TypedConstant value, CancellationToken cancellationToken)
+	{
+		cancellationToken.ThrowIfCancellationRequested();
+
+		var symbol = value.Value as INamedTypeSymbol;
+		var typeName = symbol?.ToDisplayString(DisplayNameFormatters.FullyQualifiedWithNullableFormat) ?? "<unresolved behavior>";
+		var declaration = symbol?.OriginalDefinition.ToDisplayString(
+			DisplayNameFormatters.FullyQualifiedWithNullableFormat.WithGenericsOptions(
+				SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeTypeConstraints
+			)
+		) ?? typeName;
+
+		BehaviorRegistration Invalid(string reason) => new()
+		{
+			TypeName = typeName,
+			Declaration = declaration,
+			Behavior = null,
+			Error = reason,
+		};
+
+		if (symbol is null)
+			return Invalid("Behavior type could not be resolved.");
+
+		var originalDefinition = symbol.OriginalDefinition;
+		if (originalDefinition.TypeParameters.Length > 2)
+			return Invalid("Behavior has more than two type parameters.");
+
+		if (originalDefinition.IsGenericType && !symbol.IsUnboundGenericType)
+			return Invalid("Generic behavior must be unbound.");
+
+		if (originalDefinition.IsAbstract)
+			return Invalid("Behavior is abstract.");
+
+		if (!originalDefinition.ImplementsBehavior())
+			return Invalid("Type does not inherit Behavior<,> or StreamingBehavior<,>.");
+
+		var constraintInfo = symbol.GetBehaviorConstraintInfo();
+		if (constraintInfo is not { RequestConstraints: { }, ResponseConstraints: { } })
+			return Invalid("Request and response constraints could not be resolved.");
+
+		cancellationToken.ThrowIfCancellationRequested();
+		return new()
+		{
+			TypeName = typeName,
+			Declaration = declaration,
+			Behavior = new()
+			{
+				NonGenericTypeName = originalDefinition.ToDisplayString(DisplayNameFormatters.NonGenericFqdnFormat),
+				RequestType = constraintInfo.RequestConstraints.ToEquatableConstraint(),
+				ResponseType = constraintInfo.ResponseConstraints.ToEquatableConstraint(),
+				Name = originalDefinition.Name,
+				IsStreaming = originalDefinition.ImplementsStreamingBehavior(),
+			},
+		};
 	}
 }
 
