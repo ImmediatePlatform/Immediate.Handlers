@@ -29,7 +29,9 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProvider : CodeFixPr
 		var root = await document.GetRequiredSyntaxRootAsync(token);
 		if (root.FindNode(span) is not MethodDeclarationSyntax method
 			|| method.ParameterList.Parameters.Any(p => p.Modifiers.Any(SyntaxKind.ParamsKeyword)))
+		{
 			return;
+		}
 
 		context.RegisterCodeFix(
 			CodeAction.Create(
@@ -56,7 +58,6 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProvider : CodeFixPr
 				ParseTypeName("global::System.Threading.CancellationToken")
 					.WithAdditionalAnnotations(Simplifier.Annotation)
 			)
-			.WithDefault(EqualsValueClause(LiteralExpression(SyntaxKind.DefaultLiteralExpression)))
 			.WithAdditionalAnnotations(Formatter.Annotation);
 
 		var newMethod = method.AddParameterListParameters(parameter);
