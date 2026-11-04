@@ -42,14 +42,16 @@ public sealed partial class ImmediateHandlersGenerator
 			if (assemblyBehaviors.IsEmpty && (handler.OverrideBehaviors is null or { Count: 0 }))
 				Line("  No behaviors registered.");
 
-			foreach (var registration in assemblyBehaviors)
-				ReportBehavior(registration, "assembly", handler.OverrideBehaviors is not null);
-
 			if (handler.OverrideBehaviors is { } overrides)
 			{
 				Line("  Handler-specific behaviors replace the assembly behaviors.");
 				foreach (var registration in overrides)
 					ReportBehavior(registration, "handler", replaced: false);
+			}
+			else
+			{
+				foreach (var registration in assemblyBehaviors)
+					ReportBehavior(registration, "assembly", handler.OverrideBehaviors is not null);
 			}
 
 			void ReportBehavior(BehaviorRegistration registration, string origin, bool replaced)
@@ -60,7 +62,9 @@ public sealed partial class ImmediateHandlersGenerator
 					reasons.Add("Replaced by handler-specific behaviors.");
 
 				if (registration.Behavior is not { } behavior)
+				{
 					reasons.Add(registration.Error ?? "Invalid behavior registration.");
+				}
 				else
 				{
 					if (behavior.IsStreaming != handler.IsStreaming)
@@ -90,7 +94,9 @@ public sealed partial class ImmediateHandlersGenerator
 						return;
 
 					if (constraints.ExactType is { } exact)
+					{
 						reasons.Add($"{name} type mismatch: required {exact}; actual {actual.Name}.");
+					}
 					else
 					{
 						var missing = constraints.TypeConstraints.Where(c => !actual.Implements.Contains(c, StringComparer.Ordinal));
@@ -110,9 +116,11 @@ public sealed partial class ImmediateHandlersGenerator
 		? "(none)"
 		: string.Join(", ", type.Implements);
 
-	private static string Requirements(ConstraintInfo constraints) => constraints.ExactType is { } exact
-		? $"exact type {exact}"
-		: constraints.TypeConstraints.Count == 0
-			? "any type (no type constraints)"
-			: string.Join(", ", constraints.TypeConstraints);
+	private static string Requirements(ConstraintInfo constraints) =>
+		constraints switch
+		{
+			{ ExactType: { } exact } => $"exact type {exact}",
+			{ TypeConstraints: [] } => "any type (no type constraints)",
+			_ => string.Join(", ", constraints.TypeConstraints),
+		};
 }

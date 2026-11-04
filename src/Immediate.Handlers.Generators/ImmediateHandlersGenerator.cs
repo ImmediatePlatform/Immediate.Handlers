@@ -59,8 +59,12 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.WithTrackingName("HandlersWithBehaviors");
 
 		var generateDebugFile = context.AnalyzerConfigOptionsProvider
-			.Select(static (options, _) => options.GlobalOptions.TryGetValue("build_property.ImmediateHandlers_GenerateDebugFile", out var value)
-				&& bool.TryParse(value, out var enabled) && enabled)
+			.Select(
+				(options, _) =>
+					options.GlobalOptions.TryGetValue("build_property.ImmediateHandlers_GenerateDebugFile", out var value)
+					&& bool.TryParse(value, out var enabled)
+					&& enabled
+			)
 			.WithTrackingName("GenerateDebugFile");
 
 		context.RegisterSourceOutput(

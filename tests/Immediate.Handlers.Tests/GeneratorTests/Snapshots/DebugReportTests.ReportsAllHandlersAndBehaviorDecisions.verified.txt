@@ -8,43 +8,6 @@
 //   Request available types: (none)
 //   Response type: global::System.ValueTuple
 //   Response available types: (none)
-//   [NOT USED] global::AnyBehavior<,> (assembly)
-//     Declaration: global::AnyBehavior<TRequest, TResponse>
-//     Request requirements: any type (no type constraints)
-//     Response requirements: any type (no type constraints)
-//     Reason: Replaced by handler-specific behaviors.
-//   [NOT USED] global::RequestBehavior<,> (assembly)
-//     Declaration: global::RequestBehavior<TRequest, TResponse> where TRequest : global::IRequest
-//     Request requirements: global::IRequest
-//     Response requirements: any type (no type constraints)
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Request constraints not satisfied: global::IRequest; actual object; available types: (none).
-//   [NOT USED] global::ResponseBehavior<,> (assembly)
-//     Declaration: global::ResponseBehavior<TRequest, TResponse> where TResponse : global::IResponse
-//     Request requirements: any type (no type constraints)
-//     Response requirements: global::IResponse
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Response constraints not satisfied: global::IResponse; actual global::System.ValueTuple; available types: (none).
-//   [NOT USED] global::ExactBehavior (assembly)
-//     Declaration: global::ExactBehavior
-//     Request requirements: exact type global::Matching.Query
-//     Response requirements: exact type global::Response
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Request type mismatch: required global::Matching.Query; actual object.
-//     Reason: Response type mismatch: required global::Response; actual global::System.ValueTuple.
-//   [NOT USED] global::OneParameterBehavior<> (assembly)
-//     Declaration: global::OneParameterBehavior<TResponse> where TResponse : global::IResponse
-//     Request requirements: exact type global::Matching.Query
-//     Response requirements: global::IResponse
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Request type mismatch: required global::Matching.Query; actual object.
-//     Reason: Response constraints not satisfied: global::IResponse; actual global::System.ValueTuple; available types: (none).
-//   [NOT USED] global::StreamBehavior<,> (assembly)
-//     Declaration: global::StreamBehavior<TRequest, TResponse>
-//     Request requirements: any type (no type constraints)
-//     Response requirements: any type (no type constraints)
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Pipeline kind mismatch: behavior is streaming, handler is regular.
 //   Handler-specific behaviors replace the assembly behaviors.
 //
 // Handler: global::Matching
@@ -123,43 +86,6 @@
 //   Request available types: (none)
 //   Response type: global::OtherResponse
 //   Response available types: global::OtherResponse
-//   [NOT USED] global::AnyBehavior<,> (assembly)
-//     Declaration: global::AnyBehavior<TRequest, TResponse>
-//     Request requirements: any type (no type constraints)
-//     Response requirements: any type (no type constraints)
-//     Reason: Replaced by handler-specific behaviors.
-//   [NOT USED] global::RequestBehavior<,> (assembly)
-//     Declaration: global::RequestBehavior<TRequest, TResponse> where TRequest : global::IRequest
-//     Request requirements: global::IRequest
-//     Response requirements: any type (no type constraints)
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Request constraints not satisfied: global::IRequest; actual object; available types: (none).
-//   [NOT USED] global::ResponseBehavior<,> (assembly)
-//     Declaration: global::ResponseBehavior<TRequest, TResponse> where TResponse : global::IResponse
-//     Request requirements: any type (no type constraints)
-//     Response requirements: global::IResponse
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Response constraints not satisfied: global::IResponse; actual global::OtherResponse; available types: global::OtherResponse.
-//   [NOT USED] global::ExactBehavior (assembly)
-//     Declaration: global::ExactBehavior
-//     Request requirements: exact type global::Matching.Query
-//     Response requirements: exact type global::Response
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Request type mismatch: required global::Matching.Query; actual object.
-//     Reason: Response type mismatch: required global::Response; actual global::OtherResponse.
-//   [NOT USED] global::OneParameterBehavior<> (assembly)
-//     Declaration: global::OneParameterBehavior<TResponse> where TResponse : global::IResponse
-//     Request requirements: exact type global::Matching.Query
-//     Response requirements: global::IResponse
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Request type mismatch: required global::Matching.Query; actual object.
-//     Reason: Response constraints not satisfied: global::IResponse; actual global::OtherResponse; available types: global::OtherResponse.
-//   [NOT USED] global::StreamBehavior<,> (assembly)
-//     Declaration: global::StreamBehavior<TRequest, TResponse>
-//     Request requirements: any type (no type constraints)
-//     Response requirements: any type (no type constraints)
-//     Reason: Replaced by handler-specific behaviors.
-//     Reason: Pipeline kind mismatch: behavior is streaming, handler is regular.
 //   Handler-specific behaviors replace the assembly behaviors.
 //   [USED] global::AnyBehavior<,> (handler)
 //     Declaration: global::AnyBehavior<TRequest, TResponse>
