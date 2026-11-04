@@ -1,8 +1,10 @@
 using System.Collections.Immutable;
+using System.Globalization;
 using Immediate.Handlers.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
@@ -18,13 +20,15 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProvider : CodeFixPr
 
 	public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
+	/// <summary>Registers a fix when a cancellation token can be appended to the diagnosed handler.</summary>
 	public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 	{
 		var (document, span, diagnostics, token) = context;
 		token.ThrowIfCancellationRequested();
 
 		var root = await document.GetRequiredSyntaxRootAsync(token);
-		if (root.FindNode(span) is not MethodDeclarationSyntax method)
+		if (root.FindNode(span) is not MethodDeclarationSyntax method
+			|| method.ParameterList.Parameters.Any(p => p.Modifiers.Any(SyntaxKind.ParamsKeyword)))
 			return;
 
 		context.RegisterCodeFix(
@@ -37,6 +41,7 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProvider : CodeFixPr
 		);
 	}
 
+	/// <summary>Appends a token without conflicting with existing names or optional parameters.</summary>
 	private static Task<Document> AddCancellationTokenAsync(
 		Document document,
 		SyntaxNode root,
@@ -46,14 +51,34 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProvider : CodeFixPr
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 
-		var parameter = Parameter(Identifier("cancellationToken"))
+		var parameter = Parameter(Identifier(GetParameterName(method)))
 			.WithType(
 				ParseTypeName("global::System.Threading.CancellationToken")
 					.WithAdditionalAnnotations(Simplifier.Annotation)
 			)
 			.WithAdditionalAnnotations(Formatter.Annotation);
 
+		if (method.ParameterList.Parameters.LastOrDefault()?.Default is not null)
+			parameter = parameter.WithDefault(EqualsValueClause(LiteralExpression(SyntaxKind.DefaultLiteralExpression)));
+
 		var newMethod = method.AddParameterListParameters(parameter);
 		return Task.FromResult(document.WithSyntaxRoot(root.ReplaceNode(method, newMethod)));
+	}
+
+	/// <summary>Chooses a name that cannot shadow identifiers or conflict with declarations in the method.</summary>
+	private static string GetParameterName(MethodDeclarationSyntax method)
+	{
+		var names = new HashSet<string>(
+			method.DescendantTokens()
+				.Where(static token => token.IsKind(SyntaxKind.IdentifierToken))
+				.Select(static token => token.ValueText),
+			StringComparer.Ordinal
+		);
+
+		var parameterName = "cancellationToken";
+		for (var suffix = 1; names.Contains(parameterName); suffix++)
+			parameterName = "cancellationToken" + suffix.ToString(CultureInfo.InvariantCulture);
+
+		return parameterName;
 	}
 }
