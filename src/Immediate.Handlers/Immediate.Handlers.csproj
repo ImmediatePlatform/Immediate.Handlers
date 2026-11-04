@@ -28,6 +28,8 @@
 	-->
   <ItemGroup>
 	<None Include="../../readme.md" Pack="true" PackagePath="/" />
+	<None Remove="build/Immediate.Handlers.targets" />
+	<None Include="build/Immediate.Handlers.targets" Pack="true" PackagePath="build;buildTransitive" />
 
 	<!-- IH.Shared -->
 	<TfmSpecificPackageFile

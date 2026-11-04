@@ -166,6 +166,23 @@ public sealed class LoggingBehavior<TRequest, TResponse>
 When a pipeline is generated, all potential behaviors are evaluated against the request and response types, and if
 either type does not match a given constraint, the behavior is not added to the generated pipeline.
 
+#### Debugging behavior selection
+
+To inspect which behaviors are used or skipped for each handler, enable the diagnostic source file in your `.csproj`:
+
+```xml
+<PropertyGroup>
+  <ImmediateHandlers_GenerateDebugFile>true</ImmediateHandlers_GenerateDebugFile>
+</PropertyGroup>
+```
+
+This adds a comment-only `Debug.g.cs` to the generated sources. It lists every handler's request and response types,
+all assembly and handler-specific behavior registrations, and whether each behavior is used. Skipped behaviors include
+constraint/type comparisons, streaming mismatches, overridden registrations, or invalid-registration reasons.
+The file is disabled by default; set the property to `false` or remove it to stop generating the report.
+
+To write generated sources to disk as well as viewing them in the IDE, set `EmitCompilerGeneratedFiles` to `true`.
+
 ### Registering with `IServiceCollection`
 
 Immediate.Handlers supports `Microsoft.Extensions.DependencyInjection.Abstractions` directly. 

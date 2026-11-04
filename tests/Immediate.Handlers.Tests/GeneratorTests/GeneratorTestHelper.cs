@@ -12,6 +12,12 @@ public static class GeneratorTestHelper
 	public static GeneratorDriverRunResult RunGenerator(
 		[StringSyntax("c#-test")] string source,
 		params ReadOnlySpan<string> skippedSteps
+	) => RunGenerator(source, globalOptions: null, skippedSteps);
+
+	public static GeneratorDriverRunResult RunGenerator(
+		[StringSyntax("c#-test")] string source,
+		IReadOnlyDictionary<string, string>? globalOptions,
+		params ReadOnlySpan<string> skippedSteps
 	)
 	{
 		var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
@@ -41,7 +47,7 @@ public static class GeneratorTestHelper
 				new ImmediateHandlersGenerator().AsSourceGenerator(),
 			],
 			parseOptions: options,
-			optionsProvider: new OptionsProvider(),
+			optionsProvider: new OptionsProvider(globalOptions),
 			driverOptions: new GeneratorDriverOptions(default, trackIncrementalGeneratorSteps: true)
 		);
 
@@ -152,17 +158,26 @@ public static class GeneratorTestHelper
 
 	private sealed class OptionsProvider : AnalyzerConfigOptionsProvider
 	{
-		private static readonly AnalyzerConfigOptions Options =
-			new DictionaryAnalyzerOptions(
-				new(StringComparer.OrdinalIgnoreCase)
-				{
-					["build_property.rootnamespace"] = "Immediate.Handlers.Testing",
-				}
-			);
+		private readonly AnalyzerConfigOptions _options;
 
-		public override AnalyzerConfigOptions GetOptions(SyntaxTree tree) => Options;
-		public override AnalyzerConfigOptions GetOptions(AdditionalText textFile) => Options;
-		public override AnalyzerConfigOptions GlobalOptions => Options;
+		public OptionsProvider(IReadOnlyDictionary<string, string>? properties)
+		{
+			var values = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+			{
+				["build_property.rootnamespace"] = "Immediate.Handlers.Testing",
+			};
+			if (properties is not null)
+			{
+				foreach (var (key, value) in properties)
+					values[key] = value;
+			}
+
+			_options = new DictionaryAnalyzerOptions(values);
+		}
+
+		public override AnalyzerConfigOptions GetOptions(SyntaxTree tree) => _options;
+		public override AnalyzerConfigOptions GetOptions(AdditionalText textFile) => _options;
+		public override AnalyzerConfigOptions GlobalOptions => _options;
 	}
 
 	private sealed class DictionaryAnalyzerOptions(Dictionary<string, string> properties) : AnalyzerConfigOptions

@@ -42,19 +42,34 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 			.Collect()
 			.WithTrackingName("Behaviors");
 
-		var handlers = context.SyntaxProvider
+		var parsedHandlers = context.SyntaxProvider
 			.ForAttributeWithMetadataName(
 				"Immediate.Handlers.Shared.HandlerAttribute",
 				predicate: (node, _) => node is TypeDeclarationSyntax,
 				TransformHandler.ParseHandler
 			)
-			.WhereNotNull()
-			.Where(h => h.DisplayName is { } && !(h.OverrideBehaviors?.Any(b => b is null) ?? false))
+			.WhereNotNull();
+
+		var handlers = parsedHandlers
+			.Where(h => h.DisplayName is { } && !(h.OverrideBehaviors?.Any(b => b.Behavior is null) ?? false))
 			.WithTrackingName("Handlers");
 
 		var handlerNodes = handlers
 			.Combine(behaviors)
 			.WithTrackingName("HandlersWithBehaviors");
+
+		var generateDebugFile = context.AnalyzerConfigOptionsProvider
+			.Select(static (options, _) => options.GlobalOptions.TryGetValue("build_property.ImmediateHandlers_GenerateDebugFile", out var value)
+				&& bool.TryParse(value, out var enabled) && enabled)
+			.WithTrackingName("GenerateDebugFile");
+
+		context.RegisterSourceOutput(
+			generateDebugFile
+				.SelectMany(static IEnumerable<bool> (bool enabled, CancellationToken _) => enabled ? [true] : [])
+				.Combine(parsedHandlers.Collect())
+				.Combine(behaviors),
+			static (spc, node) => RenderDebugReport(spc, node.Left.Right, node.Right)
+		);
 
 		var template = GetTemplate("Handler");
 		context.RegisterSourceOutput(
@@ -134,7 +149,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 	private static void RenderHandler(
 		SourceProductionContext context,
 		Handler handler,
-		ImmutableArray<Behavior?> behaviors,
+		ImmutableArray<BehaviorRegistration> behaviors,
 		Template template
 	)
 	{
@@ -153,6 +168,7 @@ public sealed partial class ImmediateHandlersGenerator : IIncrementalGenerator
 		// Only include behaviors that match the handler's streaming type.
 		// Null behaviors (invalid/unparseable) are kept to trigger generation abort downstream.
 		var filteredBehaviors = behaviorSource
+			.Select(b => b.Behavior)
 			.Where(b => b is null || b.IsStreaming == handler.IsStreaming);
 
 		var pipelineBehaviors = BuildPipeline(
@@ -293,26 +309,4 @@ file static class Extensions
 			.Trim();
 	}
 
-	public static bool IsValid(
-		this Behavior? behavior,
-		GenericType requestType,
-		GenericType responseType
-	) =>
-		behavior is null
-		|| (
-			IsValid(behavior.RequestType, requestType)
-			&& IsValid(behavior.ResponseType, responseType)
-		);
-
-	private static bool IsValid(
-		ConstraintInfo constraintInfo,
-		GenericType type
-	)
-	{
-		if (constraintInfo.ExactType is { } exactType)
-			return string.Equals(type.Name, exactType, StringComparison.Ordinal);
-
-		return constraintInfo.TypeConstraints
-			.All(c => type.Implements.Contains(c, StringComparer.Ordinal));
-	}
 }
