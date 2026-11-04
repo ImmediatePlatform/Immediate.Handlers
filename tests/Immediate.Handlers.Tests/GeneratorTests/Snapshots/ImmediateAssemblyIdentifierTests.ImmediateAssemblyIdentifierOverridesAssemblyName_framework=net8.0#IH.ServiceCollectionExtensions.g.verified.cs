@@ -11,7 +11,7 @@ public static class HandlerServiceCollectionExtensions
 	public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddCustomHandlers(
 		this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services,
 		global::Microsoft.Extensions.DependencyInjection.ServiceLifetime lifetime = global::Microsoft.Extensions.DependencyInjection.ServiceLifetime.Scoped,
-		params global::System.ReadOnlySpan<string> tags
+		params string[] tags
 	)
 	{
 		global::Dummy.GetUsersQuery.AddHandlers(services, lifetime);
