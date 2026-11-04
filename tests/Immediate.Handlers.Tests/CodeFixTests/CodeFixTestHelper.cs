@@ -47,6 +47,8 @@ public static class CodeFixTestHelper
 			},
 		};
 
+		csTest.BatchFixedState.Sources.Add(fixedSource);
+
 		csTest.TestState.AdditionalReferences
 			.AddRange(Utility.GetAdditionalReferences());
 
