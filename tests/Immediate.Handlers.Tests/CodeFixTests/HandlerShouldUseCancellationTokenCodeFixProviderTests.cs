@@ -43,7 +43,7 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProviderTests
 			{
 				public record Query;
 
-				private {{methodModifier}} ValueTask<int> {{methodName}}(Query query, CancellationToken cancellationToken) => new(0);
+				private {{methodModifier}} ValueTask<int> {{methodName}}(Query query, CancellationToken cancellationToken = default) => new(0);
 			}
 			"""
 		).RunAsync(TestContext.Current.CancellationToken);
@@ -82,7 +82,7 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProviderTests
 
 				private static ValueTask<int> HandleAsync(
 					Query query,
-					object dependency, CancellationToken cancellationToken)
+					object dependency, CancellationToken cancellationToken = default)
 				{
 					return new(0);
 				}
@@ -114,7 +114,7 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProviderTests
 			{
 				public record Query;
 
-				private ValueTask<int> Handle(Query query, System.Threading.CancellationToken cancellationToken) => new(0);
+				private ValueTask<int> Handle(Query query, System.Threading.CancellationToken cancellationToken = default) => new(0);
 			}
 			"""
 		).RunAsync(TestContext.Current.CancellationToken);
@@ -147,13 +147,13 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProviderTests
 			[Handler]
 			public sealed partial class FirstHandler
 			{
-				private ValueTask<int> Handle(object request, CancellationToken cancellationToken) => new(1);
+				private ValueTask<int> Handle(object request, CancellationToken cancellationToken = default) => new(1);
 			}
 
 			[Handler]
 			public sealed partial class SecondHandler
 			{
-				private ValueTask<int> Handle(object request, CancellationToken cancellationToken) => new(2);
+				private ValueTask<int> Handle(object request, CancellationToken cancellationToken = default) => new(2);
 			}
 			"""
 		).RunAsync(TestContext.Current.CancellationToken);
@@ -206,7 +206,7 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProviderTests
 			[Handler]
 			public sealed partial class GetUsersQuery
 			{
-				private ValueTask<int> Handle(object {{requestName}}, CancellationToken {{tokenName}})
+				private ValueTask<int> Handle(object {{requestName}}, CancellationToken {{tokenName}} = default)
 				{
 					{{body}}
 					return new(0);
@@ -268,5 +268,38 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProviderTests
 		test.NumberOfIncrementalIterations = 0;
 		test.NumberOfFixAllIterations = 0;
 		await test.RunAsync(TestContext.Current.CancellationToken);
+	}
+
+	[Fact]
+	public async Task PreservesExistingCallsToHandle()
+	{
+		await CodeFixTestHelper.CreateCodeFixTest<HandlerClassAnalyzer, HandlerShouldUseCancellationTokenCodeFixProvider>(
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public sealed partial class GetUsersQuery
+			{
+				private ValueTask<int> {|IHR0012:Handle|}(object request) => new(0);
+
+				private ValueTask<int> CallHandler(object request) => Handle(request);
+			}
+			""",
+			"""
+			using System.Threading;
+			using System.Threading.Tasks;
+			using Immediate.Handlers.Shared;
+
+			[Handler]
+			public sealed partial class GetUsersQuery
+			{
+				private ValueTask<int> Handle(object request, CancellationToken cancellationToken = default) => new(0);
+
+				private ValueTask<int> CallHandler(object request) => Handle(request);
+			}
+			"""
+		).RunAsync(TestContext.Current.CancellationToken);
 	}
 }

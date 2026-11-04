@@ -41,7 +41,7 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProvider : CodeFixPr
 		);
 	}
 
-	/// <summary>Appends a token without conflicting with existing names or optional parameters.</summary>
+	/// <summary>Appends an optional token without conflicting with existing names or breaking existing calls.</summary>
 	private static Task<Document> AddCancellationTokenAsync(
 		Document document,
 		SyntaxNode root,
@@ -56,10 +56,8 @@ public sealed class HandlerShouldUseCancellationTokenCodeFixProvider : CodeFixPr
 				ParseTypeName("global::System.Threading.CancellationToken")
 					.WithAdditionalAnnotations(Simplifier.Annotation)
 			)
+			.WithDefault(EqualsValueClause(LiteralExpression(SyntaxKind.DefaultLiteralExpression)))
 			.WithAdditionalAnnotations(Formatter.Annotation);
-
-		if (method.ParameterList.Parameters.LastOrDefault()?.Default is not null)
-			parameter = parameter.WithDefault(EqualsValueClause(LiteralExpression(SyntaxKind.DefaultLiteralExpression)));
 
 		var newMethod = method.AddParameterListParameters(parameter);
 		return Task.FromResult(document.WithSyntaxRoot(root.ReplaceNode(method, newMethod)));
