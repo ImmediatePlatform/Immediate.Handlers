@@ -5,29 +5,29 @@
 
   <ItemGroup>
 	<PackageVersion Include="AssemblyMetadata.Generators" Version="2.2.0" />
-	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14" />
+	<PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.15" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.9.0" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" Version="1.1.4" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" Version="1.1.4" />
 	<PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing" Version="1.1.4" />
 	<PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.12.0" />
-	<PackageVersion Include="Scriban" Version="7.5.3" />
+	<PackageVersion Include="Scriban" Version="7.6.1" />
 	<PackageVersion Include="Swashbuckle.AspNetCore" Version="10.3.1" />
 	<PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
 	<PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
 	<PackageVersion Include="Verify.XunitV3" Version="33.3.4" />
-	<PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.2" />
+	<PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.3" />
   </ItemGroup>
 
   <!-- IH.Shared dependencies -->
   <PropertyGroup>
-	<Net10PackageVersion>10.0.14</Net10PackageVersion>
-	<Net11PackageVersion>11.0.0-rc.3.26522.148</Net11PackageVersion>
+	<Net10PackageVersion>10.0.15</Net10PackageVersion>
+	<Net11PackageVersion>11.0.0</Net11PackageVersion>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net11.0' ">
 	<PackageVersion Include="Basic.Reference.Assemblies.Net110" Version="1.8.14" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="11.0.100-rc.3.26522.148" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="11.0.100" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(Net11PackageVersion)" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(Net11PackageVersion)" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.11.0" />
@@ -37,7 +37,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
 	<PackageVersion Include="Basic.Reference.Assemblies.Net100" Version="1.8.14" />
-	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.403" />
+	<PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.404" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(Net10PackageVersion)" />
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(Net10PackageVersion)" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.11.0" />
@@ -52,7 +52,7 @@
 	<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 	<PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="8.10.0" />
 	<PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.1" />
-	<PackageVersion Include="System.Security.Cryptography.Pkcs" Version="9.0.22" />
+	<PackageVersion Include="System.Security.Cryptography.Pkcs" Version="9.0.23" />
   </ItemGroup>
 
   <!-- IH.Generators dependencies -->
@@ -86,8 +86,8 @@
 
   <ItemGroup>
 	<GlobalPackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.5" PrivateAssets="All" />
-	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.320" PrivateAssets="All" />
-	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.170" PrivateAssets="All" />
+	<GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.322" PrivateAssets="All" />
+	<GlobalPackageReference Include="Meziantou.Polyfill" Version="1.0.171" PrivateAssets="All" />
 	<GlobalPackageReference Include="MinVer" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>
