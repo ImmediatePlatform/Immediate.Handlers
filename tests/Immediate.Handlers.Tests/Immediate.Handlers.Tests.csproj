@@ -53,7 +53,7 @@
   <PropertyGroup>
 	<RoslynVersion Condition=" '$(TargetFramework)' == 'net8.0' ">roslyn4.8</RoslynVersion>
 	<RoslynVersion Condition=" '$(TargetFramework)' == 'net10.0' ">roslyn5.0</RoslynVersion>
-	<RoslynVersion Condition=" '$(TargetFramework)' == 'net11.0' ">roslyn5.9</RoslynVersion>
+	<RoslynVersion Condition=" '$(TargetFramework)' == 'net11.0' ">roslyn5.12</RoslynVersion>
   </PropertyGroup>
   
   <ItemGroup>
