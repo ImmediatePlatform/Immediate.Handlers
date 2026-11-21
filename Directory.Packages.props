@@ -21,8 +21,8 @@
 
   <!-- IH.Shared dependencies -->
   <PropertyGroup>
-	<Net10PackageVersion>10.0.15<//Net10PackageVersion>
-	<Net11PackageVersion>11.0.0<//Net11PackageVersion>
+	<Net10PackageVersion>10.0.15</Net10PackageVersion>
+	<Net11PackageVersion>11.0.0</Net11PackageVersion>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net11.0' ">
